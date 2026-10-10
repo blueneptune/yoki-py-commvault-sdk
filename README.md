@@ -1,4 +1,4 @@
-# commvault-sdk
+# yoki-py-commvault-sdk
 
 A small SDK for Commvault's REST API - a CommServe you run yourself, or
 Commvault Cloud (SaaS, formerly Metallic) - written as a facade: one object per CommServe connection, with a named group of
@@ -191,10 +191,12 @@ policies, VM and file-system content are the likely next ones.
 
 ## Installing
 
-It is not on PyPI. Depend on a tag of this repository:
+It is not on PyPI. Depend on a tag of this repository. The repository is
+`yoki-py-commvault-sdk`; the package it provides is `commvault-sdk`,
+imported as `commvault_sdk`:
 
 ```
-uv add "commvault-sdk @ git+https://github.com/blueneptune/commvault-sdk.git@v0.1.0"
+uv add "commvault-sdk @ git+https://github.com/blueneptune/yoki-py-commvault-sdk.git@v0.1.0"
 ```
 
 It builds on [`sdk-primer-core`](https://github.com/blueneptune/sdk-primer-core)
