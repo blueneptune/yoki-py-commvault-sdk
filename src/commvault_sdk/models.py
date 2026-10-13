@@ -5,6 +5,9 @@ POST /Jobs and GET /Job/{id} (the same one cvpysdk's JobController
 reads). Everything except jobId is optional: which fields are present
 varies by job type and CommServe version, and the untouched summary is
 kept in Job.raw regardless.
+
+JobAttempt is one entry of `attemptsInfo`, which POST /JobDetails adds
+to its answer when asked with showAttempt.
 """
 
 from __future__ import annotations
@@ -89,6 +92,84 @@ class JobSummary(BaseModel):
     storage_policy: _StoragePolicy = Field(default_factory=_StoragePolicy, alias="storagePolicy")
 
 
+class JobAttempt(BaseModel):
+    """One attempt at one phase of a job. A backup that ran cleanly has
+    one per phase (Scan, Backup, Archive Index); a phase that was
+    interrupted and run again has one for each time it was tried.
+
+    `failure_reason` is Commvault's text, with its "<br/>Source: ...,
+    Process: ..." ending left on. It is not cleared when the job gets
+    going again: a later attempt that completed can still carry the
+    reason an earlier one stopped, so read it together with `status`."""
+
+    phase: int | None = None
+    phase_name: str | None = None
+    status: str
+    failure_reason: str | None = None
+    start_time: AwareDatetime | None = None
+    end_time: AwareDatetime | None = None
+    elapsed_seconds: int | None = None
+    objects: int | None = None
+    folders: int | None = None
+    failures: int | None = None
+    skipped: int | None = None
+    uncompressed_bytes: int | None = None
+    compressed_bytes: int | None = None
+    # What reached storage, after deduplication.
+    data_written: int | None = None
+    streams: int | None = None
+    access_node: str | None = None
+    media_agent: str | None = None
+    library: str | None = None
+    storage_policy: str | None = None
+    copy_name: str | None = None
+    raw: dict[str, Any] = Field(default_factory=dict)
+
+
+class _MediaAgent(BaseModel):
+    model_config = ConfigDict(extra="ignore", populate_by_name=True)
+
+    name: str | None = Field(default=None, alias="mediaAgentName")
+
+
+class _Library(BaseModel):
+    model_config = ConfigDict(extra="ignore", populate_by_name=True)
+
+    name: str | None = Field(default=None, alias="libraryName")
+
+
+class _Copy(BaseModel):
+    model_config = ConfigDict(extra="ignore", populate_by_name=True)
+
+    name: str | None = Field(default=None, alias="copyName")
+
+
+class AttemptInfo(BaseModel):
+    model_config = ConfigDict(extra="ignore", populate_by_name=True)
+
+    phase: int | None = None
+    phase_name: str | None = Field(default=None, alias="phaseName")
+    status: str = "Unknown"
+    failure_reason: str | None = Field(default=None, alias="failureReason")
+    # Epoch seconds, sent as strings.
+    start_time: int | None = Field(default=None, alias="startTime")
+    end_time: int | None = Field(default=None, alias="endTime")
+    elapsed_time: int | None = Field(default=None, alias="elapsedTime")
+    num_objects: int | None = Field(default=None, alias="numObjects")
+    num_folders: int | None = Field(default=None, alias="numFolders")
+    num_failures: int | None = Field(default=None, alias="numFailures")
+    num_skipped: int | None = Field(default=None, alias="numSkipped")
+    uncomp_bytes: int | None = Field(default=None, alias="uncompBytes")
+    comp_bytes: int | None = Field(default=None, alias="compBytes")
+    data_written: int | None = Field(default=None, alias="dataWritten")
+    max_streams_used: int | None = Field(default=None, alias="maxStreamsUsed")
+    access_node_client_name: str | None = Field(default=None, alias="accessNodeClientName")
+    media_agent: _MediaAgent = Field(default_factory=_MediaAgent, alias="mediaAgent")
+    library: _Library = Field(default_factory=_Library)
+    storage_policy: _StoragePolicy = Field(default_factory=_StoragePolicy, alias="storagePolicy")
+    copy_: _Copy = Field(default_factory=_Copy, alias="copy")
+
+
 def _from_epoch(seconds: int | None) -> datetime | None:
     """Commvault reports times as epoch seconds and uses 0 for "not yet"
     (e.g. the end time of a job that is still running)."""
@@ -123,5 +204,34 @@ def job_from_summary(raw: dict[str, Any]) -> Job:
         failed_files=summary.failed_files,
         pending_reason=summary.pending_reason or None,
         is_aged=summary.is_aged,
+        raw=raw,
+    )
+
+
+def attempt_from_info(raw: dict[str, Any]) -> JobAttempt:
+    info = AttemptInfo.model_validate(raw)
+    return JobAttempt(
+        phase=info.phase,
+        # Some phase names arrive padded with spaces to 64 characters.
+        phase_name=(info.phase_name or "").strip() or None,
+        status=info.status,
+        failure_reason=info.failure_reason or None,
+        start_time=_from_epoch(info.start_time),
+        end_time=_from_epoch(info.end_time),
+        elapsed_seconds=info.elapsed_time,
+        objects=info.num_objects,
+        folders=info.num_folders,
+        failures=info.num_failures,
+        skipped=info.num_skipped,
+        uncompressed_bytes=info.uncomp_bytes,
+        compressed_bytes=info.comp_bytes,
+        data_written=info.data_written,
+        streams=info.max_streams_used,
+        # Blank, not absent, is how Commvault says "none" for these.
+        access_node=info.access_node_client_name or None,
+        media_agent=info.media_agent.name or None,
+        library=info.library.name or None,
+        storage_policy=info.storage_policy.name or None,
+        copy_name=info.copy_.name or None,
         raw=raw,
     )

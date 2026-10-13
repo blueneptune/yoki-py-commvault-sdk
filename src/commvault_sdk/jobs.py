@@ -11,7 +11,7 @@ from pydantic import ValidationError
 from sdk_primer import NotFoundError
 
 from ._base import Resource
-from .models import Job, job_from_summary
+from .models import Job, JobAttempt, attempt_from_info, job_from_summary
 
 # POST /Jobs "category": 0 = all, 1 = active only, 2 = finished only.
 CATEGORY_ALL = 0
@@ -23,6 +23,12 @@ CATEGORY_FINISHED = 2
 # offset paging safe: a job that starts mid-run lands after the last
 # page instead of pushing every later job down by one.
 _ASCENDING = 0
+
+
+def _problems(exc: ValidationError) -> str:
+    return "; ".join(
+        f"{'.'.join(str(part) for part in error['loc'])}: {error['msg']}" for error in exc.errors()
+    )
 
 
 def parse_job(entry: dict[str, Any]) -> Job | None:
@@ -37,12 +43,8 @@ def parse_job(entry: dict[str, Any]) -> Job | None:
     try:
         return job_from_summary(summary)
     except ValidationError as exc:
-        problems = "; ".join(
-            f"{'.'.join(str(part) for part in error['loc'])}: {error['msg']}"
-            for error in exc.errors()
-        )
         logger.error(
-            "Skipping job {}: could not read its summary - {}", summary.get("jobId"), problems
+            "Skipping job {}: could not read its summary - {}", summary.get("jobId"), _problems(exc)
         )
         return None
 
@@ -176,13 +178,35 @@ class Jobs(Resource):
                 return job
         return None
 
-    def details(self, job_id: int) -> dict[str, Any]:
+    def details(self, job_id: int, *, attempts: bool = False) -> dict[str, Any]:
         """Everything the CommServe reports about one job
-        (POST /JobDetails): general, progress and detail info."""
+        (POST /JobDetails): general, progress and detail info - and, with
+        `attempts`, attemptsInfo as well. Empty if the CommCell does not
+        know the job; that is a 200 with nothing in it, not a 404."""
+        body: dict[str, Any] = {"jobId": job_id}
+        if attempts:
+            body["showAttempt"] = True
         detail: dict[str, Any] = (
-            self._query("/JobDetails", {"jobId": job_id}).get("job", {}).get("jobDetail", {})
+            self._query("/JobDetails", body).get("job", {}).get("jobDetail", {})
         )
         return detail
+
+    def attempts(self, job_id: int) -> list[JobAttempt]:
+        """Each attempt at each phase of a job, in the order they ran
+        (POST /JobDetails with showAttempt): the phase, how the attempt
+        ended and why, when, and what it moved.
+
+        Empty for a job that failed to start - it never reached a phase -
+        and for one the CommCell does not know."""
+        found = []
+        for entry in self.details(job_id, attempts=True).get("attemptsInfo") or []:
+            try:
+                found.append(attempt_from_info(entry))
+            except ValidationError as exc:
+                logger.error(
+                    "Skipping an attempt of job {}: could not read it - {}", job_id, _problems(exc)
+                )
+        return found
 
     def counts(self, job_id: int) -> dict[str, Any]:
         """The CommServe's own totals for a job: how many objects it
