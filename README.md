@@ -73,6 +73,8 @@ real CommServe (11 SP46).
 | `oldest_start(lookup_seconds)` | `POST /Jobs` (limit 1) | proven |
 | `get(job_id)` | `GET /Job/{id}` | proven |
 | `details(job_id)`, `counts(job_id)` | `POST /JobDetails` | proven |
+| `attempts(job_id)`, `details(job_id, attempts=True)` | `POST /JobDetails` (showAttempt) | proven, on all 258 lab jobs |
+| `events(job_id)` | `GET /Events?jobId=` | proven, on all 258 lab jobs |
 | `suspend`, `resume`, `kill` *change* | `POST /Job/{id}/action/pause\|resume\|kill` | proven |
 
 ### `cv.clients`, `cv.instances`
@@ -137,8 +139,27 @@ run against Commvault Cloud.
 Commvault's own JSON for each thing, as dictionaries, with the envelope
 removed (`clients.list()` gives the list of client entities, not the
 `clientProperties` wrapper). Jobs are the exception: they come back as
-the SDK's typed `Job`. Typed models for the rest are worth adding once it
-is clear which fields matter.
+the SDK's typed `Job`, their attempts as `JobAttempt` and their events
+as `JobEvent`, each with Commvault's own JSON kept in `.raw`. Typed
+models for the rest are worth adding once it is clear which fields
+matter.
+
+### Why a job failed
+
+The job summary has one sentence (`Job.pending_reason`). Two calls say
+more:
+
+```python
+for attempt in cv.jobs.attempts(job_id):   # each try at each phase
+    attempt.phase_name, attempt.status, attempt.failure_reason
+for event in cv.jobs.events(job_id):       # the event log, oldest first
+    event.time, event.severity, event.code, event.description
+```
+
+A job that failed to start has no attempts - it never reached a phase -
+so its events are all there is. A job that ran cleanly usually has no
+events. Each call is one request per job, so on a large CommCell ask
+only for the jobs that need explaining, not for every job collected.
 
 ## Errors
 
@@ -157,7 +178,7 @@ budget.py      the hourly call budget
 _base.py       Resource (get / list / query / change), error handling
 auth.py        access-token header and renewal
 jobs.py  clients.py  subclients.py  sql.py  commcell.py   the groups
-models.py      Job, and Commvault's jobSummary -> Job
+models.py      Job, JobAttempt, JobEvent, and Commvault's JSON -> each
 ```
 
 It sits on `sdk-primer-core` for transport - retries, typed exceptions,
