@@ -146,8 +146,12 @@ matter.
 
 ### Why a job failed
 
-The job summary has one sentence (`Job.pending_reason`). Two calls say
-more:
+The job summary has one sentence (`Job.pending_reason`) and Commvault's
+code for it (`Job.pending_reason_code`, e.g. `19:1132`). Both arrive
+with the job listing, at no extra request. The text names the client,
+path or job involved, so it differs from one failure to the next; the
+code is the same for every failure of that kind, which makes it the
+thing to count and group by. Two calls say more:
 
 ```python
 for attempt in cv.jobs.attempts(job_id):   # each try at each phase

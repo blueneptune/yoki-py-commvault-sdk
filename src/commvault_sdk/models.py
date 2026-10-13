@@ -47,7 +47,13 @@ class Job(BaseModel):
     size_of_media: int | None = None
     total_files: int | None = None
     failed_files: int | None = None
+    failed_folders: int | None = None
     pending_reason: str | None = None
+    # Commvault's code for pending_reason, e.g. "19:1132" - the same
+    # form as JobEvent.code. It names the kind of failure where the
+    # text names the client, path and job it happened to, so it is the
+    # thing to group failures by. None when there is no reason.
+    pending_reason_code: str | None = None
     is_aged: bool | None = None
     raw: dict[str, Any] = Field(default_factory=dict)
 
@@ -86,7 +92,9 @@ class JobSummary(BaseModel):
     size_of_media: int | None = Field(default=None, alias="sizeOfMediaOnDisk")
     total_files: int | None = Field(default=None, alias="totalNumOfFiles")
     failed_files: int | None = Field(default=None, alias="totalFailedFiles")
+    failed_folders: int | None = Field(default=None, alias="totalFailedFolders")
     pending_reason: str | None = Field(default=None, alias="pendingReason")
+    pending_reason_code: str | None = Field(default=None, alias="pendingReasonErrorCode")
     is_aged: bool | None = Field(default=None, alias="isAged")
     dest_client_name: str | None = Field(default=None, alias="destClientName")
     subclient: _Subclient = Field(default_factory=_Subclient)
@@ -243,7 +251,9 @@ def job_from_summary(raw: dict[str, Any]) -> Job:
         size_of_media=summary.size_of_media,
         total_files=summary.total_files,
         failed_files=summary.failed_files,
+        failed_folders=summary.failed_folders,
         pending_reason=summary.pending_reason or None,
+        pending_reason_code=summary.pending_reason_code or None,
         is_aged=summary.is_aged,
         raw=raw,
     )
