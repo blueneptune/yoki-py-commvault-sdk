@@ -11,7 +11,14 @@ from pydantic import ValidationError
 from sdk_primer import NotFoundError
 
 from ._base import Resource
-from .models import Job, JobAttempt, attempt_from_info, job_from_summary
+from .models import (
+    Job,
+    JobAttempt,
+    JobEvent,
+    attempt_from_info,
+    event_from_commserv,
+    job_from_summary,
+)
 
 # POST /Jobs "category": 0 = all, 1 = active only, 2 = finished only.
 CATEGORY_ALL = 0
@@ -23,6 +30,9 @@ CATEGORY_FINISHED = 2
 # offset paging safe: a job that starts mid-run lands after the last
 # page instead of pushing every later job down by one.
 _ASCENDING = 0
+
+# Sorts an event with no time before the ones that have one.
+_NO_TIME = datetime.fromtimestamp(0, tz=UTC)
 
 
 def _problems(exc: ValidationError) -> str:
@@ -207,6 +217,28 @@ class Jobs(Resource):
                     "Skipping an attempt of job {}: could not read it - {}", job_id, _problems(exc)
                 )
         return found
+
+    def events(self, job_id: int) -> list[JobEvent]:
+        """What the CommServe's event log says about a job
+        (GET /Events?jobId=), oldest first: each message's severity,
+        code, subsystem and text. Where a failed job's reason is one
+        sentence, its events are the steps that led there.
+
+        Many jobs have none - a clean backup logs no events - and so
+        does a job the CommCell does not know."""
+        found = []
+        for entry in self._list(f"/Events?jobId={job_id}").get("commservEvents") or []:
+            try:
+                found.append(event_from_commserv(entry))
+            except ValidationError as exc:
+                logger.error(
+                    "Skipping an event of job {}: could not read it - {}", job_id, _problems(exc)
+                )
+        # Commvault lists them newest first, by the time on the machine
+        # that reported each one. Ids are given out as events reach the
+        # CommServe, which is not always the same order (seen in the
+        # lab), so the id only settles events of the same second.
+        return sorted(found, key=lambda event: (event.time or _NO_TIME, event.event_id))
 
     def counts(self, job_id: int) -> dict[str, Any]:
         """The CommServe's own totals for a job: how many objects it

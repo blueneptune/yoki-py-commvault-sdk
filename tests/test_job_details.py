@@ -1,4 +1,5 @@
-"""Job detail beyond the summary: the attempts at each phase. The reply
+"""Job detail beyond the summary: the attempts at each phase, and the
+job's events. The reply
 shapes are the lab CommServe's (11 SP46), cut down."""
 
 from __future__ import annotations
@@ -143,3 +144,73 @@ def test_one_unreadable_attempt_does_not_hide_the_rest(log_messages: list[str]) 
 
     assert [a.phase_name for a in attempts] == ["Scan"]
     assert any("Skipping an attempt of job 5" in message for message in log_messages)
+
+
+def _event(event_id: int, code: str, description: str, **extra: object) -> dict:
+    return {
+        "id": event_id,
+        "jobId": 279,
+        "severity": 9,
+        "eventCode": "285212830",
+        "eventCodeString": code,
+        "subsystem": "FileScan",
+        "description": description,
+        "timeSource": 1791511232,
+        "type": 0,
+        "acknowledge": 0,
+        "clientEntity": {"clientName": "web01", "displayName": "web01", "clientId": 2},
+        **extra,
+    }
+
+
+@respx.mock
+def test_events_are_read_and_put_oldest_first() -> None:
+    # Newest first, as Commvault sends them. Two share a second, and one
+    # with a lower id is later than both: ids do not follow time.
+    respx.get(f"{BASE}/Events", params={"jobId": 279}).respond(
+        json={
+            "commservEvents": [
+                _event(1099, "17:2", "File system scan failed.", timeSource=1791511237),
+                _event(1101, "17:12", "Backup job is aborted.", severity=6),
+                _event(1100, "17:158", "Configured content does not exist."),
+            ]
+        }
+    )
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        events = cv.jobs.events(279)
+
+    assert [e.event_id for e in events] == [1100, 1101, 1099]
+    first = events[0]
+    assert (first.job_id, first.severity, first.code) == (279, 9, "17:158")
+    assert (first.subsystem, first.description) == (
+        "FileScan",
+        "Configured content does not exist.",
+    )
+    assert (first.client_id, first.client_name) == (2, "web01")
+    assert first.time == datetime.fromtimestamp(1791511232, tz=UTC)
+    assert events[1].severity == 6
+    assert first.raw["eventCode"] == "285212830"
+
+
+@respx.mock
+def test_a_job_with_no_events_gives_an_empty_list() -> None:
+    respx.get(f"{BASE}/Events", params={"jobId": 306}).respond(json={"commservEvents": []})
+    respx.get(f"{BASE}/Events", params={"jobId": 7}).respond(404)
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        assert cv.jobs.events(306) == []
+        assert cv.jobs.events(7) == []
+
+
+@respx.mock
+def test_one_unreadable_event_does_not_hide_the_rest(log_messages: list[str]) -> None:
+    respx.get(f"{BASE}/Events", params={"jobId": 279}).respond(
+        json={"commservEvents": [_event(2, "17:2", "ok"), {"description": "no id"}]}
+    )
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        events = cv.jobs.events(279)
+
+    assert [e.event_id for e in events] == [2]
+    assert any("Skipping an event of job 279" in message for message in log_messages)

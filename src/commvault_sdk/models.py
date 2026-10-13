@@ -7,7 +7,8 @@ varies by job type and CommServe version, and the untouched summary is
 kept in Job.raw regardless.
 
 JobAttempt is one entry of `attemptsInfo`, which POST /JobDetails adds
-to its answer when asked with showAttempt.
+to its answer when asked with showAttempt. JobEvent is one entry of
+`commservEvents` from GET /Events.
 """
 
 from __future__ import annotations
@@ -170,6 +171,46 @@ class AttemptInfo(BaseModel):
     copy_: _Copy = Field(default_factory=_Copy, alias="copy")
 
 
+class JobEvent(BaseModel):
+    """One line of the CommServe's event log that belongs to a job - what
+    Command Center shows under the job's Events tab.
+
+    `severity` is Commvault's number. Seen: 0 (information), 3 (minor),
+    6 (major) and 9 (critical). `code` is the "17:158" form that
+    Commvault's documentation and support use to identify a message."""
+
+    event_id: int
+    job_id: int | None = None
+    time: AwareDatetime | None = None
+    severity: int | None = None
+    code: str | None = None
+    subsystem: str | None = None
+    description: str | None = None
+    client_id: int | None = None
+    client_name: str | None = None
+    raw: dict[str, Any] = Field(default_factory=dict)
+
+
+class _EventClient(BaseModel):
+    model_config = ConfigDict(extra="ignore", populate_by_name=True)
+
+    client_id: int | None = Field(default=None, alias="clientId")
+    client_name: str | None = Field(default=None, alias="clientName")
+
+
+class CommservEvent(BaseModel):
+    model_config = ConfigDict(extra="ignore", populate_by_name=True)
+
+    event_id: int = Field(alias="id")
+    job_id: int | None = Field(default=None, alias="jobId")
+    time_source: int | None = Field(default=None, alias="timeSource")
+    severity: int | None = None
+    event_code_string: str | None = Field(default=None, alias="eventCodeString")
+    subsystem: str | None = None
+    description: str | None = None
+    client: _EventClient = Field(default_factory=_EventClient, alias="clientEntity")
+
+
 def _from_epoch(seconds: int | None) -> datetime | None:
     """Commvault reports times as epoch seconds and uses 0 for "not yet"
     (e.g. the end time of a job that is still running)."""
@@ -233,5 +274,21 @@ def attempt_from_info(raw: dict[str, Any]) -> JobAttempt:
         library=info.library.name or None,
         storage_policy=info.storage_policy.name or None,
         copy_name=info.copy_.name or None,
+        raw=raw,
+    )
+
+
+def event_from_commserv(raw: dict[str, Any]) -> JobEvent:
+    event = CommservEvent.model_validate(raw)
+    return JobEvent(
+        event_id=event.event_id,
+        job_id=event.job_id,
+        time=_from_epoch(event.time_source),
+        severity=event.severity,
+        code=event.event_code_string or None,
+        subsystem=event.subsystem or None,
+        description=event.description or None,
+        client_id=event.client.client_id,
+        client_name=event.client.client_name or None,
         raw=raw,
     )
