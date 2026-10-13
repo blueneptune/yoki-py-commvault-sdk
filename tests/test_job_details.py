@@ -214,3 +214,162 @@ def test_one_unreadable_event_does_not_hide_the_rest(log_messages: list[str]) ->
 
     assert [e.event_id for e in events] == [2]
     assert any("Skipping an event of job 279" in message for message in log_messages)
+
+
+def _job_detail(**general: object) -> dict:
+    """A file system backup's jobDetail, as the lab sends it."""
+    return {
+        "generalInfo": {
+            "jobId": 279,
+            "operationType": "Backup",
+            "backupType": "Full",
+            "jobStartedBy": "Admin",
+            "jobStartedFrom": "Scheduled",
+            "scheduleName": "",
+            "taskData": {"taskId": 40, "taskName": "Standard Plan", "subtaskName": ""},
+            "plan": {"planId": 1, "planName": "Standard Plan"},
+            "storagePolicy": {"storagePolicyId": 3, "storagePolicyName": "Standard Plan"},
+            "priority": 166,
+            "subclient": {
+                "clientId": 2,
+                "clientName": "web01",
+                "appName": "Windows File System",
+                "instanceId": 1,
+                "instanceName": "DefaultInstanceName",
+                "backupsetName": "defaultBackupSet",
+                "subclientId": 15,
+                "subclientName": "data",
+            },
+            "encrypted": "No",
+            "softwareCompression": "Storage Policy",
+            "pendingReasonErrorCode": "17:158",
+            **general,
+        },
+        "detailInfo": {
+            "startTime": 1791511223,
+            "endTime": 1791511283,
+            "numOfObjects": 6,
+            "skippedItems": 1,
+            "scannedFiles": 340,
+            "scannedFolders": 2,
+            "scanFileFailures": 1,
+            "scanFolderFailures": 0,
+            "backupFileFailures": 0,
+            "backupFolderFailures": 0,
+            # Commvault sends these three as strings.
+            "sizeOfApplication": "1262194",
+            "savingsPercent": "84.07",
+            "transferTime": "5",
+            "compressedBytes": 828015,
+            "sizeOfMediaOnDisk": 47176,
+            "numOfStreams": 1,
+            "failures": "0 Folders, 1 Files",
+        },
+        "progressInfo": {
+            "state": "Failed",
+            "reasonForJobDelay": "Configured content does not exist.<br/>Source: CS",
+            "elapsedTime": "60",
+        },
+    }
+
+
+@respx.mock
+def test_detail_reads_what_the_summary_does_not_have() -> None:
+    respx.post(f"{BASE}/JobDetails").respond(json={"job": {"jobDetail": _job_detail()}})
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        detail = cv.jobs.detail(279)
+
+    assert detail is not None
+    assert (detail.job_id, detail.status, detail.operation) == (279, "Failed", "Backup")
+    assert (detail.backup_type, detail.started_by, detail.started_from) == (
+        "Full",
+        "Admin",
+        "Scheduled",
+    )
+    # Scheduled by a plan: no schedule name of its own.
+    assert (detail.schedule_name, detail.schedule_policy) == (None, "Standard Plan")
+    assert (detail.plan, detail.storage_policy, detail.priority) == (
+        "Standard Plan",
+        "Standard Plan",
+        166,
+    )
+    assert (detail.client_id, detail.client_name, detail.app_name) == (
+        2,
+        "web01",
+        "Windows File System",
+    )
+    assert (detail.instance_id, detail.instance_name) == (1, "DefaultInstanceName")
+    assert (detail.backupset_name, detail.subclient_id, detail.subclient_name) == (
+        "defaultBackupSet",
+        15,
+        "data",
+    )
+    assert (detail.encrypted, detail.software_compression) == (False, "Storage Policy")
+    assert detail.pending_reason == "Configured content does not exist.<br/>Source: CS"
+    assert detail.pending_reason_code == "17:158"
+    assert detail.start_time == datetime.fromtimestamp(1791511223, tz=UTC)
+    assert detail.end_time == datetime.fromtimestamp(1791511283, tz=UTC)
+    assert detail.elapsed_seconds == 60
+    assert (detail.objects, detail.skipped) == (6, 1)
+    assert (detail.scanned_files, detail.scanned_folders) == (340, 2)
+    assert (detail.scan_failed_files, detail.scan_failed_folders) == (1, 0)
+    assert (detail.backup_failed_files, detail.backup_failed_folders) == (0, 0)
+    assert (detail.size_of_application, detail.compressed_bytes, detail.size_of_media) == (
+        1262194,
+        828015,
+        47176,
+    )
+    assert (detail.savings_percent, detail.streams, detail.transfer_seconds) == (84.07, 1, 5)
+    assert detail.raw["detailInfo"]["failures"] == "0 Folders, 1 Files"
+
+
+@respx.mock
+def test_detail_of_an_administrative_job_leaves_the_backup_fields_empty() -> None:
+    # Data Aging: no subclient to speak of, no scan, blanks for names.
+    raw = {
+        "generalInfo": {
+            "jobId": 288,
+            "operationType": "Data Aging",
+            "jobStartedBy": "SystemCreatedAdmin",
+            "jobStartedFrom": "Scheduled",
+            "scheduleName": "Data Aging",
+            "taskData": {"taskName": "", "subtaskName": "Data Aging"},
+            "plan": {"planId": 0},
+            "storagePolicy": {"storagePolicyId": 0, "storagePolicyName": ""},
+            "subclient": {"displayName": "", "instanceName": "", "workloadId": 0},
+            "pendingReasonErrorCode": "",
+        },
+        "detailInfo": {"startTime": 1791565380, "endTime": 0, "numOfObjects": 0},
+        "progressInfo": {"state": "Completed", "reasonForJobDelay": "", "elapsedTime": "-5445"},
+    }
+    respx.post(f"{BASE}/JobDetails").respond(json={"job": {"jobDetail": raw}})
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        detail = cv.jobs.detail(288)
+
+    assert detail is not None
+    assert (detail.schedule_name, detail.schedule_policy) == ("Data Aging", None)
+    assert (detail.plan, detail.storage_policy, detail.backup_type) == (None, None, None)
+    assert (detail.client_id, detail.client_name, detail.instance_name) == (None, None, None)
+    assert (detail.encrypted, detail.scanned_files, detail.scan_failed_files) == (None, None, None)
+    assert (detail.pending_reason, detail.pending_reason_code) == (None, None)
+    # 0 is Commvault's "not yet"; the elapsed figure is passed on as it is.
+    assert (detail.end_time, detail.elapsed_seconds) == (None, -5445)
+
+
+@respx.mock
+def test_detail_is_none_for_an_unknown_or_unreadable_job(log_messages: list[str]) -> None:
+    respx.post(f"{BASE}/JobDetails").mock(
+        side_effect=[
+            respx.MockResponse(200, json={}),
+            respx.MockResponse(200, json={"job": {"jobDetail": _job_detail(priority="high")}}),
+        ]
+    )
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        assert cv.jobs.detail(999999) is None
+        assert cv.jobs.detail(279) is None
+
+    assert any("Could not read the details of job 279" in message for message in log_messages)
+    assert any("generalInfo.priority" in message for message in log_messages)

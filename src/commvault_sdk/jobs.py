@@ -14,8 +14,10 @@ from ._base import Resource
 from .models import (
     Job,
     JobAttempt,
+    JobDetail,
     JobEvent,
     attempt_from_info,
+    detail_from_job_detail,
     event_from_commserv,
     job_from_summary,
 )
@@ -200,6 +202,20 @@ class Jobs(Resource):
             self._query("/JobDetails", body).get("job", {}).get("jobDetail", {})
         )
         return detail
+
+    def detail(self, job_id: int) -> JobDetail | None:
+        """What details() returns, typed (POST /JobDetails): who or what
+        started the job, its schedule and plan, and what it scanned,
+        skipped and failed on. None if the CommCell does not know the
+        job, or - logged - if its details cannot be read."""
+        raw = self.details(job_id)
+        if not raw:
+            return None
+        try:
+            return detail_from_job_detail(raw)
+        except ValidationError as exc:
+            logger.error("Could not read the details of job {} - {}", job_id, _problems(exc))
+            return None
 
     def attempts(self, job_id: int) -> list[JobAttempt]:
         """Each attempt at each phase of a job, in the order they ran

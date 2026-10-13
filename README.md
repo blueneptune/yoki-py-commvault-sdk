@@ -73,6 +73,7 @@ real CommServe (11 SP46).
 | `oldest_start(lookup_seconds)` | `POST /Jobs` (limit 1) | proven |
 | `get(job_id)` | `GET /Job/{id}` | proven |
 | `details(job_id)`, `counts(job_id)` | `POST /JobDetails` | proven |
+| `detail(job_id)` | `POST /JobDetails` | proven, on all 270 lab jobs |
 | `attempts(job_id)`, `details(job_id, attempts=True)` | `POST /JobDetails` (showAttempt) | proven, on all 258 lab jobs |
 | `events(job_id)` | `GET /Events?jobId=` | proven, on all 258 lab jobs |
 | `suspend`, `resume`, `kill` *change* | `POST /Job/{id}/action/pause\|resume\|kill` | proven |
@@ -139,8 +140,8 @@ run against Commvault Cloud.
 Commvault's own JSON for each thing, as dictionaries, with the envelope
 removed (`clients.list()` gives the list of client entities, not the
 `clientProperties` wrapper). Jobs are the exception: they come back as
-the SDK's typed `Job`, their attempts as `JobAttempt` and their events
-as `JobEvent`, each with Commvault's own JSON kept in `.raw`. Typed
+the SDK's typed `Job`, their details as `JobDetail`, their attempts as
+`JobAttempt` and their events as `JobEvent`, each with Commvault's own JSON kept in `.raw`. Typed
 models for the rest are worth adding once it is clear which fields
 matter.
 
@@ -159,6 +160,12 @@ for attempt in cv.jobs.attempts(job_id):   # each try at each phase
 for event in cv.jobs.events(job_id):       # the event log, oldest first
     event.time, event.severity, event.code, event.description
 ```
+
+`cv.jobs.detail(job_id)` is the rest of what Commvault knows about one
+job, typed as `JobDetail`: who or what started it (`started_by`,
+`started_from`), its schedule and plan, whether it was encrypted and
+where it was compressed, and what it scanned, skipped and failed on.
+`details()` remains for the same reply as Commvault's JSON.
 
 A job that failed to start has no attempts - it never reached a phase -
 so its events are all there is. A job that ran cleanly usually has no
@@ -182,7 +189,7 @@ budget.py      the hourly call budget
 _base.py       Resource (get / list / query / change), error handling
 auth.py        access-token header and renewal
 jobs.py  clients.py  subclients.py  sql.py  commcell.py   the groups
-models.py      Job, JobAttempt, JobEvent, and Commvault's JSON -> each
+models.py      Job, JobDetail, JobAttempt, JobEvent, and Commvault's JSON -> each
 ```
 
 It sits on `sdk-primer-core` for transport - retries, typed exceptions,

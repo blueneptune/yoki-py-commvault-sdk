@@ -8,7 +8,8 @@ kept in Job.raw regardless.
 
 JobAttempt is one entry of `attemptsInfo`, which POST /JobDetails adds
 to its answer when asked with showAttempt. JobEvent is one entry of
-`commservEvents` from GET /Events.
+`commservEvents` from GET /Events. JobDetail is the `jobDetail` object
+of POST /JobDetails.
 """
 
 from __future__ import annotations
@@ -219,6 +220,142 @@ class CommservEvent(BaseModel):
     client: _EventClient = Field(default_factory=_EventClient, alias="clientEntity")
 
 
+class JobDetail(BaseModel):
+    """What POST /JobDetails knows about a job that its summary does
+    not: who or what started it, how it was set to run, and what it
+    found, skipped and failed on. The fields a summary already has
+    (status, times, sizes, the reason) are here too, so a JobDetail can
+    be read on its own; `raw` is Commvault's whole jobDetail.
+
+    Which fields are filled varies by kind of job: the scan and failure
+    counts are there for backups, not for administrative jobs."""
+
+    job_id: int
+    status: str
+    operation: str | None = None
+    # "Full", "Incremental", "Differential", "Transaction Log".
+    backup_type: str | None = None
+    # The user name, and "Scheduled", "Interactive" or "System".
+    started_by: str | None = None
+    started_from: str | None = None
+    # What scheduled it. Jobs scheduled by a plan have the plan's name
+    # (or its schedule policy's) in schedule_policy and no
+    # schedule_name; a schedule of its own has a schedule_name.
+    schedule_name: str | None = None
+    schedule_policy: str | None = None
+    plan: str | None = None
+    # Named here ("CV_DEFAULT") for some administrative jobs whose
+    # summary leaves it blank.
+    storage_policy: str | None = None
+    priority: int | None = None
+    client_id: int | None = None
+    client_name: str | None = None
+    app_name: str | None = None
+    instance_id: int | None = None
+    instance_name: str | None = None
+    backupset_name: str | None = None
+    subclient_id: int | None = None
+    subclient_name: str | None = None
+    encrypted: bool | None = None
+    # Where compression was done: "Client", "Storage Policy" or "Off".
+    software_compression: str | None = None
+    pending_reason: str | None = None
+    # Unlike Job.pending_reason_code this repeats the code once for each
+    # line of the reason: "19:601, 19:601, 19:601".
+    pending_reason_code: str | None = None
+    start_time: AwareDatetime | None = None
+    end_time: AwareDatetime | None = None
+    # Commvault's figure, and it is end minus start by the CommServe's
+    # clock: a job that ran across a clock change can have a negative one.
+    elapsed_seconds: int | None = None
+    # For a SQL Server job an object is a database.
+    objects: int | None = None
+    skipped: int | None = None
+    scanned_files: int | None = None
+    scanned_folders: int | None = None
+    scan_failed_files: int | None = None
+    scan_failed_folders: int | None = None
+    backup_failed_files: int | None = None
+    backup_failed_folders: int | None = None
+    # 0 here for a CommServe DR backup and a software download, whose
+    # summaries do have the size: for those, trust Job.
+    size_of_application: int | None = None
+    compressed_bytes: int | None = None
+    size_of_media: int | None = None
+    savings_percent: float | None = None
+    streams: int | None = None
+    transfer_seconds: int | None = None
+    raw: dict[str, Any] = Field(default_factory=dict)
+
+
+class _Reply(BaseModel):
+    model_config = ConfigDict(extra="ignore", populate_by_name=True)
+
+
+class _DetailSubclient(_Subclient):
+    app_name: str | None = Field(default=None, alias="appName")
+    instance_id: int | None = Field(default=None, alias="instanceId")
+    subclient_id: int | None = Field(default=None, alias="subclientId")
+
+
+class _Plan(_Reply):
+    name: str | None = Field(default=None, alias="planName")
+
+
+class _TaskData(_Reply):
+    task_name: str | None = Field(default=None, alias="taskName")
+
+
+class _GeneralInfo(_Reply):
+    job_id: int = Field(alias="jobId")
+    operation_type: str | None = Field(default=None, alias="operationType")
+    backup_type: str | None = Field(default=None, alias="backupType")
+    job_started_by: str | None = Field(default=None, alias="jobStartedBy")
+    job_started_from: str | None = Field(default=None, alias="jobStartedFrom")
+    schedule_name: str | None = Field(default=None, alias="scheduleName")
+    task_data: _TaskData = Field(default_factory=_TaskData, alias="taskData")
+    plan: _Plan = Field(default_factory=_Plan)
+    storage_policy: _StoragePolicy = Field(default_factory=_StoragePolicy, alias="storagePolicy")
+    priority: int | None = None
+    subclient: _DetailSubclient = Field(default_factory=_DetailSubclient)
+    # "Yes" or "No".
+    encrypted: str | None = None
+    software_compression: str | None = Field(default=None, alias="softwareCompression")
+    pending_reason_error_code: str | None = Field(default=None, alias="pendingReasonErrorCode")
+
+
+class _DetailInfo(_Reply):
+    start_time: int | None = Field(default=None, alias="startTime")
+    end_time: int | None = Field(default=None, alias="endTime")
+    num_of_objects: int | None = Field(default=None, alias="numOfObjects")
+    skipped_items: int | None = Field(default=None, alias="skippedItems")
+    scanned_files: int | None = Field(default=None, alias="scannedFiles")
+    scanned_folders: int | None = Field(default=None, alias="scannedFolders")
+    scan_file_failures: int | None = Field(default=None, alias="scanFileFailures")
+    scan_folder_failures: int | None = Field(default=None, alias="scanFolderFailures")
+    backup_file_failures: int | None = Field(default=None, alias="backupFileFailures")
+    backup_folder_failures: int | None = Field(default=None, alias="backupFolderFailures")
+    # These three numbers arrive as strings.
+    size_of_application: int | None = Field(default=None, alias="sizeOfApplication")
+    savings_percent: float | None = Field(default=None, alias="savingsPercent")
+    transfer_time: int | None = Field(default=None, alias="transferTime")
+    compressed_bytes: int | None = Field(default=None, alias="compressedBytes")
+    size_of_media: int | None = Field(default=None, alias="sizeOfMediaOnDisk")
+    num_of_streams: int | None = Field(default=None, alias="numOfStreams")
+
+
+class _ProgressInfo(_Reply):
+    state: str = "Unknown"
+    reason_for_job_delay: str | None = Field(default=None, alias="reasonForJobDelay")
+    elapsed_time: int | None = Field(default=None, alias="elapsedTime")
+
+
+class JobDetailInfo(_Reply):
+    general: _GeneralInfo = Field(alias="generalInfo")
+    detail: _DetailInfo = Field(default_factory=_DetailInfo, alias="detailInfo")
+    progress: _ProgressInfo = Field(default_factory=_ProgressInfo, alias="progressInfo")
+
+
 def _from_epoch(seconds: int | None) -> datetime | None:
     """Commvault reports times as epoch seconds and uses 0 for "not yet"
     (e.g. the end time of a job that is still running)."""
@@ -300,5 +437,54 @@ def event_from_commserv(raw: dict[str, Any]) -> JobEvent:
         description=event.description or None,
         client_id=event.client.client_id,
         client_name=event.client.client_name or None,
+        raw=raw,
+    )
+
+
+def detail_from_job_detail(raw: dict[str, Any]) -> JobDetail:
+    info = JobDetailInfo.model_validate(raw)
+    general, detail, progress = info.general, info.detail, info.progress
+    subclient = general.subclient
+    return JobDetail(
+        job_id=general.job_id,
+        status=progress.state,
+        operation=general.operation_type or None,
+        backup_type=general.backup_type or None,
+        started_by=general.job_started_by or None,
+        started_from=general.job_started_from or None,
+        schedule_name=general.schedule_name or None,
+        schedule_policy=general.task_data.task_name or None,
+        plan=general.plan.name or None,
+        storage_policy=general.storage_policy.name or None,
+        priority=general.priority,
+        client_id=subclient.client_id,
+        client_name=subclient.client_name or None,
+        app_name=subclient.app_name or None,
+        instance_id=subclient.instance_id,
+        instance_name=subclient.instance_name or None,
+        backupset_name=subclient.backupset_name or None,
+        subclient_id=subclient.subclient_id,
+        subclient_name=subclient.subclient_name or None,
+        encrypted={"Yes": True, "No": False}.get(general.encrypted or ""),
+        software_compression=general.software_compression or None,
+        pending_reason=progress.reason_for_job_delay or None,
+        pending_reason_code=general.pending_reason_error_code or None,
+        start_time=_from_epoch(detail.start_time),
+        end_time=_from_epoch(detail.end_time),
+        elapsed_seconds=progress.elapsed_time,
+        objects=detail.num_of_objects,
+        skipped=detail.skipped_items,
+        scanned_files=detail.scanned_files,
+        scanned_folders=detail.scanned_folders,
+        scan_failed_files=detail.scan_file_failures,
+        scan_failed_folders=detail.scan_folder_failures,
+        backup_failed_files=detail.backup_file_failures,
+        backup_failed_folders=detail.backup_folder_failures,
+        size_of_application=detail.size_of_application,
+        compressed_bytes=detail.compressed_bytes,
+        size_of_media=detail.size_of_media,
+        savings_percent=detail.savings_percent,
+        streams=detail.num_of_streams,
+        transfer_seconds=detail.transfer_time,
         raw=raw,
     )
