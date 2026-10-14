@@ -96,7 +96,7 @@ real CommServe (11 SP46).
 | `oldest_start(lookup_seconds)` | `POST /Jobs` (limit 1) | proven |
 | `get(job_id)` | `GET /Job/{id}` | proven |
 | `details(job_id)`, `counts(job_id)` | `POST /JobDetails` | proven |
-| `detail(job_id)` | `POST /JobDetails` | proven, on all 270 lab jobs |
+| `detail(job_id)` | `POST /JobDetails` | proven, on all 270 lab jobs, and on two running ones |
 | `attempts(job_id)`, `details(job_id, attempts=True)` | `POST /JobDetails` (showAttempt) | proven, on all 258 lab jobs |
 | `events(job_id)` | `GET /Events?jobId=` | proven, on all 258 lab jobs |
 | `explain(job_id, min_severity=)` | `POST /JobDetails` (showAttempt) + `GET /Events?jobId=` | proven, on all 272 lab jobs |

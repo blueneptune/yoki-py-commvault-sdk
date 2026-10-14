@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import base64
 import json
+from datetime import UTC, datetime
 
 import httpx
 import pytest
@@ -221,3 +222,31 @@ def test_a_failed_job_carries_the_code_for_its_reason() -> None:
     assert (two.pending_reason, two.pending_reason_code, two.failed_folders) == (None, None, 0)
     # Older summaries without the fields at all.
     assert (three.pending_reason_code, three.failed_folders) == (None, None)
+
+
+@respx.mock
+def test_a_running_job_says_which_phase_it_is_in() -> None:
+    running = _summary(
+        352, "Running", jobEndTime=0, percentComplete=25,
+        currentPhase=7, currentPhaseName="Backup", attemptStartTime=1792013894,
+    )  # fmt: skip
+    waiting = _summary(353, "Waiting", jobEndTime=0, currentPhase=4, currentPhaseName="Scan",
+                       attemptStartTime=-1)  # fmt: skip
+    finished = _summary(279, currentPhase=17, currentPhaseName=None, attemptStartTime=0)
+    for job_id, entry in ((352, running), (353, waiting), (279, finished)):
+        respx.get(f"{BASE}/Job/{job_id}").respond(json={"jobs": [entry]})
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        jobs = [cv.jobs.get(job_id) for job_id in (352, 353, 279)]
+
+    assert [(j.current_phase, j.current_phase_name) for j in jobs if j] == [
+        (7, "Backup"),
+        (4, "Scan"),
+        # A finished job still carries a phase number; it is not one it is in.
+        (None, None),
+    ]
+    assert [j.attempt_start_time for j in jobs if j] == [
+        datetime.fromtimestamp(1792013894, tz=UTC),
+        None,  # -1: waiting for resources
+        None,
+    ]
