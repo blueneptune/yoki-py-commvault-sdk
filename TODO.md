@@ -22,7 +22,7 @@ branch of its own.
 | ~~2~~ | ~~Typed `jobs.detail()`~~ | `a99db21` | 2026.10.W03 |
 | ~~3~~ | ~~Reasons split into message, source and process~~ | `714067d` | 2026.10.W03 |
 | ~~4~~ | ~~`jobs.explain()`~~ | `b4e0b2c` | 2026.10.W03 |
-| 5 | `jobs.task()` | | |
+| ~~5~~ | ~~`jobs.task()`~~ | `34d41be` | 2026.10.W03 |
 | 6 | Failed files for a job | | |
 | 7 | Detail of a running job | | |
 
@@ -80,12 +80,23 @@ branch of its own.
    - With this the branch `2026.10.W03/F/Job_details` is complete and
      ready to merge into `release/2026.10.W03`.
 
-5. **`jobs.task(job_id)`** - the options a job was submitted with:
-   backup level, associations (`GET /Job/{id}/TaskDetails`). Seen
-   working for most lab jobs. Jobs started from the command line answer
-   200 with an error in the body ("Resubmit operation is not supported
-   ..."), which has to become an empty result or a clear error, not a
-   crash.
+5. ~~**`jobs.task(job_id)`** - what a job was asked to do: what it
+   was pointed at, the level requested and the options it was submitted
+   with (`GET /Job/{id}/TaskDetails`).~~ **Done 2026-10-13**, `34d41be`,
+   on branch `2026.10.W03/F/Job_task_details`. Returns a typed
+   `JobTask`. Run over all 272 lab jobs.
+   - It answers for only 168 of them. The endpoint is Commvault's
+     template for resubmitting a job and refuses for an interactive job
+     more than 7 days old, a job started from the command line and a
+     workflow job. Those are `None`, not an error.
+   - An unknown job id gets the same "older than 7 days" answer, so the
+     two cannot be told apart from this call.
+   - The level requested differed from the level that ran for 58 of 141
+     backups, so `requested_level` is not a substitute for
+     `Job.backup_level`.
+   - Not typed: the options themselves, which differ by agent and kind
+     of job. Unknown: whether the 7 days is a setting, and the names of
+     the level numbers other than 1, 2, 3 and 6.
 
 6. **Failed files for a job** - the individual files and folders a
    backup could not read. Not looked at yet. cvpysdk points at
