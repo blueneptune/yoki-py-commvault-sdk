@@ -24,7 +24,7 @@ branch of its own.
 | ~~4~~ | ~~`jobs.explain()`~~ | `b4e0b2c` | 2026.10.W03 |
 | ~~5~~ | ~~`jobs.task()`~~ | `34d41be` | 2026.10.W03 |
 | ~~6~~ | ~~`jobs.failed_items()`~~ | `8376f10` | 2026.10.W03 |
-| 7 | Detail of a running job | | |
+| ~~7~~ | ~~Detail of a running job~~ | `39f387b` | 2026.10.W03 |
 
 0a. ~~**`jobs.attempts(job_id)`** - each attempt at each phase of a
     job, as a typed `JobAttempt`.~~ **Done 2026-10-13**, `51e3cea`.
@@ -116,11 +116,19 @@ branch of its own.
      scan (the lab has only scan failures), folders, a long list, and
      `isFailedItemsCSV` being true.
 
-7. **Detail of a running job** - current phase, progress, the reason it
-   is waiting. Nothing was active in the lab when the calls above were
-   run, so none of them is proven on a running job. Needs a backup
-   started in the lab first, which is a change to the CommServe and so
-   goes through blt's `lab/cvlab.py`, not through a read-only client.
+7. ~~**Detail of a running job** - current phase, progress, the reason it
+   is waiting.~~ **Done 2026-10-14**, `39f387b`, on branch
+   `2026.10.W03/F/Running_job_detail`. Phase and progress fields on
+   `Job` and `JobDetail`. Two lab backups (jobs 352, 353) read every few
+   seconds from start to end.
+   - The summary lags the details by up to ten seconds; follow one job
+     with `detail()`.
+   - Percent moves in steps; Commvault's time-left estimate was 0.
+   - `attempts()` lists finished phases only.
+   - `task()` refuses an API-started job once it has finished ("initiated
+     from command line") but answers while it runs.
+   - Not seen: a job waiting *with* a reason (Pending). That needs a
+     failure caused on purpose - the lab's catalogue F01 and F02.
 
 ## Events
 

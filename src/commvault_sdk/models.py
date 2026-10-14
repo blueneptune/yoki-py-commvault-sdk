@@ -99,6 +99,15 @@ class Job(BaseModel):
     # thing to group failures by. None when there is no reason.
     pending_reason_code: str | None = None
     is_aged: bool | None = None
+    # While the job is active: the phase it is in (Commvault's number and
+    # name - Scan is 4, Backup 7, Archive Index 12 for a file-system
+    # backup) and when the current attempt at it started. None once the
+    # job has ended, and attempt_start_time is None while it waits for
+    # resources. The summary lags the job by a few seconds; JobDetail's
+    # phase is fresher (see Jobs.detail).
+    current_phase: int | None = None
+    current_phase_name: str | None = None
+    attempt_start_time: AwareDatetime | None = None
     raw: dict[str, Any] = Field(default_factory=dict)
 
     @property
@@ -145,6 +154,9 @@ class JobSummary(BaseModel):
     pending_reason: str | None = Field(default=None, alias="pendingReason")
     pending_reason_code: str | None = Field(default=None, alias="pendingReasonErrorCode")
     is_aged: bool | None = Field(default=None, alias="isAged")
+    current_phase: int | None = Field(default=None, alias="currentPhase")
+    current_phase_name: str | None = Field(default=None, alias="currentPhaseName")
+    attempt_start_time: int | None = Field(default=None, alias="attemptStartTime")
     dest_client_name: str | None = Field(default=None, alias="destClientName")
     subclient: _Subclient = Field(default_factory=_Subclient)
     storage_policy: _StoragePolicy = Field(default_factory=_StoragePolicy, alias="storagePolicy")
@@ -338,6 +350,27 @@ class JobDetail(BaseModel):
     savings_percent: float | None = None
     streams: int | None = None
     transfer_seconds: int | None = None
+    # How far an active job has got - None once it has ended, when
+    # Commvault keeps only its state, elapsed time and files transferred. `phase` and
+    # `phase_name` are the phase it is in (4 Scan, 7 Backup, 12 Archive
+    # Index, 17 Post Operation for a file-system backup);
+    # `percent_complete` is the whole job's, and moves in steps (0, 25,
+    # 70, 85, 98 seen), not smoothly. `network_bytes` is what crossed the network, after
+    # deduplication - far less than size_of_application on a repeat
+    # backup. `average_gib_per_hour` is size_of_application over the
+    # transfer time, in GiB per hour (checked on two lab jobs) - so on a
+    # small, deduplicated job it is large and means little. `active_file` is the file being worked on, when Commvault
+    # says; often blank. Commvault's estimated completion time was 0
+    # throughout, so it is left in `raw`.
+    phase: int | None = None
+    phase_name: str | None = None
+    percent_complete: float | None = None
+    files_transferred: int | None = None
+    network_bytes: int | None = None
+    average_gib_per_hour: float | None = None
+    active_file: str | None = None
+    attempt_start_time: AwareDatetime | None = None
+    last_update_time: AwareDatetime | None = None
     raw: dict[str, Any] = Field(default_factory=dict)
 
     @property
@@ -483,6 +516,18 @@ class _ProgressInfo(_Reply):
     state: str = "Unknown"
     reason_for_job_delay: str | None = Field(default=None, alias="reasonForJobDelay")
     elapsed_time: int | None = Field(default=None, alias="elapsedTime")
+    # Present while the job is active; a finished job's progressInfo
+    # has only the four fields above it.
+    current_phase_num: int | None = Field(default=None, alias="currentPhaseNum")
+    current_phase: str | None = Field(default=None, alias="currentPhase")
+    percent_complete: float | None = Field(default=None, alias="percentComplete")
+    files_transferred: int | None = Field(default=None, alias="numOfFilesTransferred")
+    network_bytes: int | None = Field(default=None, alias="dataXferedNetwork")
+    average_throughput: float | None = Field(default=None, alias="averageThroughput")
+    active_file: str | None = Field(default=None, alias="activeFile")
+    attempt_start_time: int | None = Field(default=None, alias="attemptStartTime")
+    last_update_time: int | None = Field(default=None, alias="lastJobUpdateTime")
+    size_of_application: int | None = Field(default=None, alias="sizeOfApplication")
 
 
 class JobDetailInfo(_Reply):
@@ -493,8 +538,9 @@ class JobDetailInfo(_Reply):
 
 def _from_epoch(seconds: int | None) -> datetime | None:
     """Commvault reports times as epoch seconds and uses 0 for "not yet"
-    (e.g. the end time of a job that is still running)."""
-    if not seconds:
+    (e.g. the end time of a job that is still running) - and -1 for
+    the start of an attempt that is waiting for resources."""
+    if not seconds or seconds < 0:
         return None
     return datetime.fromtimestamp(seconds, tz=UTC)
 
@@ -527,6 +573,13 @@ def job_from_summary(raw: dict[str, Any]) -> Job:
         pending_reason=summary.pending_reason or None,
         pending_reason_code=summary.pending_reason_code or None,
         is_aged=summary.is_aged,
+        # A finished job still names a phase (17, with no name, on a
+        # completed backup); it is not one the job is in.
+        current_phase=None if summary.job_end_time else summary.current_phase,
+        current_phase_name=(
+            None if summary.job_end_time else (summary.current_phase_name or "").strip() or None
+        ),
+        attempt_start_time=_from_epoch(summary.attempt_start_time),
         raw=raw,
     )
 
@@ -615,12 +668,26 @@ def detail_from_job_detail(raw: dict[str, Any]) -> JobDetail:
         scan_failed_folders=detail.scan_folder_failures,
         backup_failed_files=detail.backup_file_failures,
         backup_failed_folders=detail.backup_folder_failures,
-        size_of_application=detail.size_of_application,
+        # detailInfo has no size while the job runs; progressInfo does.
+        size_of_application=(
+            detail.size_of_application
+            if detail.size_of_application is not None
+            else progress.size_of_application
+        ),
         compressed_bytes=detail.compressed_bytes,
         size_of_media=detail.size_of_media,
         savings_percent=detail.savings_percent,
         streams=detail.num_of_streams,
         transfer_seconds=detail.transfer_time,
+        phase=progress.current_phase_num,
+        phase_name=(progress.current_phase or "").strip() or None,
+        percent_complete=progress.percent_complete,
+        files_transferred=progress.files_transferred,
+        network_bytes=progress.network_bytes,
+        average_gib_per_hour=progress.average_throughput,
+        active_file=progress.active_file or None,
+        attempt_start_time=_from_epoch(progress.attempt_start_time),
+        last_update_time=_from_epoch(progress.last_update_time),
         raw=raw,
     )
 

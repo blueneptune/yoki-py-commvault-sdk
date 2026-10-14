@@ -7,6 +7,7 @@ from __future__ import annotations
 import json
 from datetime import UTC, datetime
 
+import pytest
 import respx
 
 from commvault_sdk import CommvaultClient
@@ -627,3 +628,86 @@ def test_one_unreadable_failed_item_does_not_hide_the_rest(log_messages: list[st
     assert [(item.path, item.reason) for item in items] == [("/etc/shadow", None)]
     assert any("Skipping a failed item of job 279" in message for message in log_messages)
     assert any("as a CSV" in message for message in log_messages)
+
+
+def _running_job_detail(**progress: object) -> dict:
+    """Job 352's jobDetail mid-run in the lab (Archive Index phase):
+    detailInfo has no counts yet, progressInfo has the progress."""
+    raw = _job_detail(jobId=352)
+    raw["detailInfo"] = {"compressedBytes": 0, "workflowInputsXml": ""}
+    raw["progressInfo"] = {
+        "state": "Running",
+        "elapsedTime": "33",
+        "currentPhaseNum": 12,
+        "currentPhase": "Archive Index",
+        "percentComplete": 85,
+        "numOfFilesTransferred": 340,
+        "dataXferedNetwork": 1724936,
+        "sizeOfApplication": 428034797,
+        "averageThroughput": 239.23769,
+        "transferTime": 6,
+        "activeFile": "%IDXDB%\\CvIdxLogs\\2\\J352\\Job.cmt",
+        "attemptStartTime": "1792013906",
+        "lastJobUpdateTime": 1792013910,
+        "estimatedCompletionTime": 0,
+        **progress,
+    }
+    return raw
+
+
+@respx.mock
+def test_detail_of_a_running_job_says_how_far_it_has_got() -> None:
+    respx.post(f"{BASE}/JobDetails").respond(json={"job": {"jobDetail": _running_job_detail()}})
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        detail = cv.jobs.detail(352)
+
+    assert detail is not None
+    assert (detail.status, detail.phase, detail.phase_name) == ("Running", 12, "Archive Index")
+    assert detail.percent_complete == 85
+    assert (detail.files_transferred, detail.network_bytes) == (340, 1724936)
+    # No size in detailInfo while running; progressInfo's is used.
+    assert detail.size_of_application == 428034797
+    assert detail.average_gib_per_hour == pytest.approx(239.24, abs=0.01)
+    assert detail.active_file == "%IDXDB%\\CvIdxLogs\\2\\J352\\Job.cmt"
+    assert detail.attempt_start_time == datetime.fromtimestamp(1792013906, tz=UTC)
+    assert detail.last_update_time == datetime.fromtimestamp(1792013910, tz=UTC)
+    assert detail.end_time is None
+
+
+@respx.mock
+def test_a_job_waiting_for_resources_has_no_attempt_start_yet() -> None:
+    waiting = _running_job_detail(
+        state="Waiting", currentPhaseNum=7, currentPhase="Backup", percentComplete=25,
+        attemptStartTime="0", activeFile="", numOfFilesTransferred=0, dataXferedNetwork=0,
+    )  # fmt: skip
+    respx.post(f"{BASE}/JobDetails").respond(json={"job": {"jobDetail": waiting}})
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        detail = cv.jobs.detail(352)
+
+    assert detail is not None
+    assert (detail.status, detail.phase_name, detail.percent_complete) == ("Waiting", "Backup", 25)
+    assert detail.attempt_start_time is None
+    assert detail.active_file is None
+
+
+@respx.mock
+def test_a_finished_job_has_no_progress() -> None:
+    # A finished job's progressInfo, as the lab sends it: four fields.
+    raw = _job_detail()
+    raw["progressInfo"] = {
+        "reasonForJobDelay": "",
+        "state": "Completed",
+        "numOfFilesTransferred": 340,
+        "elapsedTime": "54",
+    }
+    respx.post(f"{BASE}/JobDetails").respond(json={"job": {"jobDetail": raw}})
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        detail = cv.jobs.detail(279)
+
+    assert detail is not None
+    assert (detail.phase, detail.phase_name, detail.percent_complete) == (None, None, None)
+    assert detail.attempt_start_time is None
+    assert detail.files_transferred == 340

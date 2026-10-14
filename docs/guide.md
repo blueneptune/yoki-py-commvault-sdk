@@ -272,6 +272,42 @@ running = cv.jobs.active()
 Store jobs by `job_id` and overwrite: a job read twice is the same job,
 and a running job read again later has moved on.
 
+### A job in progress
+
+```python
+job = cv.jobs.get(job_id)                 # from the summary: a few seconds behind
+job.status, job.current_phase_name, job.percent_complete
+
+detail = cv.jobs.detail(job_id)           # fresher
+detail.status, detail.phase_name, detail.percent_complete
+detail.files_transferred, detail.network_bytes, detail.size_of_application
+```
+
+While a job is active, `Job` has its phase (`current_phase`,
+`current_phase_name`) and when the current attempt at it started
+(`attempt_start_time`), and `JobDetail` adds files transferred, bytes
+sent over the network, average throughput (`average_gib_per_hour`) and
+the file being worked on. All of them are `None` once the job has
+ended. What two lab backups showed:
+
+- **The summary lags.** `get()` and the job listing were up to ten
+  seconds behind `detail()`: the summary still said Backup at 25% when
+  the details said Archive Index at 85%. To follow one job, poll
+  `detail()`.
+- **Waiting is normal.** A backup waits for resources between phases -
+  `Waiting`, with no reason given and `attempt_start_time` `None` -
+  for a few seconds. A job that waits with a reason is another matter
+  (`pending_reason`, `pending_reason_code`).
+- **Percent moves in steps** at phase changes (0, 25, 70, 85, 98 on a
+  file-system backup), so it says which stage a job is at, not how long
+  is left. Commvault's own estimate of the time left was 0 throughout.
+- **Attempts list finished phases only.** `attempts()` has no entry for
+  the phase in progress until it ends, so `explain()` on a running job
+  shows only what has already gone wrong.
+- **`task()` may only answer while the job runs.** A backup started
+  through the API answered while running, and afterwards was refused as
+  a job "initiated from command line".
+
 ### Small things
 
 - `cv.jobs.active()` - jobs active right now (one page, up to 500).
