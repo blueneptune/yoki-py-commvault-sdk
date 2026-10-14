@@ -240,8 +240,16 @@ media agents) are managed by Commvault there.
     replaced by the README's "Releases" section (`bcbab82`). To delete.
 
 22. **blt's README**, "The SDKs", still says the SDKs are not on the
-    weekly clock. To correct in `blt-v5-poc`.
+    weekly clock. To correct in `blt-v5-poc`. Its "Tidying up" also
+    still deletes branches from GitHub at the merge, where this README
+    now keeps them up for a month.
 
 23. **First release from the weekly branch**, Monday 2026-10-19: the
     version in `pyproject.toml` and the tag. Everything above is new
     calls and fields with nothing removed, so `v0.2.0`.
+
+24. **2026.10.W03's branches off GitHub**, Monday 2026-11-23, a month
+    after its release (README, "Tidying up"): `release/2026.10.W03` and
+    its work branches - `F/Job_details`, `F/Job_task_details`,
+    `F/Weekly_release_cadence`, `F/Branches_off_GitHub_a_month_behind`
+    and any merged after these. Already deleted locally on 2026-10-14.
