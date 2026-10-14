@@ -6,6 +6,7 @@ from .auth import AccessTokenAuth, TokenSet
 from .budget import CallBudget
 from .client import CommvaultClient, Deployment
 from .models import (
+    FailedItem,
     Job,
     JobAttempt,
     JobDetail,
@@ -23,6 +24,7 @@ __all__ = [
     "CommvaultClient",
     "CommvaultError",
     "Deployment",
+    "FailedItem",
     "Job",
     "JobAttempt",
     "JobDetail",

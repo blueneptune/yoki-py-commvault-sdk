@@ -78,6 +78,7 @@ real CommServe (11 SP46).
 | `events(job_id)` | `GET /Events?jobId=` | proven, on all 258 lab jobs |
 | `explain(job_id, min_severity=)` | `POST /JobDetails` (showAttempt) + `GET /Events?jobId=` | proven, on all 272 lab jobs |
 | `task(job_id)` | `GET /Job/{id}/TaskDetails` | proven, on all 272 lab jobs; answers for 168 |
+| `failed_items(job_id)` | `GET /Job/{id}/FailedItems` | proven, on all 286 lab jobs; scan failures only |
 | `suspend`, `resume`, `kill` *change* | `POST /Job/{id}/action/pause\|resume\|kill` | proven |
 
 ### `cv.clients`, `cv.instances`
@@ -209,6 +210,14 @@ with. Commvault keeps this for resubmitting a job and gives it only for
 jobs it would resubmit, so it is `None` for an interactive job more
 than 7 days old, a job started from the command line and a workflow
 job.
+
+`cv.jobs.failed_items(job_id)` is the files and folders a backup could
+not read, each a `FailedItem` with its path and Commvault's reason - the
+list behind `Job.failed_files` and `failed_folders`. Ask only about jobs
+whose summary counts one: Commvault keeps the list for about 7 days
+(after that it is an empty list, though the count remains), and for a
+job that is not a backup it answers with an HTTP 500, which comes back
+as `None` but is logged as an error on the way.
 
 A job that failed to start has no attempts - it never reached a phase -
 so its events are all there is. A job that ran cleanly usually has no
