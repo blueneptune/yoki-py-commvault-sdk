@@ -359,8 +359,9 @@ class JobDetail(BaseModel):
     # deduplication - far less than size_of_application on a repeat
     # backup. `average_gib_per_hour` is size_of_application over the
     # transfer time, in GiB per hour (checked on two lab jobs) - so on a
-    # small, deduplicated job it is large and means little. `active_file` is the file being worked on, when Commvault
-    # says; often blank. Commvault's estimated completion time was 0
+    # small, deduplicated job it is large and means little.
+    # `active_file` is the file being worked on, when Commvault says;
+    # often blank. Commvault's estimated completion time was 0
     # throughout, so it is left in `raw`.
     phase: int | None = None
     phase_name: str | None = None

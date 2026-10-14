@@ -24,7 +24,7 @@ branch of its own.
 | ~~4~~ | ~~`jobs.explain()`~~ | `b4e0b2c` | 2026.10.W03 |
 | ~~5~~ | ~~`jobs.task()`~~ | `34d41be` | 2026.10.W03 |
 | ~~6~~ | ~~`jobs.failed_items()`~~ | `8376f10` | 2026.10.W03 |
-| ~~7~~ | ~~Detail of a running job~~ | `39f387b` | 2026.10.W03 |
+| ~~7~~ | ~~Detail of a running job~~ | `9cc89b5` | 2026.10.W03 |
 
 0a. ~~**`jobs.attempts(job_id)`** - each attempt at each phase of a
     job, as a typed `JobAttempt`.~~ **Done 2026-10-13**, `51e3cea`.
@@ -117,7 +117,7 @@ branch of its own.
      `isFailedItemsCSV` being true.
 
 7. ~~**Detail of a running job** - current phase, progress, the reason it
-   is waiting.~~ **Done 2026-10-14**, `39f387b`, on branch
+   is waiting.~~ **Done 2026-10-14**, `9cc89b5`, on branch
    `2026.10.W03/F/Running_job_detail`. Phase and progress fields on
    `Job` and `JobDetail`. Two lab backups (jobs 352, 353) read every few
    seconds from start to end.
