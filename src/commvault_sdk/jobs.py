@@ -8,10 +8,11 @@ from typing import Any
 
 from loguru import logger
 from pydantic import ValidationError
-from sdk_primer import NotFoundError
+from sdk_primer import NotFoundError, ServerError
 
-from ._base import Resource, error_in
+from ._base import Resource, error_in, json_body
 from .models import (
+    FailedItem,
     Job,
     JobAttempt,
     JobDetail,
@@ -21,6 +22,7 @@ from .models import (
     attempt_from_info,
     detail_from_job_detail,
     event_from_commserv,
+    failed_item_from_entry,
     job_from_summary,
     task_from_info,
 )
@@ -301,6 +303,46 @@ class Jobs(Resource):
         except ValidationError as exc:
             logger.error("Could not read the task of job {} - {}", job_id, _problems(exc))
             return None
+
+    def failed_items(self, job_id: int) -> list[FailedItem] | None:
+        """The files and folders a backup could not read, each with
+        Commvault's reason (GET /Job/{id}/FailedItems) - the list behind
+        Job.failed_files and Job.failed_folders.
+
+        Empty for a backup with no failures, and also for one whose
+        list Commvault no longer keeps: in the lab, backups that ended
+        more than about 7 days earlier answered with an empty list
+        although their summary still counted a failure. Compare with
+        Job.failed_files to tell the two apart.
+
+        None when Commvault will not list failed items for the job at
+        all. It answers those with an HTTP 500 ("View failed items
+        operation failed."): every job that is not a backup - DR
+        backup, data aging, DDB verification, installs - and a job id
+        it does not know. sdk_primer logs each of those 500s as an
+        error before it reaches here, so ask only about jobs whose
+        summary counts a failed file or folder."""
+        try:
+            body = json_body(self._client.api.get(f"/Job/{job_id}/FailedItems"))
+        except ServerError as exc:
+            logger.debug("No failed items for job {}: {}", job_id, exc)
+            return None
+        if body.get("isFailedItemsCSV"):
+            # Never seen in the lab; perhaps a list too long to give
+            # inline. Whatever did come inline is still returned.
+            logger.warning(
+                "Commvault offers the failed items of job {} as a CSV, which is not read here",
+                job_id,
+            )
+        found = []
+        for entry in body.get("failedItems") or []:
+            try:
+                found.append(failed_item_from_entry(entry))
+            except (KeyError, ValidationError) as exc:
+                logger.error(
+                    "Skipping a failed item of job {}: could not read it - {!r}", job_id, exc
+                )
+        return found
 
     def events(self, job_id: int) -> list[JobEvent]:
         """What the CommServe's event log says about a job

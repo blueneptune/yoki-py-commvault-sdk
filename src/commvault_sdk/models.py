@@ -408,6 +408,21 @@ class JobTask(BaseModel):
     raw: dict[str, Any] = Field(default_factory=dict)
 
 
+class FailedItem(BaseModel):
+    """One file or folder a backup could not read, and Commvault's
+    reason for it (see Jobs.failed_items). A folder's path ends in a
+    separator, as Commvault writes it."""
+
+    path: str
+    reason: str | None = None
+    raw: dict[str, Any] = Field(default_factory=dict)
+
+
+def failed_item_from_entry(entry: dict[str, Any]) -> FailedItem:
+    """One entry of GET /Job/{id}/FailedItems as a FailedItem."""
+    return FailedItem(path=entry["entity"], reason=entry.get("failureReason"), raw=entry)
+
+
 class _Reply(BaseModel):
     model_config = ConfigDict(extra="ignore", populate_by_name=True)
 

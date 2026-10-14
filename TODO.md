@@ -23,7 +23,7 @@ branch of its own.
 | ~~3~~ | ~~Reasons split into message, source and process~~ | `714067d` | 2026.10.W03 |
 | ~~4~~ | ~~`jobs.explain()`~~ | `b4e0b2c` | 2026.10.W03 |
 | ~~5~~ | ~~`jobs.task()`~~ | `34d41be` | 2026.10.W03 |
-| 6 | Failed files for a job | | |
+| ~~6~~ | ~~`jobs.failed_items()`~~ | `8376f10` | 2026.10.W03 |
 | 7 | Detail of a running job | | |
 
 0a. ~~**`jobs.attempts(job_id)`** - each attempt at each phase of a
@@ -98,10 +98,23 @@ branch of its own.
      of job. Unknown: whether the 7 days is a setting, and the names of
      the level numbers other than 1, 2, 3 and 6.
 
-6. **Failed files for a job** - the individual files and folders a
-   backup could not read. Not looked at yet. cvpysdk points at
-   `GET /Job/{id}/AdvancedDetails?infoType=`. The lab has 11 jobs with
-   a scan failure to try it on.
+6. ~~**`jobs.failed_items(job_id)`** - the individual files and
+   folders a backup could not read, with Commvault's reason for each
+   (`GET /Job/{id}/FailedItems`).~~ **Done 2026-10-14**, `8376f10`, on
+   branch `2026.10.W03/F/Job_failed_files`. Returns a list of typed
+   `FailedItem`. Run over all 286 lab jobs.
+   - Not `AdvancedDetails`, which this item first pointed at: none of
+     its info types lists failed files. The endpoint was found by
+     probing.
+   - The list looks kept for about 7 days: 7 backups that still count
+     a failed file returned an empty list, all of them older than 7
+     days. So an empty list does not prove none failed.
+   - A job that is not a backup, and an unknown job id, get an HTTP
+     500; that is `None`. sdk_primer logs it as an error first (item
+     25), so ask only about jobs whose summary counts a failure.
+   - Unproven: a file that failed in the backup phase rather than the
+     scan (the lab has only scan failures), folders, a long list, and
+     `isFailedItemsCSV` being true.
 
 7. **Detail of a running job** - current phase, progress, the reason it
    is waiting. Nothing was active in the lab when the calls above were
@@ -253,3 +266,12 @@ media agents) are managed by Commvault there.
     its work branches - `F/Job_details`, `F/Job_task_details`,
     `F/Weekly_release_cadence`, `F/Branches_off_GitHub_a_month_behind`
     and any merged after these. Already deleted locally on 2026-10-14.
+
+25. **Expected errors logged as errors, in sdk-primer-core.** It logs
+    every 4xx and 5xx it raises at ERROR before the SDK can catch it,
+    including the ones the SDK expects and turns into an answer: the
+    404 `_list` reads as "none", and the 500 `jobs.failed_items()` reads
+    as "not a backup". A way for a caller to say which statuses it
+    expects - or logging at ERROR only what reaches the caller - would
+    fix it there; working round it here would mean bypassing
+    sdk_primer's retries and token renewal.

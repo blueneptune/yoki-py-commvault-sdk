@@ -559,3 +559,71 @@ def test_task_is_none_when_commvault_will_not_resubmit_the_job(log_messages: lis
         "No task details for job 50" in message and "older than [7] days" in message
         for message in log_messages
     )
+
+
+@respx.mock
+def test_failed_items_are_read_with_commvaults_reason() -> None:
+    respx.get(f"{BASE}/Job/279/FailedItems").respond(
+        json={
+            "isFailedItemsCSV": False,
+            "failedItems": [
+                {
+                    "failureReason": "The system cannot find the path specified.",
+                    "entity": "C:\\blt-lab\\does-not-exist\\",
+                },
+                {"failureReason": "Access is denied.", "entity": "C:\\data\\locked.db"},
+            ],
+        }
+    )
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        items = cv.jobs.failed_items(279)
+
+    assert items is not None
+    assert [(item.path, item.reason) for item in items] == [
+        ("C:\\blt-lab\\does-not-exist\\", "The system cannot find the path specified."),
+        ("C:\\data\\locked.db", "Access is denied."),
+    ]
+    assert items[1].raw == {"failureReason": "Access is denied.", "entity": "C:\\data\\locked.db"}
+
+
+@respx.mock
+def test_a_backup_with_no_failed_items_gives_an_empty_list() -> None:
+    # What a clean backup gets - and an old one whose list is gone.
+    respx.get(f"{BASE}/Job/306/FailedItems").respond(json={})
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        assert cv.jobs.failed_items(306) == []
+
+
+@respx.mock
+def test_failed_items_is_none_where_commvault_will_not_list_them(
+    log_messages: list[str],
+) -> None:
+    # Any job that is not a backup, and a job id the CommCell does not know.
+    respx.get(f"{BASE}/Job/12/FailedItems").respond(
+        500, json={"errorMessage": "View failed items operation failed.", "errorCode": 1}
+    )
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        assert cv.jobs.failed_items(12) is None
+
+    assert any("No failed items for job 12" in message for message in log_messages)
+
+
+@respx.mock
+def test_one_unreadable_failed_item_does_not_hide_the_rest(log_messages: list[str]) -> None:
+    respx.get(f"{BASE}/Job/279/FailedItems").respond(
+        json={
+            "isFailedItemsCSV": True,
+            "failedItems": [{"failureReason": "no path"}, {"entity": "/etc/shadow"}],
+        }
+    )
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        items = cv.jobs.failed_items(279)
+
+    assert items is not None
+    assert [(item.path, item.reason) for item in items] == [("/etc/shadow", None)]
+    assert any("Skipping a failed item of job 279" in message for message in log_messages)
+    assert any("as a CSV" in message for message in log_messages)
