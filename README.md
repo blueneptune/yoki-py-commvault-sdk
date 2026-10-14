@@ -73,6 +73,10 @@ real CommServe (11 SP46).
 | `oldest_start(lookup_seconds)` | `POST /Jobs` (limit 1) | proven |
 | `get(job_id)` | `GET /Job/{id}` | proven |
 | `details(job_id)`, `counts(job_id)` | `POST /JobDetails` | proven |
+| `detail(job_id)` | `POST /JobDetails` | proven, on all 270 lab jobs |
+| `attempts(job_id)`, `details(job_id, attempts=True)` | `POST /JobDetails` (showAttempt) | proven, on all 258 lab jobs |
+| `events(job_id)` | `GET /Events?jobId=` | proven, on all 258 lab jobs |
+| `explain(job_id, min_severity=)` | `POST /JobDetails` (showAttempt) + `GET /Events?jobId=` | proven, on all 272 lab jobs |
 | `suspend`, `resume`, `kill` *change* | `POST /Job/{id}/action/pause\|resume\|kill` | proven |
 
 ### `cv.clients`, `cv.instances`
@@ -137,8 +141,70 @@ run against Commvault Cloud.
 Commvault's own JSON for each thing, as dictionaries, with the envelope
 removed (`clients.list()` gives the list of client entities, not the
 `clientProperties` wrapper). Jobs are the exception: they come back as
-the SDK's typed `Job`. Typed models for the rest are worth adding once it
-is clear which fields matter.
+the SDK's typed `Job`, their details as `JobDetail`, their attempts as
+`JobAttempt` and their events as `JobEvent`, each with Commvault's own JSON kept in `.raw`. Typed
+models for the rest are worth adding once it is clear which fields
+matter.
+
+### Why a job failed
+
+`cv.jobs.explain(job_id)` is the short way: one answer, from two
+requests, holding the job's reasons and their codes, the attempts that
+did not complete, and its major and critical events.
+
+```python
+why = cv.jobs.explain(job_id)
+if why and not why.clean:
+    why.status, why.reason_codes
+    for reason in why.reasons: ...               # text, source, process
+    for attempt in why.incomplete_attempts: ...  # phase_name, status
+    for event in why.events: ...                 # severity, code, description
+```
+
+A job can complete and still not be `clean`: in the lab, 9 of 207
+completed jobs had an attempt that was suspended, interrupted or failed
+before a later one succeeded. The pieces it is made from follow, for
+when only one is wanted.
+
+The job summary has one sentence (`Job.pending_reason`) and Commvault's
+code for it (`Job.pending_reason_code`, e.g. `19:1132`). Both arrive
+with the job listing, at no extra request. The text names the client,
+path or job involved, so it differs from one failure to the next; the
+code is the same for every failure of that kind, which makes it the
+thing to count and group by. Two calls say more:
+
+```python
+for attempt in cv.jobs.attempts(job_id):   # each try at each phase
+    attempt.phase_name, attempt.status, attempt.failure_reason
+for event in cv.jobs.events(job_id):       # the event log, oldest first
+    event.time, event.severity, event.code, event.description
+```
+
+`cv.jobs.detail(job_id)` is the rest of what Commvault knows about one
+job, typed as `JobDetail`: who or what started it (`started_by`,
+`started_from`), its schedule and plan, whether it was encrypted and
+where it was compressed, and what it scanned, skipped and failed on.
+`details()` remains for the same reply as Commvault's JSON.
+
+Commvault ends each reason with the machine and process that reported
+it, as `...<br/>Source: CS01, Process: JobManager`, and puts several
+reasons in one field when a job was held up more than once.
+`pending_reason` and `failure_reason` are that text untouched;
+`.reasons`, on a `Job`, `JobDetail` or `JobAttempt`, is the same thing
+split:
+
+```python
+for reason in job.reasons:
+    reason.text, reason.source, reason.process
+```
+
+`split_reason(text)` does the same for a reason held anywhere else, such
+as one stored earlier.
+
+A job that failed to start has no attempts - it never reached a phase -
+so its events are all there is. A job that ran cleanly usually has no
+events. Each call is one request per job, so on a large CommCell ask
+only for the jobs that need explaining, not for every job collected.
 
 ## Errors
 
@@ -157,7 +223,8 @@ budget.py      the hourly call budget
 _base.py       Resource (get / list / query / change), error handling
 auth.py        access-token header and renewal
 jobs.py  clients.py  subclients.py  sql.py  commcell.py   the groups
-models.py      Job, and Commvault's jobSummary -> Job
+models.py      Job, JobDetail, JobAttempt, JobEvent, JobExplanation, Reason,
+               and Commvault's JSON -> each
 ```
 
 It sits on `sdk-primer-core` for transport - retries, typed exceptions,
@@ -189,6 +256,9 @@ untested would produce an SDK that looks complete and is wrong in ways
 only a live CommServe reveals; `cvpysdk` already exists for breadth.
 Add groups as work calls for them - restores, schedules, alerts, storage
 policies, VM and file-system content are the likely next ones.
+
+What has been done, in which commit, and what is open is in
+[`TODO.md`](TODO.md).
 
 ## Installing
 
