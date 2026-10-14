@@ -11,6 +11,7 @@ from .models import (
     JobDetail,
     JobEvent,
     JobExplanation,
+    JobTask,
     Reason,
     split_reason,
 )
@@ -27,6 +28,7 @@ __all__ = [
     "JobDetail",
     "JobEvent",
     "JobExplanation",
+    "JobTask",
     "Reason",
     "TokenSet",
     "split_reason",

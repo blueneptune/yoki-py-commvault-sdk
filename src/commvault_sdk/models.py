@@ -10,7 +10,8 @@ JobAttempt is one entry of `attemptsInfo`, which POST /JobDetails adds
 to its answer when asked with showAttempt. JobEvent is one entry of
 `commservEvents` from GET /Events. JobDetail is the `jobDetail` object
 of POST /JobDetails. JobExplanation is the SDK's own: those three put
-together for one job.
+together for one job. JobTask is the `taskInfo` object of
+GET /Job/{id}/TaskDetails.
 """
 
 from __future__ import annotations
@@ -374,6 +375,39 @@ class JobExplanation(BaseModel):
         return not (self.reasons or self.incomplete_attempts or self.events)
 
 
+# backupOpts.backupLevel in a job's task, as matched against what the
+# lab's jobs ran as. Other numbers exist (a synthetic full, for one)
+# and have not been seen; they give a code with no name.
+_REQUESTED_LEVELS = {1: "Full", 2: "Incremental", 3: "Differential", 6: "Transaction Log"}
+
+
+class JobTask(BaseModel):
+    """What a job was asked to do: what it was pointed at and the
+    options it was submitted with. It is the request Commvault would
+    send again to resubmit the job, which is why it exists only for
+    jobs Commvault is willing to resubmit (see Jobs.task).
+
+    `requested_level` is what was asked for, not what ran. Commvault
+    turns an incremental into a full when there is no full to build on,
+    and a plan's log schedule asks for an incremental and runs a
+    transaction log backup; Job.backup_level is what ran.
+
+    `options` is Commvault's own options object. Its contents depend on
+    the agent and the kind of job - backupOpts for a backup, adminOpts
+    for data aging or a DR backup - so it is left as it comes."""
+
+    job_id: int
+    # Commvault's numbers for the kind of operation: 2 is a backup.
+    operation_type: int | None = None
+    requested_level: str | None = None
+    requested_level_code: int | None = None
+    # The subclients, clients or storage the job was pointed at, each
+    # an entity as Commvault writes it (clientName, subclientId, ...).
+    associations: list[dict[str, Any]] = Field(default_factory=list)
+    options: dict[str, Any] = Field(default_factory=dict)
+    raw: dict[str, Any] = Field(default_factory=dict)
+
+
 class _Reply(BaseModel):
     model_config = ConfigDict(extra="ignore", populate_by_name=True)
 
@@ -572,5 +606,21 @@ def detail_from_job_detail(raw: dict[str, Any]) -> JobDetail:
         savings_percent=detail.savings_percent,
         streams=detail.num_of_streams,
         transfer_seconds=detail.transfer_time,
+        raw=raw,
+    )
+
+
+def task_from_info(job_id: int, raw: dict[str, Any]) -> JobTask:
+    # One sub-task per job in everything seen; the first is read.
+    sub_tasks = raw.get("subTasks") or [{}]
+    options = sub_tasks[0].get("options") or {}
+    level = (options.get("backupOpts") or {}).get("backupLevel")
+    return JobTask(
+        job_id=job_id,
+        operation_type=(sub_tasks[0].get("subTask") or {}).get("operationType"),
+        requested_level=_REQUESTED_LEVELS.get(level) if isinstance(level, int) else None,
+        requested_level_code=level,
+        associations=raw.get("associations") or [],
+        options=options,
         raw=raw,
     )

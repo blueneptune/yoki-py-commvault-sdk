@@ -10,17 +10,19 @@ from loguru import logger
 from pydantic import ValidationError
 from sdk_primer import NotFoundError
 
-from ._base import Resource
+from ._base import Resource, error_in
 from .models import (
     Job,
     JobAttempt,
     JobDetail,
     JobEvent,
     JobExplanation,
+    JobTask,
     attempt_from_info,
     detail_from_job_detail,
     event_from_commserv,
     job_from_summary,
+    task_from_info,
 )
 
 # POST /Jobs "category": 0 = all, 1 = active only, 2 = finished only.
@@ -274,6 +276,31 @@ class Jobs(Resource):
             ],
             detail=detail,
         )
+
+    def task(self, job_id: int) -> JobTask | None:
+        """What a job was asked to do (GET /Job/{id}/TaskDetails): what
+        it was pointed at, the level requested and the options it was
+        submitted with.
+
+        This is the request Commvault keeps for resubmitting a job, and
+        it refuses - in a 200, with the refusal in the body - for jobs
+        it will not resubmit. Seen: an interactive job more than 7 days
+        old, a job started from the command line, a workflow job. An
+        unknown job id gets the "older than 7 days" answer too. All of
+        those are None here, with Commvault's words logged at debug, so
+        expect None for a good share of jobs: 104 of the lab's 272."""
+        body = self._list(f"/Job/{job_id}/TaskDetails")
+        info = body.get("taskInfo")
+        if not info:
+            logger.debug(
+                "No task details for job {}: {}", job_id, error_in(body) or "nothing returned"
+            )
+            return None
+        try:
+            return task_from_info(job_id, info)
+        except ValidationError as exc:
+            logger.error("Could not read the task of job {} - {}", job_id, _problems(exc))
+            return None
 
     def events(self, job_id: int) -> list[JobEvent]:
         """What the CommServe's event log says about a job

@@ -478,3 +478,84 @@ def test_explain_is_none_for_an_unknown_job_and_does_not_ask_for_its_events() ->
 
     with CommvaultClient(BASE, access_token="tok") as cv:
         assert cv.jobs.explain(999999) is None
+
+
+def _task(level: int | None = 2, **options: object) -> dict:
+    backup = {} if level is None else {"backupOpts": {"backupLevel": level, "incLevel": 1}}
+    return {
+        "taskInfo": {
+            "task": {"ownerId": 1, "runUserId": 1, "taskType": 1},
+            "associations": [
+                {"clientId": 16, "clientName": "sql-02", "subclientId": 44, "appName": "SQL Server"}
+            ],
+            "subTasks": [
+                {
+                    "subTaskOperation": 1,
+                    "subTask": {"subTaskType": 2, "operationType": 2},
+                    "options": {**backup, **options},
+                }
+            ],
+        }
+    }
+
+
+@respx.mock
+def test_task_reads_what_a_job_was_asked_to_do() -> None:
+    respx.get(f"{BASE}/Job/306/TaskDetails").respond(
+        json=_task(2, commonOpts={"notifyUserOnJobCompletion": False})
+    )
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        task = cv.jobs.task(306)
+
+    assert task is not None
+    assert (task.job_id, task.operation_type) == (306, 2)
+    assert (task.requested_level, task.requested_level_code) == ("Incremental", 2)
+    assert task.associations == [
+        {"clientId": 16, "clientName": "sql-02", "subclientId": 44, "appName": "SQL Server"}
+    ]
+    # Options are Commvault's own, whatever the agent put there.
+    assert task.options["backupOpts"]["incLevel"] == 1
+    assert task.options["commonOpts"] == {"notifyUserOnJobCompletion": False}
+    assert task.raw["task"]["ownerId"] == 1
+
+
+@respx.mock
+def test_task_names_the_levels_seen_and_leaves_the_rest_as_a_code() -> None:
+    replies = [_task(1), _task(3), _task(6), _task(4), _task(None, adminOpts={"x": 1})]
+    respx.get(f"{BASE}/Job/1/TaskDetails").mock(
+        side_effect=[respx.MockResponse(200, json=reply) for reply in replies]
+    )
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        tasks = [cv.jobs.task(1) for _ in replies]
+
+    assert [(t.requested_level, t.requested_level_code) for t in tasks if t] == [
+        ("Full", 1),
+        ("Differential", 3),
+        ("Transaction Log", 6),
+        # Not seen in the lab: the number is kept, no name is guessed.
+        (None, 4),
+        # An administrative job has no backup options at all.
+        (None, None),
+    ]
+
+
+@respx.mock
+def test_task_is_none_when_commvault_will_not_resubmit_the_job(log_messages: list[str]) -> None:
+    refusal = {
+        "errorMessage": "Unable to resubmit job as job is older than [7] days.",
+        "errorCode": 587204882,
+    }
+    respx.get(f"{BASE}/Job/50/TaskDetails").respond(json=refusal)
+    respx.get(f"{BASE}/Job/51/TaskDetails").respond(404)
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        assert cv.jobs.task(50) is None
+        assert cv.jobs.task(51) is None
+
+    # Commvault's own words are kept, for whoever needs to know why.
+    assert any(
+        "No task details for job 50" in message and "older than [7] days" in message
+        for message in log_messages
+    )
