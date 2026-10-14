@@ -167,6 +167,21 @@ job, typed as `JobDetail`: who or what started it (`started_by`,
 where it was compressed, and what it scanned, skipped and failed on.
 `details()` remains for the same reply as Commvault's JSON.
 
+Commvault ends each reason with the machine and process that reported
+it, as `...<br/>Source: CS01, Process: JobManager`, and puts several
+reasons in one field when a job was held up more than once.
+`pending_reason` and `failure_reason` are that text untouched;
+`.reasons`, on a `Job`, `JobDetail` or `JobAttempt`, is the same thing
+split:
+
+```python
+for reason in job.reasons:
+    reason.text, reason.source, reason.process
+```
+
+`split_reason(text)` does the same for a reason held anywhere else, such
+as one stored earlier.
+
 A job that failed to start has no attempts - it never reached a phase -
 so its events are all there is. A job that ran cleanly usually has no
 events. Each call is one request per job, so on a large CommCell ask

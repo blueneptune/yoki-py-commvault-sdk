@@ -14,10 +14,51 @@ of POST /JobDetails.
 
 from __future__ import annotations
 
+import re
 from datetime import UTC, datetime
 from typing import Any
 
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
+
+
+class Reason(BaseModel):
+    """One reason Commvault gave for a job being delayed, failed or
+    killed, with the ending it puts on each taken off: the message, the
+    machine that reported it and the process on that machine."""
+
+    text: str
+    source: str | None = None
+    process: str | None = None
+
+
+# How every reason seen so far ends. A reason field can hold several,
+# one after another, each with its own ending.
+_REASON_ENDING = re.compile(r"<br/>Source: (?P<source>[^\n]*?), Process: (?P<process>[^\n]*)\n?")
+
+
+def split_reason(text: str | None) -> list[Reason]:
+    """Commvault's reason text as the reasons in it.
+
+    A reason arrives as "Killed by Admin.<br/>Source: CS, Process:
+    JobManager", and a job that was held up more than once has several
+    in the one field. Text with no such ending comes back whole, as one
+    reason with no source or process, so nothing is ever dropped."""
+    reasons = []
+    rest_from = 0
+    for ending in _REASON_ENDING.finditer(text or ""):
+        message = (text or "")[rest_from : ending.start()].strip()
+        reasons.append(
+            Reason(
+                text=message,
+                source=ending["source"].strip() or None,
+                process=ending["process"].strip() or None,
+            )
+        )
+        rest_from = ending.end()
+    rest = (text or "")[rest_from:].strip()
+    if rest:
+        reasons.append(Reason(text=rest))
+    return reasons
 
 
 class Job(BaseModel):
@@ -57,6 +98,11 @@ class Job(BaseModel):
     pending_reason_code: str | None = None
     is_aged: bool | None = None
     raw: dict[str, Any] = Field(default_factory=dict)
+
+    @property
+    def reasons(self) -> list[Reason]:
+        """pending_reason, split into message, source and process."""
+        return split_reason(self.pending_reason)
 
 
 class _Subclient(BaseModel):
@@ -134,6 +180,11 @@ class JobAttempt(BaseModel):
     storage_policy: str | None = None
     copy_name: str | None = None
     raw: dict[str, Any] = Field(default_factory=dict)
+
+    @property
+    def reasons(self) -> list[Reason]:
+        """failure_reason, split into message, source and process."""
+        return split_reason(self.failure_reason)
 
 
 class _MediaAgent(BaseModel):
@@ -286,6 +337,11 @@ class JobDetail(BaseModel):
     streams: int | None = None
     transfer_seconds: int | None = None
     raw: dict[str, Any] = Field(default_factory=dict)
+
+    @property
+    def reasons(self) -> list[Reason]:
+        """pending_reason, split into message, source and process."""
+        return split_reason(self.pending_reason)
 
 
 class _Reply(BaseModel):
