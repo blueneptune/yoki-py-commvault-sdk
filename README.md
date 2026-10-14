@@ -77,6 +77,7 @@ real CommServe (11 SP46).
 | `attempts(job_id)`, `details(job_id, attempts=True)` | `POST /JobDetails` (showAttempt) | proven, on all 258 lab jobs |
 | `events(job_id)` | `GET /Events?jobId=` | proven, on all 258 lab jobs |
 | `explain(job_id, min_severity=)` | `POST /JobDetails` (showAttempt) + `GET /Events?jobId=` | proven, on all 272 lab jobs |
+| `task(job_id)` | `GET /Job/{id}/TaskDetails` | proven, on all 272 lab jobs; answers for 168 |
 | `suspend`, `resume`, `kill` *change* | `POST /Job/{id}/action/pause\|resume\|kill` | proven |
 
 ### `cv.clients`, `cv.instances`
@@ -201,6 +202,14 @@ for reason in job.reasons:
 `split_reason(text)` does the same for a reason held anywhere else, such
 as one stored earlier.
 
+`cv.jobs.task(job_id)` is what the job was asked to do: what it was
+pointed at, the level requested (which is not always the level that
+ran - `Job.backup_level` is that) and the options it was submitted
+with. Commvault keeps this for resubmitting a job and gives it only for
+jobs it would resubmit, so it is `None` for an interactive job more
+than 7 days old, a job started from the command line and a workflow
+job.
+
 A job that failed to start has no attempts - it never reached a phase -
 so its events are all there is. A job that ran cleanly usually has no
 events. Each call is one request per job, so on a large CommCell ask
@@ -223,7 +232,7 @@ budget.py      the hourly call budget
 _base.py       Resource (get / list / query / change), error handling
 auth.py        access-token header and renewal
 jobs.py  clients.py  subclients.py  sql.py  commcell.py   the groups
-models.py      Job, JobDetail, JobAttempt, JobEvent, JobExplanation, Reason,
+models.py      Job, JobDetail, JobAttempt, JobEvent, JobExplanation, JobTask, Reason,
                and Commvault's JSON -> each
 ```
 
