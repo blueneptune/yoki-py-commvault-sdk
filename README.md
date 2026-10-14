@@ -17,6 +17,29 @@ with CommvaultClient(url, access_token=TokenSet(access, refresh)) as cv:
             ...
 ```
 
+**[The usage guide](docs/guide.md)** shows how to do the things the
+SDK is for: connecting and keeping a renewed token, collecting jobs,
+finding out why they failed, inventory, changes, Commvault Cloud, errors.
+This README lists what is in it. Working on the SDK itself - how it is
+built, adding a call, checks and releases - is
+[docs/development.md](docs/development.md); what is done and open is
+[TODO.md](TODO.md).
+
+## Installing
+
+It is not on PyPI. Depend on a tag of this repository (the newest is
+the one to use; tags are listed on GitHub). The repository is
+`yoki-py-commvault-sdk`; the package it provides is `commvault-sdk`,
+imported as `commvault_sdk`:
+
+```
+uv add "commvault-sdk @ git+https://github.com/blueneptune/yoki-py-commvault-sdk.git@v0.2.0"
+```
+
+It builds on [`sdk-primer-core`](https://github.com/blueneptune/sdk-primer-core)
+for transport, which comes with it. More in the guide,
+[Installing](docs/guide.md#installing).
+
 ## Software and SaaS
 
 The same SDK talks to a CommServe you run and to Commvault Cloud:
@@ -138,133 +161,6 @@ been run through it; the rest send requests that were proven before
 this code was a library, checked here by unit tests. Nothing has been
 run against Commvault Cloud.
 
-## What it returns
-
-Commvault's own JSON for each thing, as dictionaries, with the envelope
-removed (`clients.list()` gives the list of client entities, not the
-`clientProperties` wrapper). Jobs are the exception: they come back as
-the SDK's typed `Job`, their details as `JobDetail`, their attempts as
-`JobAttempt` and their events as `JobEvent`, each with Commvault's own JSON kept in `.raw`. Typed
-models for the rest are worth adding once it is clear which fields
-matter.
-
-### Why a job failed
-
-`cv.jobs.explain(job_id)` is the short way: one answer, from two
-requests, holding the job's reasons and their codes, the attempts that
-did not complete, and its major and critical events.
-
-```python
-why = cv.jobs.explain(job_id)
-if why and not why.clean:
-    why.status, why.reason_codes
-    for reason in why.reasons: ...               # text, source, process
-    for attempt in why.incomplete_attempts: ...  # phase_name, status
-    for event in why.events: ...                 # severity, code, description
-```
-
-A job can complete and still not be `clean`: in the lab, 9 of 207
-completed jobs had an attempt that was suspended, interrupted or failed
-before a later one succeeded. The pieces it is made from follow, for
-when only one is wanted.
-
-The job summary has one sentence (`Job.pending_reason`) and Commvault's
-code for it (`Job.pending_reason_code`, e.g. `19:1132`). Both arrive
-with the job listing, at no extra request. The text names the client,
-path or job involved, so it differs from one failure to the next; the
-code is the same for every failure of that kind, which makes it the
-thing to count and group by. Two calls say more:
-
-```python
-for attempt in cv.jobs.attempts(job_id):   # each try at each phase
-    attempt.phase_name, attempt.status, attempt.failure_reason
-for event in cv.jobs.events(job_id):       # the event log, oldest first
-    event.time, event.severity, event.code, event.description
-```
-
-`cv.jobs.detail(job_id)` is the rest of what Commvault knows about one
-job, typed as `JobDetail`: who or what started it (`started_by`,
-`started_from`), its schedule and plan, whether it was encrypted and
-where it was compressed, and what it scanned, skipped and failed on.
-`details()` remains for the same reply as Commvault's JSON.
-
-Commvault ends each reason with the machine and process that reported
-it, as `...<br/>Source: CS01, Process: JobManager`, and puts several
-reasons in one field when a job was held up more than once.
-`pending_reason` and `failure_reason` are that text untouched;
-`.reasons`, on a `Job`, `JobDetail` or `JobAttempt`, is the same thing
-split:
-
-```python
-for reason in job.reasons:
-    reason.text, reason.source, reason.process
-```
-
-`split_reason(text)` does the same for a reason held anywhere else, such
-as one stored earlier.
-
-`cv.jobs.task(job_id)` is what the job was asked to do: what it was
-pointed at, the level requested (which is not always the level that
-ran - `Job.backup_level` is that) and the options it was submitted
-with. Commvault keeps this for resubmitting a job and gives it only for
-jobs it would resubmit, so it is `None` for an interactive job more
-than 7 days old, a job started from the command line and a workflow
-job.
-
-`cv.jobs.failed_items(job_id)` is the files and folders a backup could
-not read, each a `FailedItem` with its path and Commvault's reason - the
-list behind `Job.failed_files` and `failed_folders`. Ask only about jobs
-whose summary counts one: Commvault keeps the list for about 7 days
-(after that it is an empty list, though the count remains), and for a
-job that is not a backup it answers with an HTTP 500, which comes back
-as `None` but is logged as an error on the way.
-
-A job that failed to start has no attempts - it never reached a phase -
-so its events are all there is. A job that ran cleanly usually has no
-events. Each call is one request per job, so on a large CommCell ask
-only for the jobs that need explaining, not for every job collected.
-
-## Errors
-
-- HTTP failures raise sdk-primer's typed errors (`AuthenticationError`,
-  `NotFoundError`, `ServerError`, ...), all `SDKError`.
-- Commvault reports many failures as a 200 with an error in the body. A
-  changing call checks for that and raises `CommvaultError`.
-- An HTML "Scheduled Maintenance" page with a 200 raises `ServerError`.
-- A listing that answers 404 for "there are none" returns an empty list.
-
-## How it is built
-
-```
-client.py      CommvaultClient: connection, auth, and the groups
-budget.py      the hourly call budget
-_base.py       Resource (get / list / query / change), error handling
-auth.py        access-token header and renewal
-jobs.py  clients.py  subclients.py  sql.py  commcell.py   the groups
-models.py      Job, JobDetail, JobAttempt, JobEvent, JobExplanation, JobTask, Reason,
-               and Commvault's JSON -> each
-```
-
-It sits on `sdk-primer-core` for transport - retries, typed exceptions,
-request logging - but does not use its `BaseAPIModel` / `ResourceManager`.
-Those model a resource you save, load and find at a path; Commvault's
-API is not shaped that way, so each group is written against the
-transport directly and shares Commvault's conventions through
-`_base.Resource`.
-
-## Adding an endpoint
-
-1. Find the request in Commvault's API documentation, and in cvpysdk if
-   the documentation is thin.
-2. Add a method to the group it belongs to, using `_get`, `_list`,
-   `_query` or `_change` - `_change` for anything that alters the
-   CommServe, however harmless it looks.
-3. Run it against a real CommServe before relying on it. Nearly every
-   endpoint here differed from first expectations in some way: a sort
-   flag that meant the opposite, an id that was not unique, a listing
-   that left out system databases, a 404 for an empty list.
-4. Add it to the tables above, with whether it has been run.
-
 ## What is not here, deliberately
 
 Commvault's API has hundreds of endpoints. This covers the ones its
@@ -274,177 +170,3 @@ untested would produce an SDK that looks complete and is wrong in ways
 only a live CommServe reveals; `cvpysdk` already exists for breadth.
 Add groups as work calls for them - restores, schedules, alerts, storage
 policies, VM and file-system content are the likely next ones.
-
-What has been done, in which commit, and what is open is in
-[`TODO.md`](TODO.md).
-
-## Installing
-
-It is not on PyPI. Depend on a tag of this repository. The repository is
-`yoki-py-commvault-sdk`; the package it provides is `commvault-sdk`,
-imported as `commvault_sdk`:
-
-```
-uv add "commvault-sdk @ git+https://github.com/blueneptune/yoki-py-commvault-sdk.git@v0.1.0"
-```
-
-It builds on [`sdk-primer-core`](https://github.com/blueneptune/sdk-primer-core)
-for transport, which comes with it.
-
-## Tokens
-
-`TokenSet(access, refresh)` gives the client an access token it can
-renew. Renewal replaces both tokens on the CommServe, so pass
-`on_token_renew=` a function that stores the new pair somewhere durable
-the moment it arrives. If several processes share one token, also pass
-`token_reload=` (read the stored pair) and `token_renew_lock=` (a
-context manager they all take), so they adopt each other's renewals
-instead of trading in a pair that has just been replaced.
-
-## Development
-
-```
-uv sync
-uv run pytest
-uv run ruff check . && uv run ruff format --check .
-uv run mypy
-```
-
-The tests mock HTTP with respx; none needs a CommServe. Before trusting
-a new endpoint, run it against a real one.
-
-## Releases
-
-This SDK is released on the same weekly clock as blt, with the same
-branch names. `main` holds only released code; nothing is committed to
-it directly.
-
-### The week
-
-| Day | What happens |
-|---|---|
-| Monday | The previous week's release branch is merged to `main` and tagged. The new week's release branch opens from `main`. |
-| Monday - Thursday | Work happens on short branches and is merged into the week's release branch as each piece is finished. |
-| Thursday, end of day | Cut-off. What is not merged waits for next week. |
-| Friday | The release branch is tested as a whole (see below). No new work goes in - only fixes for what the testing finds. |
-| Monday | If Friday's tests passed, release. If not, the release is held until they do, or skipped. A week in which nothing was merged has no release. |
-
-### Names
-
-A release is named for the Monday it is released on: `YYYY.MM.Wnn`,
-where `nn` counts the Mondays of that month. Work done in the week of
-12 October 2026 goes into `release/2026.10.W03` and is released on
-Monday 19 October, the third Monday of October. So the branch to be on
-is always the one named for **next** Monday.
-
-| Thing | Name | Example |
-|---|---|---|
-| Release branch | `release/<release>` | `release/2026.10.W03` |
-| Feature branch | `<release>/F/<What_it_does>` | `2026.10.W03/F/Job_details` |
-| Bug-fix branch | `<release>/B/<What_it_fixes>` | `2026.10.W03/B/Paging_stops_early` |
-| Hotfix branch | `<release>/H/<What_it_fixes>` | `2026.10.W03/H/Token_renewal_loop` |
-| Release tag, on `main` | `v<major>.<minor>.<patch>` | `v0.2.0` |
-
-The one difference from blt is the tag. blt is deployed, and its tag is
-the week's name. This is a library that other projects pin, so its tag
-and the version in `pyproject.toml` say what a caller needs to know
-about the change: a new call or option is a minor step (`v0.1.0` to
-`v0.2.0`), a week of only fixes is a patch step (`v0.2.0` to `v0.2.1`),
-and a change that would break a caller is a major step. The tag's
-message names the release branch it came from.
-
-### The loop for one piece of work
-
-```
-git checkout release/2026.10.W03 && git pull
-git checkout -b 2026.10.W03/F/Job_details
-# small commits, each with its tests; run the checks before every one
-git push -u origin 2026.10.W03/F/Job_details     # and push often
-git checkout release/2026.10.W03
-git merge --no-ff 2026.10.W03/F/Job_details
-git push
-```
-
-- **Commit small and often.** One call, one fix or one finding per
-  commit, with its tests in the same commit, and `ruff`, `mypy` and
-  `pytest` passing at each one (see Development). Push as you go; the
-  branch on GitHub should never be far behind.
-- **A new or changed call is run against a real CommServe before its
-  commit**, and the commit message says what that showed. That is where
-  most of this SDK's corrections have come from.
-- **Feature and bug-fix branches** start from the week's release branch
-  and merge back into it.
-- **Hotfix branches** are for something a user of the SDK cannot wait
-  until Monday for. They start from `main`, merge to `main` with a patch
-  tag, and are then merged into the open release branch as well.
-
-### Friday's test
-
-On the release branch, all of:
-
-1. `ruff check`, `ruff format --check`, `mypy`, and the unit tests.
-2. Every call added or changed that week, run against a real CommServe,
-   and the README's tables saying truthfully which are proven.
-3. blt's own tests with its `commvault-sdk` source pointed at this
-   checkout (`{ path = "../yoki-py-commvault-sdk", editable = true }`),
-   so a change that breaks its first user is found before the tag.
-
-If no CommServe is reachable, step 2 has not happened: the calls stay
-marked "written, never run" and the tag message says so.
-
-### Releasing, on Monday
-
-```
-git checkout main && git pull
-git merge --no-ff release/2026.10.W03
-# set the new version in pyproject.toml, then:
-uv lock
-git commit -am "Release v0.2.0 (2026.10.W03)"
-git tag -a v0.2.0 -m "2026.10.W03: what changed, in a line or two"
-git push origin main v0.2.0
-git checkout -b release/2026.10.W04 && git push -u origin release/2026.10.W04
-```
-
-The tag has to be pushed by name, as above: a plain `git push` does not
-send tags, and blt cannot pin a tag that is not on GitHub.
-
-blt takes the new SDK on its own release branch for the following week:
-change the tag for `commvault-sdk` under `[tool.uv.sources]` in its
-`pyproject.toml`, run `uv lock`, run blt's tests, commit.
-
-The same Monday, the branches of any release that went out a month or
-more ago come off GitHub (see Tidying up).
-
-### Tidying up
-
-A branch is deleted locally once it has been merged, and from GitHub a
-month after the release it went out in.
-
-Locally, straight after the merge:
-
-```
-git branch -d 2026.10.W03/F/Job_details
-```
-
-`git branch -d` refuses to delete a branch that has not been merged
-into the branch you are on, which is the check that nothing is lost. A
-release branch is deleted locally the same way after its Monday
-release; the tag keeps that release reachable.
-
-On GitHub, each release's branches - its work branches and the release
-branch itself - stay up for a month after that release, so a week's
-work can still be looked at branch by branch while it is recent. They
-come off on the first release Monday a month or more after the
-release: `2026.10.W03`, released Monday 19 October, has its branches
-deleted from GitHub on Monday 23 November, as part of releasing
-`2026.11.W04`.
-
-```
-git fetch --prune
-git branch -r --list 'origin/2026.10.W03/*' 'origin/release/2026.10.W03'
-git push origin --delete 2026.10.W03/F/Job_details 2026.10.W03/F/Job_task_details ... release/2026.10.W03
-git fetch --prune
-```
-
-Only a release that has been tagged is tidied this way. A branch that
-was never merged stays until someone decides about it.
