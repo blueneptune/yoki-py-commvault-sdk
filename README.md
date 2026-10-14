@@ -237,6 +237,9 @@ only a live CommServe reveals; `cvpysdk` already exists for breadth.
 Add groups as work calls for them - restores, schedules, alerts, storage
 policies, VM and file-system content are the likely next ones.
 
+What has been done, in which commit, and what is open is in
+[`TODO.md`](TODO.md).
+
 ## Installing
 
 It is not on PyPI. Depend on a tag of this repository. The repository is
