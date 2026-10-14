@@ -373,3 +373,108 @@ def test_detail_is_none_for_an_unknown_or_unreadable_job(log_messages: list[str]
 
     assert any("Could not read the details of job 279" in message for message in log_messages)
     assert any("generalInfo.priority" in message for message in log_messages)
+
+
+@respx.mock
+def test_explain_gathers_the_reasons_the_attempts_that_fell_short_and_the_serious_events() -> None:
+    reason = "The Job Manager service was restarted.<br/>Source: CS, Process: JobManager"
+    raw = _job_detail(pendingReasonErrorCode="19:601, 19:601, 17:158")
+    raw["progressInfo"] = {
+        "state": "Completed w/ one or more errors",
+        "reasonForJobDelay": f"{reason}\n{reason}",
+        "elapsedTime": "60",
+    }
+    raw["attemptsInfo"] = [
+        _attempt(4, "Scan", "Interrupted", failureReason=reason),
+        _attempt(4, "Scan"),
+        _attempt(7, "Backup", "Completed w/ one or more errors"),
+    ]
+    details = respx.post(f"{BASE}/JobDetails").respond(json={"job": {"jobDetail": raw}})
+    events = respx.get(f"{BASE}/Events", params={"jobId": 279}).respond(
+        json={
+            "commservEvents": [
+                _event(4, "17:2", "critical", severity=9, timeSource=1791511240),
+                _event(3, "17:12", "major", severity=6, timeSource=1791511239),
+                _event(2, "19:122", "minor", severity=3, timeSource=1791511238),
+                _event(1, "19:1451", "information", severity=0, timeSource=1791511237),
+            ]
+        }
+    )
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        why = cv.jobs.explain(279)
+        everything = cv.jobs.explain(279, min_severity=0)
+
+    assert why is not None and everything is not None
+    # One request for the details and attempts together, one for events.
+    assert json.loads(details.calls[0].request.content) == {"jobId": 279, "showAttempt": True}
+    assert (details.call_count, events.call_count) == (2, 2)
+    assert (why.job_id, why.status) == (279, "Completed w/ one or more errors")
+    assert [r.text for r in why.reasons] == ["The Job Manager service was restarted."] * 2
+    # Each code once, in the order given.
+    assert why.reason_codes == ["19:601", "17:158"]
+    assert [(a.phase_name, a.status) for a in why.incomplete_attempts] == [
+        ("Scan", "Interrupted"),
+        ("Backup", "Completed w/ one or more errors"),
+    ]
+    assert [e.description for e in why.events] == ["major", "critical"]
+    assert [e.description for e in everything.events] == [
+        "information",
+        "minor",
+        "major",
+        "critical",
+    ]
+    assert why.detail.started_by == "Admin"
+    assert not why.clean
+
+
+@respx.mock
+def test_explain_of_a_clean_job_says_so() -> None:
+    raw = _job_detail(pendingReasonErrorCode="")
+    raw["progressInfo"] = {"state": "Completed", "reasonForJobDelay": "", "elapsedTime": "60"}
+    raw["attemptsInfo"] = [_attempt(4, "Scan"), _attempt(7, "Backup")]
+    respx.post(f"{BASE}/JobDetails").respond(json={"job": {"jobDetail": raw}})
+    # Information only: below what is asked for.
+    respx.get(f"{BASE}/Events", params={"jobId": 279}).respond(
+        json={"commservEvents": [_event(1, "19:1451", "converted to a full", severity=0)]}
+    )
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        why = cv.jobs.explain(279)
+
+    assert why is not None and why.clean
+    assert (why.reasons, why.reason_codes, why.incomplete_attempts, why.events) == ([], [], [], [])
+
+
+@respx.mock
+def test_explain_of_a_job_that_failed_to_start_has_reasons_and_events_but_no_attempts() -> None:
+    raw = _job_detail(pendingReasonErrorCode="19:1132")
+    raw["progressInfo"] = {
+        "state": "Failed to Start",
+        "reasonForJobDelay": "Another backup is running.<br/>Source: CS, Process: JobManager",
+        "elapsedTime": "0",
+    }
+    respx.post(f"{BASE}/JobDetails").respond(json={"job": {"jobDetail": raw}})
+    respx.get(f"{BASE}/Events", params={"jobId": 279}).respond(
+        json={"commservEvents": [_event(1, "19:1132", "Another backup is running.", severity=6)]}
+    )
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        why = cv.jobs.explain(279)
+
+    assert why is not None and not why.clean
+    assert (why.status, why.reason_codes, why.incomplete_attempts) == (
+        "Failed to Start",
+        ["19:1132"],
+        [],
+    )
+    assert [e.code for e in why.events] == ["19:1132"]
+
+
+@respx.mock
+def test_explain_is_none_for_an_unknown_job_and_does_not_ask_for_its_events() -> None:
+    respx.post(f"{BASE}/JobDetails").respond(json={})
+    # No /Events route is mocked: asking would fail the test.
+
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        assert cv.jobs.explain(999999) is None

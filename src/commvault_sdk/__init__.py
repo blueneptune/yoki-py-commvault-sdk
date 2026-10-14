@@ -5,7 +5,15 @@ from ._base import ChangesNotAllowed, CommvaultError
 from .auth import AccessTokenAuth, TokenSet
 from .budget import CallBudget
 from .client import CommvaultClient, Deployment
-from .models import Job, JobAttempt, JobDetail, JobEvent, Reason, split_reason
+from .models import (
+    Job,
+    JobAttempt,
+    JobDetail,
+    JobEvent,
+    JobExplanation,
+    Reason,
+    split_reason,
+)
 
 __all__ = [
     "AccessTokenAuth",
@@ -18,6 +26,7 @@ __all__ = [
     "JobAttempt",
     "JobDetail",
     "JobEvent",
+    "JobExplanation",
     "Reason",
     "TokenSet",
     "split_reason",

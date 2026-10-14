@@ -16,6 +16,7 @@ from .models import (
     JobAttempt,
     JobDetail,
     JobEvent,
+    JobExplanation,
     attempt_from_info,
     detail_from_job_detail,
     event_from_commserv,
@@ -35,6 +36,9 @@ _ASCENDING = 0
 
 # Sorts an event with no time before the ones that have one.
 _NO_TIME = datetime.fromtimestamp(0, tz=UTC)
+
+# JobEvent.severity: 0 information, 3 minor, 6 major, 9 critical.
+SEVERITY_MAJOR = 6
 
 
 def _problems(exc: ValidationError) -> str:
@@ -208,7 +212,9 @@ class Jobs(Resource):
         started the job, its schedule and plan, and what it scanned,
         skipped and failed on. None if the CommCell does not know the
         job, or - logged - if its details cannot be read."""
-        raw = self.details(job_id)
+        return self._read_detail(job_id, self.details(job_id))
+
+    def _read_detail(self, job_id: int, raw: dict[str, Any]) -> JobDetail | None:
         if not raw:
             return None
         try:
@@ -224,8 +230,11 @@ class Jobs(Resource):
 
         Empty for a job that failed to start - it never reached a phase -
         and for one the CommCell does not know."""
+        return self._read_attempts(job_id, self.details(job_id, attempts=True))
+
+    def _read_attempts(self, job_id: int, raw: dict[str, Any]) -> list[JobAttempt]:
         found = []
-        for entry in self.details(job_id, attempts=True).get("attemptsInfo") or []:
+        for entry in raw.get("attemptsInfo") or []:
             try:
                 found.append(attempt_from_info(entry))
             except ValidationError as exc:
@@ -233,6 +242,38 @@ class Jobs(Resource):
                     "Skipping an attempt of job {}: could not read it - {}", job_id, _problems(exc)
                 )
         return found
+
+    def explain(self, job_id: int, *, min_severity: int = SEVERITY_MAJOR) -> JobExplanation | None:
+        """Why a job ended as it did, in one answer: its reasons and
+        their codes, the attempts that did not complete, and its events
+        of `min_severity` and above (major and critical unless told
+        otherwise; 0 for all of them).
+
+        Two requests - POST /JobDetails with showAttempt, and
+        GET /Events?jobId= - so ask for the jobs that need explaining,
+        not for every job collected. None if the CommCell does not know
+        the job."""
+        raw = self.details(job_id, attempts=True)
+        detail = self._read_detail(job_id, raw)
+        if detail is None:
+            return None
+        # The details repeat a code once per line of the reason.
+        codes = [code.strip() for code in (detail.pending_reason_code or "").split(",")]
+        return JobExplanation(
+            job_id=detail.job_id,
+            status=detail.status,
+            reasons=detail.reasons,
+            reason_codes=list(dict.fromkeys(code for code in codes if code)),
+            incomplete_attempts=[
+                attempt
+                for attempt in self._read_attempts(job_id, raw)
+                if attempt.status != "Completed"
+            ],
+            events=[
+                event for event in self.events(job_id) if (event.severity or 0) >= min_severity
+            ],
+            detail=detail,
+        )
 
     def events(self, job_id: int) -> list[JobEvent]:
         """What the CommServe's event log says about a job

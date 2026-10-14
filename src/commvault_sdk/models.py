@@ -9,7 +9,8 @@ kept in Job.raw regardless.
 JobAttempt is one entry of `attemptsInfo`, which POST /JobDetails adds
 to its answer when asked with showAttempt. JobEvent is one entry of
 `commservEvents` from GET /Events. JobDetail is the `jobDetail` object
-of POST /JobDetails.
+of POST /JobDetails. JobExplanation is the SDK's own: those three put
+together for one job.
 """
 
 from __future__ import annotations
@@ -342,6 +343,35 @@ class JobDetail(BaseModel):
     def reasons(self) -> list[Reason]:
         """pending_reason, split into message, source and process."""
         return split_reason(self.pending_reason)
+
+
+class JobExplanation(BaseModel):
+    """Why a job ended as it did, gathered from everything Commvault
+    says about it: the reasons on the job, the attempts that did not
+    complete, and the events serious enough to matter.
+
+    Any of the three can be empty. A job that failed to start never
+    reached a phase, so it has no attempts and its reasons and events
+    are all there is; a job that ran cleanly has none of the three,
+    which `clean` says in one word."""
+
+    job_id: int
+    status: str
+    reasons: list[Reason] = Field(default_factory=list)
+    # Commvault's codes for those reasons, each once, in order.
+    reason_codes: list[str] = Field(default_factory=list)
+    # Every attempt that ended as anything but "Completed": failed,
+    # killed, interrupted, completed with errors.
+    incomplete_attempts: list[JobAttempt] = Field(default_factory=list)
+    # Events at or above the severity asked for, oldest first.
+    events: list[JobEvent] = Field(default_factory=list)
+    detail: JobDetail
+
+    @property
+    def clean(self) -> bool:
+        """Nothing to explain: no reason, no attempt that fell short and
+        no serious event."""
+        return not (self.reasons or self.incomplete_attempts or self.events)
 
 
 class _Reply(BaseModel):

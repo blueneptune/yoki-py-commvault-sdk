@@ -76,6 +76,7 @@ real CommServe (11 SP46).
 | `detail(job_id)` | `POST /JobDetails` | proven, on all 270 lab jobs |
 | `attempts(job_id)`, `details(job_id, attempts=True)` | `POST /JobDetails` (showAttempt) | proven, on all 258 lab jobs |
 | `events(job_id)` | `GET /Events?jobId=` | proven, on all 258 lab jobs |
+| `explain(job_id, min_severity=)` | `POST /JobDetails` (showAttempt) + `GET /Events?jobId=` | proven, on all 272 lab jobs |
 | `suspend`, `resume`, `kill` *change* | `POST /Job/{id}/action/pause\|resume\|kill` | proven |
 
 ### `cv.clients`, `cv.instances`
@@ -147,6 +148,24 @@ matter.
 
 ### Why a job failed
 
+`cv.jobs.explain(job_id)` is the short way: one answer, from two
+requests, holding the job's reasons and their codes, the attempts that
+did not complete, and its major and critical events.
+
+```python
+why = cv.jobs.explain(job_id)
+if why and not why.clean:
+    why.status, why.reason_codes
+    for reason in why.reasons: ...               # text, source, process
+    for attempt in why.incomplete_attempts: ...  # phase_name, status
+    for event in why.events: ...                 # severity, code, description
+```
+
+A job can complete and still not be `clean`: in the lab, 9 of 207
+completed jobs had an attempt that was suspended, interrupted or failed
+before a later one succeeded. The pieces it is made from follow, for
+when only one is wanted.
+
 The job summary has one sentence (`Job.pending_reason`) and Commvault's
 code for it (`Job.pending_reason_code`, e.g. `19:1132`). Both arrive
 with the job listing, at no extra request. The text names the client,
@@ -204,7 +223,8 @@ budget.py      the hourly call budget
 _base.py       Resource (get / list / query / change), error handling
 auth.py        access-token header and renewal
 jobs.py  clients.py  subclients.py  sql.py  commcell.py   the groups
-models.py      Job, JobDetail, JobAttempt, JobEvent, and Commvault's JSON -> each
+models.py      Job, JobDetail, JobAttempt, JobEvent, JobExplanation, Reason,
+               and Commvault's JSON -> each
 ```
 
 It sits on `sdk-primer-core` for transport - retries, typed exceptions,
