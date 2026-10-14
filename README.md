@@ -403,16 +403,39 @@ blt takes the new SDK on its own release branch for the following week:
 change the tag for `commvault-sdk` under `[tool.uv.sources]` in its
 `pyproject.toml`, run `uv lock`, run blt's tests, commit.
 
+The same Monday, the branches of any release that went out a month or
+more ago come off GitHub (see Tidying up).
+
 ### Tidying up
 
-A branch is deleted once it has been merged, locally and on GitHub:
+A branch is deleted locally once it has been merged, and from GitHub a
+month after the release it went out in.
+
+Locally, straight after the merge:
 
 ```
 git branch -d 2026.10.W03/F/Job_details
-git push origin --delete 2026.10.W03/F/Job_details
 ```
 
 `git branch -d` refuses to delete a branch that has not been merged
 into the branch you are on, which is the check that nothing is lost. A
-release branch is deleted the same way after its Monday release; the
-tag keeps that release reachable.
+release branch is deleted locally the same way after its Monday
+release; the tag keeps that release reachable.
+
+On GitHub, each release's branches - its work branches and the release
+branch itself - stay up for a month after that release, so a week's
+work can still be looked at branch by branch while it is recent. They
+come off on the first release Monday a month or more after the
+release: `2026.10.W03`, released Monday 19 October, has its branches
+deleted from GitHub on Monday 23 November, as part of releasing
+`2026.11.W04`.
+
+```
+git fetch --prune
+git branch -r --list 'origin/2026.10.W03/*' 'origin/release/2026.10.W03'
+git push origin --delete 2026.10.W03/F/Job_details 2026.10.W03/F/Job_task_details ... release/2026.10.W03
+git fetch --prune
+```
+
+Only a release that has been tagged is tidied this way. A branch that
+was never merged stays until someone decides about it.
