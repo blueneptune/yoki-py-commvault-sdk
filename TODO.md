@@ -246,23 +246,38 @@ media agents) are managed by Commvault there.
     file-system content - and workloads other than SQL Server for blt's
     inventory.
 
+## Documentation
+
+26. ~~**A usage guide**~~ - `docs/guide.md`: connecting, keeping a
+    renewed token, logging, collecting jobs, why a job failed,
+    inventory, changes, Commvault Cloud, errors, what comes back. The
+    README keeps the list of calls; how the SDK is built, adding a call
+    and the release cadence moved to `docs/development.md`. **Done
+    2026-10-14**, on branch `2026.10.W03/F/Usage_guide`. Every
+    read-only example was run as written against the lab, and the
+    token-file example offline; the change and SaaS examples were not
+    run.
+    - Next: the examples as runnable scripts in the lab repository, run
+      with its live tests (lab TODO item 7), so they cannot drift.
+
 ## Housekeeping
 
 21. **`F/Release_process_docs`** (local and on GitHub) describes this
     SDK as not being on the weekly clock. It was never merged and is
-    replaced by the README's "Releases" section (`bcbab82`). To delete.
+    replaced by the "Releases" section now in docs/development.md
+    (`bcbab82`). To delete.
 
 22. **blt's README**, "The SDKs", still says the SDKs are not on the
     weekly clock. To correct in `blt-v5-poc`. Its "Tidying up" also
-    still deletes branches from GitHub at the merge, where this README
-    now keeps them up for a month.
+    still deletes branches from GitHub at the merge, where
+    docs/development.md now keeps them up for a month.
 
 23. **First release from the weekly branch**, Monday 2026-10-19: the
     version in `pyproject.toml` and the tag. Everything above is new
     calls and fields with nothing removed, so `v0.2.0`.
 
 24. **2026.10.W03's branches off GitHub**, Monday 2026-11-23, a month
-    after its release (README, "Tidying up"): `release/2026.10.W03` and
+    after its release (docs/development.md, "Tidying up"): `release/2026.10.W03` and
     its work branches - `F/Job_details`, `F/Job_task_details`,
     `F/Weekly_release_cadence`, `F/Branches_off_GitHub_a_month_behind`
     and any merged after these. Already deleted locally on 2026-10-14.
