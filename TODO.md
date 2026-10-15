@@ -281,8 +281,9 @@ media agents) are managed by Commvault there.
     docs/development.md now keeps them up for a month.
 
 23. **First release from the weekly branch**, Monday 2026-10-19: the
-    version in `pyproject.toml` and the tag. Everything above is new
-    calls and fields with nothing removed, so `v0.2.0`.
+    tag. Everything above is new calls and fields with nothing removed,
+    so `v0.2.0`; `pyproject.toml` already says 0.2.0 (set at the
+    cut-off, 2026-10-15, so Friday tests what ships).
 
 24. **2026.10.W03's branches off GitHub**, Monday 2026-11-23, a month
     after its release (docs/development.md, "Tidying up"): `release/2026.10.W03` and
