@@ -117,6 +117,11 @@ git push
 
 ### Friday's test
 
+By Thursday's cut-off, the release branch already carries the new
+version: `version` in `pyproject.toml` set to the coming tag without its
+`v`, then `uv lock`, on an `H/` branch like any other change. Friday
+then tests what Monday ships, and the tag and the package agree.
+
 On the release branch, all of:
 
 1. `ruff check`, `ruff format --check`, `mypy`, and the unit tests.
@@ -133,10 +138,7 @@ marked "written, never run" and the tag message says so.
 
 ```
 git checkout main && git pull
-git merge --no-ff release/2026.10.W03
-# set the new version in pyproject.toml, then:
-uv lock
-git commit -am "Release v0.2.0 (2026.10.W03)"
+git merge --no-ff release/2026.10.W03 -m "Release v0.2.0 (2026.10.W03)"
 git tag -a v0.2.0 -m "2026.10.W03: what changed, in a line or two"
 git push origin main v0.2.0
 git checkout -b release/2026.10.W04 && git push -u origin release/2026.10.W04
