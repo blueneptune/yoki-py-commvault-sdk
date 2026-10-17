@@ -15,7 +15,10 @@ whoever rotates is responsible for getting it to the service that uses
 the token. The old pair stops working the moment it is deleted.
 
 Request shapes are cvpysdk's (security/user.py); the field names of a
-token are the ones POST /V4/AccessToken/Renew answers with on 11 SP46.
+token are those of GET /V4/AccessToken on 11 SP46 (seen 2026-10-17:
+`{"tokens": [...]}`, each with accessTokenId, tokenName, tokenType,
+userId, createdTime, lastUsedTime, tokenExpiryTimestamp,
+renewableUntilTimestamp, allowedIPs, enableIPAllowListFeature).
 """
 
 from __future__ import annotations
@@ -106,6 +109,9 @@ class AccessToken(BaseModel):
     renewable_until: datetime | None = None
     refresh_expires_at: datetime | None = None
     created_at: datetime | None = None
+    # When the token was last used to call the API: the age of a token
+    # nobody uses any more.
+    last_used_at: datetime | None = None
     allowed_ips: list[str] = Field(default_factory=list)
     api_endpoints: list[str] = Field(default_factory=list)
     raw: dict[str, Any] = Field(default_factory=dict)
@@ -144,7 +150,8 @@ def access_token_from_entry(entry: dict[str, Any], user_name: str | None = None)
         expires_at=_from_epoch(entry.get("tokenExpiryTimestamp")),
         renewable_until=_from_epoch(entry.get("renewableUntilTimestamp")),
         refresh_expires_at=_from_epoch(entry.get("refreshTokenExpiryTimestamp")),
-        created_at=_from_epoch(entry.get("tokenCreatedTimestamp", entry.get("createdTime"))),
+        created_at=_from_epoch(entry.get("createdTime", entry.get("tokenCreatedTimestamp"))),
+        last_used_at=_from_epoch(entry.get("lastUsedTime")),
         allowed_ips=list(entry.get("allowedIPs") or []),
         api_endpoints=list(entry.get("apiEndpoints") or []),
         raw=_without_secrets(entry),

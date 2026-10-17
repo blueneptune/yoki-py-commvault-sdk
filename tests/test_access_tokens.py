@@ -37,7 +37,10 @@ def _token(token_id: int, name: str, user_id: int, **extra: object) -> dict:
         "tokenName": name,
         "userId": user_id,
         "tokenType": 2,
+        "createdTime": 1792193858,
+        "lastUsedTime": 1792251399,
         "tokenExpiryTimestamp": 1792180020,
+        "enableIPAllowListFeature": False,
         "renewableUntilTimestamp": RENEWABLE,
         **extra,
     }
@@ -53,6 +56,8 @@ def test_a_token_is_read_without_its_secret() -> None:
     assert token.scope == "All"
     assert token.renewable_until == datetime(2026, 12, 5, 5, 59, 59, tzinfo=UTC)
     assert token.allowed_ips == ["10.0.0.0/24"]
+    assert token.created_at == datetime.fromtimestamp(1792193858, tz=UTC)
+    assert token.last_used_at == datetime.fromtimestamp(1792251399, tz=UTC)
     assert "SECRET" not in token.model_dump_json()
     assert "ALSO" not in token.model_dump_json()
 

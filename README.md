@@ -153,13 +153,14 @@ real CommServe (11 SP46).
 ### `cv.users`, `cv.access_tokens`
 
 Command Center shows each user only their own tokens; the API lists
-them per user, so `everyone()` can show an administrator all of them.
+them per user, and an administrator may ask for anyone's: `everyone()`
+shows them all (proven 2026-10-17, as Admin, a token of another user's).
 
 | Call | Endpoint | |
 |---|---|---|
-| `users.list()`, `users.find(name)` | `GET /User` | written, **never run** |
-| `access_tokens.list(user_id=)` | `GET /V4/AccessToken?userId=` | written, **never run** |
-| `access_tokens.everyone()`, `get(token_id)` | `GET /User` + the above per user | written, **never run** |
+| `users.list()`, `users.find(name)` | `GET /User` | proven |
+| `access_tokens.list(user_id=)` | `GET /V4/AccessToken?userId=` | proven, for another user's tokens too |
+| `access_tokens.everyone()`, `get(token_id)` | `GET /User` + the above per user | proven |
 | `access_tokens.create(name, ...)` *change* | `POST /V4/AccessToken` | written, **never run** |
 | `access_tokens.update(token_id, ...)` *change* | `PUT /V4/AccessToken/{id}` | written, **never run** |
 | `access_tokens.delete(token_id)` *change* | `DELETE /V4/AccessToken/{id}` | written, **never run** |

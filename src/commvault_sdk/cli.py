@@ -111,6 +111,8 @@ def _row(token: AccessToken) -> dict[str, Any]:
         "scope": token.scope,
         "expires_at": token.expires_at.isoformat() if token.expires_at else None,
         "renewable_until": token.renewable_until.isoformat() if token.renewable_until else None,
+        "created_at": token.created_at.isoformat() if token.created_at else None,
+        "last_used_at": token.last_used_at.isoformat() if token.last_used_at else None,
         "allowed_ips": token.allowed_ips,
         "api_endpoints": token.api_endpoints,
     }
@@ -151,7 +153,19 @@ def cmd_list(cv: CommvaultClient, args: argparse.Namespace) -> int:
         )
     else:
         if found:
-            rows = [["USER", "ID", "NAME", "SCOPE", "EXPIRES", "RENEWABLE UNTIL", "IP LIMIT"]]
+            rows = [
+                [
+                    "USER",
+                    "ID",
+                    "NAME",
+                    "SCOPE",
+                    "CREATED",
+                    "LAST USED",
+                    "EXPIRES",
+                    "RENEWABLE UNTIL",
+                    "IP LIMIT",
+                ]
+            ]
             for t in sorted(found, key=lambda t: ((t.user_name or "").lower(), t.token_id)):
                 rows.append(
                     [
@@ -159,6 +173,8 @@ def cmd_list(cv: CommvaultClient, args: argparse.Namespace) -> int:
                         str(t.token_id),
                         t.name or "-",
                         t.scope or "-",
+                        _date(t.created_at),
+                        _date(t.last_used_at),
                         _date(t.expires_at),
                         _date(t.renewable_until),
                         ", ".join(t.allowed_ips) or "-",

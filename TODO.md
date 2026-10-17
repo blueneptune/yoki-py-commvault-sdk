@@ -306,10 +306,11 @@ media agents) are managed by Commvault there.
     `cv.users`, `cv.access_tokens` (`list`, `everyone`, `get`, `create`,
     `update`, `delete`, `rotate`) and the `commvault-tokens` CLI are
     written and unit-tested from cvpysdk's request shapes, on
-    `2026.10.W04/F/Access_tokens`. **To prove on cv-toaster:**
-    - whether `GET /V4/AccessToken?userId=` answers for *another* user,
-      for an administrator - the point of the whole item - and under
-      which key the list sits;
-    - `GET /User`'s shape;
-    - create, rotate and delete on a throwaway token made for the test,
-      never on blt's (in its Prefect block) or the lab's.
+    `2026.10.W04/F/Access_tokens`. **Proven 2026-10-17** on cv-toaster,
+    as Admin: `GET /V4/AccessToken?userId=` answers for another user (a
+    token `test` of a second user, which Command Center does not show
+    Admin), under `tokens`, with `createdTime` and `lastUsedTime` (now
+    read: `created_at`, `last_used_at`, CLI columns); `GET /User`.
+    **Still to prove:** create, rotate and delete, on the `test` token
+    only - never blt's (in its Prefect block) or the lab's. Run by the
+    user: the permission check here refuses writing a new token pair.
