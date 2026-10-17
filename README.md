@@ -150,6 +150,26 @@ real CommServe (11 SP46).
 | `credentials.names()` | `GET /CommCell/Credentials` | proven |
 | `credentials.create(...)` *change* | `POST /Commcell/Credentials` | proven |
 
+### `cv.users`, `cv.access_tokens`
+
+Command Center shows each user only their own tokens; the API lists
+them per user, so `everyone()` can show an administrator all of them.
+
+| Call | Endpoint | |
+|---|---|---|
+| `users.list()`, `users.find(name)` | `GET /User` | written, **never run** |
+| `access_tokens.list(user_id=)` | `GET /V4/AccessToken?userId=` | written, **never run** |
+| `access_tokens.everyone()`, `get(token_id)` | `GET /User` + the above per user | written, **never run** |
+| `access_tokens.create(name, ...)` *change* | `POST /V4/AccessToken` | written, **never run** |
+| `access_tokens.update(token_id, ...)` *change* | `PUT /V4/AccessToken/{id}` | written, **never run** |
+| `access_tokens.delete(token_id)` *change* | `DELETE /V4/AccessToken/{id}` | written, **never run** |
+| `access_tokens.rotate(token)` *change* | create, then delete the old one | written, **never run** |
+
+The same from a shell: `commvault-tokens list | rotate | delete` (see
+`src/commvault_sdk/cli.py`). It signs in with a username and password,
+so it never renews - and so never invalidates - a token pair that some
+other tool holds.
+
 Authentication (`POST /Login`, `POST /V4/AccessToken/Renew`) is handled
 underneath, in `auth.py` and `client.py`.
 
