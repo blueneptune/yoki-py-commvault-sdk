@@ -280,10 +280,10 @@ media agents) are managed by Commvault there.
     still deletes branches from GitHub at the merge, where
     docs/development.md now keeps them up for a month.
 
-23. **First release from the weekly branch**, Monday 2026-10-19: the
-    tag. Everything above is new calls and fields with nothing removed,
-    so `v0.2.0`; `pyproject.toml` already says 0.2.0 (set at the
-    cut-off, 2026-10-15, so Friday tests what ships).
+23. ~~**First release from the weekly branch**, Monday 2026-10-19: the
+    tag.~~ **Done 2026-10-19**: `release/2026.10.W03` merged to `main`
+    and tagged `v0.2.0` (`ff0a47c`); blt pins it from
+    `release/2026.10.W04` on, and the lab takes the checkout.
 
 24. **2026.10.W03's branches off GitHub**, Monday 2026-11-23, a month
     after its release (docs/development.md, "Tidying up"): `release/2026.10.W03` and
