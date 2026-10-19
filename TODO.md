@@ -299,3 +299,18 @@ media agents) are managed by Commvault there.
     expects - or logging at ERROR only what reaches the caller - would
     fix it there; working round it here would mean bypassing
     sdk_primer's retries and token renewal.
+
+27. **Access tokens of every user** (W04, asked for 2026-10-17). Command
+    Center shows a user only their own tokens; an administrator needs to
+    check every token in the CommCell and rotate or delete them.
+    `cv.users`, `cv.access_tokens` (`list`, `everyone`, `get`, `create`,
+    `update`, `delete`, `rotate`) and the `commvault-tokens` CLI are
+    written and unit-tested from cvpysdk's request shapes, on
+    `2026.10.W04/F/Access_tokens`. **Proven 2026-10-17** on cv-toaster,
+    as Admin: `GET /V4/AccessToken?userId=` answers for another user (a
+    token `test` of a second user, which Command Center does not show
+    Admin), under `tokens`, with `createdTime` and `lastUsedTime` (now
+    read: `created_at`, `last_used_at`, CLI columns); `GET /User`.
+    **Still to prove:** create, rotate and delete, on the `test` token
+    only - never blt's (in its Prefect block) or the lab's. Run by the
+    user: the permission check here refuses writing a new token pair.
