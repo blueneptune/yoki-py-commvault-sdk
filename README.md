@@ -17,6 +17,29 @@ with CommvaultClient(url, access_token=TokenSet(access, refresh)) as cv:
             ...
 ```
 
+**[The usage guide](docs/guide.md)** shows how to do the things the
+SDK is for: connecting and keeping a renewed token, collecting jobs,
+finding out why they failed, inventory, changes, Commvault Cloud, errors.
+This README lists what is in it. Working on the SDK itself - how it is
+built, adding a call, checks and releases - is
+[docs/development.md](docs/development.md); what is done and open is
+[TODO.md](TODO.md).
+
+## Installing
+
+It is not on PyPI. Depend on a tag of this repository (the newest is
+the one to use; tags are listed on GitHub). The repository is
+`yoki-py-commvault-sdk`; the package it provides is `commvault-sdk`,
+imported as `commvault_sdk`:
+
+```
+uv add "commvault-sdk @ git+https://github.com/blueneptune/yoki-py-commvault-sdk.git@v0.2.0"
+```
+
+It builds on [`sdk-primer-core`](https://github.com/blueneptune/sdk-primer-core)
+for transport, which comes with it. More in the guide,
+[Installing](docs/guide.md#installing).
+
 ## Software and SaaS
 
 The same SDK talks to a CommServe you run and to Commvault Cloud:
@@ -73,6 +96,12 @@ real CommServe (11 SP46).
 | `oldest_start(lookup_seconds)` | `POST /Jobs` (limit 1) | proven |
 | `get(job_id)` | `GET /Job/{id}` | proven |
 | `details(job_id)`, `counts(job_id)` | `POST /JobDetails` | proven |
+| `detail(job_id)` | `POST /JobDetails` | proven, on all 270 lab jobs, and on two running ones |
+| `attempts(job_id)`, `details(job_id, attempts=True)` | `POST /JobDetails` (showAttempt) | proven, on all 258 lab jobs |
+| `events(job_id)` | `GET /Events?jobId=` | proven, on all 258 lab jobs |
+| `explain(job_id, min_severity=)` | `POST /JobDetails` (showAttempt) + `GET /Events?jobId=` | proven, on all 272 lab jobs |
+| `task(job_id)` | `GET /Job/{id}/TaskDetails` | proven, on all 272 lab jobs; answers for 168 |
+| `failed_items(job_id)` | `GET /Job/{id}/FailedItems` | proven, on all 286 lab jobs; scan failures only |
 | `suspend`, `resume`, `kill` *change* | `POST /Job/{id}/action/pause\|resume\|kill` | proven |
 
 ### `cv.clients`, `cv.instances`
@@ -132,54 +161,6 @@ been run through it; the rest send requests that were proven before
 this code was a library, checked here by unit tests. Nothing has been
 run against Commvault Cloud.
 
-## What it returns
-
-Commvault's own JSON for each thing, as dictionaries, with the envelope
-removed (`clients.list()` gives the list of client entities, not the
-`clientProperties` wrapper). Jobs are the exception: they come back as
-the SDK's typed `Job`. Typed models for the rest are worth adding once it
-is clear which fields matter.
-
-## Errors
-
-- HTTP failures raise sdk-primer's typed errors (`AuthenticationError`,
-  `NotFoundError`, `ServerError`, ...), all `SDKError`.
-- Commvault reports many failures as a 200 with an error in the body. A
-  changing call checks for that and raises `CommvaultError`.
-- An HTML "Scheduled Maintenance" page with a 200 raises `ServerError`.
-- A listing that answers 404 for "there are none" returns an empty list.
-
-## How it is built
-
-```
-client.py      CommvaultClient: connection, auth, and the groups
-budget.py      the hourly call budget
-_base.py       Resource (get / list / query / change), error handling
-auth.py        access-token header and renewal
-jobs.py  clients.py  subclients.py  sql.py  commcell.py   the groups
-models.py      Job, and Commvault's jobSummary -> Job
-```
-
-It sits on `sdk-primer-core` for transport - retries, typed exceptions,
-request logging - but does not use its `BaseAPIModel` / `ResourceManager`.
-Those model a resource you save, load and find at a path; Commvault's
-API is not shaped that way, so each group is written against the
-transport directly and shares Commvault's conventions through
-`_base.Resource`.
-
-## Adding an endpoint
-
-1. Find the request in Commvault's API documentation, and in cvpysdk if
-   the documentation is thin.
-2. Add a method to the group it belongs to, using `_get`, `_list`,
-   `_query` or `_change` - `_change` for anything that alters the
-   CommServe, however harmless it looks.
-3. Run it against a real CommServe before relying on it. Nearly every
-   endpoint here differed from first expectations in some way: a sort
-   flag that meant the opposite, an id that was not unique, a listing
-   that left out system databases, a 404 for an empty list.
-4. Add it to the tables above, with whether it has been run.
-
 ## What is not here, deliberately
 
 Commvault's API has hundreds of endpoints. This covers the ones its
@@ -189,38 +170,3 @@ untested would produce an SDK that looks complete and is wrong in ways
 only a live CommServe reveals; `cvpysdk` already exists for breadth.
 Add groups as work calls for them - restores, schedules, alerts, storage
 policies, VM and file-system content are the likely next ones.
-
-## Installing
-
-It is not on PyPI. Depend on a tag of this repository. The repository is
-`yoki-py-commvault-sdk`; the package it provides is `commvault-sdk`,
-imported as `commvault_sdk`:
-
-```
-uv add "commvault-sdk @ git+https://github.com/blueneptune/yoki-py-commvault-sdk.git@v0.1.0"
-```
-
-It builds on [`sdk-primer-core`](https://github.com/blueneptune/sdk-primer-core)
-for transport, which comes with it.
-
-## Tokens
-
-`TokenSet(access, refresh)` gives the client an access token it can
-renew. Renewal replaces both tokens on the CommServe, so pass
-`on_token_renew=` a function that stores the new pair somewhere durable
-the moment it arrives. If several processes share one token, also pass
-`token_reload=` (read the stored pair) and `token_renew_lock=` (a
-context manager they all take), so they adopt each other's renewals
-instead of trading in a pair that has just been replaced.
-
-## Development
-
-```
-uv sync
-uv run pytest
-uv run ruff check . && uv run ruff format --check .
-uv run mypy
-```
-
-The tests mock HTTP with respx; none needs a CommServe. Before trusting
-a new endpoint, run it against a real one.
