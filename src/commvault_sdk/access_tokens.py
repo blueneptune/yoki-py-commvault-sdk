@@ -29,7 +29,7 @@ from typing import Any
 
 from loguru import logger
 from pydantic import BaseModel, Field
-from sdk_primer import SDKError
+from sdk_primer import NotFoundError, SDKError
 
 from ._base import CommvaultError, Entities, Names, Resource
 from .auth import TokenSet
@@ -71,13 +71,17 @@ def _without_secrets(entry: dict[str, Any]) -> dict[str, Any]:
 
 
 class User(BaseModel):
-    """One CommServe user, from GET /User."""
+    """One CommServe user, from GET /User or GET /User/{id}."""
 
     user_id: int
     name: str
     full_name: str | None = None
     email: str | None = None
     enabled: bool | None = None
+    # Only GET /User/{id} says; None from the listing. An administrator
+    # may create (and so rotate) a service account's tokens, and no one
+    # else's.
+    is_service_account: bool | None = None
     raw: dict[str, Any] = Field(default_factory=dict)
 
 
@@ -85,12 +89,14 @@ def user_from_entry(entry: dict[str, Any]) -> User:
     """One entry of GET /User's `users` as a User."""
     entity = entry.get("userEntity") or {}
     enabled = entry.get("enableUser")
+    service = entry.get("isServiceAccount")
     return User(
         user_id=int(entity["userId"]),
         name=str(entity.get("userName") or ""),
         full_name=entry.get("fullName") or None,
         email=entry.get("email") or None,
         enabled=bool(enabled) if enabled is not None else None,
+        is_service_account=bool(service) if service is not None else None,
         raw=entry,
     )
 
@@ -212,6 +218,15 @@ class Users(Resource):
     def find(self, name: str) -> User | None:
         wanted = name.lower()
         return next((u for u in self.list() if u.name.lower() == wanted), None)
+
+    def get(self, user_id: int) -> User | None:
+        """One user in full, including whether it is a service account."""
+        try:
+            body = self._get(f"/User/{user_id}")
+        except NotFoundError:
+            return None
+        entries = body.get("users") or []
+        return user_from_entry(entries[0]) if entries else None
 
 
 class AccessTokens(Resource):

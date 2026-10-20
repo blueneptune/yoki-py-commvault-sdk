@@ -245,6 +245,7 @@ def cmd_rotate(cv: CommvaultClient, args: argparse.Namespace) -> int:
     if args.out and args.out.exists():
         raise SystemExit(f"{args.out} already exists")
     token = _find(cv, args.token_id, args.user)
+    _only_its_owner_may_create(cv, token, args.signed_in_as)
     _confirm(
         f"Rotate {_describe(token)}? Whatever uses it stops working until given the new pair.",
         args.yes,
@@ -253,6 +254,26 @@ def cmd_rotate(cv: CommvaultClient, args: argparse.Namespace) -> int:
     print(f"Rotated {_describe(token)}: new token {issued.token.token_id}", file=sys.stderr)
     _write_issued(issued, args.out)
     return 0
+
+
+def _only_its_owner_may_create(
+    cv: CommvaultClient, token: AccessToken, signed_in_as: str | None
+) -> None:
+    """Commvault creates a token only for the user asking, or for a service
+    account (403 otherwise), so a rotate by anyone else would fail at its
+    first step. Say so before asking, rather than after."""
+    if signed_in_as is None or token.user_id is None:
+        return
+    if (token.user_name or "").lower() == signed_in_as.lower():
+        return
+    owner = cv.users.get(token.user_id)
+    if owner is None or owner.is_service_account is not False:
+        return
+    raise SystemExit(
+        f"Only {owner.name} can rotate {_describe(token)}: Commvault creates tokens "
+        "only for the user asking, or for a service account. Delete it instead, "
+        f"and have {owner.name} issue a new one."
+    )
 
 
 def cmd_delete(cv: CommvaultClient, args: argparse.Namespace) -> int:
@@ -308,7 +329,11 @@ def parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
     try:
-        cv = connect(settings(args.env_file), allow_changes=args.changes)
+        values = settings(args.env_file)
+        # Who the login is, when it is a username and password (see connect).
+        token_only = values.get("CV_ACCESS_TOKEN") and not values.get("CV_PASSWORD")
+        args.signed_in_as = None if token_only else values.get("CV_USERNAME")
+        cv = connect(values, allow_changes=args.changes)
         try:
             return int(args.func(cv, args))
         finally:
