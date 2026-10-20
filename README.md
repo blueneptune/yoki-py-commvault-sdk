@@ -156,15 +156,24 @@ Command Center shows each user only their own tokens; the API lists
 them per user, and an administrator may ask for anyone's: `everyone()`
 shows them all (proven 2026-10-17, as Admin, a token of another user's).
 
+Who may do what, as found on cv-toaster (11 SP46):
+
+- **List and delete:** an administrator, any user's token.
+- **Create, and so rotate:** a token's own user only - or an
+  administrator for a service account. For anyone else Commvault answers
+  403. To replace someone's token: delete it, and they issue the new one.
+- A user cannot hold two tokens of the same name, so `rotate` creates
+  the new one under a passing name, deletes the old one, then renames.
+
 | Call | Endpoint | |
 |---|---|---|
 | `users.list()`, `users.find(name)` | `GET /User` | proven |
 | `access_tokens.list(user_id=)` | `GET /V4/AccessToken?userId=` | proven, for another user's tokens too |
 | `access_tokens.everyone()`, `get(token_id)` | `GET /User` + the above per user | proven |
-| `access_tokens.create(name, ...)` *change* | `POST /V4/AccessToken` | written, **never run** |
-| `access_tokens.update(token_id, ...)` *change* | `PUT /V4/AccessToken/{id}` | written, **never run** |
-| `access_tokens.delete(token_id)` *change* | `DELETE /V4/AccessToken/{id}` | written, **never run** |
-| `access_tokens.rotate(token)` *change* | create, then delete the old one | written, **never run** |
+| `access_tokens.create(name, ...)` *change* | `POST /V4/AccessToken` | proven, for oneself |
+| `access_tokens.update(token_id, ...)` *change* | `PUT /V4/AccessToken/{id}` | proven, renaming one's own |
+| `access_tokens.delete(token_id)` *change* | `DELETE /V4/AccessToken/{id}` | proven, one's own and, as Admin, another user's |
+| `access_tokens.rotate(token)` *change* | create, delete the old one, rename | proven, for oneself |
 
 The same from a shell: `commvault-tokens list | rotate | delete` (see
 `src/commvault_sdk/cli.py`). It signs in with a username and password,
