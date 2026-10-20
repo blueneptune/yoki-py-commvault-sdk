@@ -320,28 +320,45 @@ class AccessTokens(Resource):
         """Replace `token` with a new one of the same name, scope and limits
         for the same user, then revoke the old one. A change.
 
-        If the old one cannot be revoked, the new one is still returned -
-        it exists and its pair would otherwise be lost - and the failure
-        is logged; the old token then has to be deleted separately."""
+        Commvault refuses a second token of the same name for a user, so the
+        new one is created under a passing name, the old one revoked, and
+        the new one renamed. If the old one cannot be revoked, or the new
+        one renamed, the new one is still returned - it exists and its pair
+        would otherwise be lost - and the failure is logged."""
         renewable_until = token.renewable_until
         if renewable_until is not None and renewable_until <= datetime.now(UTC):
             renewable_until = None
+        name = token.name or f"rotated-{token.token_id}"
         issued = self.create(
-            token.name or f"rotated-{token.token_id}",
+            f"{name}-rotating-{token.token_id}",
             user_id=token.user_id,
             token_type=token.token_type,
             renewable_until=renewable_until,
             api_endpoints=token.api_endpoints or None,
             allowed_ips=token.allowed_ips or None,
         )
+        new_id = issued.token.token_id
         try:
             self.delete(token.token_id)
         except SDKError as error:
             logger.error(
                 "Created token {} to replace {}, but could not delete {}: {}",
-                issued.token.token_id,
+                new_id,
                 token.token_id,
                 token.token_id,
                 error,
             )
-        return issued
+            return issued
+        try:
+            self.update(new_id, name=name)
+        except SDKError as error:
+            logger.error(
+                "Replaced token {} with {}, but could not rename {} to {!r}: {}",
+                token.token_id,
+                new_id,
+                new_id,
+                name,
+                error,
+            )
+            return issued
+        return issued.model_copy(update={"token": issued.token.model_copy(update={"name": name})})
