@@ -168,6 +168,7 @@ Who may do what, as found on cv-toaster (11 SP46):
 | Call | Endpoint | |
 |---|---|---|
 | `users.list()`, `users.find(name)` | `GET /User` | proven |
+| `users.get(user_id)`, with `is_service_account` | `GET /User/{id}` | proven |
 | `access_tokens.list(user_id=)` | `GET /V4/AccessToken?userId=` | proven, for another user's tokens too |
 | `access_tokens.everyone()`, `get(token_id)` | `GET /User` + the above per user | proven |
 | `access_tokens.create(name, ...)` *change* | `POST /V4/AccessToken` | proven, for oneself |

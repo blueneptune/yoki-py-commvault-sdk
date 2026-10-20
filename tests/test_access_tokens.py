@@ -211,6 +211,46 @@ def _env(tmp_path: Path) -> Path:
     return env
 
 
+def _password_env(tmp_path: Path) -> Path:
+    env = tmp_path / "admin.env"
+    env.write_text(f"CV_BASE_URL={BASE}\nCV_USERNAME=admin\nCV_PASSWORD=pw\n")
+    return env
+
+
+def _user_detail(user_id: int, name: str, *, service: bool) -> dict:
+    return {
+        "users": [
+            {"userEntity": {"userId": user_id, "userName": name}, "isServiceAccount": service}
+        ]
+    }
+
+
+@respx.mock
+def test_users_get_says_which_is_a_service_account() -> None:
+    respx.get(f"{BASE}/User/7").respond(json=_user_detail(7, "blt-svc", service=True))
+    respx.get(f"{BASE}/User/9").respond(404)
+    with CommvaultClient(BASE, access_token="tok") as cv:
+        user = cv.users.get(7)
+        assert user is not None and user.is_service_account is True
+        assert cv.users.get(9) is None
+
+
+@respx.mock
+def test_cli_rotate_of_someone_elses_token_stops_before_any_change(
+    tmp_path: Path, no_cv_env: pytest.MonkeyPatch
+) -> None:
+    respx.post(f"{BASE}/Login").respond(json={"userName": "admin", "token": "QSDK abc"})
+    respx.get(f"{BASE}/User").respond(json=_users())
+    respx.get(f"{BASE}/V4/AccessToken", params={"userId": "5"}).respond(
+        json={"tokens": [_token(7, "blt", 5)]}
+    )
+    respx.get(f"{BASE}/User/5").respond(json=_user_detail(5, "blt-collector", service=False))
+    create = respx.post(f"{BASE}/V4/AccessToken")
+    with pytest.raises(SystemExit, match="Only blt-collector can rotate"):
+        main(["--env-file", str(_password_env(tmp_path)), "rotate", "7", "--user", "blt-collector"])
+    assert not create.called
+
+
 def test_read_env_file(tmp_path: Path) -> None:
     assert read_env_file(_env(tmp_path)) == {
         "CV_BASE_URL": BASE,
