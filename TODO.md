@@ -324,13 +324,16 @@ media agents) are managed by Commvault there.
 
     So the routine check is: list everyone's, revoke what is stale or
     unknown as Admin, and the owner issues the replacement. Still open:
-    - **Service accounts.** Admin may issue and rotate their tokens, by
-      the message above; not yet run. `GET /User` does not say which
-      users are service accounts (`userEntity`, `idleTime`,
-      `loggedInMode` only), so the CLI cannot tell yet.
-    - **Fail early in the CLI.** `rotate` of an ordinary user's token,
-      run by someone else, should say who can do it before sending the
-      `POST`, once a service account can be recognised.
-    - **`last_used_at` after a renewal.** The lab's token showed a
-      last-used time, then none after it was renewed; an audit by
-      last-used would wrongly call it unused. To watch.
+    - **Service accounts: proven 2026-10-20.** As Admin, `rotate` of
+      `blt-test-service-account`'s token: create, delete, rename, all
+      200. `GET /User/{id}` says `isServiceAccount` (`GET /User` does
+      not): `users.get()`. The CLI's `rotate` now stops early, saying
+      who can do it, for an ordinary user's token and someone else
+      signed in. Creating that account with the Master role needed a
+      second person's approval in Command Center.
+    - **The renewal date is Commvault's.** The rotated token was
+      renewable until 2027-01-19, not the old token's 2027-01-16 that
+      was sent: about 90 days from creation, whatever is asked.
+    - **`last_used_at` after a renewal.** The lab's token showed none
+      after it was renewed, and a time again once it was used: a
+      renewal clears it. An audit by last-used should allow for that.
