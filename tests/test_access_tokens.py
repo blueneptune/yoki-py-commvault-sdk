@@ -13,6 +13,7 @@ from pathlib import Path
 
 import pytest
 import respx
+from sdk_primer import ServerError
 
 from commvault_sdk import ChangesNotAllowed, CommvaultClient, CommvaultError
 from commvault_sdk.access_tokens import access_token_from_entry
@@ -152,6 +153,24 @@ def test_a_refused_create_is_an_error() -> None:
     )
     with CommvaultClient(BASE, access_token="tok", allow_changes=True) as cv:
         with pytest.raises(CommvaultError, match="already exists"):
+            cv.access_tokens.create("blt")
+
+
+@respx.mock
+def test_an_http_refusal_carries_commvaults_reason() -> None:
+    respx.post(f"{BASE}/V4/AccessToken").respond(
+        403, json={"errorCode": 5, "errorMessage": "Not allowed to create a token for this user"}
+    )
+    with CommvaultClient(BASE, access_token="tok", allow_changes=True) as cv:
+        with pytest.raises(CommvaultError, match="Not allowed to create a token"):
+            cv.access_tokens.create("blt", user_id=5)
+
+
+@respx.mock
+def test_an_http_refusal_without_a_reason_is_raised_as_it_came() -> None:
+    respx.post(f"{BASE}/V4/AccessToken").respond(500)
+    with CommvaultClient(BASE, access_token="tok", allow_changes=True) as cv:
+        with pytest.raises(ServerError):
             cv.access_tokens.create("blt")
 
 
