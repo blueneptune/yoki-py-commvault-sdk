@@ -117,19 +117,23 @@ def test_rotate_creates_the_same_kind_of_token_then_deletes_the_old_one() -> Non
         }
     )
     delete = respx.delete(f"{BASE}/V4/AccessToken/7").respond(json={"errorCode": 0})
+    rename = respx.put(f"{BASE}/V4/AccessToken/9").respond(json={"errorCode": 0})
     old = access_token_from_entry(_token(7, "blt", 5, allowedIPs=["10.0.0.5"]))
     with CommvaultClient(BASE, access_token="tok", allow_changes=True) as cv:
         issued = cv.access_tokens.rotate(old)
     sent = json.loads(create.calls.last.request.content)
     assert sent == {
-        "tokenName": "blt",
+        "tokenName": "blt-rotating-7",
         "userId": 5,
         "tokenType": 2,
         "renewableUntilTimestamp": RENEWABLE,
         "allowedIPs": ["10.0.0.5"],
     }
     assert delete.called
+    # Commvault refuses a second "blt", so the name comes back after the delete.
+    assert json.loads(rename.calls.last.request.content) == {"tokenName": "blt"}
     assert issued.token.token_id == 9
+    assert issued.token.name == "blt"
     assert issued.tokens.access_token == "NEW"
     assert issued.tokens.refresh_token == "NEWR"
 
@@ -144,6 +148,20 @@ def test_rotate_keeps_the_new_token_when_the_old_one_will_not_go() -> None:
     with CommvaultClient(BASE, access_token="tok", allow_changes=True) as cv:
         issued = cv.access_tokens.rotate(old)
     assert issued.tokens.access_token == "NEW"
+
+
+@respx.mock
+def test_rotate_keeps_the_new_token_when_it_will_not_take_the_old_name() -> None:
+    respx.post(f"{BASE}/V4/AccessToken").respond(
+        json={"tokenInfo": _token(9, "blt-rotating-7", 5, accessToken="NEW", refreshToken="NEWR")}
+    )
+    respx.delete(f"{BASE}/V4/AccessToken/7").respond(json={"errorCode": 0})
+    respx.put(f"{BASE}/V4/AccessToken/9").respond(json={"errorCode": 5, "errorMessage": "no"})
+    old = access_token_from_entry(_token(7, "blt", 5))
+    with CommvaultClient(BASE, access_token="tok", allow_changes=True) as cv:
+        issued = cv.access_tokens.rotate(old)
+    assert issued.tokens.access_token == "NEW"
+    assert issued.token.name == "blt-rotating-7"
 
 
 @respx.mock
@@ -246,6 +264,7 @@ def test_cli_rotate_writes_the_new_pair_privately(
         json={"tokenInfo": _token(9, "blt", 5, accessToken="NEW", refreshToken="NEWR")}
     )
     respx.delete(f"{BASE}/V4/AccessToken/7").respond(json={"errorCode": 0})
+    respx.put(f"{BASE}/V4/AccessToken/9").respond(json={"errorCode": 0})
     out = tmp_path / "new.env"
     code = main(
         [
