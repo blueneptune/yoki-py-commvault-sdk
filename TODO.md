@@ -311,6 +311,26 @@ media agents) are managed by Commvault there.
     token `test` of a second user, which Command Center does not show
     Admin), under `tokens`, with `createdTime` and `lastUsedTime` (now
     read: `created_at`, `last_used_at`, CLI columns); `GET /User`.
-    **Still to prove:** create, rotate and delete, on the `test` token
-    only - never blt's (in its Prefect block) or the lab's. Run by the
-    user: the permission check here refuses writing a new token pair.
+    **Proven 2026-10-20**, run by the user on throwaway `test` tokens:
+    - As the token's owner: `rotate` - `create` (`POST`), `delete` of
+      the old one, `update` renaming the new one (`PUT`).
+    - As Admin, on another user's token: `delete` works. `create`, and
+      so `rotate`, are refused, 403: "access token cannot be created
+      for other users. only can be created for themself or service
+      accounts".
+    - A user may not hold two tokens of one name ("Token name already
+      present", a 500), so `rotate` creates under `<name>-rotating-<id>`
+      and renames after the delete.
+
+    So the routine check is: list everyone's, revoke what is stale or
+    unknown as Admin, and the owner issues the replacement. Still open:
+    - **Service accounts.** Admin may issue and rotate their tokens, by
+      the message above; not yet run. `GET /User` does not say which
+      users are service accounts (`userEntity`, `idleTime`,
+      `loggedInMode` only), so the CLI cannot tell yet.
+    - **Fail early in the CLI.** `rotate` of an ordinary user's token,
+      run by someone else, should say who can do it before sending the
+      `POST`, once a service account can be recognised.
+    - **`last_used_at` after a renewal.** The lab's token showed a
+      last-used time, then none after it was renewed; an audit by
+      last-used would wrongly call it unused. To watch.
