@@ -3,7 +3,8 @@
 A facade in the sense of sdk-primer's example: one object per connection,
 with a named group of calls for each kind of thing the CommServe has -
 `cv.jobs`, `cv.clients`, `cv.instances`, `cv.subclients`, `cv.sql`,
-`cv.commcell`, `cv.plans`, `cv.storage`, `cv.credentials`. Each group is
+`cv.commcell`, `cv.plans`, `cv.storage`, `cv.credentials`, `cv.users`,
+`cv.access_tokens`. Each group is
 a small class in its own module.
 
 sdk-primer supplies what is underneath: APIClient for transport (retry
@@ -34,6 +35,7 @@ from typing import Any, Literal
 import httpx
 from sdk_primer import APIClient, AuthenticationError, TokenExchangeAuth
 
+from .access_tokens import AccessTokens, Users
 from .auth import AccessTokenAuth, TokenSet
 from .budget import BudgetTransport, CallBudget
 from .clients import Clients, Instances
@@ -201,6 +203,8 @@ class CommvaultClient:
         self.storage = Storage(self)
         self.credentials = Credentials(self)
         self.partner = Partner(self)
+        self.users = Users(self)
+        self.access_tokens = AccessTokens(self)
 
     def close(self) -> None:
         self._api.close()

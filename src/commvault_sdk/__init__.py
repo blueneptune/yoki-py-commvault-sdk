@@ -2,6 +2,7 @@
 the README."""
 
 from ._base import ChangesNotAllowed, CommvaultError
+from .access_tokens import AccessToken, IssuedToken, User
 from .auth import AccessTokenAuth, TokenSet
 from .budget import CallBudget
 from .client import CommvaultClient, Deployment
@@ -18,6 +19,7 @@ from .models import (
 )
 
 __all__ = [
+    "AccessToken",
     "AccessTokenAuth",
     "CallBudget",
     "ChangesNotAllowed",
@@ -25,6 +27,7 @@ __all__ = [
     "CommvaultError",
     "Deployment",
     "FailedItem",
+    "IssuedToken",
     "Job",
     "JobAttempt",
     "JobDetail",
@@ -33,5 +36,6 @@ __all__ = [
     "JobTask",
     "Reason",
     "TokenSet",
+    "User",
     "split_reason",
 ]

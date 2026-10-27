@@ -280,10 +280,10 @@ media agents) are managed by Commvault there.
     still deletes branches from GitHub at the merge, where
     docs/development.md now keeps them up for a month.
 
-23. **First release from the weekly branch**, Monday 2026-10-19: the
-    tag. Everything above is new calls and fields with nothing removed,
-    so `v0.2.0`; `pyproject.toml` already says 0.2.0 (set at the
-    cut-off, 2026-10-15, so Friday tests what ships).
+23. ~~**First release from the weekly branch**, Monday 2026-10-19: the
+    tag.~~ **Done 2026-10-19**: `release/2026.10.W03` merged to `main`
+    and tagged `v0.2.0` (`ff0a47c`); blt pins it from
+    `release/2026.10.W04` on, and the lab takes the checkout.
 
 24. **2026.10.W03's branches off GitHub**, Monday 2026-11-23, a month
     after its release (docs/development.md, "Tidying up"): `release/2026.10.W03` and
@@ -299,3 +299,41 @@ media agents) are managed by Commvault there.
     expects - or logging at ERROR only what reaches the caller - would
     fix it there; working round it here would mean bypassing
     sdk_primer's retries and token renewal.
+
+27. **Access tokens of every user** (W04, asked for 2026-10-17). Command
+    Center shows a user only their own tokens; an administrator needs to
+    check every token in the CommCell and rotate or delete them.
+    `cv.users`, `cv.access_tokens` (`list`, `everyone`, `get`, `create`,
+    `update`, `delete`, `rotate`) and the `commvault-tokens` CLI are
+    written and unit-tested from cvpysdk's request shapes, on
+    `2026.10.W04/F/Access_tokens`. **Proven 2026-10-17** on cv-toaster,
+    as Admin: `GET /V4/AccessToken?userId=` answers for another user (a
+    token `test` of a second user, which Command Center does not show
+    Admin), under `tokens`, with `createdTime` and `lastUsedTime` (now
+    read: `created_at`, `last_used_at`, CLI columns); `GET /User`.
+    **Proven 2026-10-20**, run by the user on throwaway `test` tokens:
+    - As the token's owner: `rotate` - `create` (`POST`), `delete` of
+      the old one, `update` renaming the new one (`PUT`).
+    - As Admin, on another user's token: `delete` works. `create`, and
+      so `rotate`, are refused, 403: "access token cannot be created
+      for other users. only can be created for themself or service
+      accounts".
+    - A user may not hold two tokens of one name ("Token name already
+      present", a 500), so `rotate` creates under `<name>-rotating-<id>`
+      and renames after the delete.
+
+    So the routine check is: list everyone's, revoke what is stale or
+    unknown as Admin, and the owner issues the replacement. Still open:
+    - **Service accounts: proven 2026-10-20.** As Admin, `rotate` of
+      `blt-test-service-account`'s token: create, delete, rename, all
+      200. `GET /User/{id}` says `isServiceAccount` (`GET /User` does
+      not): `users.get()`. The CLI's `rotate` now stops early, saying
+      who can do it, for an ordinary user's token and someone else
+      signed in. Creating that account with the Master role needed a
+      second person's approval in Command Center.
+    - **The renewal date is Commvault's.** The rotated token was
+      renewable until 2027-01-19, not the old token's 2027-01-16 that
+      was sent: about 90 days from creation, whatever is asked.
+    - **`last_used_at` after a renewal.** The lab's token showed none
+      after it was renewed, and a time again once it was used: a
+      renewal clears it. An audit by last-used should allow for that.

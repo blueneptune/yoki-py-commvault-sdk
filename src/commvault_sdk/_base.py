@@ -80,6 +80,28 @@ def error_in(data: dict[str, Any]) -> str | None:
     return None
 
 
+def refusal_in(error: SDKError) -> str | None:
+    """Commvault's reason for an HTTP error, from the response that
+    sdk_primer's exception was raised from. Its exceptions carry only the
+    status; the reason (a 403's or a 500's) is in the body."""
+    cause = error.__cause__
+    if not isinstance(cause, httpx.HTTPStatusError):
+        return None
+    try:
+        data = cause.response.json()
+    except ValueError:
+        return cause.response.text.strip()[:500] or None
+    if not isinstance(data, dict):
+        return None
+    found = error_in(data)
+    if found:
+        return found
+    for key in ("errorMessage", "errorString", "message"):
+        if data.get(key):
+            return str(data[key])
+    return None
+
+
 class Resource:
     """One group of related endpoints (jobs, clients, ...), reached as an
     attribute of CommvaultClient."""
@@ -108,7 +130,14 @@ class Resource:
                 "Build it with allow_changes=True if that is really intended."
             )
         # One attempt only - see CommvaultClient.api_once for why.
-        data = json_body(self._client.api_once.request(method, path, json=body))
+        try:
+            response = self._client.api_once.request(method, path, json=body)
+        except SDKError as error:
+            reason = refusal_in(error)
+            if reason:
+                raise CommvaultError(f"{method} {path}: {error}: {reason}") from error
+            raise
+        data = json_body(response)
         problem = error_in(data)
         if problem:
             raise CommvaultError(f"{method} {path}: {problem}")
