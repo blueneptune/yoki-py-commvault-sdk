@@ -102,6 +102,30 @@ def refusal_in(error: SDKError) -> str | None:
     return None
 
 
+def _query_value(value: Any) -> Any:
+    """Commvault reads booleans in a query as true/false."""
+    return str(value).lower() if isinstance(value, bool) else value
+
+
+def decode(response: httpx.Response) -> Any:
+    """An answer as what it is: JSON, text, the bytes of a file, or None
+    when there is no body."""
+    if not response.content:
+        return None
+    kind = response.headers.get("content-type", "")
+    if "json" in kind:
+        try:
+            return response.json()
+        except ValueError:
+            pass
+    if kind.startswith("text/") or "xml" in kind:
+        return response.text
+    try:
+        return response.json()
+    except ValueError:
+        return response.content
+
+
 class Resource:
     """One group of related endpoints (jobs, clients, ...), reached as an
     attribute of CommvaultClient."""
@@ -122,6 +146,48 @@ class Resource:
 
     def _query(self, path: str, body: dict[str, Any]) -> dict[str, Any]:
         return json_body(self._client.api.post(path, json=body))
+
+    def _call(
+        self,
+        method: str,
+        path: str,
+        *,
+        params: dict[str, Any] | None = None,
+        headers: dict[str, Any] | None = None,
+        body: Any = None,
+        form: Any = None,
+        files: Any = None,
+        accept: str | None = None,
+        change: bool = False,
+    ) -> Any:
+        """Any operation (the generated `cv.raw` calls): reads retried,
+        changes refused on a read-only client and sent once. The answer
+        comes back decoded - JSON, text or bytes, None when empty - and an
+        error Commvault tucked into a 200 is raised as CommvaultError."""
+        if change and not self._client.allow_changes:
+            raise ChangesNotAllowed(
+                f"{method} {path} would change the CommServe; this client is read-only. "
+                "Build it with allow_changes=True if that is really intended."
+            )
+        sent = {k: str(v) for k, v in (headers or {}).items() if v is not None}
+        if accept:
+            sent["Accept"] = accept
+        kwargs: dict[str, Any] = {
+            "params": {k: _query_value(v) for k, v in (params or {}).items() if v is not None},
+            "headers": sent,
+        }
+        if body is not None:
+            kwargs["json"] = body
+        if form is not None:
+            kwargs["data"] = form
+        if files is not None:
+            kwargs["files"] = files
+        api = self._client.api_once if change else self._client.api
+        data = decode(api.request(method, path, **kwargs))
+        problem = error_in(data) if isinstance(data, dict) else None
+        if problem:
+            raise CommvaultError(f"{method} {path}: {problem}")
+        return data
 
     def _change(self, method: str, path: str, body: dict[str, Any] | None = None) -> dict[str, Any]:
         if not self._client.allow_changes:

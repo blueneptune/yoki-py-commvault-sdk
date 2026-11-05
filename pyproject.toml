@@ -44,9 +44,21 @@ extend-exclude = ["*.md"]
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
 
+[tool.ruff.lint.per-file-ignores]
+"src/commvault_sdk/raw/*" = ["E501"]
+
 [tool.mypy]
 plugins = ["pydantic.mypy"]
-files = ["src"]
+files = ["src", "scripts", "tests/live"]
+
+[[tool.mypy.overrides]]
+# The live tests connect through yoki-commvault-lab, installed only for them.
+module = ["commvault_lab.*"]
+ignore_missing_imports = true
+follow_untyped_imports = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# The live tests need a real CommServe: `pytest -m live` (tests/live).
+addopts = "-m 'not live'"
+markers = ["live: against a real CommServe (tests/live/conftest.py)"]
