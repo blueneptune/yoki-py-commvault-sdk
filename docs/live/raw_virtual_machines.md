@@ -1,6 +1,6 @@
 # `cv.raw.virtual_machines`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_access_nodes` - GET /V4/AccessNodes
 
@@ -58,7 +58,7 @@ cv.raw.virtual_machines.get_kubernetes_applications()
 
 **On the wire**
 
-- `GET /V4/Kubernetes/Applications` -> **200** (0.25 s)
+- `GET /V4/Kubernetes/Applications` -> **200** (0.24 s)
 
   <details><summary>Answer</summary>
 
@@ -79,7 +79,7 @@ cv.raw.virtual_machines.get_kubernetes_cluster()
 
 **On the wire**
 
-- `GET /V4/Kubernetes/cluster` -> **200** (0.18 s)
+- `GET /V4/Kubernetes/cluster` -> **200** (0.20 s)
 
   <details><summary>Answer</summary>
 
@@ -99,7 +99,7 @@ cv.raw.virtual_machines.list_virtual_machines()
 
 **On the wire**
 
-- `GET /V4/VirtualMachines` -> **200** (0.14 s)
+- `GET /V4/VirtualMachines` -> **200** (0.15 s)
 
   <details><summary>Answer</summary>
 

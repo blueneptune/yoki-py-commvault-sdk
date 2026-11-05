@@ -1,6 +1,6 @@
 # `cv.raw.laptop_plan`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_laptop_plan` - GET /V4/LaptopPlan/{planId}
 
@@ -12,7 +12,7 @@ cv.raw.laptop_plan.get_laptop_plan('1')
 
 **On the wire**
 
-- `GET /V4/LaptopPlan/1` -> **400** (0.08 s)
+- `GET /V4/LaptopPlan/1` -> **400** (0.07 s)
 
   <details><summary>Answer</summary>
 
@@ -33,7 +33,7 @@ cv.raw.laptop_plan.get_laptop_plan_backup_destinations('1')
 
 **On the wire**
 
-- `GET /V4/LaptopPlan/1/BackupDestinations` -> **200** (0.21 s)
+- `GET /V4/LaptopPlan/1/BackupDestinations` -> **200** (0.17 s)
 
   <details><summary>Answer</summary>
 
@@ -49,7 +49,7 @@ cv.raw.laptop_plan.get_laptop_plan_backup_destinations('1')
         "copyPrecedence": 1,
         "snapRecoveryPoints": 0,
         "storagePoolTypeForCopy": "GlobalDedupeStoragePolicy",
-        "issubclient-01": true,
+        "isDefault": true,
         "storageType": "DISK",
         "enableDataAging": true,
         "dataRetentionLockDays": 0,

@@ -1,6 +1,6 @@
 # `cv.raw.dashboard`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_airgapprotect_license`
 
@@ -12,13 +12,13 @@ cv.raw.dashboard.get_airgapprotect_license()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:cc2e77ec-9315-4446-cd7e-44ef80a8860e/data/?offset=0&fields=%5BLicUsageType%5D+AS+%5BLicense+ID%5D%2C%5BDial%5D+AS+%5BLicense%5D%2C%5BPurchased%5D+AS+%5BAvailable+Total+%28TB%29%5D%2C%5BPermTotal%5D+AS+%5BPermanent+Purchased+%28TB%29%5D%2C%5BEval%5D+AS+%5BTerm+Purchased+%28TB%29%5D%2C%5BUsage%5D+AS+%5BUsed+%28TB%29%5D%2C%5BEvalExpiryDate%5D+AS+%5BEvalExpiryDate%5D%2C%5BSummary%5D+AS+%5BSummary%5D&parameter.GUID=-1&limit=20` -> **200** (0.33 s)
+- `GET /cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:cc2e77ec-9315-4446-cd7e-44ef80a8860e/data/?offset=0&fields=%5BLicUsageType%5D+AS+%5BLicense+ID%5D%2C%5BDial%5D+AS+%5BLicense%5D%2C%5BPurchased%5D+AS+%5BAvailable+Total+%28TB%29%5D%2C%5BPermTotal%5D+AS+%5BPermanent+Purchased+%28TB%29%5D%2C%5BEval%5D+AS+%5BTerm+Purchased+%28TB%29%5D%2C%5BUsage%5D+AS+%5BUsed+%28TB%29%5D%2C%5BEvalExpiryDate%5D+AS+%5BEvalExpiryDate%5D%2C%5BSummary%5D+AS+%5BSummary%5D&parameter.GUID=-1&limit=20` -> **200** (0.72 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "2df6e680eb5b4ddba979f65b68c544b8",
+    "cacheId": "0ce402b8b2224cee967a97ee5e463204",
     "offset": 0,
     "limit": 20,
     "totalRecordCount": 0,
@@ -71,7 +71,7 @@ cv.raw.dashboard.get_anomalous_entities()
 
 **On the wire**
 
-- `GET /CommServ/Anomaly/Entity/Count?anomalousEntityType=14` -> **200** (0.09 s)
+- `GET /CommServ/Anomaly/Entity/Count?anomalousEntityType=14` -> **200** (0.19 s)
 
   <details><summary>Answer</summary>
 
@@ -93,7 +93,7 @@ cv.raw.dashboard.get_clientsclount()
 
 **On the wire**
 
-- `GET /clients/count?type=fileserver%2Cvm%2Claptop` -> **200** (0.07 s)
+- `GET /clients/count?type=fileserver%2Cvm%2Claptop` -> **200** (0.09 s)
 
   <details><summary>Answer</summary>
 
@@ -115,13 +115,13 @@ cv.raw.dashboard.get_commcellsladetails()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/GetSLACounts/data?cache=true&parameter.i_DashboardType=commcell&datasource=2` -> **200** (0.27 s)
+- `GET /cr/reportsplusengine/datasets/GetSLACounts/data?cache=true&parameter.i_DashboardType=commcell&datasource=2` -> **200** (0.30 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "4fd5f1fb233b4a5ba3d082e2b361241e",
+    "cacheId": "99d7e867c0fe46e48d9f32dc18db3994",
     "offset": 0,
     "limit": 0,
     "totalRecordCount": 4,
@@ -191,13 +191,13 @@ cv.raw.dashboard.get_cr_reportsplusengine_datasets_a0f077a5_2dfe_4010_a957_57a24
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/a0f077a5-2dfe-4010-a957-57a24cae89a8/data` -> **200** (0.18 s)
+- `GET /cr/reportsplusengine/datasets/a0f077a5-2dfe-4010-a957-57a24cae89a8/data` -> **200** (0.21 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "f63d830656394c89804a171983c1842d",
+    "cacheId": "2625ab085d86430592a4a06fa237834c",
     "offset": 0,
     "limit": 0,
     "totalRecordCount": 1,
@@ -254,7 +254,7 @@ cv.raw.dashboard.get_current_capacity()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:feabb5ca-b6b7-4572-b0cb-39352c7e1b67/data/?cacheId=e76a6d07-2b1b-47b2-d97e-7a7f1a9793be&offset=0&fields=%5BDial%5D+AS+%5BDial%5D%2C%5BPurchased%5D+AS+%5BPurchased%5D%2C%5BPermTotal%5D+AS+%5BPermTotal%5D%2C%5BEval%5D+AS+%5BEval%5D%2C%5BUsage%5D+AS+%5BUsage%5D%2C%5BTermDate%5D+AS+%5BTermDate%5D%2C%5BEvalExpiryDate%5D+AS+%5BEvalExpiryDate%5D&isExport=false&componentName=Capacity+Licenses&parameter.GUID=-1&limit=5&rawData=false` -> **200** (0.09 s)
+- `GET /cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:feabb5ca-b6b7-4572-b0cb-39352c7e1b67/data/?cacheId=e76a6d07-2b1b-47b2-d97e-7a7f1a9793be&offset=0&fields=%5BDial%5D+AS+%5BDial%5D%2C%5BPurchased%5D+AS+%5BPurchased%5D%2C%5BPermTotal%5D+AS+%5BPermTotal%5D%2C%5BEval%5D+AS+%5BEval%5D%2C%5BUsage%5D+AS+%5BUsage%5D%2C%5BTermDate%5D+AS+%5BTermDate%5D%2C%5BEvalExpiryDate%5D+AS+%5BEvalExpiryDate%5D&isExport=false&componentName=Capacity+Licenses&parameter.GUID=-1&limit=5&rawData=false` -> **200** (0.21 s)
 
   <details><summary>Answer</summary>
 
@@ -293,7 +293,11 @@ cv.raw.dashboard.get_current_capacity()
     ],
     "recordsCount": 0,
     "records": [],
-    "failures": {},
+    "failures": {
+      "commserve-02": [
+        "Bad Request. Please check the parameters."
+      ]
+    },
     "warnings": {}
   }
   ```
@@ -310,13 +314,13 @@ cv.raw.dashboard.get_data_insights_license()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:f7c6b473-f99d-44b4-ff5e-466b55656500/data/?offset=0&fields=%5BLicUsageType%5D+AS+%5BLicense+ID%5D%2C%5BDial%5D+AS+%5BLicense%5D%2C%5BPurchased%5D+AS+%5BAvailable+Total%5D%2C%5BPermTotal%5D+AS+%5BPermanent+Purchased%5D%2C%5BEval%5D+AS+%5BTerm+Purchased%5D%2C%5BUsage%5D+AS+%5BUsed%5D%2C%5BEvalExpiryDate%5D+AS+%5BEvalExpiryDate%5D%2C%5BSummary%5D+AS+%5BSummary%5D&parameter.GUID=-1&limit=20` -> **200** (0.21 s)
+- `GET /cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:f7c6b473-f99d-44b4-ff5e-466b55656500/data/?offset=0&fields=%5BLicUsageType%5D+AS+%5BLicense+ID%5D%2C%5BDial%5D+AS+%5BLicense%5D%2C%5BPurchased%5D+AS+%5BAvailable+Total%5D%2C%5BPermTotal%5D+AS+%5BPermanent+Purchased%5D%2C%5BEval%5D+AS+%5BTerm+Purchased%5D%2C%5BUsage%5D+AS+%5BUsed%5D%2C%5BEvalExpiryDate%5D+AS+%5BEvalExpiryDate%5D%2C%5BSummary%5D+AS+%5BSummary%5D&parameter.GUID=-1&limit=20` -> **200** (0.20 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "f6669abdbc324bf5a6b3b0c5cd09ac81",
+    "cacheId": "19f664b656e24221a51ee7fe7b5bc479",
     "offset": 0,
     "limit": 20,
     "totalRecordCount": 0,
@@ -371,13 +375,13 @@ cv.raw.dashboard.get_environment_details()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/d0a73c45-b06d-4358-8d7e-d55d428ba75c/data?cache=true&parameter.i_DashboardType=commcell&datasource=2` -> **200** (0.30 s)
+- `GET /cr/reportsplusengine/datasets/d0a73c45-b06d-4358-8d7e-d55d428ba75c/data?cache=true&parameter.i_DashboardType=commcell&datasource=2` -> **200** (0.31 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "7ab3884fae8a4dcf92167965f96444e7",
+    "cacheId": "4d6595e8682a410eac31f437f7e5b019",
     "offset": 0,
     "limit": 0,
     "totalRecordCount": 4,
@@ -440,13 +444,13 @@ cv.raw.dashboard.get_health_overview()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/b50b20ed-5fc4-4b4c-f7c4-fc6b84eb35cc/data?cache=true` -> **200** (0.18 s)
+- `GET /cr/reportsplusengine/datasets/b50b20ed-5fc4-4b4c-f7c4-fc6b84eb35cc/data?cache=true` -> **200** (0.20 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "ad307db81a8c4e66bf66f11ae246b7f3",
+    "cacheId": "a974fed9c12e44d4b153f20eefe7bdee",
     "offset": 0,
     "limit": 0,
     "totalRecordCount": 4,
@@ -509,13 +513,13 @@ cv.raw.dashboard.get_hypescalelicensereport()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:2654b01f-9bb0-481e-b273-4b4fddc585b1/data/?offset=0&fields=%5BLicUsageType%5D+AS+%5BLicense+ID%5D%2C%5BDial%5D+AS+%5BLicense%5D%2C%5BPurchased%5D+AS+%5BAvailable+Total+%28TB%29%5D%2C%5BPermTotal%5D+AS+%5BPermanent+Purchased+%28TB%29%5D%2C%5BEval%5D+AS+%5BTerm+Purchased+%28TB%29%5D%2C%5BUsage%5D+AS+%5BUsed+%28TB%29%5D%2C%5BEvalExpiryDate%5D+AS+%5BEvalExpiryDate%5D%2C%5BSummary%5D+AS+%5BSummary%5D&parameter.GUID=-1&limit=10` -> **200** (0.18 s)
+- `GET /cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:2654b01f-9bb0-481e-b273-4b4fddc585b1/data/?offset=0&fields=%5BLicUsageType%5D+AS+%5BLicense+ID%5D%2C%5BDial%5D+AS+%5BLicense%5D%2C%5BPurchased%5D+AS+%5BAvailable+Total+%28TB%29%5D%2C%5BPermTotal%5D+AS+%5BPermanent+Purchased+%28TB%29%5D%2C%5BEval%5D+AS+%5BTerm+Purchased+%28TB%29%5D%2C%5BUsage%5D+AS+%5BUsed+%28TB%29%5D%2C%5BEvalExpiryDate%5D+AS+%5BEvalExpiryDate%5D%2C%5BSummary%5D+AS+%5BSummary%5D&parameter.GUID=-1&limit=10` -> **200** (0.21 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "e2018a002054400e87489aab94b117a2",
+    "cacheId": "a2fbbdda05c34f26a905c421153ff199",
     "offset": 0,
     "limit": 10,
     "totalRecordCount": 0,
@@ -570,13 +574,13 @@ cv.raw.dashboard.get_jobsin_24hours()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/075e703a-b29f-46d6-ad29-7c1a60f7e4f3/data?cache=true&parameter.i_DashboardType=commcell&datasource=2` -> **200** (0.27 s)
+- `GET /cr/reportsplusengine/datasets/075e703a-b29f-46d6-ad29-7c1a60f7e4f3/data?cache=true&parameter.i_DashboardType=commcell&datasource=2` -> **200** (0.37 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "2a6fe5e49f444fb0af2cef7ebf046386",
+    "cacheId": "683834909f044c6d8e54396143981845",
     "offset": 0,
     "limit": 0,
     "totalRecordCount": 7,
@@ -669,13 +673,13 @@ cv.raw.dashboard.get_operatinginstanceslicense()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:cd38c52a-e099-4252-d36f-3e2c54540f6f/data/?offset=0&fields=%5BLicUsageType%5D+AS+%5BLicense+ID%5D%2C%5BDial%5D+AS+%5BLicense%5D%2C%5BPurchased%5D+AS+%5BAvailable+Total+%28instances%29%5D%2C%5BPermTotal%5D+AS+%5BPermanent+Purchased+%28instances%29%5D%2C%5BEval%5D+AS+%5BTerm+Purchased+%28instances%29%5D%2C%5BUsage%5D+AS+%5BUsed+%28instances%29%5D%2C%5BEvalExpiryDate%5D+AS+%5BEvalExpiryDate%5D%2C%5BSummary%5D+AS+%5BSummary%5D&parameter.GUID=-1&limit=5` -> **200** (0.20 s)
+- `GET /cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:cd38c52a-e099-4252-d36f-3e2c54540f6f/data/?offset=0&fields=%5BLicUsageType%5D+AS+%5BLicense+ID%5D%2C%5BDial%5D+AS+%5BLicense%5D%2C%5BPurchased%5D+AS+%5BAvailable+Total+%28instances%29%5D%2C%5BPermTotal%5D+AS+%5BPermanent+Purchased+%28instances%29%5D%2C%5BEval%5D+AS+%5BTerm+Purchased+%28instances%29%5D%2C%5BUsage%5D+AS+%5BUsed+%28instances%29%5D%2C%5BEvalExpiryDate%5D+AS+%5BEvalExpiryDate%5D%2C%5BSummary%5D+AS+%5BSummary%5D&parameter.GUID=-1&limit=5` -> **200** (0.22 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "88e185b5ffe14f4d962466fcdc3b93ca",
+    "cacheId": "55eaf313e84644ca9c7dc27d610700f2",
     "offset": 0,
     "limit": 5,
     "totalRecordCount": 0,
@@ -728,7 +732,7 @@ cv.raw.dashboard.get_security_dashboard()
 
 **On the wire**
 
-- `GET /Security/Dashboard` -> **200** (0.41 s)
+- `GET /Security/Dashboard` -> **200** (0.50 s)
 
   <details><summary>Answer</summary>
 
@@ -770,38 +774,6 @@ cv.raw.dashboard.get_security_dashboard()
         ]
       },
       {
-        "category": 1,
-        "parameter": [
-          {
-            "active": "Not Applicable",
-            "recommendation": "Retention for Critical audit trail: 1 year\nRetention for High audit trail: 1 year\nRetention for Medium audit trail: 8 months\nRetention for Low audit trail: 4 months",
-            "paramName": "Audit trail",
-            "currentSetting": "Retention for Critical audit trail: 1 year<br>Retention for High audit trail: 1 year<br>Retention for Medium audit trail: 8 months<br>Retention for Low audit trail: 4 months",
-            "paramId": 7,
-            "remarks": "<a href=#/reportDetails?reportId=AuditTrailReport target=\"_blank\">View full audit trail report</a> for export options",
-            "status": 0
-          },
-          {
-            "active": "Active",
-            "recommendation": "Review and remove unused CommCell management entities",
-            "paramName": "Cleanup of unused entities",
-            "currentSetting": "0 user groups without users<br>0 users without security associations<br>0 users not logged-in in 30 days",
-            "paramId": 16,
-            "remarks": "Review user security configurations to identify and mitigate potential user access risks.<br><a href=#/reportDetails?reportName=Cleanup%20Report target=\"_blank\">Click here</a> to view.",
-            "status": 1
-          },
-          {
-            "active": "Active",
-            "recommendation": "Review and remove privileged access accounts that are no longer needed",
-            "paramName": "User and user group permissions",
-            "currentSetting": "View users in user-group-01 group",
-            "paramId": 17,
-            "remarks": "",
-            "status": 1
-          }
-        ]
-      },
-      {
         "category": 3,
         "parameter": [
           {
@@ -830,6 +802,38 @@ cv.raw.dashboard.get_security_dashboard()
             "paramId": 23,
             "remarks": "",
             "status": 0
+          }
+        ]
+      },
+      {
+        "category": 1,
+        "parameter": [
+          {
+            "active": "Not Applicable",
+            "recommendation": "Retention for Critical audit trail: 1 year\nRetention for High audit trail: 1 year\nRetention for Medium audit trail: 8 months\nRetention for Low audit trail: 4 months",
+            "paramName": "Audit trail",
+            "currentSetting": "Retention for Critical audit trail: 1 year<br>Retention for High audit trail: 1 year<br>Retention for Medium audit trail: 8 months<br>Retention for Low audit trail: 4 months",
+            "paramId": 7,
+            "remarks": "<a href=#/reportDetails?reportId=AuditTrailReport target=\"_blank\">View full audit trail report</a> for export options",
+            "status": 0
+          },
+          {
+            "active": "Active",
+            "recommendation": "Review and remove unused CommCell management entities",
+            "paramName": "Cleanup of unused entities",
+            "currentSetting": "0 user groups without users<br>0 users without security associations<br>0 users not logged-in in 30 days",
+            "paramId": 16,
+            "remarks": "Review user security configurations to identify and mitigate potential user access risks.<br><a href=#/reportDetails?reportName=Cleanup%20Report target=\"_blank\">Click here</a> to view.",
+            "status": 1
+          },
+          {
+            "active": "Active",
+            "recommendation": "Review and remove privileged access accounts that are no longer needed",
+            "paramName": "User and user group permissions",
+            "currentSetting": "View users in master group",
+            "paramId": 17,
+            "remarks": "",
+            "status": 1
           }
         ]
       },
@@ -877,7 +881,7 @@ cv.raw.dashboard.get_storagespaceusage()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/2b366703-52e1-4775-8047-1f4cfa13d2db/data?cache=true&parameter.i_DashboardType=commcell&orderby=%22Date+to+be+Full%22&datasource=2` -> **200** (0.18 s)
+- `GET /cr/reportsplusengine/datasets/2b366703-52e1-4775-8047-1f4cfa13d2db/data?cache=true&parameter.i_DashboardType=commcell&orderby=%22Date+to+be+Full%22&datasource=2` -> **200** (0.21 s)
 
   <details><summary>Answer</summary>
 
@@ -911,13 +915,13 @@ cv.raw.dashboard.get_topfiveservers()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/841800ea-53c4-4249-91fa-76ea0d60f6a4/data?cache=true&parameter.i_dashboardType=commcell&datasource=2` -> **200** (0.19 s)
+- `GET /cr/reportsplusengine/datasets/841800ea-53c4-4249-91fa-76ea0d60f6a4/data?cache=true&parameter.i_dashboardType=commcell&datasource=2` -> **200** (0.22 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "b7f2f2215408401384e1a928b9493964",
+    "cacheId": "88235d46164c4db099b360b6f694b173",
     "offset": 0,
     "limit": 0,
     "totalRecordCount": 3,
@@ -986,13 +990,13 @@ cv.raw.dashboard.get_userlicenses()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:44cd7de8-ecb2-4ec8-8b2b-162491172eef/data/?offset=0&fields=%5BLicUsageType%5D+AS+%5BLicense+ID%5D%2C%5BDial%5D+AS+%5BLicense%5D%2C%5BPurchased%5D+AS+%5BAvailable+Total+%28users%29%5D%2C%5BPermTotal%5D+AS+%5BPermanent+Purchased+%28users%29%5D%2C%5BEval%5D+AS+%5BTerm+Purchased+%28users%29%5D%2C%5BUsage%5D+AS+%5BUsed+%28users%29%5D%2C%5BEvalExpiryDate%5D+AS+%5BEvalExpiryDate%5D%2C%5BSummary%5D+AS+%5BSummary%5D&parameter.GUID=-1&limit=5` -> **200** (0.18 s)
+- `GET /cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:44cd7de8-ecb2-4ec8-8b2b-162491172eef/data/?offset=0&fields=%5BLicUsageType%5D+AS+%5BLicense+ID%5D%2C%5BDial%5D+AS+%5BLicense%5D%2C%5BPurchased%5D+AS+%5BAvailable+Total+%28users%29%5D%2C%5BPermTotal%5D+AS+%5BPermanent+Purchased+%28users%29%5D%2C%5BEval%5D+AS+%5BTerm+Purchased+%28users%29%5D%2C%5BUsage%5D+AS+%5BUsed+%28users%29%5D%2C%5BEvalExpiryDate%5D+AS+%5BEvalExpiryDate%5D%2C%5BSummary%5D+AS+%5BSummary%5D&parameter.GUID=-1&limit=5` -> **200** (0.20 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "681a112b293b41b8aa7803cb7fed19fa",
+    "cacheId": "33bb28e370e24d0aa6897f8b4feb85c1",
     "offset": 0,
     "limit": 5,
     "totalRecordCount": 0,

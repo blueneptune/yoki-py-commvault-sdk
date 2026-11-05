@@ -1,6 +1,6 @@
 # `cv.raw.tape_storage`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_storage_tape_locations` - GET /V4/Storage/Tape/Locations
 
@@ -10,7 +10,7 @@ cv.raw.tape_storage.get_storage_tape_locations()
 
 **On the wire**
 
-- `GET /V4/Storage/Tape/Locations` -> **200** (0.27 s)
+- `GET /V4/Storage/Tape/Locations` -> **200** (0.28 s)
 
   <details><summary>Answer</summary>
 
@@ -35,7 +35,7 @@ cv.raw.tape_storage.get_vault_tracker_action()
 
 **On the wire**
 
-- `GET /V4/VaultTrackerAction` -> **200** (0.29 s)
+- `GET /V4/VaultTrackerAction` -> **200** (0.25 s)
 
   <details><summary>Answer</summary>
 
@@ -76,7 +76,7 @@ cv.raw.tape_storage.get_vault_tracker_policies()
 
 **On the wire**
 
-- `GET /V4/VaultTrackerPolicies` -> **200** (0.17 s)
+- `GET /V4/VaultTrackerPolicies` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 
@@ -118,7 +118,7 @@ cv.raw.tape_storage.get_library_media('1')
 
 **On the wire**
 
-- `GET /V4/Library/1/Media` -> **400** (0.06 s)
+- `GET /V4/Library/1/Media` -> **400** (0.07 s)
 
   <details><summary>Answer</summary>
 
@@ -136,7 +136,7 @@ cv.raw.tape_storage.get_library_slot('1')
 
 **On the wire**
 
-- `GET /V4/Library/1/Slot` -> **400** (0.07 s)
+- `GET /V4/Library/1/Slot` -> **400** (0.10 s)
 
   <details><summary>Answer</summary>
 
@@ -162,7 +162,7 @@ cv.raw.tape_storage.get_storage_tape('1')
       "id": 1,
       "name": "storage-pool-01",
       "manufacturer": "Disk",
-      "database-03": "Disk",
+      "model": "Disk",
       "firmwareRevision": "",
       "barcodeReader ": "",
       "serialNumber": ""
@@ -188,7 +188,7 @@ cv.raw.tape_storage.get_storage_tape_media('1')
 
 **On the wire**
 
-- `GET /V4/Storage/Tape/1/Media` -> **200** (0.21 s)
+- `GET /V4/Storage/Tape/1/Media` -> **200** (0.20 s)
 
   <details><summary>Answer</summary>
 
@@ -217,7 +217,7 @@ cv.raw.tape_storage.get_storage_tape_media_type('1')
 
 **On the wire**
 
-- `GET /V4/Storage/Tape/1/MediaType` -> **500** (0.64 s)
+- `GET /V4/Storage/Tape/1/MediaType` -> **500** (0.69 s)
 
   <details><summary>Answer</summary>
 

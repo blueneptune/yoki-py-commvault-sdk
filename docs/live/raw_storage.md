@@ -1,6 +1,6 @@
 # `cv.raw.storage`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_drive_controller` - GET /DriveController
 
@@ -40,7 +40,7 @@ cv.raw.storage.get_drive_controller()
         "minSpacePerRPStoreGB": 0,
         "origRPStoreId": 0,
         "rpStoreId": 0,
-        "subclient-01HostId": 0,
+        "defaultHostId": 0,
         "maxSpacePerRPStoreGB": 0,
         "intervalWindow": {}
       },
@@ -165,7 +165,7 @@ cv.raw.storage.list_media_agent()
 
 **On the wire**
 
-- `GET /MediaAgent` -> **200** (0.21 s)
+- `GET /MediaAgent` -> **200** (0.23 s)
 
   <details><summary>Answer</summary>
 
@@ -192,7 +192,7 @@ cv.raw.storage.list_media_agents()
 
 **On the wire**
 
-- `GET /v2/MediaAgents` -> **200** (0.30 s)
+- `GET /v2/MediaAgents` -> **200** (0.27 s)
 
   <details><summary>Answer</summary>
 
@@ -377,7 +377,7 @@ cv.raw.storage.get_library('1')
 
 **On the wire**
 
-- `GET /Library/1` -> **200** (0.16 s)
+- `GET /Library/1` -> **200** (0.26 s)
 
   <details><summary>Answer</summary>
 
@@ -385,7 +385,7 @@ cv.raw.storage.get_library('1')
   {
     "libraryInfo": {
       "lowWaterMarkPercentage": 0,
-      "subclient-01MediaTypeId": 0,
+      "defaultMediaTypeId": 0,
       "description": "",
       "libraryUsedForLogCaching": false,
       "extendedAttributes": 262145,
@@ -393,7 +393,7 @@ cv.raw.storage.get_library('1')
       "storagePoolType": 1,
       "libraryVendorId": 0,
       "warningWaterMarkPercentage": 0,
-      "database-03": "Disk",
+      "model": "Disk",
       "libraryType": 3,
       "status": "",
       "libraryControllerList": [
@@ -429,7 +429,7 @@ cv.raw.storage.get_library('1')
         "numOfSpareMedia": 0,
         "vendor": "",
         "numOfRegSlots": 0,
-        "database-03": "",
+        "model": "",
         "numOfMedia": 0,
         "attribute": 0,
         "numOfDrivesOffline": 0,
@@ -461,11 +461,11 @@ cv.raw.storage.get_library('1')
       },
       "MountPathList": [
         {
-          "mediaAgents": "",
+          "mediaAgents": "commserve-02",
           "mountPathUsedForLogCaching": false,
           "dataServerType": 0,
           "mountPathType": 4,
-          "jobIds": "",
+          "jobIds": "1511",
           "preventDataBlockReferences": false,
           "driveId": 0,
           "disabledForNewWrite": false,
@@ -484,7 +484,7 @@ cv.raw.storage.get_library('1')
             "minSpacePerRPStoreGB": 0,
             "origRPStoreId": 0,
             "rpStoreId": 0,
-            "subclient-01HostId": 0,
+            "defaultHostId": 0,
             "maxSpacePerRPStoreGB": 0,
             "intervalWindow": {}
           },
@@ -532,20 +532,20 @@ cv.raw.storage.get_library('1')
       "magLibSummary": {
         "associatedMediaAgents": " commserve-02",
         "bytesBackedupInLast24H": "1.30 GB",
-        "lastDayThroughput": "1.35 GB/Hr",
+        "lastDayThroughput": "1.55 GB/Hr",
         "isOnline": "Ready",
-        "backupReservations": 0,
+        "backupReservations": 2,
         "bytesBackedupInLast1H": "",
         "lastRestoreTime": "Nov  5 2026 11:04AM",
         "onlineMountPaths": "1 out of 1",
-        "lastBackupTime": "Nov  5 2026 10:01AM",
+        "lastBackupTime": "Nov  5 2026 12:47PM",
         "totalAvailableSpace": "981.49 GB",
         "lastHourThroughput": "0",
         "totalFreeSpace": "1001.49 GB",
         "totalCapacity": "1024.00 GB",
         "auxiliaryCopyWriteReservations": 0,
         "numOfMountPath": 1,
-        "totalNumberOfWriteReservations": 0,
+        "totalNumberOfWriteReservations": 2,
         "mountPathUsage": "Spill and Fill"
       }
     }
@@ -562,7 +562,7 @@ cv.raw.storage.get_storage_associated_copies('2')
 
 **On the wire**
 
-- `GET /V4/Storage/2/associatedCopies` -> **200** (0.17 s)
+- `GET /V4/Storage/2/associatedCopies` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 
@@ -640,7 +640,7 @@ cv.raw.storage.get_storage_policy('3')
 
 **On the wire**
 
-- `GET /V2/StoragePolicy/3` -> **200** (0.15 s)
+- `GET /V2/StoragePolicy/3` -> **200** (0.20 s)
 
   <details><summary>Answer</summary>
 
@@ -651,7 +651,7 @@ cv.raw.storage.get_storage_policy('3')
         "copies": [
           {
             "copyType": 1,
-            "issubclient-01": 1,
+            "isDefault": 1,
             "isSnapCopy": 0,
             "isMirrorCopy": 0,
             "StoragePolicyCopy": {
@@ -703,7 +703,7 @@ cv.raw.storage.get_storage_pool('2')
 
 **On the wire**
 
-- `GET /StoragePool/2` -> **200** (0.49 s)
+- `GET /StoragePool/2` -> **200** (0.46 s)
 
   <details><summary>Answer</summary>
 
@@ -948,7 +948,7 @@ cv.raw.storage.get_storage_pool('2')
       "libraryList": [
         {
           "lowWaterMarkPercentage": 15,
-          "subclient-01MediaTypeId": 0,
+          "defaultMediaTypeId": 0,
           "description": "",
           "libraryUsedForLogCaching": false,
           "extendedAttributes": 0,
@@ -956,7 +956,7 @@ cv.raw.storage.get_storage_pool('2')
           "storagePoolType": 1,
           "libraryVendorId": 1,
           "warningWaterMarkPercentage": 30,
-          "database-03": "Disk",
+          "model": "Disk",
           "libraryType": 3,
           "status": "Ready",
           "tapeLibSummary": {
@@ -972,7 +972,7 @@ cv.raw.storage.get_storage_pool('2')
             "numOfSpareMedia": 0,
             "vendor": "",
             "numOfRegSlots": 0,
-            "database-03": "",
+            "model": "",
             "numOfMedia": 0,
             "attribute": 0,
             "numOfDrivesOffline": 0,
@@ -1004,11 +1004,11 @@ cv.raw.storage.get_storage_pool('2')
           },
           "MountPathList": [
             {
-              "mediaAgents": "",
+              "mediaAgents": "commserve-02",
               "mountPathUsedForLogCaching": false,
               "dataServerType": 0,
               "mountPathType": 4,
-              "jobIds": "",
+              "jobIds": "1511",
               "preventDataBlockReferences": false,
               "driveId": 0,
               "disabledForNewWrite": false,
@@ -1027,7 +1027,7 @@ cv.raw.storage.get_storage_pool('2')
                 "minSpacePerRPStoreGB": 0,
                 "origRPStoreId": 0,
                 "rpStoreId": 0,
-                "subclient-01HostId": 0,
+                "defaultHostId": 0,
                 "maxSpacePerRPStoreGB": 0,
                 "intervalWindow": {}
               },
@@ -1196,7 +1196,8 @@ cv.raw.storage.get_storage_pool_running_jobs('2')
   ```json
   {
     "jobIds": [
-      1434
+      1434,
+      1511
     ]
   }
   ```
@@ -1221,7 +1222,7 @@ cv.raw.storage.get_storage_policy_copy('3', '2')
 
 **On the wire**
 
-- `GET /V2/StoragePolicy/3/Copy/2` -> **200** (0.43 s)
+- `GET /V2/StoragePolicy/3/Copy/2` -> **200** (0.34 s)
 
   <details><summary>Answer</summary>
 
@@ -1232,7 +1233,7 @@ cv.raw.storage.get_storage_policy_copy('3', '2')
       "deviceType": 1,
       "active": 1,
       "isAzureVnetConfigEnabled": 0,
-      "issubclient-01": 1,
+      "isDefault": 1,
       "isSnapCopy": 0,
       "snapOperationsSupported": 0,
       "dataRetentionLockDays": 0,
@@ -1300,7 +1301,7 @@ cv.raw.storage.get_storage_policy_copy('3', '2')
             "clientId": 0,
             "instanceName": "",
             "clientGroupName": "",
-            "appName": "subclient-01 Application Type Name",
+            "appName": "Default Application Type Name",
             "clientGroupId": 0,
             "applicationId": 0,
             "clientName": "",
@@ -1320,7 +1321,7 @@ cv.raw.storage.get_storage_policy_copy('3', '2')
             "clientId": 0,
             "instanceName": "",
             "clientGroupName": "",
-            "appName": "subclient-01 Application Type Name",
+            "appName": "Default Application Type Name",
             "clientGroupId": 0,
             "applicationId": 0,
             "clientName": "",
@@ -1394,7 +1395,7 @@ cv.raw.storage.get_storage_policy_copy_size('3', '2')
         "dataSizeInGB": 12,
         "dataWrittenInGB": 1,
         "requiresBackupsOnOrAfterDate": false,
-        "oldestJobStartTime": 1793903852,
+        "oldestJobStartTime": 1793904644,
         "spCopy": {
           "storagePolicyName": "plan-01",
           "storagePolicyId": 3,

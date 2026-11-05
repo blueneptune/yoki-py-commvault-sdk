@@ -1,6 +1,6 @@
 # `cv.raw.aws_db_document_db`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_instance` - GET /Instance/{instanceid}
 
@@ -53,7 +53,7 @@ cv.raw.aws_db_document_db.get_subclient('44')
 
   </details>
 
-- `GET /subclient/44` -> **200** (0.11 s)
+- `GET /subclient/44` -> **200** (0.09 s)
 
   <details><summary>Answer</summary>
 
@@ -105,7 +105,7 @@ cv.raw.aws_db_document_db.get_subclient('44')
           "appName": "SQL Server",
           "backupsetName": "backupset-01",
           "applicationId": 81,
-          "subclientName": "subclient-01",
+          "subclientName": "default",
           "entityInfo": {
             "companyId": 0,
             "multiCommcellGuid": "2DCFEA81-1B84-4E4D-ADB4-C317F96A112E",
@@ -141,21 +141,21 @@ cv.raw.aws_db_document_db.get_subclient('44')
           {
             "mssqlDbContent": {
               "discoverType": 1,
-              "databaseName": "user-group-01",
+              "databaseName": "master",
               "databaseId": 1
             }
           },
           {
             "mssqlDbContent": {
               "discoverType": 1,
-              "databaseName": "database-03",
+              "databaseName": "model",
               "databaseId": 3
             }
           },
           {
             "mssqlDbContent": {
               "discoverType": 1,
-              "databaseName": "database-04",
+              "databaseName": "msdb",
               "databaseId": 4
             }
           },
@@ -184,7 +184,7 @@ cv.raw.aws_db_document_db.get_subclient('44')
           "idaType": 0,
           "runTrueUpJobAfterDays": 30,
           "totalBackupSize": 4008809970,
-          "issubclient-01Subclient": true,
+          "isDefaultSubclient": true,
           "dedupeRatio": 89.5756,
           "isTrueUpOptionEnabled": false,
           "slaCategory": 1,
@@ -233,7 +233,7 @@ cv.raw.aws_db_document_db.get_subclient('44')
             "jobID": 1491,
             "failureReasonIds": "515,",
             "commCellID": 2,
-            "failureReasonMessageEnglish": "Another backup is running for client [host-14], iDataAgent [SQL Server], Instance [host-14], Subclient [subclient-01].<br/>Source: commserve-02, Process: JobManager",
+            "failureReasonMessageEnglish": "Another backup is running for client [host-14], iDataAgent [SQL Server], Instance [host-14], Subclient [default].<br/>Source: commserve-02, Process: JobManager",
             "status": 9,
             "startTime": {
               "time": 1793826011
@@ -265,7 +265,7 @@ cv.raw.aws_db_document_db.get_subclient('44')
               {
                 "userGroupId": 1,
                 "_type_": 15,
-                "userGroupName": "user-group-01"
+                "userGroupName": "master"
               }
             ],
             "advancedPrivacySettings": {

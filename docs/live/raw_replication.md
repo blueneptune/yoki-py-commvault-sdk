@@ -1,6 +1,6 @@
 # `cv.raw.replication`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_replications_groups` - GET /Replications/Groups
 
@@ -10,7 +10,7 @@ cv.raw.replication.get_replications_groups()
 
 **On the wire**
 
-- `GET /Replications/Groups` -> **200** (0.09 s)
+- `GET /Replications/Groups` -> **200** (0.10 s)
 
   <details><summary>Answer</summary>
 
@@ -46,7 +46,7 @@ cv.raw.replication.list_replications_monitors_streaming()
 
 **On the wire**
 
-- `GET /Replications/Monitors/streaming` -> **200** (0.10 s)
+- `GET /Replications/Monitors/streaming` -> **200** (0.11 s)
 
   <details><summary>Answer</summary>
 
@@ -64,7 +64,7 @@ cv.raw.replication.list_vm_allocation_policy()
 
 **On the wire**
 
-- `GET /VMAllocationPolicy` -> **200** (0.12 s)
+- `GET /VMAllocationPolicy` -> **200** (0.11 s)
 
   <details><summary>Answer</summary>
 
@@ -82,7 +82,7 @@ cv.raw.replication.get_task_details('40')
 
 **On the wire**
 
-- `GET /Task/40/Details` -> **200** (0.15 s)
+- `GET /Task/40/Details` -> **200** (0.14 s)
 
   <details><summary>Answer</summary>
 
@@ -145,7 +145,7 @@ cv.raw.replication.get_task_details('40')
             {
               "userGroupId": 1,
               "_type_": 15,
-              "userGroupName": "user-group-01"
+              "userGroupName": "master"
             }
           ],
           "advancedPrivacySettings": {
@@ -188,7 +188,7 @@ cv.raw.replication.get_task_details('40')
       "appGroup": {},
       "subTasks": [
         {
-          "relativeTime": 30163,
+          "relativeTime": 29371,
           "nextScheduleTime": 1793934000,
           "subTask": {
             "subTaskOrder": 0,

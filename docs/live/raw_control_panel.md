@@ -1,6 +1,6 @@
 # `cv.raw.control_panel`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_comm_cell_activity_control` - GET /CommCell/ActivityControl
 
@@ -53,7 +53,7 @@ cv.raw.control_panel.get_comm_serv()
 
 **On the wire**
 
-- `GET /CommServ` -> **200** (0.11 s)
+- `GET /CommServ` -> **200** (0.09 s)
 
   <details><summary>Answer</summary>
 
@@ -91,7 +91,7 @@ cv.raw.control_panel.get_comm_serv_add_remove_software_commserve_software_cache(
 
 **On the wire**
 
-- `GET /CommServ/AddRemoveSoftware/CommserveSoftwareCache` -> **200** (0.57 s)
+- `GET /CommServ/AddRemoveSoftware/CommserveSoftwareCache` -> **200** (0.54 s)
 
   <details><summary>Answer</summary>
 
@@ -148,7 +148,7 @@ cv.raw.control_panel.get_comm_serv_add_remove_software_commserve_software_cache(
         "uaUpdateCacheStatus": 1,
         "unixTimeStamp": 0,
         "unixTimeStampForWindows": 0,
-        "subclient-01ShareName": "",
+        "defaultShareName": "",
         "winx64SP": "",
         "latestVersion": "",
         "solarisSP": "",
@@ -213,7 +213,7 @@ cv.raw.control_panel.get_comm_serv_add_remove_software_remote_software_cache()
   {
     "qualifiedClients": [
       {
-        "subclient-01Share": "\\\\host-02\\SoftwareShare",
+        "defaultShare": "\\\\host-02\\SoftwareShare",
         "cachePath": "/opt/commvault/SW",
         "clientName": {
           "name": "host-02",
@@ -221,7 +221,7 @@ cv.raw.control_panel.get_comm_serv_add_remove_software_remote_software_cache()
         }
       },
       {
-        "subclient-01Share": "\\\\host-03\\SoftwareShare",
+        "defaultShare": "\\\\host-03\\SoftwareShare",
         "cachePath": "/opt/commvault/SW",
         "clientName": {
           "name": "host-03",
@@ -229,7 +229,7 @@ cv.raw.control_panel.get_comm_serv_add_remove_software_remote_software_cache()
         }
       },
       {
-        "subclient-01Share": "\\\\host-04\\SoftwareShare",
+        "defaultShare": "\\\\host-04\\SoftwareShare",
         "cachePath": "/opt/commvault/SW",
         "clientName": {
           "name": "host-04",
@@ -286,7 +286,7 @@ cv.raw.control_panel.get_comm_serv_custom_calendar()
       {
         "beginDate": 0,
         "defineCustomMonths": false,
-        "issubclient-01": true,
+        "isDefault": true,
         "calendarType": 1,
         "numberOfYears": 0,
         "beginYear": 0,
@@ -461,7 +461,7 @@ cv.raw.control_panel.get_commcell_properties()
 
 **On the wire**
 
-- `GET /commcell/properties` -> **200** (0.13 s)
+- `GET /commcell/properties` -> **200** (0.14 s)
 
   <details><summary>Answer</summary>
 
@@ -520,7 +520,7 @@ cv.raw.control_panel.get_email_server()
 
 **On the wire**
 
-- `GET /EmailServer` -> **200** (0.09 s)
+- `GET /EmailServer` -> **200** (0.08 s)
 
   <details><summary>Answer</summary>
 
@@ -558,7 +558,7 @@ cv.raw.control_panel.get_operation_window_op_window_list()
 
 **On the wire**
 
-- `GET /OperationWindow/OpWindowList` -> **200** (0.19 s)
+- `GET /OperationWindow/OpWindowList` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 
@@ -604,7 +604,7 @@ cv.raw.control_panel.get_comm_cell_credential('blt-lab-sql-sa')
 
 **On the wire**
 
-- `GET /CommCell/Credentials/blt-lab-sql-sa` -> **200** (0.19 s)
+- `GET /CommCell/Credentials/blt-lab-sql-sa` -> **200** (0.18 s)
 
   <details><summary>Answer</summary>
 

@@ -1,6 +1,6 @@
 # `cv.raw.server_plan`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_server_plan` - GET /V4/ServerPlan/{planId}
 
@@ -10,7 +10,7 @@ cv.raw.server_plan.get_server_plan('1')
 
 **On the wire**
 
-- `GET /V4/ServerPlan/1` -> **200** (0.20 s)
+- `GET /V4/ServerPlan/1` -> **200** (0.19 s)
 
   <details><summary>Answer</summary>
 
@@ -47,7 +47,7 @@ cv.raw.server_plan.get_server_plan('1')
       ],
       "SLA": {
         "inheritedSLAPeriod": 7,
-        "useSystemsubclient-01SLA": true,
+        "useSystemDefaultSLA": true,
         "inheritedFrom": "COMMCELL",
         "SLAPeriod": 3
       },
@@ -61,7 +61,7 @@ cv.raw.server_plan.get_server_plan('1')
             "scheduleId": 41,
             "scheduleOption": {
               "retentionOption": {
-                "retentionType": "STORAGE_POLICY_subclient-01",
+                "retentionType": "STORAGE_POLICY_DEFAULT",
                 "applyRetentionOn": "PRIMARY_COPY"
               }
             },
@@ -169,7 +169,7 @@ cv.raw.server_plan.get_server_plan('1')
         "copyPrecedence": 1,
         "snapRecoveryPoints": 0,
         "storagePoolTypeForCopy": "GlobalDedupeStoragePolicy",
-        "issubclient-01": true,
+        "isDefault": true,
         "storageType": "DISK",
         "enableDataAging": true,
         "dataRetentionLockDays": 0,
@@ -253,7 +253,7 @@ cv.raw.server_plan.get_server_plan_backup_destination_source_copy_eligible('1')
   {
     "copy": [
       {
-        "issubclient-01": true,
+        "isDefault": true,
         "copyType": "SYNCHRONOUS",
         "backupDestination": {
           "name": "Primary",
@@ -274,7 +274,7 @@ cv.raw.server_plan.get_server_plan_backup_destinations('1')
 
 **On the wire**
 
-- `GET /V4/ServerPlan/1/BackupDestinations` -> **200** (0.15 s)
+- `GET /V4/ServerPlan/1/BackupDestinations` -> **200** (0.17 s)
 
   <details><summary>Answer</summary>
 
@@ -290,7 +290,7 @@ cv.raw.server_plan.get_server_plan_backup_destinations('1')
         "copyPrecedence": 1,
         "snapRecoveryPoints": 0,
         "storagePoolTypeForCopy": "GlobalDedupeStoragePolicy",
-        "issubclient-01": true,
+        "isDefault": true,
         "storageType": "DISK",
         "enableDataAging": true,
         "dataRetentionLockDays": 0,
@@ -346,7 +346,7 @@ cv.raw.server_plan.get_server_plan_rpo('1')
         "scheduleId": 41,
         "scheduleOption": {
           "retentionOption": {
-            "retentionType": "STORAGE_POLICY_subclient-01",
+            "retentionType": "STORAGE_POLICY_DEFAULT",
             "applyRetentionOn": "PRIMARY_COPY"
           }
         },

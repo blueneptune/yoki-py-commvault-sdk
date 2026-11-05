@@ -1,6 +1,6 @@
 # `cv.raw.untagged`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_workload_resource_pool` - GET /V4/Workload/ResourcePool
 
@@ -12,7 +12,7 @@ cv.raw.untagged.get_workload_resource_pool()
 
 **On the wire**
 
-- `GET /V4/Workload/ResourcePool` -> **400** (0.07 s)
+- `GET /V4/Workload/ResourcePool` -> **400** (0.08 s)
 
   <details><summary>Answer</summary>
 
@@ -35,7 +35,7 @@ cv.raw.untagged.list_asset_discovery_criteria()
 
 **On the wire**
 
-- `GET /Asset/Discovery/Criteria` -> **200** (0.09 s)
+- `GET /Asset/Discovery/Criteria` -> **200** (0.08 s)
 
   <details><summary>Answer</summary>
 
@@ -67,7 +67,7 @@ cv.raw.untagged.get_storage_pool_backup_locations('2')
 
 **On the wire**
 
-- `GET /V4/StoragePool/2/BackupLocations` -> **403** (0.02 s)
+- `GET /V4/StoragePool/2/BackupLocations` -> **403** (0.01 s)
 
   <details><summary>Answer</summary>
 

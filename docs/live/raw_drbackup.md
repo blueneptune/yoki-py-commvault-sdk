@@ -1,6 +1,6 @@
 # `cv.raw.drbackup`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_dr_backup_backup_destination_source_copy_eligible`
 
@@ -24,7 +24,7 @@ cv.raw.drbackup.get_dr_backup_backup_destination_source_copy_eligible()
         "copyPrecedence": 1,
         "isActive": true,
         "isSourceBackupCopy": false,
-        "issubclient-01": true,
+        "isDefault": true,
         "isSnapCopy": false,
         "isSourceCatalog": false,
         "copyType": "SYNCHRONOUS",
@@ -65,7 +65,7 @@ cv.raw.drbackup.get_dr_backup_backup_destinations()
         "snapRecoveryPoints": 0,
         "useExtendedRetentionRules": true,
         "storagePoolTypeForCopy": "GlobalStoragePolicy",
-        "issubclient-01": true,
+        "isDefault": true,
         "storageType": "DISK",
         "enableDataAging": true,
         "dataRetentionLockDays": 0,
@@ -116,13 +116,13 @@ cv.raw.drbackup.get_dr_backup_regions()
 
 **On the wire**
 
-- `GET /V4/DRBackup/Regions` -> **200** (0.08 s)
+- `GET /V4/DRBackup/Regions` -> **200** (0.27 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "subclient-01Region": "eastus2",
+    "defaultRegion": "eastus2",
     "regions": [
       {
         "regionCode": "australiaeast",
@@ -151,7 +151,7 @@ cv.raw.drbackup.get_dr_backup_storage_policy()
 
 **On the wire**
 
-- `GET /V4/DRBackup/StoragePolicy` -> **200** (0.07 s)
+- `GET /V4/DRBackup/StoragePolicy` -> **200** (0.08 s)
 
   <details><summary>Answer</summary>
 

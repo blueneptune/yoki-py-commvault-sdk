@@ -1,6 +1,6 @@
 # Coverage, proven live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 **327 of 1487** operations in the server's own API description were called by the live tests and answered without an error. (Commvault publishes it at
 api.commvault.com; scripts/spec.py reads it from there.)

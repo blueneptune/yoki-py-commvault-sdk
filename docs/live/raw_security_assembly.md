@@ -1,6 +1,6 @@
 # `cv.raw.security_assembly`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_security_assembly` - GET /Security/Assembly
 
@@ -10,7 +10,7 @@ cv.raw.security_assembly.get_security_assembly()
 
 **On the wire**
 
-- `GET /Security/Assembly` -> **200** (0.12 s)
+- `GET /Security/Assembly` -> **200** (0.11 s)
 
   <details><summary>Answer</summary>
 

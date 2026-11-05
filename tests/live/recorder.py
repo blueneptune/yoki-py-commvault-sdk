@@ -212,6 +212,13 @@ PRODUCT_WORDS = {
     # first copy of a plan or storage policy
     "administrator",
     "primary",
+    # a subclient Commvault makes for every backup set, and SQL Server's
+    # own databases
+    "default",
+    "master",
+    "model",
+    "msdb",
+    "tempdb",
     # and the page's own words (<details><summary>Answer</summary>)
     "details",
     "summary",
