@@ -1,6 +1,6 @@
 # `cv.raw.server_group`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `list_server_group` - GET /V4/ServerGroup
 
@@ -68,7 +68,7 @@ cv.raw.server_group.get_server_group('1')
 
 **On the wire**
 
-- `GET /V4/ServerGroup/1` -> **200** (1.33 s)
+- `GET /V4/ServerGroup/1` -> **200** (1.35 s)
 
   <details><summary>Answer</summary>
 
@@ -129,7 +129,7 @@ cv.raw.server_group.get_server_group_dc_plan('1')
 
 **On the wire**
 
-- `GET /V4/ServerGroup/1/DCPlan` -> **200** (0.07 s)
+- `GET /V4/ServerGroup/1/DCPlan` -> **200** (0.08 s)
 
   <details><summary>Answer</summary>
 

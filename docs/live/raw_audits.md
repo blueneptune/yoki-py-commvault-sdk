@@ -1,6 +1,6 @@
 # `cv.raw.audits`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_audits_entity` - GET /v4/Audits/Entity
 
@@ -12,7 +12,7 @@ cv.raw.audits.get_audits_entity()
 
 **On the wire**
 
-- `GET /v4/Audits/Entity` -> **400** (0.07 s)
+- `GET /v4/Audits/Entity` -> **400** (0.06 s)
 
   <details><summary>Answer</summary>
 
@@ -30,7 +30,7 @@ cv.raw.audits.list_audits()
 
 **On the wire**
 
-- `GET /v4/Audits` -> **200** (0.15 s)
+- `GET /v4/Audits` -> **200** (0.17 s)
 
   <details><summary>Answer</summary>
 
@@ -38,19 +38,19 @@ cv.raw.audits.list_audits()
   {
     "audits": [
       {
-        "auditId": "A1AD169BCF7341B9BC8A823EA536FF31413",
+        "auditId": "A1AD169BCF7341B9BC8A823EA536FF31453",
         "hasAuditId": true,
-        "severity": "High",
+        "severity": "Critical",
         "user": {
           "userId": 2,
           "userName": "user-01",
           "hasUserName": true
         },
-        "createdTimeUtc": 1793894837,
+        "createdTimeUtc": 1793903594,
         "entities": [
           {
-            "entityType": 0,
-            "entityId": 0,
+            "entityType": 15,
+            "entityId": 10,
             "entityName": "mount-path-01",
             "hasEntityName": true
           }
@@ -60,7 +60,7 @@ cv.raw.audits.list_audits()
             "localizedMessages": [
               {
                 "localeId": 0,
-                "localeText": "Renewed the REST Access Token."
+                "localeText": "Delete User group"
               }
             ]
           }
@@ -71,7 +71,7 @@ cv.raw.audits.list_audits()
               "localizedMessages": [
                 {
                   "localeId": 0,
-                  "localeText": "Renewed the Access Token [blt] "
+                  "localeText": "User Group: bltlive-11051833-users <br>Service Type  [UNKNOWN] (Removed)<br>Two Factor Authentication  [DISABLED_AT_COMPANY] (Removed)<br>Quota Limit In GB  [100] (Removed)<br>Description  [bltlive: changed by the SDK's live tests] (Removed)<br>Enabled  Changed from [true] to []<br>Edge Drive Quota Limit In GB  [100] (Removed)<br>Preference Machine Centric Client  Changed from [true] to []<br>&ems... (563 characters)"
                 }
               ],
               "messageLevel": 0
@@ -97,7 +97,7 @@ cv.raw.audits.list_audits()
         "auditNotesCount": 0
       },
       {
-        "auditId": "A1AD169BCF7341B9BC8A823EA536FF31412",
+        "auditId": "A1AD169BCF7341B9BC8A823EA536FF31452",
         "hasAuditId": true,
         "severity": "High",
         "user": {
@@ -105,11 +105,11 @@ cv.raw.audits.list_audits()
           "userName": "user-01",
           "hasUserName": true
         },
-        "createdTimeUtc": 1793894406,
+        "createdTimeUtc": 1793903593,
         "entities": [
           {
-            "entityType": 0,
-            "entityId": 0,
+            "entityType": 15,
+            "entityId": 10,
             "entityName": "mount-path-01",
             "hasEntityName": true
           }
@@ -119,7 +119,7 @@ cv.raw.audits.list_audits()
             "localizedMessages": [
               {
                 "localeId": 0,
-                "localeText": "DR Backup"
+                "localeText": "Update User Group properties"
               }
             ]
           }
@@ -130,7 +130,7 @@ cv.raw.audits.list_audits()
               "localizedMessages": [
                 {
                   "localeId": 0,
-                  "localeText": "DBCC CHECKDB was executed as part of DR backup Job ID: [1504]. "
+                  "localeText": "User Group: bltlive-11051833-users <br>Description  Changed from [bltlive: made by the SDK's live tests] to [bltlive: changed by the SDK's live tests]"
                 }
               ],
               "messageLevel": 0
@@ -156,7 +156,7 @@ cv.raw.audits.list_audits()
         "auditNotesCount": 0
       },
       {
-        "auditId": "A1AD169BCF7341B9BC8A823EA536FF31411",
+        "auditId": "A1AD169BCF7341B9BC8A823EA536FF31451",
         "hasAuditId": true,
         "severity": "High",
         "user": {
@@ -164,11 +164,11 @@ cv.raw.audits.list_audits()
           "userName": "user-01",
           "hasUserName": true
         },
-        "createdTimeUtc": 1793894326,
+        "createdTimeUtc": 1793903590,
         "entities": [
           {
-            "entityType": 0,
-            "entityId": 0,
+            "entityType": 15,
+            "entityId": 10,
             "entityName": "mount-path-01",
             "hasEntityName": true
           }
@@ -178,7 +178,7 @@ cv.raw.audits.list_audits()
             "localizedMessages": [
               {
                 "localeId": 0,
-                "localeText": "Renewed the REST Access Token."
+                "localeText": "Add New User Group"
               }
             ]
           }
@@ -189,7 +189,7 @@ cv.raw.audits.list_audits()
               "localizedMessages": [
                 {
                   "localeId": 0,
-                  "localeText": "Renewed the Access Token [lab] "
+                  "localeText": "User Group: bltlive-11051833-users <br>Service Type  Set to [UNKNOWN]<br>Two Factor Authentication  Set to [DISABLED_AT_COMPANY]<br>Quota Limit In GB  Set to [100]<br>Description  Set to [bltlive: made by the SDK's live tests]<br>Enabled : Yes<br>Edge Drive Quota Limit In GB  Set to [100]<br>Preference Machine Centric Client : Yes<br>&emsp;Company <br>&emsp;&emsp;Provider Domain Name  Set to [Comm... (497 characters)"
                 }
               ],
               "messageLevel": 0
@@ -214,9 +214,9 @@ cv.raw.audits.list_audits()
         },
         "auditNotesCount": 0
       },
-      "... 395 more"
+      "... 435 more"
     ],
-    "filterMatchCount": 398,
+    "filterMatchCount": 438,
     "hasFilterMatchCount": true
   }
   ```

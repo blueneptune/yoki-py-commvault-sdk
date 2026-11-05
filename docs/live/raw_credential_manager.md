@@ -1,6 +1,6 @@
 # `cv.raw.credential_manager`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `list_credential` - GET /V4/Credential
 
@@ -50,7 +50,7 @@ cv.raw.credential_manager.get_credential_v4('5')
 
 **On the wire**
 
-- `GET /V4/Credential/5` -> **200** (0.28 s)
+- `GET /V4/Credential/5` -> **200** (0.25 s)
 
   <details><summary>Answer</summary>
 
@@ -71,7 +71,7 @@ cv.raw.credential_manager.get_credential_v5('6')
 
 **On the wire**
 
-- `GET /V5/Credential/6` -> **200** (0.29 s)
+- `GET /V5/Credential/6` -> **200** (0.28 s)
 
   <details><summary>Answer</summary>
 
@@ -102,7 +102,7 @@ cv.raw.credential_manager.get_v6_credential('5')
 
 **On the wire**
 
-- `GET /V6/Credential/5` -> **200** (0.23 s)
+- `GET /V6/Credential/5` -> **200** (0.28 s)
 
   <details><summary>Answer</summary>
 

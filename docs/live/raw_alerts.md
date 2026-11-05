@@ -1,6 +1,6 @@
 # `cv.raw.alerts`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_alert_type` - GET /V4/AlertType
 
@@ -10,7 +10,7 @@ cv.raw.alerts.get_alert_type()
 
 **On the wire**
 
-- `GET /V4/AlertType` -> **200** (0.74 s)
+- `GET /V4/AlertType` -> **200** (0.78 s)
 
   <details><summary>Answer</summary>
 
@@ -77,7 +77,7 @@ cv.raw.alerts.list_alert_custom_rule()
 
 **On the wire**
 
-- `GET /Alert/CustomRule` -> **200** (1.09 s)
+- `GET /Alert/CustomRule` -> **200** (0.90 s)
 
   <details><summary>Answer</summary>
 
@@ -95,7 +95,7 @@ cv.raw.alerts.list_alert_custom_rule()
         "isOverwriteAssociationAtAlertAllowed": true,
         "isSystemCreated": true,
         "queryCriteriaName": "Alert when CommCell SLA for last <LastNDays,1> days is less than <slaPercent,1> Percent",
-        "isstorage-copy-01KeyPresent": false,
+        "isPrimaryKeyPresent": false,
         "isDisabled": false,
         "creator": {
           "userName": "user-01",
@@ -167,7 +167,7 @@ cv.raw.alerts.list_alert_custom_rule()
           {
             "isColumnFilterable": false,
             "lmDataType": 0,
-            "isstorage-copy-01Key": false,
+            "isPrimaryKey": false,
             "columnFriendlyName": "SLA Percent",
             "columnName": "SLAPercent",
             "columnAdditionalDetails": {},
@@ -191,7 +191,7 @@ cv.raw.alerts.list_alert_custom_rule()
         "isOverwriteAssociationAtAlertAllowed": true,
         "isSystemCreated": true,
         "queryCriteriaName": "Threshold size of data in GB<maxSize,1>",
-        "isstorage-copy-01KeyPresent": true,
+        "isPrimaryKeyPresent": true,
         "isDisabled": false,
         "creator": {
           "userName": "user-01",
@@ -237,7 +237,7 @@ cv.raw.alerts.list_alert_custom_rule()
           {
             "isColumnFilterable": true,
             "lmDataType": 0,
-            "isstorage-copy-01Key": true,
+            "isPrimaryKey": true,
             "columnFriendlyName": "JobID",
             "columnName": "jobID",
             "columnAdditionalDetails": {},
@@ -251,7 +251,7 @@ cv.raw.alerts.list_alert_custom_rule()
           {
             "isColumnFilterable": true,
             "lmDataType": 1,
-            "isstorage-copy-01Key": false,
+            "isPrimaryKey": false,
             "columnFriendlyName": "User",
             "columnName": "UserName",
             "columnAdditionalDetails": {},
@@ -265,7 +265,7 @@ cv.raw.alerts.list_alert_custom_rule()
           {
             "isColumnFilterable": true,
             "lmDataType": 14,
-            "isstorage-copy-01Key": false,
+            "isPrimaryKey": false,
             "columnFriendlyName": "Client",
             "columnName": "clientId",
             "columnAdditionalDetails": {},
@@ -279,7 +279,7 @@ cv.raw.alerts.list_alert_custom_rule()
       {
         "isQueryModifyEnabled": true,
         "visibility": 1,
-        "sqlQuery": "\n\n\tIF object_id('tempdb.dbo.#AppsExcluded') IS NOT NULL DROP TABLE #AppsExcluded\n\n\tIF object_id('tempdb.dbo.#tmpDetails') is not null DROP TABLE #tmpDetails\n\n\tIF object_id('tempdb.dbo.#tempValidApps') is not null DROP TABLE #tempValidApps\n\n\tIF object_id('tempdb.dbo.#tempSCIndexBS') is not null DROP TABLE #tempSCIndexBS\n\n\tDECLARE @curTime BIGINT = dbo.GetUnixTime(GETUTCDATE())\n\n\t--DECLARE @userId I... (8738 characters)",
+        "sqlQuery": "\n\n\tIF object_id('tempdb.dbo.#AppsExcluded') IS NOT NULL DROP TABLE #AppsExcluded\n\n\tIF object_id('tempdb.dbo.#tmpDetails') is not null DROP TABLE #tmpDetails\n\n\tIF object_id('tempdb.dbo.#tempValidApps') is not null DROP TABLE #tempValidApps\n\n\tIF object_id('tempdb.dbo.#tempSCIndexBS') is not null DROP TABLE #tempSCIndexBS\n\n\tDECLARE @curTime BIGINT = dbo.GetUnixTime(GETUTCDATE())\n\n\t--DECLARE @userId I... (8730 characters)",
         "isRuleAssociatedWithAlert": true,
         "doesQuerySupportOutputFilter": true,
         "customAlertType": 3,
@@ -288,7 +288,7 @@ cv.raw.alerts.list_alert_custom_rule()
         "isOverwriteAssociationAtAlertAllowed": true,
         "isSystemCreated": false,
         "queryCriteriaName": "Index backup status",
-        "isstorage-copy-01KeyPresent": false,
+        "isPrimaryKeyPresent": false,
         "isDisabled": false,
         "creator": {
           "userName": "user-02",
@@ -335,7 +335,7 @@ cv.raw.alerts.list_alert_custom_rule()
           {
             "isColumnFilterable": false,
             "lmDataType": 1,
-            "isstorage-copy-01Key": false,
+            "isPrimaryKey": false,
             "columnFriendlyName": "ClientName",
             "columnName": "ClientName",
             "columnAdditionalDetails": {
@@ -351,7 +351,7 @@ cv.raw.alerts.list_alert_custom_rule()
           {
             "isColumnFilterable": false,
             "lmDataType": 1,
-            "isstorage-copy-01Key": false,
+            "isPrimaryKey": false,
             "columnFriendlyName": "Agent",
             "columnName": "Agent",
             "columnAdditionalDetails": {
@@ -367,7 +367,7 @@ cv.raw.alerts.list_alert_custom_rule()
           {
             "isColumnFilterable": false,
             "lmDataType": 1,
-            "isstorage-copy-01Key": false,
+            "isPrimaryKey": false,
             "columnFriendlyName": "BackupsetName",
             "columnName": "BackupsetName",
             "columnAdditionalDetails": {
@@ -398,7 +398,7 @@ cv.raw.alerts.list_alert_definitions()
 
 **On the wire**
 
-- `GET /V4/AlertDefinitions` -> **200** (0.29 s)
+- `GET /V4/AlertDefinitions` -> **200** (0.26 s)
 
   <details><summary>Answer</summary>
 
@@ -475,7 +475,7 @@ cv.raw.alerts.get_alert_custom_rule('2')
 
 **On the wire**
 
-- `GET /Alert/CustomRule/2` -> **200** (0.16 s)
+- `GET /Alert/CustomRule/2` -> **200** (0.17 s)
 
   <details><summary>Answer</summary>
 
@@ -493,7 +493,7 @@ cv.raw.alerts.get_alert_custom_rule('2')
         "isOverwriteAssociationAtAlertAllowed": true,
         "isSystemCreated": true,
         "queryCriteriaName": "Alert when CommCell SLA for last <LastNDays,1> days is less than <slaPercent,1> Percent",
-        "isstorage-copy-01KeyPresent": false,
+        "isPrimaryKeyPresent": false,
         "isDisabled": false,
         "creator": {
           "userName": "user-01",
@@ -565,7 +565,7 @@ cv.raw.alerts.get_alert_custom_rule('2')
           {
             "isColumnFilterable": false,
             "lmDataType": 0,
-            "isstorage-copy-01Key": false,
+            "isPrimaryKey": false,
             "columnFriendlyName": "SLA Percent",
             "columnName": "SLAPercent",
             "columnAdditionalDetails": {},
@@ -680,7 +680,7 @@ cv.raw.alerts.get_triggered_alert('2')
 
 **On the wire**
 
-- `GET /V4/TriggeredAlerts/2` -> **403** (0.12 s)
+- `GET /V4/TriggeredAlerts/2` -> **403** (0.13 s)
 
   <details><summary>Answer</summary>
 

@@ -1,6 +1,6 @@
 # `cv.raw.total_cost_of_ownership`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_tco_assessment_details` - GET /V4/TCO/AssessmentDetails
 
@@ -10,7 +10,7 @@ cv.raw.total_cost_of_ownership.get_tco_assessment_details()
 
 **On the wire**
 
-- `GET /V4/TCO/AssessmentDetails` -> **200** (0.07 s)
+- `GET /V4/TCO/AssessmentDetails` -> **200** (0.08 s)
 
   <details><summary>Answer</summary>
 
@@ -32,7 +32,7 @@ cv.raw.total_cost_of_ownership.get_tco_assessment_discovery_criteria()
 
 **On the wire**
 
-- `GET /V4/TCO/AssessmentDiscoveryCriteria` -> **200** (0.07 s)
+- `GET /V4/TCO/AssessmentDiscoveryCriteria` -> **200** (0.08 s)
 
   <details><summary>Answer</summary>
 

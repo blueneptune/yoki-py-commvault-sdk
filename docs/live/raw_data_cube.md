@@ -1,6 +1,6 @@
 # `cv.raw.data_cube`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_dcube_get_analytics_engine` - GET /dcube/getAnalyticsEngine
 
@@ -10,7 +10,7 @@ cv.raw.data_cube.get_dcube_get_analytics_engine()
 
 **On the wire**
 
-- `GET /dcube/getAnalyticsEngine` -> **200** (0.14 s)
+- `GET /dcube/getAnalyticsEngine` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 
@@ -64,7 +64,7 @@ cv.raw.data_cube.get_e_discovery_clients_clients_4()
 
 **On the wire**
 
-- `GET /V2/EDiscoveryClients/Clients/4` -> **200** (0.10 s)
+- `GET /V2/EDiscoveryClients/Clients/4` -> **200** (0.15 s)
 
   <details><summary>Answer</summary>
 
@@ -104,7 +104,7 @@ cv.raw.data_cube.get_dcube_get_jdbc_driver('1')
 
 **On the wire**
 
-- `GET /dcube/GetJDBCDrivers/1` -> **403** (0.01 s)
+- `GET /dcube/GetJDBCDrivers/1` -> **403** (0.02 s)
 
   <details><summary>Answer</summary>
 

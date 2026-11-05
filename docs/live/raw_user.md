@@ -1,6 +1,6 @@
 # `cv.raw.user`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_sessions` - GET /Sessions
 
@@ -28,7 +28,7 @@ cv.raw.user.get_users_and_groups()
 
 **On the wire**
 
-- `GET /UsersAndGroups` -> **200** (0.20 s)
+- `GET /UsersAndGroups` -> **200** (0.22 s)
 
   <details><summary>Answer</summary>
 
@@ -60,8 +60,8 @@ cv.raw.user.get_users_and_groups()
     ],
     "users": [
       {
-        "fullName": "user-07",
-        "description": "user-07",
+        "fullName": "Administrator",
+        "description": "Administrator",
         "email": "user-05",
         "associatedUserOrUserGroup": {
           "userId": 2,
@@ -77,12 +77,12 @@ cv.raw.user.get_users_and_groups()
         "associatedUserOrUserGroup": {
           "userId": 7,
           "userGUID": "27CCE1D2-3A98-4517-8AB7-9B7912461EA5",
-          "userName": "user-43",
+          "userName": "user-42",
           "_type_": 13
         }
       },
       {
-        "fullName": "user-44",
+        "fullName": "user-43",
         "description": "",
         "email": "user-03",
         "associatedUserOrUserGroup": {
@@ -106,7 +106,7 @@ cv.raw.user.list_user()
 
 **On the wire**
 
-- `GET /User` -> **200** (0.16 s)
+- `GET /User` -> **200** (0.17 s)
 
   <details><summary>Answer</summary>
 
@@ -144,7 +144,7 @@ cv.raw.user.list_user()
         "idleTime": 0,
         "userEntity": {
           "userGUID": "27CCE1D2-3A98-4517-8AB7-9B7912461EA5",
-          "userName": "user-43",
+          "userName": "user-42",
           "userId": 7
         }
       }
@@ -162,7 +162,7 @@ cv.raw.user.list_user_v4()
 
 **On the wire**
 
-- `GET /V4/user` -> **200** (0.14 s)
+- `GET /V4/user` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 
@@ -175,11 +175,11 @@ cv.raw.user.list_user_v4()
         "name": "user-01",
         "GUID": "70650349-DCD7-4363-9004-9562719F8130",
         "email": "user-05",
-        "fullName": "user-07",
+        "fullName": "Administrator",
         "userPrincipalName": "",
-        "lastLoggedIn": 1793717986,
+        "lastLoggedIn": 1793902517,
         "enabled": true,
-        "description": "user-07",
+        "description": "Administrator",
         "lockInfo": {
           "isLocked": false
         },
@@ -194,9 +194,9 @@ cv.raw.user.list_user_v4()
         "name": "user-03",
         "GUID": "BC7AA2DD-10B4-4E28-AA84-137AB63F8B61",
         "email": "user-03",
-        "fullName": "user-44",
+        "fullName": "user-43",
         "userPrincipalName": "user-03",
-        "lastLoggedIn": 1792511627,
+        "lastLoggedIn": 1793902991,
         "enabled": true,
         "description": "",
         "lockInfo": {
@@ -210,7 +210,7 @@ cv.raw.user.list_user_v4()
       },
       {
         "id": 7,
-        "name": "user-43",
+        "name": "user-42",
         "GUID": "27CCE1D2-3A98-4517-8AB7-9B7912461EA5",
         "email": "",
         "fullName": "",
@@ -241,7 +241,7 @@ cv.raw.user.get_user('2')
 
 **On the wire**
 
-- `GET /User/2` -> **200** (0.12 s)
+- `GET /User/2` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 
@@ -271,11 +271,11 @@ cv.raw.user.get_user('2')
         "agePasswordDays": "<masked>",
         "authenticationMethod": "LOCAL",
         "isAccountLocked": false,
-        "description": "user-07",
+        "description": "Administrator",
         "inheritGroupEdgeDriveQuotaSettings": true,
-        "lastLogIntime": 1793717986,
+        "lastLogIntime": 1793902517,
         "enforceEdgeDriveQuota": false,
-        "fullName": "user-07",
+        "fullName": "Administrator",
         "inheritGroupQuotaSettings": true,
         "userEntity": {
           "userGUID": "70650349-DCD7-4363-9004-9562719F8130",
@@ -325,7 +325,7 @@ cv.raw.user.get_user_v4('2')
 
 **On the wire**
 
-- `GET /V4/user/2` -> **200** (0.17 s)
+- `GET /V4/user/2` -> **200** (0.22 s)
 
   <details><summary>Answer</summary>
 
@@ -334,16 +334,16 @@ cv.raw.user.get_user_v4('2')
     "id": 2,
     "name": "user-01",
     "GUID": "70650349-DCD7-4363-9004-9562719F8130",
-    "fullName": "user-07",
+    "fullName": "Administrator",
     "email": "user-05",
     "userPrincipalName": "",
     "enabled": true,
     "lockInfo": {
       "isLocked": false
     },
-    "description": "user-07",
+    "description": "Administrator",
     "serviceType": "UNKNOWN",
-    "lastLoggedIn": 1793717986,
+    "lastLoggedIn": 1793902517,
     "company": {
       "id": 0,
       "name": ""

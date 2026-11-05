@@ -1,6 +1,6 @@
 # `cv.raw.license`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_license` - GET /V4/License
 
@@ -37,7 +37,7 @@ cv.raw.license.get_client_license('2')
 
 **On the wire**
 
-- `GET /Client/2/License` -> **200** (0.11 s)
+- `GET /Client/2/License` -> **200** (0.10 s)
 
   <details><summary>Answer</summary>
 

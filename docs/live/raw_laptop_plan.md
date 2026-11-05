@@ -1,6 +1,6 @@
 # `cv.raw.laptop_plan`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_laptop_plan` - GET /V4/LaptopPlan/{planId}
 
@@ -12,7 +12,7 @@ cv.raw.laptop_plan.get_laptop_plan('1')
 
 **On the wire**
 
-- `GET /V4/LaptopPlan/1` -> **400** (0.07 s)
+- `GET /V4/LaptopPlan/1` -> **400** (0.08 s)
 
   <details><summary>Answer</summary>
 
@@ -33,7 +33,7 @@ cv.raw.laptop_plan.get_laptop_plan_backup_destinations('1')
 
 **On the wire**
 
-- `GET /V4/LaptopPlan/1/BackupDestinations` -> **200** (0.16 s)
+- `GET /V4/LaptopPlan/1/BackupDestinations` -> **200** (0.21 s)
 
   <details><summary>Answer</summary>
 
@@ -54,7 +54,7 @@ cv.raw.laptop_plan.get_laptop_plan_backup_destinations('1')
         "enableDataAging": true,
         "dataRetentionLockDays": 0,
         "planBackupDestination": {
-          "name": "storage-copy-01",
+          "name": "Primary",
           "id": 2
         },
         "storagePool": {
@@ -92,7 +92,7 @@ cv.raw.laptop_plan.list_laptop_plan_storage_policy('1')
 
 **On the wire**
 
-- `GET /V5/LaptopPlan/1/StoragePolicy` -> **403** (0.02 s)
+- `GET /V5/LaptopPlan/1/StoragePolicy` -> **403** (0.01 s)
 
   <details><summary>Answer</summary>
 
@@ -112,7 +112,7 @@ cv.raw.laptop_plan.get_laptop_plan_storage_policy('1', '4')
 
 **On the wire**
 
-- `GET /V5/LaptopPlan/1/StoragePolicy` -> **403** (0.01 s)
+- `GET /V5/LaptopPlan/1/StoragePolicy` -> **403** (0.02 s)
 
   <details><summary>Answer</summary>
 
@@ -120,7 +120,7 @@ cv.raw.laptop_plan.get_laptop_plan_storage_policy('1', '4')
 
   </details>
 
-- `GET /V5/LaptopPlan/1/StoragePolicy/4` -> **403** (0.01 s)
+- `GET /V5/LaptopPlan/1/StoragePolicy/4` -> **403** (0.02 s)
 
   <details><summary>Answer</summary>
 

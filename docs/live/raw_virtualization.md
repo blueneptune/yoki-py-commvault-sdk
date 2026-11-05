@@ -1,6 +1,6 @@
 # `cv.raw.virtualization`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_client_vm_pseudo_client` - GET /Client/VMPseudoClient
 
@@ -28,7 +28,7 @@ cv.raw.virtualization.get_vm()
 
 **On the wire**
 
-- `GET /VM` -> **200** (0.08 s)
+- `GET /VM` -> **200** (0.09 s)
 
   <details><summary>Answer</summary>
 
@@ -60,7 +60,7 @@ cv.raw.virtualization.get_vs_aclientlist()
 
 **On the wire**
 
-- `GET /VSAclientlist` -> **200** (0.08 s)
+- `GET /VSAclientlist` -> **200** (0.09 s)
 
   <details><summary>Answer</summary>
 
@@ -109,7 +109,7 @@ cv.raw.virtualization.get_client_credentials_verify('2')
 
 **On the wire**
 
-- `GET /Client/2/credentials/verify` -> **400** (0.06 s)
+- `GET /Client/2/credentials/verify` -> **400** (0.07 s)
 
   <details><summary>Answer</summary>
 

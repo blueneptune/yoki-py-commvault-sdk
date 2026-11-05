@@ -1,6 +1,6 @@
 # `cv.raw.additional_settings`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_added_entity_settings` - GET /V4/AddedEntitySettings
 
@@ -10,7 +10,7 @@ cv.raw.additional_settings.get_added_entity_settings()
 
 **On the wire**
 
-- `GET /V4/AddedEntitySettings` -> **200** (0.10 s)
+- `GET /V4/AddedEntitySettings` -> **200** (0.11 s)
 
   <details><summary>Answer</summary>
 
@@ -148,7 +148,7 @@ cv.raw.additional_settings.get_global_settings()
 
 **On the wire**
 
-- `GET /V4/GlobalSettings` -> **200** (1.62 s)
+- `GET /V4/GlobalSettings` -> **200** (1.92 s)
 
   <details><summary>Answer</summary>
 

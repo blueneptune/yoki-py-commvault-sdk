@@ -1,6 +1,6 @@
 # The CommServe: version, identity, what it runs
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `cv.commcell.info()` - the CommServe's version, Service Pack and operating system
 
@@ -31,7 +31,7 @@ assert packages
 
 **On the wire**
 
-- `GET /V4/commcell/available-packages` -> **200** (0.22 s)
+- `GET /V4/commcell/available-packages` -> **200** (0.23 s)
 
   <details><summary>Answer</summary>
 
@@ -117,7 +117,7 @@ assert clients
 
 **On the wire**
 
-- `GET /Client` -> **200** (0.10 s)
+- `GET /Client` -> **200** (0.11 s)
 
   <details><summary>Answer</summary>
 
@@ -226,7 +226,7 @@ record.result(cv.storage.disk()[:3])
 
 **On the wire**
 
-- `GET /V4/Storage/Disk` -> **200** (0.23 s)
+- `GET /V4/Storage/Disk` -> **200** (0.24 s)
 
   <details><summary>Answer</summary>
 
@@ -239,8 +239,8 @@ record.result(cv.storage.disk()[:3])
         "storagePoolType": "DEDUPLICATION",
         "status": "Online",
         "capacity": 1048572,
-        "freeSpace": 1024272,
-        "usableFreeSpace": 1003792,
+        "freeSpace": 1025530,
+        "usableFreeSpace": 1005050,
         "company": {
           "id": 0,
           "name": ""
@@ -263,8 +263,8 @@ record.result(cv.storage.disk()[:3])
     "storagePoolType": "DEDUPLICATION",
     "status": "Online",
     "capacity": 1048572,
-    "freeSpace": 1024272,
-    "usableFreeSpace": 1003792,
+    "freeSpace": 1025530,
+    "usableFreeSpace": 1005050,
     "company": {
       "id": 0,
       "name": ""
@@ -282,13 +282,13 @@ record.result(cv.plans.list()[:3])
 
 **On the wire**
 
-- `GET /V4/Plan/Summary` -> **200** (0.23 s)
+- `GET /V4/Plan/Summary` -> **200** (0.25 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "plansCount": 1,
+    "plansCount": 2,
     "plans": [
       {
         "planType": "Server",
@@ -302,6 +302,20 @@ record.result(cv.plans.list()[:3])
         "plan": {
           "name": "plan-01",
           "id": 1
+        }
+      },
+      {
+        "planType": "Server",
+        "searchType": "METADATA",
+        "derivable": false,
+        "description": "bltlive-11051831-plan",
+        "RPO": 0,
+        "associatedEntities": 0,
+        "numberOfCopies": 1,
+        "status": "ENABLED",
+        "plan": {
+          "name": "bltlive-11051831-plan-2",
+          "id": 3
         }
       }
     ]
@@ -326,6 +340,20 @@ record.result(cv.plans.list()[:3])
     "plan": {
       "name": "plan-01",
       "id": 1
+    }
+  },
+  {
+    "planType": "Server",
+    "searchType": "METADATA",
+    "derivable": false,
+    "description": "bltlive-11051831-plan",
+    "RPO": 0,
+    "associatedEntities": 0,
+    "numberOfCopies": 1,
+    "status": "ENABLED",
+    "plan": {
+      "name": "bltlive-11051831-plan-2",
+      "id": 3
     }
   }
 ]

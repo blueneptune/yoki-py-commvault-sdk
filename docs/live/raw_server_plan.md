@@ -1,6 +1,6 @@
 # `cv.raw.server_plan`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_server_plan` - GET /V4/ServerPlan/{planId}
 
@@ -10,7 +10,7 @@ cv.raw.server_plan.get_server_plan('1')
 
 **On the wire**
 
-- `GET /V4/ServerPlan/1` -> **200** (0.18 s)
+- `GET /V4/ServerPlan/1` -> **200** (0.20 s)
 
   <details><summary>Answer</summary>
 
@@ -62,7 +62,7 @@ cv.raw.server_plan.get_server_plan('1')
             "scheduleOption": {
               "retentionOption": {
                 "retentionType": "STORAGE_POLICY_subclient-01",
-                "applyRetentionOn": "storage-copy-01_COPY"
+                "applyRetentionOn": "PRIMARY_COPY"
               }
             },
             "schedulePattern": {
@@ -87,7 +87,7 @@ cv.raw.server_plan.get_server_plan('1')
             "forDatabasesOnly": false,
             "backupType": "SYNTHETICFULL",
             "policyId": 40,
-            "additionalInfo": "Projected to run every [30] days based on configuration [Retention period] on backup destination [storage-copy-01].",
+            "additionalInfo": "Projected to run every [30] days based on configuration [Retention period] on backup destination [Primary].",
             "scheduleId": 42,
             "schedulePattern": {
               "endDate": 0,
@@ -174,7 +174,7 @@ cv.raw.server_plan.get_server_plan('1')
         "enableDataAging": true,
         "dataRetentionLockDays": 0,
         "planBackupDestination": {
-          "name": "storage-copy-01",
+          "name": "Primary",
           "id": 2
         },
         "storagePool": {
@@ -245,7 +245,7 @@ cv.raw.server_plan.get_server_plan_backup_destination_source_copy_eligible('1')
 
 **On the wire**
 
-- `GET /V5/ServerPlan/1/BackupDestination/SourceCopy/Eligible` -> **200** (0.09 s)
+- `GET /V5/ServerPlan/1/BackupDestination/SourceCopy/Eligible` -> **200** (0.08 s)
 
   <details><summary>Answer</summary>
 
@@ -256,7 +256,7 @@ cv.raw.server_plan.get_server_plan_backup_destination_source_copy_eligible('1')
         "issubclient-01": true,
         "copyType": "SYNCHRONOUS",
         "backupDestination": {
-          "name": "storage-copy-01",
+          "name": "Primary",
           "id": 2
         }
       }
@@ -295,7 +295,7 @@ cv.raw.server_plan.get_server_plan_backup_destinations('1')
         "enableDataAging": true,
         "dataRetentionLockDays": 0,
         "planBackupDestination": {
-          "name": "storage-copy-01",
+          "name": "Primary",
           "id": 2
         },
         "storagePool": {
@@ -331,7 +331,7 @@ cv.raw.server_plan.get_server_plan_rpo('1')
 
 **On the wire**
 
-- `GET /V4/ServerPlan/1/RPO` -> **200** (0.14 s)
+- `GET /V4/ServerPlan/1/RPO` -> **200** (0.17 s)
 
   <details><summary>Answer</summary>
 
@@ -347,7 +347,7 @@ cv.raw.server_plan.get_server_plan_rpo('1')
         "scheduleOption": {
           "retentionOption": {
             "retentionType": "STORAGE_POLICY_subclient-01",
-            "applyRetentionOn": "storage-copy-01_COPY"
+            "applyRetentionOn": "PRIMARY_COPY"
           }
         },
         "schedulePattern": {

@@ -1,6 +1,6 @@
 # `cv.raw.user_group`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `list_user_group` - GET /UserGroup
 
@@ -227,7 +227,7 @@ cv.raw.user_group.get_user_group('1')
             "userId": 6
           },
           {
-            "userName": "user-43",
+            "userName": "user-42",
             "userId": 7
           }
         ],
@@ -275,7 +275,7 @@ cv.raw.user_group.get_user_group_v4('1')
 
 **On the wire**
 
-- `GET /V4/UserGroup/1` -> **200** (0.76 s)
+- `GET /V4/UserGroup/1` -> **200** (0.75 s)
 
   <details><summary>Answer</summary>
 
@@ -310,7 +310,7 @@ cv.raw.user_group.get_user_group_v4('1')
       },
       {
         "id": 7,
-        "name": "user-43"
+        "name": "user-42"
       }
     ]
   }

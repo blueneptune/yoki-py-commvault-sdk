@@ -1,6 +1,6 @@
 # `cv.raw.client`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_client_distributed_apps` - GET /Client/DistributedApps
 
@@ -10,7 +10,7 @@ cv.raw.client.get_client_distributed_apps()
 
 **On the wire**
 
-- `GET /Client/DistributedApps` -> **200** (0.11 s)
+- `GET /Client/DistributedApps` -> **200** (0.12 s)
 
   <details><summary>Answer</summary>
 
@@ -55,7 +55,7 @@ cv.raw.client.get_index_servers()
 
 **On the wire**
 
-- `GET /IndexServers` -> **200** (0.11 s)
+- `GET /IndexServers` -> **200** (0.12 s)
 
   <details><summary>Answer</summary>
 
@@ -175,7 +175,7 @@ cv.raw.client.get_client('2')
 
 **On the wire**
 
-- `GET /client/2` -> **200** (1.28 s)
+- `GET /client/2` -> **200** (1.60 s)
 
   <details><summary>Answer</summary>
 
@@ -523,11 +523,11 @@ cv.raw.client.get_client('2')
             "status": 1,
             "lastOnlineTime": {
               "_type_": 55,
-              "time": 1793642450
+              "time": 1793903531
             },
             "lastUpdatedTime": {
               "_type_": 55,
-              "time": 1793642450
+              "time": 1793903531
             },
             "offlineTime": {
               "_type_": 55,
@@ -826,7 +826,7 @@ cv.raw.client.get_client('2')
           "emailWebAppProperties": {
             "enableEmailWebApp": false,
             "exchangeAdminSmtpAddress": "",
-            "exchangeuser-07Account": {
+            "exchangeAdministratorAccount": {
               "userName": ""
             }
           }
@@ -835,10 +835,10 @@ cv.raw.client.get_client('2')
           "DRStatus": "Ready.",
           "readinessStatus": "Ready.\n",
           "onlineTime": {
-            "time": 1793642450
+            "time": 1793903531
           },
           "ccrTime": {
-            "time": 1793642450
+            "time": 1793903531
           },
           "offlineTime": {
             "time": 0
@@ -985,7 +985,7 @@ cv.raw.client.get_system_props_client('2')
 
 **On the wire**
 
-- `GET /SystemProps/client/2` -> **500** (1.61 s)
+- `GET /SystemProps/client/2` -> **500** (1.67 s)
 
   <details><summary>Answer</summary>
 

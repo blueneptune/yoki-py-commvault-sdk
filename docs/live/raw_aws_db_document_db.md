@@ -1,6 +1,6 @@
 # `cv.raw.aws_db_document_db`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_instance` - GET /Instance/{instanceid}
 
@@ -10,7 +10,7 @@ cv.raw.aws_db_document_db.get_instance('1')
 
 **On the wire**
 
-- `GET /Instance` -> **400** (0.08 s)
+- `GET /Instance` -> **400** (0.07 s)
 
   <details><summary>Answer</summary>
 
@@ -53,7 +53,7 @@ cv.raw.aws_db_document_db.get_subclient('44')
 
   </details>
 
-- `GET /subclient/44` -> **200** (0.09 s)
+- `GET /subclient/44` -> **200** (0.11 s)
 
   <details><summary>Answer</summary>
 
@@ -305,7 +305,7 @@ cv.raw.aws_db_document_db.get_subclient('44')
               "perfSPName": "plan-01",
               "multiplexingValid": false,
               "enableMultiplexing": false,
-              "perfCopyName": "storage-copy-01",
+              "perfCopyName": "Primary",
               "perfClientName": "host-14",
               "streamsOverMux": false,
               "pipelineBufferSize": 64,
