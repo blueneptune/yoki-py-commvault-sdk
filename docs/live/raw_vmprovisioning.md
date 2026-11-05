@@ -1,6 +1,6 @@
 # `cv.raw.vmprovisioning`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_virtual_lab_virtual_machines` - GET /V4/VirtualLab/VirtualMachines
 
@@ -33,7 +33,7 @@ cv.raw.vmprovisioning.get_virtual_labs()
 
 **On the wire**
 
-- `GET /V4/VirtualLabs` -> **200** (0.48 s)
+- `GET /V4/VirtualLabs` -> **200** (1.11 s)
 
   <details><summary>Answer</summary>
 
@@ -55,7 +55,7 @@ cv.raw.vmprovisioning.get_vm_provisioning_snapshots()
 
 **On the wire**
 
-- `GET /V4/VMProvisioning/Snapshots` -> **400** (0.08 s)
+- `GET /V4/VMProvisioning/Snapshots` -> **400** (0.07 s)
 
   <details><summary>Answer</summary>
 
@@ -96,7 +96,7 @@ cv.raw.vmprovisioning.get_vm_provisioning_policy('40')
 
 **On the wire**
 
-- `GET /V4/VMProvisioning/Policy/40` -> **200** (0.24 s)
+- `GET /V4/VMProvisioning/Policy/40` -> **200** (0.28 s)
 
   <details><summary>Answer</summary>
 

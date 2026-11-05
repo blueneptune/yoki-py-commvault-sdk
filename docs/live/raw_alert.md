@@ -1,6 +1,6 @@
 # `cv.raw.alert`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_log_streaming_connector_templates` - GET /LogStreamingConnector/Templates
 
@@ -18,7 +18,7 @@ cv.raw.alert.get_log_streaming_connector_templates()
   {
     "templates": [
       {
-        "name": "subclient-01",
+        "name": "Default",
         "policyTemplates": [
           {
             "template": "{\n    \"Alert Id\" : \"<ALERTID>\",\n    \"Alert name\" : \"<ALERTNAME>\",\n    \"Detected time\" : \"<ALERTTIME>\",\n    \"Severity\" : \"<ALERTSEVERITY>\",\n    \"Job Id\" : \"<JOBID>\",\n    \"Description\" : \"<ALERTDESCRIPTION>\",\n    \"Commcell name\" : \"<COMMCELLNAME>\",\n    \"Company name\" : \"<COMPANYNAME>\",\n    \"UTC Timestamp\" : \"<UTCTIMESTAMP>\"\n}",
@@ -51,7 +51,7 @@ cv.raw.alert.list_alert()
 
 **On the wire**
 
-- `GET /Alert` -> **200** (0.10 s)
+- `GET /Alert` -> **200** (0.09 s)
 
   <details><summary>Answer</summary>
 
@@ -114,7 +114,7 @@ cv.raw.alert.list_alert_rule()
       {
         "notifType": 139265,
         "GUID": "",
-        "description": "subclient-01 alert for no successful index backup in the last 30 days",
+        "description": "Default alert for no successful index backup in the last 30 days",
         "commcellName": "",
         "escNotifType": 0,
         "organizationId": 0,
@@ -146,7 +146,7 @@ cv.raw.alert.list_alert_rule()
       {
         "notifType": 139265,
         "GUID": "",
-        "description": "subclient-01 alert for error status of index",
+        "description": "Default alert for error status of index",
         "commcellName": "",
         "escNotifType": 0,
         "organizationId": 0,

@@ -1,6 +1,6 @@
 # `cv.raw.activate`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_analytics_servers` - GET /AnalyticsServers
 
@@ -10,7 +10,7 @@ cv.raw.activate.get_analytics_servers()
 
 **On the wire**
 
-- `GET /AnalyticsServers` -> **200** (0.07 s)
+- `GET /AnalyticsServers` -> **200** (0.10 s)
 
   <details><summary>Answer</summary>
 
@@ -45,7 +45,7 @@ cv.raw.activate.list_dcube_entity()
 
 **On the wire**
 
-- `GET /dcube/entity` -> **200** (0.14 s)
+- `GET /dcube/entity` -> **200** (0.15 s)
 
   <details><summary>Answer</summary>
 
@@ -147,7 +147,7 @@ cv.raw.activate.list_e_discovery_clients_inventories()
 
 **On the wire**
 
-- `GET /EDiscoveryClients/Inventories` -> **200** (0.11 s)
+- `GET /EDiscoveryClients/Inventories` -> **200** (0.12 s)
 
   <details><summary>Answer</summary>
 
@@ -169,7 +169,7 @@ cv.raw.activate.list_e_discoveryclients()
 
 **On the wire**
 
-- `GET /EDiscoveryclients` -> **500** (0.07 s)
+- `GET /EDiscoveryclients` -> **500** (0.06 s)
 
   <details><summary>Answer</summary>
 
@@ -185,7 +185,7 @@ cv.raw.activate.get_analytics_servers_id('1')
 
 **On the wire**
 
-- `GET /AnalyticsServers/id/1` -> **200** (0.10 s)
+- `GET /AnalyticsServers/id/1` -> **200** (0.07 s)
 
   <details><summary>Answer</summary>
 
@@ -212,12 +212,12 @@ cv.raw.activate.get_analytics_servers_id('1')
 
   </details>
 
-## `get_dcube_getsubclient-01handler` - GET /dcube/getsubclient-01handler/{datasourceId}
+## `get_dcube_getdefaulthandler` - GET /dcube/getdefaulthandler/{datasourceId}
 
 > **SKIPPED** on this run: nothing on this server to look at here
 
 ```python
-cv.raw.activate.get_dcube_getsubclient-01handler(...)
+cv.raw.activate.get_dcube_getdefaulthandler(...)
 ```
 
 ## `get_dcube_handler` - GET /dcube/handler/{datasourceHandlerId}
@@ -238,7 +238,7 @@ cv.raw.activate.get_e_discovery_client(...)
 
 **On the wire**
 
-- `GET /EDiscoveryclients` -> **500** (0.07 s)
+- `GET /EDiscoveryclients` -> **500** (0.06 s)
 
   <details><summary>Answer</summary>
 

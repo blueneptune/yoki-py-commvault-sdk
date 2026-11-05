@@ -1,6 +1,6 @@
 # `cv.raw.external_endpoint_manager`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `list_externalendpoint` - GET /v4/externalendpoint
 
@@ -12,7 +12,7 @@ cv.raw.external_endpoint_manager.list_externalendpoint()
 
 **On the wire**
 
-- `GET /v4/externalendpoint` -> **500** (0.08 s)
+- `GET /v4/externalendpoint` -> **500** (0.10 s)
 
   <details><summary>Answer</summary>
 

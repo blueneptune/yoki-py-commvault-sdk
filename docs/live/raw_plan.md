@@ -1,6 +1,6 @@
 # `cv.raw.plan`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_plan_eligible` - GET /V2/Plan/Eligible
 
@@ -10,7 +10,7 @@ cv.raw.plan.get_plan_eligible()
 
 **On the wire**
 
-- `GET /V2/Plan/Eligible` -> **200** (0.14 s)
+- `GET /V2/Plan/Eligible` -> **200** (0.12 s)
 
   <details><summary>Answer</summary>
 
@@ -68,7 +68,7 @@ cv.raw.plan.get_plan_ids()
 
 **On the wire**
 
-- `GET /V4/PlanIds` -> **200** (0.10 s)
+- `GET /V4/PlanIds` -> **200** (0.09 s)
 
   <details><summary>Answer</summary>
 
@@ -97,7 +97,7 @@ cv.raw.plan.list_plan()
 
 **On the wire**
 
-- `GET /Plan` -> **200** (0.17 s)
+- `GET /Plan` -> **200** (0.14 s)
 
   <details><summary>Answer</summary>
 
@@ -132,7 +132,7 @@ cv.raw.plan.list_plan()
               "deviceType": 1,
               "active": 1,
               "isArchiveStorage": false,
-              "issubclient-01": 1,
+              "isDefault": 1,
               "isSnapCopy": 0,
               "dataRetentionLockDays": 0,
               "isMirrorCopy": 0,
@@ -241,7 +241,7 @@ cv.raw.plan.list_plan()
               "deviceType": 1,
               "active": 1,
               "isArchiveStorage": false,
-              "issubclient-01": 1,
+              "isDefault": 1,
               "isSnapCopy": 0,
               "dataRetentionLockDays": 0,
               "isMirrorCopy": 0,
@@ -386,7 +386,7 @@ cv.raw.plan.list_plan_v2()
 
 **On the wire**
 
-- `GET /v2/Plan` -> **200** (0.13 s)
+- `GET /v2/Plan` -> **200** (0.12 s)
 
   <details><summary>Answer</summary>
 
@@ -421,7 +421,7 @@ cv.raw.plan.list_plan_v2()
               "deviceType": 1,
               "active": 1,
               "isArchiveStorage": false,
-              "issubclient-01": 1,
+              "isDefault": 1,
               "isSnapCopy": 0,
               "dataRetentionLockDays": 0,
               "isMirrorCopy": 0,
@@ -530,7 +530,7 @@ cv.raw.plan.list_plan_v2()
               "deviceType": 1,
               "active": 1,
               "isArchiveStorage": false,
-              "issubclient-01": 1,
+              "isDefault": 1,
               "isSnapCopy": 0,
               "dataRetentionLockDays": 0,
               "isMirrorCopy": 0,
@@ -627,7 +627,7 @@ cv.raw.plan.get_plan_access_policies('3')
 
 **On the wire**
 
-- `GET /v2/Plan/3/AccessPolicies` -> **500** (0.28 s)
+- `GET /v2/Plan/3/AccessPolicies` -> **500** (0.22 s)
 
   <details><summary>Answer</summary>
 
@@ -643,7 +643,7 @@ cv.raw.plan.get_plan_alerts('3')
 
 **On the wire**
 
-- `GET /v2/Plan/3/Alerts` -> **200** (0.21 s)
+- `GET /v2/Plan/3/Alerts` -> **200** (0.18 s)
 
   <details><summary>Answer</summary>
 
@@ -661,7 +661,7 @@ cv.raw.plan.get_plan_associated_entities('3')
 
 **On the wire**
 
-- `GET /v2/Plan/3/AssociatedEntities` -> **200** (0.09 s)
+- `GET /v2/Plan/3/AssociatedEntities` -> **200** (0.10 s)
 
   <details><summary>Answer</summary>
 
@@ -711,7 +711,7 @@ cv.raw.plan.get_plan_by_plan_id('3')
 
 **On the wire**
 
-- `GET /v2/Plan/3` -> **200** (0.17 s)
+- `GET /v2/Plan/3` -> **200** (0.18 s)
 
   <details><summary>Answer</summary>
 
@@ -761,7 +761,7 @@ cv.raw.plan.get_plan_by_plan_id('3')
         ]
       },
       "storage": {
-        "issubclient-01CopyDistributedStorage": false,
+        "isDefaultCopyDistributedStorage": false,
         "storagePolicy": {
           "storagePolicyName": "bltlive-11051831-plan-2",
           "storagePolicyId": 6
@@ -1086,7 +1086,7 @@ cv.raw.plan.get_plan_log_plan('1')
 
 **On the wire**
 
-- `GET /V5/Plan/1/LogPlan` -> **403** (0.01 s)
+- `GET /V5/Plan/1/LogPlan` -> **403** (0.02 s)
 
   <details><summary>Answer</summary>
 
@@ -1102,7 +1102,7 @@ cv.raw.plan.get_plan_media_agents('1')
 
 **On the wire**
 
-- `GET /V4/Plan/1/MediaAgents` -> **200** (0.07 s)
+- `GET /V4/Plan/1/MediaAgents` -> **200** (0.08 s)
 
   <details><summary>Answer</summary>
 
@@ -1140,7 +1140,7 @@ cv.raw.plan.get_plan_operations('3')
 
 **On the wire**
 
-- `GET /v2/Plan/3/Operations` -> **400** (0.06 s)
+- `GET /v2/Plan/3/Operations` -> **400** (0.07 s)
 
   <details><summary>Answer</summary>
 
@@ -1156,7 +1156,7 @@ cv.raw.plan.get_plan_summary('1')
 
 **On the wire**
 
-- `GET /v4/Plan/Summary/1` -> **200** (0.24 s)
+- `GET /v4/Plan/Summary/1` -> **200** (0.23 s)
 
   <details><summary>Answer</summary>
 
@@ -1175,7 +1175,7 @@ cv.raw.plan.get_plan_summary('1')
               "scheduleId": 41,
               "scheduleOption": {
                 "retentionOption": {
-                  "retentionType": "STORAGE_POLICY_subclient-01",
+                  "retentionType": "STORAGE_POLICY_DEFAULT",
                   "applyRetentionOn": "PRIMARY_COPY"
                 }
               },
@@ -1258,7 +1258,7 @@ cv.raw.plan.get_plan_summary('1')
           "copyPrecedence": 1,
           "snapRecoveryPoints": 0,
           "storagePoolTypeForCopy": "GlobalDedupeStoragePolicy",
-          "issubclient-01": true,
+          "isDefault": true,
           "storageType": "DISK",
           "enableDataAging": true,
           "dataRetentionLockDays": 0,
@@ -1310,7 +1310,7 @@ cv.raw.plan.get_plan_by_plan_id_entity_name('3', '2')
 
 **On the wire**
 
-- `GET /v2/Plan/3/2` -> **200** (0.26 s)
+- `GET /v2/Plan/3/2` -> **200** (0.25 s)
 
   <details><summary>Answer</summary>
 

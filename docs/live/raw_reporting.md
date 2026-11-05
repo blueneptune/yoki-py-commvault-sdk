@@ -1,6 +1,6 @@
 # `cv.raw.reporting`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_allreports` - GET /cr/reportsplusengine/reports
 
@@ -10,7 +10,7 @@ cv.raw.reporting.get_allreports()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/reports?icludeDrafts=false&includeStoreVersions=false&includeMetricsReports=false` -> **200** (0.47 s)
+- `GET /cr/reportsplusengine/reports?icludeDrafts=false&includeStoreVersions=false&includeMetricsReports=false` -> **200** (0.45 s)
 
   <details><summary>Answer</summary>
 
@@ -181,7 +181,7 @@ cv.raw.reporting.get_cr_reportsplusengine_datasets()
             },
             "... 2 more"
           ],
-          "sqlText": "--declare @sys_userid int =1\n--declare @sys_locale varchar(max) = 'en',@serachString varchar(max) = '' ,@playbackLevel int = 4,\n--@TimeRange_from datetime = getdate() -900 ,@TimeRange_to datetime = getdate()\n--declare @userlist table (userlist int)\n--declare @usergrouplist table (usergrouplist int)\n\nIF OBJECT_ID('tempdb.dbo.#TEGAM') IS NOT NULL DROP TABLE #TEGAM\n  CREATE TABLE #TEGAM ( opId INT )\n... (19073 characters)",
+          "sqlText": "--declare @sys_userid int =1\n--declare @sys_locale varchar(max) = 'en',@serachString varchar(max) = '' ,@playbackLevel int = 4,\n--@TimeRange_from datetime = getdate() -900 ,@TimeRange_to datetime = getdate()\n--declare @userlist table (userlist int)\n--declare @usergrouplist table (usergrouplist int)\n\nIF OBJECT_ID('tempdb.dbo.#TEGAM') IS NOT NULL DROP TABLE #TEGAM\n  CREATE TABLE #TEGAM ( opId INT )\n... (19053 characters)",
           "timeout": 5,
           "postQueryFilter": true,
           "rDataSetQuery": "",
@@ -256,7 +256,7 @@ cv.raw.reporting.get_cr_reportsplusengine_datasets()
           "... 10 more"
         ],
         "GetOperation": {
-          "sqlText": "--DECLARE @sys_userid INT = 1\nDECLARE @userId INT = @sys_userid\n\nDECLARE @SERVEY_CAPABILITY INT = 4\nDECLARE @CloudCapabilities INT = 0\n\nSET @CloudCapabilities = ISNULL((SELECT attrVal FROM UMUsersProp WITH (NOLOCK) WHERE componentNameId = @userId and modified = 0 and attrName='Cloud Capabilities'),0)\nSELECT @CloudCapabilities = (@CloudCapabilities |attrval) FROM UMUserGroup UG WITH (NOLOCK)\nINNER ... (15062 characters)",
+          "sqlText": "--DECLARE @sys_userid INT = 1\nDECLARE @userId INT = @sys_userid\n\nDECLARE @SERVEY_CAPABILITY INT = 4\nDECLARE @CloudCapabilities INT = 0\n\nSET @CloudCapabilities = ISNULL((SELECT attrVal FROM UMUsersProp WITH (NOLOCK) WHERE componentNameId = @userId and modified = 0 and attrName='Cloud Capabilities'),0)\nSELECT @CloudCapabilities = (@CloudCapabilities |attrval) FROM UMUserGroup UG WITH (NOLOCK)\nINNER ... (14932 characters)",
           "timeout": 5,
           "postQueryFilter": true,
           "rDataSetQuery": "",
@@ -332,7 +332,7 @@ cv.raw.reporting.get_cr_reportsplusengine_datasets()
           "... 1 more"
         ],
         "GetOperation": {
-          "sqlText": "-- this dataset is to be used with script datasets to not reveal sensitive GUID information in browser\nSET NOCOUNT ON\nSET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED\n\nDECLARE @UserId   INT \nSELECT  @UserId = id FROM UMUsers WITH (NOLOCK) WHERE login = @sys_username\n\nDECLARE @ObjectType INT = 2572    -- SERVER_GROUP_NAME_ITEM\n\ncreate table  #UserObjects ( \n  [capabilities]  bigint  NOT null, \n  [f... (3555 characters)",
+          "sqlText": "-- this dataset is to be used with script datasets to not reveal sensitive GUID information in browser\nSET NOCOUNT ON\nSET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED\n\nDECLARE @UserId   INT \nSELECT  @UserId = id FROM UMUsers WITH (NOLOCK) WHERE login = @sys_username\n\nDECLARE @ObjectType INT = 2572    -- SERVER_GROUP_NAME_ITEM\n\ncreate table  #UserObjects ( \n  [capabilities]  bigint  NOT null, \n  [f... (3365 characters)",
           "timeout": 5,
           "postQueryFilter": true,
           "rDataSetQuery": "",
@@ -408,13 +408,13 @@ cv.raw.reporting.list_cr_reportsplusengine_datasets_5e7dfa05_07cd_4beb_be9c_181a
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/5e7dfa05-07cd-4beb-be9c-181a1722c2e8:571a5443-fb35-435e-b013-ecd1a6dcfb65/data` -> **200** (0.37 s)
+- `GET /cr/reportsplusengine/datasets/5e7dfa05-07cd-4beb-be9c-181a1722c2e8:571a5443-fb35-435e-b013-ecd1a6dcfb65/data` -> **200** (0.43 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "dbd9707d12b246c5a34c37b26a5a04cc",
+    "cacheId": "f23b92c21c274a379584f11bff48d30c",
     "offset": 0,
     "limit": 0,
     "totalRecordCount": 428,
@@ -474,17 +474,17 @@ cv.raw.reporting.list_cr_reportsplusengine_datasets_5e7dfa05_07cd_4beb_be9c_181a
 
   </details>
 
-## `list_cr_reportsplusengine_datasets_metrics_subclient-01_data`
+## `list_cr_reportsplusengine_datasets_metrics_default_data`
 
-GET /cr/reportsplusengine/datasets/METRICS_subclient-01/data
+GET /cr/reportsplusengine/datasets/METRICS_DEFAULT/data
 
 ```python
-cv.raw.reporting.list_cr_reportsplusengine_datasets_metrics_subclient-01_data()
+cv.raw.reporting.list_cr_reportsplusengine_datasets_metrics_default_data()
 ```
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/METRICS_subclient-01/data` -> **200** (0.19 s)
+- `GET /cr/reportsplusengine/datasets/METRICS_DEFAULT/data` -> **200** (0.21 s)
 
   <details><summary>Answer</summary>
 
@@ -528,13 +528,13 @@ cv.raw.reporting.list_cr_reportsplusengine_dataset_data('2b3e43c0-21fe-401d-ebf8
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/2b3e43c0-21fe-401d-ebf8-c485309262a7/data` -> **200** (1.34 s)
+- `GET /cr/reportsplusengine/datasets/2b3e43c0-21fe-401d-ebf8-c485309262a7/data` -> **200** (1.27 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "609aac067b0b4df49aa71ecec25ceb7e",
+    "cacheId": "013376d8a01246d0ae451bae4b2883ee",
     "offset": 0,
     "limit": 0,
     "totalRecordCount": 425,

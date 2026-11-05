@@ -1,6 +1,6 @@
 # `cv.raw.user`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_sessions` - GET /Sessions
 
@@ -28,7 +28,7 @@ cv.raw.user.get_users_and_groups()
 
 **On the wire**
 
-- `GET /UsersAndGroups` -> **200** (0.22 s)
+- `GET /UsersAndGroups` -> **200** (0.21 s)
 
   <details><summary>Answer</summary>
 
@@ -41,7 +41,7 @@ cv.raw.user.get_users_and_groups()
         "email": "",
         "associatedUserOrUserGroup": {
           "GUID": "52F0152D-42C3-4CF1-8397-0B630F0E710E",
-          "userGroupName": "user-group-01",
+          "userGroupName": "master",
           "userGroupId": 1,
           "_type_": 15
         }
@@ -52,7 +52,7 @@ cv.raw.user.get_users_and_groups()
         "email": "",
         "associatedUserOrUserGroup": {
           "GUID": "1257F0EC-7176-4B01-9CC8-57AC452B2800",
-          "userGroupName": "user-group-02",
+          "userGroupName": "user-group-01",
           "userGroupId": 7,
           "_type_": 15
         }
@@ -325,7 +325,7 @@ cv.raw.user.get_user_v4('2')
 
 **On the wire**
 
-- `GET /V4/user/2` -> **200** (0.22 s)
+- `GET /V4/user/2` -> **200** (0.26 s)
 
   <details><summary>Answer</summary>
 
@@ -361,7 +361,7 @@ cv.raw.user.get_user_v4('2')
     "associatedUserGroups": [
       {
         "id": 1,
-        "name": "user-group-01"
+        "name": "master"
       }
     ],
     "legalHoldInfo": {

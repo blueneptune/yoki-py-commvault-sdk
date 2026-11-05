@@ -1,6 +1,6 @@
 # `cv.raw.metallic`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_azuredb_backupgateway` - GET /V4/azuredb/backupgateway
 
@@ -65,7 +65,7 @@ cv.raw.metallic.get_azuredb_maria_instance()
       "title": "An error occurred while processing your request.",
       "status": "500",
       "detail": "Failed to browse RDS inventory",
-      "traceId": "00-8be37069e817c2303797aec61946dc6a-fdfe8a24ec9f9e78-01"
+      "traceId": "00-26a356c46705b87fa7118373ec531f43-b79575a29441bb62-01"
     }
   }
   ```
@@ -80,7 +80,7 @@ cv.raw.metallic.get_azuredb_mssql_credentials()
 
 **On the wire**
 
-- `GET /V4/azuredb/mssql/credentials` -> **200** (0.27 s)
+- `GET /V4/azuredb/mssql/credentials` -> **200** (0.23 s)
 
   <details><summary>Answer</summary>
 
@@ -102,7 +102,7 @@ cv.raw.metallic.get_azuredb_mssql_instance()
 
 **On the wire**
 
-- `GET /V4/azuredb/mssql/instance` -> **404** (0.13 s)
+- `GET /V4/azuredb/mssql/instance` -> **404** (0.12 s)
 
   <details><summary>Answer</summary>
 
@@ -120,7 +120,7 @@ cv.raw.metallic.get_azuredb_mysql_instance()
 
 **On the wire**
 
-- `GET /V4/azuredb/mysql/instance` -> **500** (0.14 s)
+- `GET /V4/azuredb/mysql/instance` -> **500** (0.13 s)
 
   <details><summary>Answer</summary>
 
@@ -130,7 +130,7 @@ cv.raw.metallic.get_azuredb_mysql_instance()
     "title": "An error occurred while processing your request.",
     "status": 500,
     "detail": "Failed to browse RDS inventory",
-    "traceId": "00-590d55f4c1247febfa40ea3943339e1b-1ffeb240ef40588b-01"
+    "traceId": "00-2ebde4553a7523500e525b1461a496a7-1b92e5579387e3bd-01"
   }
   ```
 
@@ -146,7 +146,7 @@ cv.raw.metallic.get_azuredb_postgresql_instance()
 
 **On the wire**
 
-- `GET /V4/azuredb/postgresql/instance` -> **500** (0.15 s)
+- `GET /V4/azuredb/postgresql/instance` -> **500** (0.14 s)
 
   <details><summary>Answer</summary>
 
@@ -156,7 +156,7 @@ cv.raw.metallic.get_azuredb_postgresql_instance()
     "title": "An error occurred while processing your request.",
     "status": 500,
     "detail": "Failed to browse RDS inventory",
-    "traceId": "00-f005fe23b567526dd0dc624c0440fc0e-2b9a42b763e36e0d-01"
+    "traceId": "00-f18b306aedbb9831d752ccb667ce11fd-721adb0c52c841a9-01"
   }
   ```
 
@@ -170,7 +170,7 @@ cv.raw.metallic.get_credentials_azure_cloud_account()
 
 **On the wire**
 
-- `GET /V4/credentials/azure/cloudAccount` -> **200** (0.67 s)
+- `GET /V4/credentials/azure/cloudAccount` -> **200** (0.53 s)
 
   <details><summary>Answer</summary>
 
@@ -190,7 +190,7 @@ cv.raw.metallic.get_credentials_azure_storage()
 
 **On the wire**
 
-- `GET /V4/credentials/azure/storage` -> **200** (0.29 s)
+- `GET /V4/credentials/azure/storage` -> **200** (0.22 s)
 
   <details><summary>Answer</summary>
 
@@ -210,7 +210,7 @@ cv.raw.metallic.get_hypervisors_azure()
 
 **On the wire**
 
-- `GET /V4/Hypervisors/azure` -> **200** (0.17 s)
+- `GET /V4/Hypervisors/azure` -> **200** (0.24 s)
 
   <details><summary>Answer</summary>
 
@@ -232,7 +232,7 @@ cv.raw.metallic.get_metallic_supported_regions()
 
 **On the wire**
 
-- `GET /V4/Metallic/supported-regions` -> **404** (0.17 s)
+- `GET /V4/Metallic/supported-regions` -> **404** (0.15 s)
 
   <details><summary>Answer</summary>
 
@@ -248,7 +248,7 @@ cv.raw.metallic.get_objectstorage_instance()
 
 **On the wire**
 
-- `GET /V4/objectstorage/instance` -> **200** (0.77 s)
+- `GET /V4/objectstorage/instance` -> **200** (0.81 s)
 
   <details><summary>Answer</summary>
 
@@ -270,7 +270,7 @@ cv.raw.metallic.get_office365_serverplan()
 
 **On the wire**
 
-- `GET /V4/office365/serverplan` -> **404** (0.06 s)
+- `GET /V4/office365/serverplan` -> **404** (0.07 s)
 
   <details><summary>Answer</summary>
 
@@ -288,7 +288,7 @@ cv.raw.metallic.get_office365plan()
 
 **On the wire**
 
-- `GET /V4/office365plan` -> **404** (0.06 s)
+- `GET /V4/office365plan` -> **404** (0.07 s)
 
   <details><summary>Answer</summary>
 

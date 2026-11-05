@@ -1,6 +1,6 @@
 # `cv.raw.user_group`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `list_user_group` - GET /UserGroup
 
@@ -20,14 +20,14 @@ cv.raw.user_group.list_user_group()
       {
         "userGroupEntity": {
           "userGroupId": 1,
-          "userGroupName": "user-group-01",
+          "userGroupName": "master",
           "GUID": "52F0152D-42C3-4CF1-8397-0B630F0E710E"
         }
       },
       {
         "userGroupEntity": {
           "userGroupId": 7,
-          "userGroupName": "user-group-02",
+          "userGroupName": "user-group-01",
           "GUID": "1257F0EC-7176-4B01-9CC8-57AC452B2800"
         }
       }
@@ -45,7 +45,7 @@ cv.raw.user_group.list_user_group_v4()
 
 **On the wire**
 
-- `GET /V4/UserGroup` -> **200** (0.19 s)
+- `GET /V4/UserGroup` -> **200** (0.21 s)
 
   <details><summary>Answer</summary>
 
@@ -54,7 +54,7 @@ cv.raw.user_group.list_user_group_v4()
     "userGroups": [
       {
         "id": 1,
-        "name": "user-group-01",
+        "name": "master",
         "GUID": "52F0152D-42C3-4CF1-8397-0B630F0E710E",
         "serviceType": "UNKNOWN",
         "description": "Administrative Group",
@@ -71,7 +71,7 @@ cv.raw.user_group.list_user_group_v4()
       },
       {
         "id": 7,
-        "name": "user-group-02",
+        "name": "user-group-01",
         "GUID": "1257F0EC-7176-4B01-9CC8-57AC452B2800",
         "serviceType": "UNKNOWN",
         "description": "",
@@ -100,7 +100,7 @@ cv.raw.user_group.get_user_group('1')
 
 **On the wire**
 
-- `GET /UserGroup/1` -> **200** (0.63 s)
+- `GET /UserGroup/1` -> **200** (0.80 s)
 
   <details><summary>Answer</summary>
 
@@ -146,7 +146,7 @@ cv.raw.user_group.get_user_group('1')
                 "role": {
                   "_type_": 120,
                   "roleId": 1,
-                  "roleName": "user-group-01",
+                  "roleName": "Master",
                   "flags": {
                     "disabled": false
                   }
@@ -169,7 +169,7 @@ cv.raw.user_group.get_user_group('1')
                 "role": {
                   "_type_": 120,
                   "roleId": 1,
-                  "roleName": "user-group-01",
+                  "roleName": "Master",
                   "flags": {
                     "disabled": false
                   }
@@ -249,7 +249,7 @@ cv.raw.user_group.get_user_group('1')
         },
         "userGroupEntity": {
           "userGroupId": 1,
-          "userGroupName": "user-group-01",
+          "userGroupName": "master",
           "GUID": "52F0152D-42C3-4CF1-8397-0B630F0E710E"
         }
       }
@@ -275,14 +275,14 @@ cv.raw.user_group.get_user_group_v4('1')
 
 **On the wire**
 
-- `GET /V4/UserGroup/1` -> **200** (0.75 s)
+- `GET /V4/UserGroup/1` -> **200** (0.88 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
     "id": 1,
-    "name": "user-group-01",
+    "name": "master",
     "GUID": "52F0152D-42C3-4CF1-8397-0B630F0E710E",
     "description": "Administrative Group",
     "enabled": true,

@@ -1,6 +1,6 @@
 # Changes
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## A server group with no servers in it: create, read back, change its description, delete
 
@@ -34,13 +34,13 @@ assert name not in remaining
 
 **On the wire**
 
-- `POST /V4/ServerGroup` -> **200** (1.06 s)
+- `POST /V4/ServerGroup` -> **200** (3.13 s)
 
   Sent:
 
   ```json
   {
-    "name": "bltlive-11051835-servers",
+    "name": "bltlive-11051848-servers",
     "description": "bltlive: made by the SDK's live tests"
   }
   ```
@@ -50,16 +50,16 @@ assert name not in remaining
   ```json
   {
     "serverGroupInfo": {
-      "GUID": "C6BA3434-0453-48E7-9164-7A6D2ADA947C",
-      "name": "bltlive-11051835-servers",
-      "id": 12
+      "GUID": "27660170-6A34-42C7-AEDC-5C8CAE778AEB",
+      "name": "bltlive-11051848-servers",
+      "id": 13
     }
   }
   ```
 
   </details>
 
-- `GET /V4/ServerGroup` -> **200** (0.20 s)
+- `GET /V4/ServerGroup` -> **200** (0.19 s)
 
   <details><summary>Answer</summary>
 
@@ -109,15 +109,15 @@ assert name not in remaining
 
   </details>
 
-- `GET /V4/ServerGroup/12` -> **200** (1.29 s)
+- `GET /V4/ServerGroup/13` -> **200** (1.34 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
     "serverGroup": {
-      "name": "bltlive-11051835-servers",
-      "id": 12
+      "name": "bltlive-11051848-servers",
+      "id": 13
     },
     "description": "bltlive: made by the SDK's live tests",
     "general": {
@@ -142,7 +142,7 @@ assert name not in remaining
 
   </details>
 
-- `PUT /V4/ServerGroup/12` -> **200** (1.76 s)
+- `PUT /V4/ServerGroup/13` -> **200** (1.73 s)
 
   Sent:
 
@@ -150,8 +150,8 @@ assert name not in remaining
   {
     "serverGroupType": "MANUAL",
     "serverGroup": {
-      "id": 12,
-      "name": "bltlive-11051835-servers"
+      "id": 13,
+      "name": "bltlive-11051848-servers"
     },
     "description": "bltlive: changed by the SDK's live tests"
   }
@@ -168,15 +168,15 @@ assert name not in remaining
 
   </details>
 
-- `GET /V4/ServerGroup/12` -> **200** (1.39 s)
+- `GET /V4/ServerGroup/13` -> **200** (1.39 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
     "serverGroup": {
-      "name": "bltlive-11051835-servers",
-      "id": 12
+      "name": "bltlive-11051848-servers",
+      "id": 13
     },
     "description": "bltlive: changed by the SDK's live tests",
     "general": {
@@ -201,7 +201,7 @@ assert name not in remaining
 
   </details>
 
-- `DELETE /V4/ServerGroup/12` -> **200** (0.80 s)
+- `DELETE /V4/ServerGroup/13` -> **200** (0.96 s)
 
   <details><summary>Answer</summary>
 
@@ -270,9 +270,9 @@ assert name not in remaining
 {
   "created": {
     "serverGroupInfo": {
-      "GUID": "C6BA3434-0453-48E7-9164-7A6D2ADA947C",
-      "name": "bltlive-11051835-servers",
-      "id": 12
+      "GUID": "27660170-6A34-42C7-AEDC-5C8CAE778AEB",
+      "name": "bltlive-11051848-servers",
+      "id": 13
     }
   },
   "description": "bltlive: changed by the SDK's live tests"
@@ -305,13 +305,13 @@ assert name not in remaining
 
 **On the wire**
 
-- `POST /V4/UserGroup` -> **200** (1.75 s)
+- `POST /V4/UserGroup` -> **200** (1.84 s)
 
   Sent:
 
   ```json
   {
-    "name": "bltlive-11051835-users",
+    "name": "bltlive-11051848-users",
     "description": "bltlive: made by the SDK's live tests"
   }
   ```
@@ -320,15 +320,15 @@ assert name not in remaining
 
   ```json
   {
-    "id": 11,
-    "name": "bltlive-11051835-users",
-    "GUID": "23AC5970-2496-4390-A489-B1C03C0A01BA"
+    "id": 12,
+    "name": "bltlive-11051848-users",
+    "GUID": "EB50222E-4801-4658-ACFC-3E0725AC82D7"
   }
   ```
 
   </details>
 
-- `GET /V4/UserGroup` -> **200** (0.22 s)
+- `GET /V4/UserGroup` -> **200** (0.21 s)
 
   <details><summary>Answer</summary>
 
@@ -337,7 +337,7 @@ assert name not in remaining
     "userGroups": [
       {
         "id": 1,
-        "name": "user-group-01",
+        "name": "master",
         "GUID": "52F0152D-42C3-4CF1-8397-0B630F0E710E",
         "serviceType": "UNKNOWN",
         "description": "Administrative Group",
@@ -354,7 +354,7 @@ assert name not in remaining
       },
       {
         "id": 7,
-        "name": "user-group-02",
+        "name": "user-group-01",
         "GUID": "1257F0EC-7176-4B01-9CC8-57AC452B2800",
         "serviceType": "UNKNOWN",
         "description": "",
@@ -370,9 +370,9 @@ assert name not in remaining
         }
       },
       {
-        "id": 11,
-        "name": "bltlive-11051835-users",
-        "GUID": "23AC5970-2496-4390-A489-B1C03C0A01BA",
+        "id": 12,
+        "name": "bltlive-11051848-users",
+        "GUID": "EB50222E-4801-4658-ACFC-3E0725AC82D7",
         "serviceType": "UNKNOWN",
         "description": "bltlive: made by the SDK's live tests",
         "provider": {
@@ -392,7 +392,7 @@ assert name not in remaining
 
   </details>
 
-- `PUT /V4/UserGroup/11` -> **200** (2.69 s)
+- `PUT /V4/UserGroup/12` -> **200** (2.51 s)
 
   Sent:
 
@@ -413,15 +413,15 @@ assert name not in remaining
 
   </details>
 
-- `GET /V4/UserGroup/11` -> **200** (0.70 s)
+- `GET /V4/UserGroup/12` -> **200** (0.65 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "id": 11,
-    "name": "bltlive-11051835-users",
-    "GUID": "23AC5970-2496-4390-A489-B1C03C0A01BA",
+    "id": 12,
+    "name": "bltlive-11051848-users",
+    "GUID": "EB50222E-4801-4658-ACFC-3E0725AC82D7",
     "description": "bltlive: changed by the SDK's live tests",
     "enabled": true,
     "serviceType": "UNKNOWN",
@@ -443,7 +443,7 @@ assert name not in remaining
 
   </details>
 
-- `DELETE /V4/UserGroup/11?skipOwnerShipTransfer=true` -> **200** (0.82 s)
+- `DELETE /V4/UserGroup/12?skipOwnerShipTransfer=true` -> **200** (0.76 s)
 
   <details><summary>Answer</summary>
 
@@ -456,7 +456,7 @@ assert name not in remaining
 
   </details>
 
-- `GET /V4/UserGroup` -> **200** (0.24 s)
+- `GET /V4/UserGroup` -> **200** (0.22 s)
 
   <details><summary>Answer</summary>
 
@@ -465,7 +465,7 @@ assert name not in remaining
     "userGroups": [
       {
         "id": 1,
-        "name": "user-group-01",
+        "name": "master",
         "GUID": "52F0152D-42C3-4CF1-8397-0B630F0E710E",
         "serviceType": "UNKNOWN",
         "description": "Administrative Group",
@@ -482,7 +482,7 @@ assert name not in remaining
       },
       {
         "id": 7,
-        "name": "user-group-02",
+        "name": "user-group-01",
         "GUID": "1257F0EC-7176-4B01-9CC8-57AC452B2800",
         "serviceType": "UNKNOWN",
         "description": "",
@@ -508,9 +508,9 @@ assert name not in remaining
 ```json
 {
   "created": {
-    "id": 11,
-    "name": "bltlive-11051835-users",
-    "GUID": "23AC5970-2496-4390-A489-B1C03C0A01BA"
+    "id": 12,
+    "name": "bltlive-11051848-users",
+    "GUID": "EB50222E-4801-4658-ACFC-3E0725AC82D7"
   },
   "description": "bltlive: changed by the SDK's live tests"
 }

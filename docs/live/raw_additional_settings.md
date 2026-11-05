@@ -1,6 +1,6 @@
 # `cv.raw.additional_settings`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_added_entity_settings` - GET /V4/AddedEntitySettings
 
@@ -10,7 +10,7 @@ cv.raw.additional_settings.get_added_entity_settings()
 
 **On the wire**
 
-- `GET /V4/AddedEntitySettings` -> **200** (0.11 s)
+- `GET /V4/AddedEntitySettings` -> **200** (0.12 s)
 
   <details><summary>Answer</summary>
 
@@ -99,7 +99,7 @@ cv.raw.additional_settings.get_added_global_settings()
 
 **On the wire**
 
-- `GET /V4/AddedGlobalSettings` -> **200** (0.17 s)
+- `GET /V4/AddedGlobalSettings` -> **200** (0.18 s)
 
   <details><summary>Answer</summary>
 
@@ -148,7 +148,7 @@ cv.raw.additional_settings.get_global_settings()
 
 **On the wire**
 
-- `GET /V4/GlobalSettings` -> **200** (1.92 s)
+- `GET /V4/GlobalSettings` -> **200** (1.86 s)
 
   <details><summary>Answer</summary>
 
@@ -158,7 +158,7 @@ cv.raw.additional_settings.get_global_settings()
       {
         "name": "<AppName>_FDSETSZ",
         "description": "Controls size of select mask for the application ",
-        "subclient-01Value": " ",
+        "defaultValue": " ",
         "type": "Integer",
         "isRestartRequired": false,
         "minValue": 0,
@@ -171,7 +171,7 @@ cv.raw.additional_settings.get_global_settings()
         "acceptableValues": [
           "IP address"
         ],
-        "subclient-01Value": "IP address",
+        "defaultValue": "IP address",
         "type": "String",
         "isRestartRequired": false,
         "category": "iDataAgent"
@@ -183,7 +183,7 @@ cv.raw.additional_settings.get_global_settings()
           "Path to a shared stage folder",
           "like O:\\StageFolder"
         ],
-        "subclient-01Value": "",
+        "defaultValue": "",
         "type": "String",
         "isRestartRequired": true,
         "category": "MSSQLAgent"
@@ -203,7 +203,7 @@ cv.raw.additional_settings.get_lookup_settings()
 
 **On the wire**
 
-- `GET /V4/LookupSettings` -> **200** (1.10 s)
+- `GET /V4/LookupSettings` -> **200** (1.14 s)
 
   <details><summary>Answer</summary>
 
@@ -214,7 +214,7 @@ cv.raw.additional_settings.get_lookup_settings()
         "name": "<AppName>_FDSETSZ",
         "displayLabel": "<AppName>_FDSETSZ",
         "description": "Controls size of select mask for the application ",
-        "subclient-01Value": " ",
+        "defaultValue": " ",
         "type": "Integer",
         "isRestartRequired": false,
         "minValue": 0,
@@ -228,7 +228,7 @@ cv.raw.additional_settings.get_lookup_settings()
         "acceptableValues": [
           "IP address"
         ],
-        "subclient-01Value": "IP address",
+        "defaultValue": "IP address",
         "type": "String",
         "isRestartRequired": false,
         "category": "iDataAgent"
@@ -241,7 +241,7 @@ cv.raw.additional_settings.get_lookup_settings()
           "Path to a shared stage folder",
           "like O:\\StageFolder"
         ],
-        "subclient-01Value": "",
+        "defaultValue": "",
         "type": "String",
         "isRestartRequired": true,
         "category": "MSSQLAgent"

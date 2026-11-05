@@ -1,6 +1,6 @@
 # `cv.raw.entity_tags`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_ediscovery_tags` - GET /Ediscovery/Tags
 
@@ -10,7 +10,7 @@ cv.raw.entity_tags.get_ediscovery_tags()
 
 **On the wire**
 
-- `GET /Ediscovery/Tags` -> **200** (0.32 s)
+- `GET /Ediscovery/Tags` -> **200** (0.35 s)
 
   <details><summary>Answer</summary>
 
@@ -27,7 +27,7 @@ cv.raw.entity_tags.get_ediscovery_tags()
               "containerName": "CommonTags",
               "deDuplicateFields": "",
               "containerOwnerType": 1,
-              "comment": "System subclient-01 tag set",
+              "comment": "System default tag set",
               "attribute": 2,
               "containerId": 1,
               "containerGuid": "152AC4AC-ADDE-423C-8989-84C1EE223927",

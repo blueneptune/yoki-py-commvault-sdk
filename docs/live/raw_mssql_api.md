@@ -1,6 +1,6 @@
 # `cv.raw.mssql_api`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_sql_instances` - GET /sql/instances
 
@@ -36,7 +36,7 @@ cv.raw.mssql_api.get_sql_instances()
         "status": 1
       },
       {
-        "notReadyReason": "Last backup job [1491] did not complete successfully for the instance with error: Another backup is running for client [host-14], iDataAgent [SQL Server], Instance [host-14], Subclient [subclient-01].<br/>Source: commserve-02, Process: JobManager",
+        "notReadyReason": "Last backup job [1491] did not complete successfully for the instance with error: Another backup is running for client [host-14], iDataAgent [SQL Server], Instance [host-14], Subclient [default].<br/>Source: commserve-02, Process: JobManager",
         "insName": "host-14",
         "sla": 1,
         "planName": "plan-01",
@@ -75,7 +75,7 @@ cv.raw.mssql_api.get_client_sql_unconfigured_servers('2')
 
 **On the wire**
 
-- `GET /Client/2/Sql/unconfiguredServers` -> **500** (0.22 s)
+- `GET /Client/2/Sql/unconfiguredServers` -> **500** (0.24 s)
 
   <details><summary>Answer</summary>
 

@@ -1,6 +1,6 @@
 # `cv.raw.failover_groups`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_failover_groups_eligible_machines` - GET /V4/FailoverGroups/EligibleMachines
 
@@ -12,7 +12,7 @@ cv.raw.failover_groups.get_failover_groups_eligible_machines()
 
 **On the wire**
 
-- `GET /V4/FailoverGroups/EligibleMachines` -> **400** (0.06 s)
+- `GET /V4/FailoverGroups/EligibleMachines` -> **400** (0.07 s)
 
   <details><summary>Answer</summary>
 
@@ -28,7 +28,7 @@ cv.raw.failover_groups.list_failover_groups()
 
 **On the wire**
 
-- `GET /V4/FailoverGroups` -> **200** (0.09 s)
+- `GET /V4/FailoverGroups` -> **200** (0.10 s)
 
   <details><summary>Answer</summary>
 
@@ -48,14 +48,14 @@ cv.raw.failover_groups.list_failover_groups()
 cv.raw.failover_groups.get_failover_group(...)
 ```
 
-## `get_failover_group_user-group-02_failover_machines`
+## `get_failover_group_user-group-01_failover_machines`
 
 GET /V4/FailoverGroups/{failoverGroupId}/TestFailoverMachines
 
 > **SKIPPED** on this run: not swept: starts work or returns a file
 
 ```python
-cv.raw.failover_groups.get_failover_group_user-group-02_failover_machines(...)
+cv.raw.failover_groups.get_failover_group_user-group-01_failover_machines(...)
 ```
 
 ## `get_failover_group_virtual_machines`

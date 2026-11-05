@@ -1,6 +1,6 @@
 # `cv.raw.blackout_windows`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `list_blackout_window_v4` - GET /V4/BlackoutWindow
 
@@ -10,7 +10,7 @@ cv.raw.blackout_windows.list_blackout_window_v4()
 
 **On the wire**
 
-- `GET /V4/BlackoutWindow` -> **200** (0.24 s)
+- `GET /V4/BlackoutWindow` -> **200** (0.23 s)
 
   <details><summary>Answer</summary>
 

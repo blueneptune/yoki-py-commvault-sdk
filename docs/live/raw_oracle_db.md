@@ -1,6 +1,6 @@
 # `cv.raw.oracle_db`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_client_instance_oracle_discover` - GET /client/{clientId}/instance/oracle/discover
 
@@ -30,7 +30,7 @@ cv.raw.oracle_db.get_job_rman_logs('1')
 
 **On the wire**
 
-- `GET /Job/1/RMANLogs` -> **200** (0.12 s)
+- `GET /Job/1/RMANLogs` -> **200** (0.13 s)
 
   <details><summary>Answer</summary>
 

@@ -1,6 +1,6 @@
 # `cv.raw.workflow`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `list_webhook` - GET /webhook
 
@@ -10,7 +10,7 @@ cv.raw.workflow.list_webhook()
 
 **On the wire**
 
-- `GET /webhook` -> **200** (0.14 s)
+- `GET /webhook` -> **200** (0.13 s)
 
   <details><summary>Answer</summary>
 
@@ -30,7 +30,7 @@ cv.raw.workflow.list_workflow()
 
 **On the wire**
 
-- `GET /Workflow` -> **200** (0.50 s)
+- `GET /Workflow` -> **200** (0.44 s)
 
   <details><summary>Answer</summary>
 
@@ -57,7 +57,7 @@ cv.raw.workflow.list_workflow()
         "deployments": [
           {
             "inputsXml": "<inputs />",
-            "inputSchema": "<configuration xmlDefinition=\"&lt;configuration /&gt;\"><schema name=\"configuration\" className=\"\" subclient-01Value=\"\" type=\"\" listType=\"0\" attribute=\"0\" /></configuration>",
+            "inputSchema": "<configuration xmlDefinition=\"&lt;configuration /&gt;\"><schema name=\"configuration\" className=\"\" defaultValue=\"\" type=\"\" listType=\"0\" attribute=\"0\" /></configuration>",
             "flags": 1,
             "description": "<html><div>&#xa;      APSS Add SysAdmin Role v1.0.2&#xa;    </div>&#xa;    <div>&#xa;      <br>&#xa;      This workflow will assign the SQL SYSADMIN role to the impersonation &#xa;      account that is provided. SA account credentials are required for this &#xa;      workflow.&#xa;    </div>&#xa;    <div>&#xa;      &#xa;    </div>&#xa;    <div>&#xa;      IMPORTANT: This workflow may take time to l... (528 characters)",
             "deployed": 1787607160,
@@ -102,7 +102,7 @@ cv.raw.workflow.list_workflow()
         "deployments": [
           {
             "inputsXml": "<inputs><subclientID class=\"java.lang.String\" _list_=\"false\" /><isGroupDisabled class=\"java.lang.Integer\" _list_=\"false\">0</isGroupDisabled><isClientDisabled class=\"java.lang.Integer\" _list_=\"false\">0</isClientDisabled><isAgentDisabled class=\"java.lang.Integer\" _list_=\"false\">0</isAgentDisabled><isSubclientDisabled class=\"java.lang.Integer\" _list_=\"false\">0</isSubclientDisabled><Client class=\"java... (619 characters)",
-            "inputSchema": "<configuration xmlDefinition=\"&lt;configuration /&gt;\"><schema name=\"configuration\" className=\"\" subclient-01Value=\"\" type=\"\" listType=\"0\" attribute=\"0\" /></configuration>",
+            "inputSchema": "<configuration xmlDefinition=\"&lt;configuration /&gt;\"><schema name=\"configuration\" className=\"\" defaultValue=\"\" type=\"\" listType=\"0\" attribute=\"0\" /></configuration>",
             "flags": 1,
             "description": "<html><div>&#xa;      This workflow requires &quot;Proactive Support&quot; to be enabled in the Cloud &#xa;      Metrics control panel, and requires the &quot;APSS - Enable Activity for &#xa;      Disabled Subclients&quot; custom report.&#xa;    </div>&#xa;    <div>&#xa;      &#xa;    </div>&#xa;    <div>&#xa;      Run the custom report and click the button next to the subclient that &#xa;      wi... (655 characters)",
             "deployed": 1787607161,
@@ -118,7 +118,7 @@ cv.raw.workflow.list_workflow()
               "entries": [
                 {
                   "hidden": false,
-                  "subclient-01Value": "0",
+                  "defaultValue": "0",
                   "displayName": "Group Activity Is Disabled",
                   "className": "java.lang.Integer",
                   "type": "{http://host-89/2001/XMLSchema}integer",
@@ -134,7 +134,7 @@ cv.raw.workflow.list_workflow()
                   "controlType": 0,
                   "name": "isGroupDisabled",
                   "maximumValue": "",
-                  "subclient-01Values": [
+                  "defaultValues": [
                     "0"
                   ]
                 },
@@ -158,7 +158,7 @@ cv.raw.workflow.list_workflow()
                 },
                 {
                   "hidden": false,
-                  "subclient-01Value": "0",
+                  "defaultValue": "0",
                   "displayName": "Client Activity Is Disabled",
                   "className": "java.lang.Integer",
                   "type": "{http://host-89/2001/XMLSchema}integer",
@@ -174,7 +174,7 @@ cv.raw.workflow.list_workflow()
                   "controlType": 0,
                   "name": "isClientDisabled",
                   "maximumValue": "",
-                  "subclient-01Values": [
+                  "defaultValues": [
                     "0"
                   ]
                 },
@@ -212,7 +212,7 @@ cv.raw.workflow.list_workflow()
         "deployments": [
           {
             "inputsXml": "<inputs><subclientID class=\"java.lang.String\" _list_=\"false\" /><Client class=\"java.lang.String\" _list_=\"false\" /><Agent class=\"java.lang.String\" _list_=\"false\" /><Subclient class=\"java.lang.String\" _list_=\"false\" /></inputs>",
-            "inputSchema": "<configuration xmlDefinition=\"&lt;configuration /&gt;\"><schema name=\"configuration\" className=\"\" subclient-01Value=\"\" type=\"\" listType=\"0\" attribute=\"0\" /></configuration>",
+            "inputSchema": "<configuration xmlDefinition=\"&lt;configuration /&gt;\"><schema name=\"configuration\" className=\"\" defaultValue=\"\" type=\"\" listType=\"0\" attribute=\"0\" /></configuration>",
             "flags": 1,
             "description": "This workflow requires \"Proactive Support\" to be enabled under the Cloud Metrics Reporting control panel and requires the \"APSS - Missed SLA Report\" from the software store.&#xd;&#xa;&#xd;&#xa;Run the custom report in the webconsole, and click the button next to the subclient that needs to be excluded from SLA.",
             "deployed": 1787607164,
@@ -317,7 +317,7 @@ cv.raw.workflow.get_workflow_definition('1')
 
 **On the wire**
 
-- `GET /Workflow/1/definition` -> **200** (0.14 s)
+- `GET /Workflow/1/definition` -> **200** (0.15 s)
 
   <details><summary>Answer</summary>
 

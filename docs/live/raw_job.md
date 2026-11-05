@@ -1,6 +1,6 @@
 # `cv.raw.job`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_jobs_active` - GET /Jobs/active
 
@@ -10,13 +10,13 @@ cv.raw.job.get_jobs_active()
 
 **On the wire**
 
-- `GET /Jobs/active` -> **200** (0.08 s)
+- `GET /Jobs/active` -> **200** (0.09 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "totalRecordsWithoutPaging": 2,
+    "totalRecordsWithoutPaging": 3,
     "jobs": [
       {
         "jobDetail": {
@@ -59,7 +59,7 @@ cv.raw.job.get_jobs_active()
           "operationNameLocaleMsgId": 0,
           "failureKBArticle": "cliver=0\rserver=16\rida=0\ropType=4\rphaseNum=0\rmessageId=318768235\rcustomMessageId=318768235;",
           "currentThroughput": 0,
-          "subclientName": "subclient-01",
+          "subclientName": "default",
           "destClientName": "host-14",
           "commcellId": 2,
           "thresholdTime": 2280,
@@ -132,7 +132,7 @@ cv.raw.job.get_jobs_active()
             "_SubclType_": 0,
             "backupsetName": "backupset-01",
             "applicationId": 81,
-            "subclientName": "subclient-01"
+            "subclientName": "default"
           },
           "company": {
             "_type_": 189,
@@ -271,6 +271,138 @@ cv.raw.job.get_jobs_active()
             "_type_": 13
           }
         }
+      },
+      {
+        "jobDetail": {
+          "generalInfo": {
+            "libraryName": "library-01",
+            "systemState": "No"
+          },
+          "progressInfo": {
+            "estimatedCompletionTime": 1793904768
+          }
+        },
+        "jobSummary": {
+          "sizeOfApplication": 0,
+          "vsaParentJobID": 0,
+          "backupSetName": "backupset-01",
+          "opType": 4,
+          "totalFailedFolders": 0,
+          "totalFailedFiles": 0,
+          "numStreamsAllocated": 2,
+          "jobAttributes": 576460752303431680,
+          "currentPhase": 2,
+          "driveList": "K:\\commvaultdataStorage                                                                                                         ",
+          "failureReason": "",
+          "restartInterval": 1200,
+          "status": "Running",
+          "percentSavings": 0,
+          "localizedOperationName": "Backup",
+          "jobCategory": 1,
+          "backupLevel": 67108864,
+          "jobElapsedTime": 153,
+          "jobStartTime": 1793904403,
+          "currentPhaseName": "Transaction Logs",
+          "isPreemptable": 1,
+          "retention": 1,
+          "attemptStartTime": 1793904425,
+          "maxNumberOfStreams": 2,
+          "appTypeName": "SQL Server",
+          "sidbStoreName": "storage-pool-01_Databases_2",
+          "displayState": 1,
+          "operationNameLocaleMsgId": 0,
+          "currentThroughput": 0,
+          "subclientName": "default",
+          "destClientName": "host-13",
+          "commcellId": 2,
+          "thresholdTime": 0,
+          "phasePercentagesList": "",
+          "combinedPriority": 166,
+          "currentPhaseType": 4294972928,
+          "jobAttributesEx": 0,
+          "workloadName": "SQL Server",
+          "isVisible": true,
+          "localizedStatus": "Running",
+          "totalNumOfFiles": 5,
+          "transferSize": 0,
+          "jobId": 1511,
+          "retainedBy": 0,
+          "lastUpdateTime": 1793904568,
+          "maxRestarts": 10,
+          "statusColor": "greenspan",
+          "pendingReason": "",
+          "lastStateChangeTime": 3852380725852504695,
+          "jobType": "Backup",
+          "backupLevelName": "Transaction Log",
+          "totItemsToProcess": 12,
+          "percentComplete": 37,
+          "phaseTimingsList": "",
+          "averageThroughput": 0,
+          "localizedBackupLevelName": "Transaction Log",
+          "plan": {
+            "planName": "plan-01",
+            "_type_": 158,
+            "planId": 1
+          },
+          "subTaskEntity": {
+            "subtaskId": 40,
+            "_type_": 68,
+            "subtaskName": ""
+          },
+          "taskEntity": {
+            "_type_": 69,
+            "taskName": "plan-01 schedule policy for the database clients",
+            "taskId": 39
+          },
+          "destinationClient": {
+            "clientName": "host-13",
+            "displayName": "host-13",
+            "_type_": 3,
+            "clientId": 15
+          },
+          "mediaAgent": {
+            "mediaAgentId": 2,
+            "_type_": 11,
+            "mediaAgentName": "commserve-02"
+          },
+          "alert": {
+            "_type_": 64,
+            "alertName": " ",
+            "alertId": 0
+          },
+          "subclient": {
+            "clientName": "host-13",
+            "instanceName": "host-13",
+            "displayName": "host-13",
+            "backupsetId": 29,
+            "_type_": 7,
+            "instanceId": 6,
+            "workloadId": 12010,
+            "subclientId": 43,
+            "clientId": 15,
+            "appName": "SQL Server",
+            "_SubclType_": 0,
+            "backupsetName": "backupset-01",
+            "applicationId": 81,
+            "subclientName": "default"
+          },
+          "company": {
+            "_type_": 189,
+            "companyId": 0,
+            "companyName": "",
+            "GUID": "95189D4E-4A7F-4CB3-969F-80D5871AC13F"
+          },
+          "storagePolicy": {
+            "_type_": 17,
+            "storagePolicyName": "plan-01",
+            "storagePolicyId": 3
+          },
+          "userName": {
+            "userName": "user-02",
+            "userId": 1,
+            "_type_": 13
+          }
+        }
       }
     ]
   }
@@ -293,6 +425,22 @@ cv.raw.job.list_events()
   ```json
   {
     "commservEvents": [
+      {
+        "severity": 0,
+        "eventCode": "587203777",
+        "acknowledge": 0,
+        "eventCodeString": "35:1217",
+        "subsystem": "AppMgrService",
+        "description": "Server group [bltlive-11051848-servers] has been deleted.",
+        "id": 2964,
+        "timeSource": 1793904547,
+        "type": 0,
+        "clientEntity": {
+          "clientName": "commserve-02",
+          "displayName": "commserve-02",
+          "clientId": 2
+        }
+      },
       {
         "severity": 0,
         "eventCode": "587203777",
@@ -325,22 +473,6 @@ cv.raw.job.list_events()
           "clientId": 2
         }
       },
-      {
-        "severity": 0,
-        "eventCode": "587203777",
-        "acknowledge": 0,
-        "eventCodeString": "35:1217",
-        "subsystem": "AppMgrService",
-        "description": "Server group [bltlive-11051832-servers] has been deleted.",
-        "id": 2757,
-        "timeSource": 1793903555,
-        "type": 0,
-        "clientEntity": {
-          "clientName": "commserve-02",
-          "displayName": "commserve-02",
-          "clientId": 2
-        }
-      },
       "... 97 more"
     ]
   }
@@ -356,13 +488,13 @@ cv.raw.job.list_job()
 
 **On the wire**
 
-- `GET /Job` -> **200** (1.29 s)
+- `GET /Job` -> **200** (1.64 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "totalRecordsWithoutPaging": 1096,
+    "totalRecordsWithoutPaging": 1097,
     "jobs": [
       {
         "jobSummary": {
@@ -573,7 +705,7 @@ cv.raw.job.list_job()
           "appTypeName": "Windows File System",
           "retainUntil": 1793901627,
           "currentThroughput": 0,
-          "subclientName": "subclient-02",
+          "subclientName": "subclient-01",
           "destClientName": "commserve-02",
           "jobEndTime": 1791256840,
           "commcellId": 2,
@@ -637,7 +769,7 @@ cv.raw.job.list_job()
             "appName": "Windows File System",
             "backupsetName": "backupset-01",
             "applicationId": 33,
-            "subclientName": "subclient-02"
+            "subclientName": "subclient-01"
           },
           "company": {
             "companyId": 0,
@@ -668,7 +800,7 @@ cv.raw.job.list_jobs_history()
 
 **On the wire**
 
-- `GET /Jobs/History` -> **200** (0.08 s)
+- `GET /Jobs/History` -> **200** (0.10 s)
 
   <details><summary>Answer</summary>
 
@@ -710,7 +842,7 @@ cv.raw.job.list_jobs_history()
           "retainUntil": 1796409943,
           "extendedJobType": 0,
           "totalWriteTime": 220,
-          "subclientName": "subclient-01",
+          "subclientName": "default",
           "totalDataWriten": 2687009,
           "jobEndTime": 1793818206,
           "commcellId": 2,
@@ -783,7 +915,7 @@ cv.raw.job.list_jobs_history()
             "appName": "SQL Server",
             "backupsetName": "backupset-01",
             "applicationId": 81,
-            "subclientName": "subclient-01"
+            "subclientName": "default"
           },
           "company": {
             "companyId": 0,
@@ -832,7 +964,7 @@ cv.raw.job.list_jobs_history()
           "primaryCopyLibrary": "storage-pool-01",
           "extendedJobType": 0,
           "totalWriteTime": 0,
-          "subclientName": "subclient-01",
+          "subclientName": "default",
           "totalDataWriten": 0,
           "jobEndTime": 1793818839,
           "commcellId": 2,
@@ -904,7 +1036,7 @@ cv.raw.job.list_jobs_history()
             "appName": "Distributed Data Platforms",
             "backupsetName": "backupset-01",
             "applicationId": 64,
-            "subclientName": "subclient-01"
+            "subclientName": "default"
           },
           "company": {
             "companyId": 0,
@@ -954,7 +1086,7 @@ cv.raw.job.list_jobs_history()
           "retainUntil": 1796418011,
           "extendedJobType": 0,
           "totalWriteTime": 0,
-          "subclientName": "subclient-06",
+          "subclientName": "subclient-05",
           "totalDataWriten": 0,
           "jobEndTime": 1793826028,
           "commcellId": 2,
@@ -1027,7 +1159,7 @@ cv.raw.job.list_jobs_history()
             "appName": "Linux File System",
             "backupsetName": "backupset-01",
             "applicationId": 29,
-            "subclientName": "subclient-06"
+            "subclientName": "subclient-05"
           },
           "company": {
             "companyId": 0,
@@ -1054,12 +1186,12 @@ cv.raw.job.list_jobs_history()
 ## `get_event` - GET /Events/{eventId}
 
 ```python
-cv.raw.job.get_event('2895')
+cv.raw.job.get_event('2964')
 ```
 
 **On the wire**
 
-- `GET /Events/2895` -> **200** (0.07 s)
+- `GET /Events/2964` -> **200** (0.10 s)
 
   <details><summary>Answer</summary>
 
@@ -1073,9 +1205,9 @@ cv.raw.job.get_event('2895')
         "acknowledge": 0,
         "eventCodeString": "35:1217",
         "subsystem": "AppMgrService",
-        "description": "Server group [bltlive-11051835-servers] has been deleted.",
-        "id": 2895,
-        "timeSource": 1793903758,
+        "description": "Server group [bltlive-11051848-servers] has been deleted.",
+        "id": 2964,
+        "timeSource": 1793904547,
         "type": 0,
         "clientEntity": {
           "clientName": "commserve-02",
@@ -1252,7 +1384,7 @@ cv.raw.job.get_job_failed_items('1')
 
 **On the wire**
 
-- `GET /Job/1/FailedItems` -> **500** (0.14 s)
+- `GET /Job/1/FailedItems` -> **500** (0.17 s)
 
   <details><summary>Answer</summary>
 

@@ -1,6 +1,6 @@
 # The CommServe: version, identity, what it runs
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `cv.commcell.info()` - the CommServe's version, Service Pack and operating system
 
@@ -31,7 +31,7 @@ assert packages
 
 **On the wire**
 
-- `GET /V4/commcell/available-packages` -> **200** (0.23 s)
+- `GET /V4/commcell/available-packages` -> **200** (0.24 s)
 
   <details><summary>Answer</summary>
 
@@ -282,7 +282,7 @@ record.result(cv.plans.list()[:3])
 
 **On the wire**
 
-- `GET /V4/Plan/Summary` -> **200** (0.25 s)
+- `GET /V4/Plan/Summary` -> **200** (0.26 s)
 
   <details><summary>Answer</summary>
 

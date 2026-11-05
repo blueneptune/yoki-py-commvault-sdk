@@ -1,6 +1,6 @@
 # `cv.raw.partner_apis`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_partner_ratecards` - GET /api/v1/partner/ratecards
 
@@ -30,7 +30,7 @@ cv.raw.partner_apis.get_partner_usage()
 
 **On the wire**
 
-- `GET /api/v1/partner/usage` -> **403** (0.02 s)
+- `GET /api/v1/partner/usage` -> **403** (0.01 s)
 
   <details><summary>Answer</summary>
 
@@ -66,7 +66,7 @@ cv.raw.partner_apis.get_partner_usage_details()
 
 **On the wire**
 
-- `GET /api/v1/partner/usage/details` -> **403** (0.02 s)
+- `GET /api/v1/partner/usage/details` -> **403** (0.01 s)
 
   <details><summary>Answer</summary>
 
@@ -84,7 +84,7 @@ cv.raw.partner_apis.get_partner_usage_summary()
 
 **On the wire**
 
-- `GET /api/v1/partner/usage/summary` -> **403** (0.02 s)
+- `GET /api/v1/partner/usage/summary` -> **403** (0.01 s)
 
   <details><summary>Answer</summary>
 
@@ -102,7 +102,7 @@ cv.raw.partner_apis.list_partner_accounts()
 
 **On the wire**
 
-- `GET /api/v1/partner/accounts` -> **403** (0.02 s)
+- `GET /api/v1/partner/accounts` -> **403** (0.01 s)
 
   <details><summary>Answer</summary>
 
@@ -120,7 +120,7 @@ cv.raw.partner_apis.list_partner_aggregator_submsps()
 
 **On the wire**
 
-- `GET /api/v1/partner/aggregator/submsps` -> **403** (0.02 s)
+- `GET /api/v1/partner/aggregator/submsps` -> **403** (0.01 s)
 
   <details><summary>Answer</summary>
 
@@ -138,7 +138,7 @@ cv.raw.partner_apis.list_partner_aggregator_usage()
 
 **On the wire**
 
-- `GET /api/v1/partner/aggregator/usage` -> **403** (0.02 s)
+- `GET /api/v1/partner/aggregator/usage` -> **403** (0.01 s)
 
   <details><summary>Answer</summary>
 
@@ -158,7 +158,7 @@ cv.raw.partner_apis.list_partner_aggregator_usage_pooledstorage()
 
 **On the wire**
 
-- `GET /api/v1/partner/aggregator/usage/pooledstorage` -> **403** (0.02 s)
+- `GET /api/v1/partner/aggregator/usage/pooledstorage` -> **403** (0.01 s)
 
   <details><summary>Answer</summary>
 
@@ -176,7 +176,7 @@ cv.raw.partner_apis.list_partner_fulfillments()
 
 **On the wire**
 
-- `GET /api/v1/partner/fulfillments` -> **403** (0.02 s)
+- `GET /api/v1/partner/fulfillments` -> **403** (0.01 s)
 
   <details><summary>Answer</summary>
 
@@ -212,7 +212,7 @@ cv.raw.partner_apis.list_partner_users()
 
 **On the wire**
 
-- `GET /api/v1/partner/users` -> **403** (0.02 s)
+- `GET /api/v1/partner/users` -> **403** (0.01 s)
 
   <details><summary>Answer</summary>
 
@@ -302,7 +302,7 @@ cv.raw.partner_apis.get_partner_partner(...)
 
 **On the wire**
 
-- `GET /api/v1/partner/partners` -> **403** (0.02 s)
+- `GET /api/v1/partner/partners` -> **403** (0.01 s)
 
   <details><summary>Answer</summary>
 

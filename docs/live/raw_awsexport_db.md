@@ -1,6 +1,6 @@
 # `cv.raw.awsexport_db`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_instance_rds_discover_0` - GET /Instance/RDSDiscover/0
 
@@ -12,7 +12,7 @@ cv.raw.awsexport_db.get_instance_rds_discover_0()
 
 **On the wire**
 
-- `GET /Instance/RDSDiscover/0` -> **500** (0.08 s)
+- `GET /Instance/RDSDiscover/0` -> **500** (0.09 s)
 
   <details><summary>Answer</summary>
 
@@ -22,7 +22,7 @@ cv.raw.awsexport_db.get_instance_rds_discover_0()
     "title": "An error occurred while processing your request.",
     "status": 500,
     "detail": "Failed to browse RDS inventory",
-    "traceId": "00-c526a863701821bdc844de07ca26b3e2-9032627da2d83bc6-01"
+    "traceId": "00-5aaef760934073a6e9fb86394d635213-8049fced18713bb0-01"
   }
   ```
 
@@ -38,7 +38,7 @@ cv.raw.awsexport_db.list_instance()
 
 **On the wire**
 
-- `GET /Instance` -> **400** (0.07 s)
+- `GET /Instance` -> **400** (0.08 s)
 
   <details><summary>Answer</summary>
 
@@ -54,7 +54,7 @@ cv.raw.awsexport_db.get_backupset('7')
 
 **On the wire**
 
-- `GET /Backupset` -> **400** (0.06 s)
+- `GET /Backupset` -> **400** (0.07 s)
 
   <details><summary>Answer</summary>
 
@@ -62,7 +62,7 @@ cv.raw.awsexport_db.get_backupset('7')
 
   </details>
 
-- `GET /backupset/7` -> **200** (0.56 s)
+- `GET /backupset/7` -> **200** (0.45 s)
 
   <details><summary>Answer</summary>
 
@@ -98,7 +98,7 @@ cv.raw.awsexport_db.get_backupset('7')
             {
               "userGroupId": 1,
               "_type_": 15,
-              "userGroupName": "user-group-01"
+              "userGroupName": "master"
             }
           ],
           "advancedPrivacySettings": {

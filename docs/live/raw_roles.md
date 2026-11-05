@@ -1,6 +1,6 @@
 # `cv.raw.roles`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_permissions` - GET /V4/Permissions
 
@@ -10,7 +10,7 @@ cv.raw.roles.get_permissions()
 
 **On the wire**
 
-- `GET /V4/Permissions` -> **200** (0.81 s)
+- `GET /V4/Permissions` -> **200** (0.84 s)
 
   <details><summary>Answer</summary>
 
@@ -126,7 +126,7 @@ cv.raw.roles.list_role()
     "roles": [
       {
         "id": 1,
-        "name": "user-group-01",
+        "name": "Master",
         "description": "System Created Role with all permissions",
         "status": "ENABLED",
         "company": {
@@ -169,14 +169,14 @@ cv.raw.roles.get_role('1')
 
 **On the wire**
 
-- `GET /V4/Role/1` -> **200** (0.29 s)
+- `GET /V4/Role/1` -> **200** (0.28 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
     "id": 1,
-    "name": "user-group-01",
+    "name": "Master",
     "description": "System Created Role with all permissions",
     "permissions": [
       {

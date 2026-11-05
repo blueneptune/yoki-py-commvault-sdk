@@ -1,6 +1,6 @@
 # `cv.raw.alerts`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_alert_type` - GET /V4/AlertType
 
@@ -10,7 +10,7 @@ cv.raw.alerts.get_alert_type()
 
 **On the wire**
 
-- `GET /V4/AlertType` -> **200** (0.78 s)
+- `GET /V4/AlertType` -> **200** (0.77 s)
 
   <details><summary>Answer</summary>
 
@@ -77,7 +77,7 @@ cv.raw.alerts.list_alert_custom_rule()
 
 **On the wire**
 
-- `GET /Alert/CustomRule` -> **200** (0.90 s)
+- `GET /Alert/CustomRule` -> **200** (0.89 s)
 
   <details><summary>Answer</summary>
 
@@ -116,7 +116,7 @@ cv.raw.alerts.list_alert_custom_rule()
         "queryParamsList": {
           "queryParamsList": [
             {
-              "subclient-01Value": "",
+              "defaultValue": "",
               "displayName": "",
               "className": "java.lang.Double",
               "type": "{http://host-89/2001/XMLSchema}double",
@@ -131,12 +131,12 @@ cv.raw.alerts.list_alert_custom_rule()
               "controlType": 0,
               "name": "slaPercent",
               "maximumValue": "",
-              "subclient-01Values": [
+              "defaultValues": [
                 ""
               ]
             },
             {
-              "subclient-01Value": "",
+              "defaultValue": "",
               "displayName": "",
               "className": "java.lang.Integer",
               "type": "{http://host-89/2001/XMLSchema}integer",
@@ -157,7 +157,7 @@ cv.raw.alerts.list_alert_custom_rule()
                 "3",
                 "... 5 more"
               ],
-              "subclient-01Values": [
+              "defaultValues": [
                 ""
               ]
             }
@@ -212,7 +212,7 @@ cv.raw.alerts.list_alert_custom_rule()
         "queryParamsList": {
           "queryParamsList": [
             {
-              "subclient-01Value": "5",
+              "defaultValue": "5",
               "displayName": "Threshold Size (GB)",
               "className": "java.lang.Float",
               "type": "{http://host-89/2001/XMLSchema}float",
@@ -227,7 +227,7 @@ cv.raw.alerts.list_alert_custom_rule()
               "controlType": 0,
               "name": "maxSize",
               "maximumValue": "",
-              "subclient-01Values": [
+              "defaultValues": [
                 ""
               ]
             }
@@ -307,8 +307,8 @@ cv.raw.alerts.list_alert_custom_rule()
           "alertType": 0,
           "isHealthParam": false,
           "alertCriteria": 0,
-          "subclient-01TextTemplate": "",
-          "subclient-01HtmlTemplate": "",
+          "defaultTextTemplate": "",
+          "defaultHtmlTemplate": "",
           "externalQueryEntity": {
             "_type_": 125
           },
@@ -323,7 +323,7 @@ cv.raw.alerts.list_alert_custom_rule()
           "associatedUserGroups": [
             {
               "userGroupId": 1,
-              "userGroupName": "user-group-01"
+              "userGroupName": "master"
             }
           ]
         },
@@ -398,7 +398,7 @@ cv.raw.alerts.list_alert_definitions()
 
 **On the wire**
 
-- `GET /V4/AlertDefinitions` -> **200** (0.26 s)
+- `GET /V4/AlertDefinitions` -> **200** (0.25 s)
 
   <details><summary>Answer</summary>
 
@@ -453,7 +453,7 @@ cv.raw.alerts.list_triggered_alerts()
 
 **On the wire**
 
-- `GET /V4/TriggeredAlerts` -> **200** (0.09 s)
+- `GET /V4/TriggeredAlerts` -> **200** (0.08 s)
 
   <details><summary>Answer</summary>
 
@@ -475,7 +475,7 @@ cv.raw.alerts.get_alert_custom_rule('2')
 
 **On the wire**
 
-- `GET /Alert/CustomRule/2` -> **200** (0.17 s)
+- `GET /Alert/CustomRule/2` -> **200** (0.18 s)
 
   <details><summary>Answer</summary>
 
@@ -514,7 +514,7 @@ cv.raw.alerts.get_alert_custom_rule('2')
         "queryParamsList": {
           "queryParamsList": [
             {
-              "subclient-01Value": "",
+              "defaultValue": "",
               "displayName": "",
               "className": "java.lang.Double",
               "type": "{http://host-89/2001/XMLSchema}double",
@@ -529,12 +529,12 @@ cv.raw.alerts.get_alert_custom_rule('2')
               "controlType": 0,
               "name": "slaPercent",
               "maximumValue": "",
-              "subclient-01Values": [
+              "defaultValues": [
                 ""
               ]
             },
             {
-              "subclient-01Value": "",
+              "defaultValue": "",
               "displayName": "",
               "className": "java.lang.Integer",
               "type": "{http://host-89/2001/XMLSchema}integer",
@@ -555,7 +555,7 @@ cv.raw.alerts.get_alert_custom_rule('2')
                 "3",
                 "... 5 more"
               ],
-              "subclient-01Values": [
+              "defaultValues": [
                 ""
               ]
             }
@@ -592,7 +592,7 @@ cv.raw.alerts.get_alert_definition('1')
 
 **On the wire**
 
-- `GET /V4/AlertDefinitions/1` -> **200** (0.15 s)
+- `GET /V4/AlertDefinitions/1` -> **200** (0.17 s)
 
   <details><summary>Answer</summary>
 

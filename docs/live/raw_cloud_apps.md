@@ -1,6 +1,6 @@
 # `cv.raw.cloud_apps`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_client_proxy_cloud_apps` - GET /Client/proxy/CloudApps
 
@@ -10,7 +10,7 @@ cv.raw.cloud_apps.get_client_proxy_cloud_apps()
 
 **On the wire**
 
-- `GET /Client/proxy/CloudApps` -> **200** (0.08 s)
+- `GET /Client/proxy/CloudApps` -> **200** (0.31 s)
 
   <details><summary>Answer</summary>
 
@@ -42,7 +42,7 @@ cv.raw.cloud_apps.get_crd_cloud_accounts()
 
 **On the wire**
 
-- `GET /V4/CRD/CloudAccounts` -> **200** (0.11 s)
+- `GET /V4/CRD/CloudAccounts` -> **200** (0.10 s)
 
   <details><summary>Answer</summary>
 

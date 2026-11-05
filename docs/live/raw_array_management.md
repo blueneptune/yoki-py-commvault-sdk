@@ -1,6 +1,6 @@
 # `cv.raw.array_management`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `list_storage_arrays` - GET /StorageArrays
 
@@ -10,7 +10,7 @@ cv.raw.array_management.list_storage_arrays()
 
 **On the wire**
 
-- `GET /StorageArrays` -> **200** (0.16 s)
+- `GET /StorageArrays` -> **200** (0.20 s)
 
   <details><summary>Answer</summary>
 
@@ -38,7 +38,7 @@ cv.raw.array_management.list_storage_arrays()
         "isEnabled": true,
         "arrayInfoType": 0,
         "arrayName": {
-          "name": "AWS-subclient-01UseIAMRoleArray",
+          "name": "AWS-DefaultUseIAMRoleArray",
           "id": 1
         },
         "vendor": {
@@ -60,7 +60,7 @@ cv.raw.array_management.list_storage_arrays()
         "isEnabled": true,
         "arrayInfoType": 0,
         "arrayName": {
-          "name": "GCP-subclient-01-IAM",
+          "name": "GCP-Default-IAM",
           "id": 3
         },
         "vendor": {
@@ -82,7 +82,7 @@ cv.raw.array_management.list_storage_arrays()
         "isEnabled": true,
         "arrayInfoType": 0,
         "arrayName": {
-          "name": "Azure-subclient-01-MSI",
+          "name": "Azure-Default-MSI",
           "id": 2
         },
         "vendor": {
@@ -108,7 +108,7 @@ cv.raw.array_management.list_storage_arrays_v4()
 
 **On the wire**
 
-- `GET /V4/StorageArrays` -> **200** (0.19 s)
+- `GET /V4/StorageArrays` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 
@@ -124,7 +124,7 @@ cv.raw.array_management.list_storage_arrays_v4()
         "userName": "",
         "type": 0,
         "vendor": "Amazon Web Services",
-        "name": "AWS-subclient-01UseIAMRoleArray",
+        "name": "AWS-DefaultUseIAMRoleArray",
         "controlHost": "",
         "id": 1,
         "company": {
@@ -141,7 +141,7 @@ cv.raw.array_management.list_storage_arrays_v4()
         "userName": "",
         "type": 0,
         "vendor": "Google Cloud Platform",
-        "name": "GCP-subclient-01-IAM",
+        "name": "GCP-Default-IAM",
         "controlHost": "",
         "id": 3,
         "company": {
@@ -158,7 +158,7 @@ cv.raw.array_management.list_storage_arrays_v4()
         "userName": "",
         "type": 0,
         "vendor": "Microsoft Azure",
-        "name": "Azure-subclient-01-MSI",
+        "name": "Azure-Default-MSI",
         "controlHost": "",
         "id": 2,
         "company": {
@@ -239,7 +239,7 @@ cv.raw.array_management.get_storage_array('1')
       "errorCode": 0
     },
     "array": {
-      "name": "AWS-subclient-01UseIAMRoleArray",
+      "name": "AWS-DefaultUseIAMRoleArray",
       "id": 1
     },
     "vendor": {
@@ -273,7 +273,7 @@ cv.raw.array_management.get_storage_array('1')
         "associatedUserGroups": [
           {
             "userGroupId": 1,
-            "userGroupName": "user-group-01"
+            "userGroupName": "master"
           }
         ]
       },
@@ -282,7 +282,7 @@ cv.raw.array_management.get_storage_array('1')
         "id": 0
       },
       "arrayName": {
-        "name": "AWS-subclient-01UseIAMRoleArray",
+        "name": "AWS-DefaultUseIAMRoleArray",
         "id": 1
       },
       "vendor": {
@@ -330,7 +330,7 @@ cv.raw.array_management.get_storage_array_v4('1')
 
 **On the wire**
 
-- `GET /V4/StorageArrays/1` -> **200** (0.37 s)
+- `GET /V4/StorageArrays/1` -> **200** (0.38 s)
 
   <details><summary>Answer</summary>
 
@@ -349,7 +349,7 @@ cv.raw.array_management.get_storage_array_v4('1')
       },
       "array": {
         "id": 1,
-        "name": "AWS-subclient-01UseIAMRoleArray"
+        "name": "AWS-DefaultUseIAMRoleArray"
       },
       "physicalArray": {
         "id": 0,
@@ -436,7 +436,7 @@ cv.raw.array_management.get_storage_arrays_client_arrays('2')
         "userName": "",
         "type": 0,
         "vendor": "Amazon Web Services",
-        "name": "AWS-subclient-01UseIAMRoleArray",
+        "name": "AWS-DefaultUseIAMRoleArray",
         "controlHost": "",
         "id": 1,
         "company": {
@@ -453,7 +453,7 @@ cv.raw.array_management.get_storage_arrays_client_arrays('2')
         "userName": "",
         "type": 0,
         "vendor": "Google Cloud Platform",
-        "name": "GCP-subclient-01-IAM",
+        "name": "GCP-Default-IAM",
         "controlHost": "",
         "id": 3,
         "company": {
@@ -470,7 +470,7 @@ cv.raw.array_management.get_storage_arrays_client_arrays('2')
         "userName": "",
         "type": 0,
         "vendor": "Microsoft Azure",
-        "name": "Azure-subclient-01-MSI",
+        "name": "Azure-Default-MSI",
         "controlHost": "",
         "id": 2,
         "company": {
@@ -509,7 +509,7 @@ cv.raw.array_management.get_storage_arrays_copy_arrays('2')
         "userName": "",
         "type": 0,
         "vendor": "Amazon Web Services",
-        "name": "AWS-subclient-01UseIAMRoleArray",
+        "name": "AWS-DefaultUseIAMRoleArray",
         "controlHost": "",
         "id": 1,
         "company": {
@@ -526,7 +526,7 @@ cv.raw.array_management.get_storage_arrays_copy_arrays('2')
         "userName": "",
         "type": 0,
         "vendor": "Google Cloud Platform",
-        "name": "GCP-subclient-01-IAM",
+        "name": "GCP-Default-IAM",
         "controlHost": "",
         "id": 3,
         "company": {
@@ -543,7 +543,7 @@ cv.raw.array_management.get_storage_arrays_copy_arrays('2')
         "userName": "",
         "type": 0,
         "vendor": "Microsoft Azure",
-        "name": "Azure-subclient-01-MSI",
+        "name": "Azure-Default-MSI",
         "controlHost": "",
         "id": 2,
         "company": {
@@ -568,7 +568,7 @@ cv.raw.array_management.get_storage_arrays_client_subclient_arrays('2', '44')
 
 **On the wire**
 
-- `GET /V4/StorageArrays/Client/2/Subclient/44/Arrays` -> **200** (0.16 s)
+- `GET /V4/StorageArrays/Client/2/Subclient/44/Arrays` -> **200** (0.18 s)
 
   <details><summary>Answer</summary>
 
@@ -584,7 +584,7 @@ cv.raw.array_management.get_storage_arrays_client_subclient_arrays('2', '44')
         "userName": "",
         "type": 0,
         "vendor": "Amazon Web Services",
-        "name": "AWS-subclient-01UseIAMRoleArray",
+        "name": "AWS-DefaultUseIAMRoleArray",
         "controlHost": "",
         "id": 1,
         "company": {
@@ -601,7 +601,7 @@ cv.raw.array_management.get_storage_arrays_client_subclient_arrays('2', '44')
         "userName": "",
         "type": 0,
         "vendor": "Google Cloud Platform",
-        "name": "GCP-subclient-01-IAM",
+        "name": "GCP-Default-IAM",
         "controlHost": "",
         "id": 3,
         "company": {
@@ -618,7 +618,7 @@ cv.raw.array_management.get_storage_arrays_client_subclient_arrays('2', '44')
         "userName": "",
         "type": 0,
         "vendor": "Microsoft Azure",
-        "name": "Azure-subclient-01-MSI",
+        "name": "Azure-Default-MSI",
         "controlHost": "",
         "id": 2,
         "company": {

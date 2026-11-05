@@ -1,6 +1,6 @@
 # `cv.raw.scheduleand_schedule_policy`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `list_schedule_policy` - GET /SchedulePolicy
 
@@ -10,7 +10,7 @@ cv.raw.scheduleand_schedule_policy.list_schedule_policy()
 
 **On the wire**
 
-- `GET /SchedulePolicy` -> **200** (0.59 s)
+- `GET /SchedulePolicy` -> **200** (0.69 s)
 
   <details><summary>Answer</summary>
 
@@ -140,7 +140,7 @@ cv.raw.scheduleand_schedule_policy.list_schedules()
 
 **On the wire**
 
-- `GET /Schedules` -> **200** (1.30 s)
+- `GET /Schedules` -> **200** (1.39 s)
 
   <details><summary>Answer</summary>
 
@@ -182,7 +182,7 @@ cv.raw.scheduleand_schedule_policy.list_schedules()
         "appGroup": {},
         "subTasks": [
           {
-            "relativeTime": 19391,
+            "relativeTime": 18599,
             "nextScheduleTime": 1793923200,
             "subTask": {
               "subTaskOrder": 0,
@@ -251,7 +251,7 @@ cv.raw.scheduleand_schedule_policy.list_schedules()
             }
           },
           {
-            "relativeTime": 105791,
+            "relativeTime": 104999,
             "nextScheduleTime": 1794009600,
             "subTask": {
               "subTaskOrder": 0,
@@ -331,7 +331,7 @@ cv.raw.scheduleand_schedule_policy.list_schedules()
             "copyId": 0,
             "clientId": 0,
             "srmTemplateName": "",
-            "appName": "subclient-01 Application Type Name",
+            "appName": "Default Application Type Name",
             "planId": 0,
             "clientGroupId": 0,
             "applicationId": 0,
@@ -380,7 +380,7 @@ cv.raw.scheduleand_schedule_policy.list_schedules()
         "appGroup": {},
         "subTasks": [
           {
-            "relativeTime": 76991,
+            "relativeTime": 76199,
             "nextScheduleTime": 1793980800,
             "subTask": {
               "subTaskOrder": 0,
@@ -440,7 +440,7 @@ cv.raw.scheduleand_schedule_policy.list_schedules()
             "copyId": 0,
             "clientId": 0,
             "srmTemplateName": "",
-            "appName": "subclient-01 Application Type Name",
+            "appName": "Default Application Type Name",
             "planId": 0,
             "clientGroupId": 0,
             "applicationId": 0,
@@ -489,7 +489,7 @@ cv.raw.scheduleand_schedule_policy.list_schedules()
         "appGroup": {},
         "subTasks": [
           {
-            "relativeTime": 84191,
+            "relativeTime": 83399,
             "nextScheduleTime": 1793988000,
             "subTask": {
               "subTaskOrder": 0,
@@ -554,7 +554,7 @@ cv.raw.scheduleand_schedule_policy.get_schedule('2')
 
 **On the wire**
 
-- `GET /Schedules/2` -> **200** (0.25 s)
+- `GET /Schedules/2` -> **200** (0.26 s)
 
   <details><summary>Answer</summary>
 
@@ -614,7 +614,7 @@ cv.raw.scheduleand_schedule_policy.get_schedule('2')
             {
               "userGroupId": 1,
               "_type_": 15,
-              "userGroupName": "user-group-01"
+              "userGroupName": "master"
             }
           ],
           "advancedPrivacySettings": {
@@ -657,7 +657,7 @@ cv.raw.scheduleand_schedule_policy.get_schedule('2')
       "appGroup": {},
       "subTasks": [
         {
-          "relativeTime": 19359,
+          "relativeTime": 18568,
           "nextScheduleTime": 1793923200,
           "subTask": {
             "subTaskOrder": 0,
@@ -739,7 +739,7 @@ cv.raw.scheduleand_schedule_policy.get_schedule('2')
           }
         },
         {
-          "relativeTime": 105759,
+          "relativeTime": 104968,
           "nextScheduleTime": 1794009600,
           "subTask": {
             "subTaskOrder": 0,
@@ -892,7 +892,7 @@ cv.raw.scheduleand_schedule_policy.get_schedule_policy('2')
             {
               "userGroupId": 1,
               "_type_": 15,
-              "userGroupName": "user-group-01"
+              "userGroupName": "master"
             }
           ],
           "advancedPrivacySettings": {
@@ -935,7 +935,7 @@ cv.raw.scheduleand_schedule_policy.get_schedule_policy('2')
       "appGroup": {},
       "subTasks": [
         {
-          "relativeTime": 19359,
+          "relativeTime": 18567,
           "nextScheduleTime": 1793923200,
           "subTask": {
             "subTaskOrder": 0,
@@ -1017,7 +1017,7 @@ cv.raw.scheduleand_schedule_policy.get_schedule_policy('2')
           }
         },
         {
-          "relativeTime": 105759,
+          "relativeTime": 104967,
           "nextScheduleTime": 1794009600,
           "subTask": {
             "subTaskOrder": 0,

@@ -1,6 +1,6 @@
 # `cv.raw.db2_database`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_backupset_db2_storage_groups` - GET /Backupset/{BackupsetID}/DB2StorageGroups
 
@@ -10,7 +10,7 @@ cv.raw.db2_database.get_backupset_db2_storage_groups('7')
 
 **On the wire**
 
-- `GET /Backupset/7/DB2StorageGroups` -> **200** (0.12 s)
+- `GET /Backupset/7/DB2StorageGroups` -> **200** (0.11 s)
 
   <details><summary>Answer</summary>
 
@@ -36,7 +36,7 @@ cv.raw.db2_database.get_client_discover_db2_instances('2')
 
 **On the wire**
 
-- `GET /Client/2/DiscoverDB2Instances` -> **200** (0.14 s)
+- `GET /Client/2/DiscoverDB2Instances` -> **200** (0.13 s)
 
   <details><summary>Answer</summary>
 

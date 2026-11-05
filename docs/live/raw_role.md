@@ -1,6 +1,6 @@
 # `cv.raw.role`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:50 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `list_role` - GET /Role
 
@@ -29,7 +29,7 @@ cv.raw.role.list_role()
         "role": {
           "roleId": 1,
           "GUID": "A5E556E9-C605-4857-BD0E-9FCA326CD227",
-          "roleName": "user-group-01",
+          "roleName": "Master",
           "flags": {
             "disabled": false
           }
@@ -70,7 +70,7 @@ cv.raw.role.get_role('1')
 
 **On the wire**
 
-- `GET /Role/1` -> **200** (0.15 s)
+- `GET /Role/1` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 
@@ -91,7 +91,7 @@ cv.raw.role.get_role('1')
         "role": {
           "roleId": 1,
           "GUID": "A5E556E9-C605-4857-BD0E-9FCA326CD227",
-          "roleName": "user-group-01",
+          "roleName": "Master",
           "flags": {
             "disabled": false
           }
