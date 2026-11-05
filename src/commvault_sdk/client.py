@@ -41,6 +41,7 @@ from .budget import BudgetTransport, CallBudget
 from .clients import Clients, Instances
 from .commcell import CommCell, Credentials, Partner, Plans, Storage
 from .jobs import Jobs
+from .raw import Raw
 from .sql import Sql
 from .subclients import Subclients
 
@@ -98,6 +99,7 @@ class CommvaultClient:
         extra_headers: dict[str, str] | None = None,
         token_reload: Callable[[], TokenSet | None] | None = None,
         token_renew_lock: Callable[[], AbstractContextManager[object]] = nullcontext,
+        transport: httpx.BaseTransport | None = None,
     ) -> None:
         base_url = base_url.rstrip("/")
         verify: bool | ssl.SSLContext = verify_tls
@@ -123,13 +125,16 @@ class CommvaultClient:
         # call budget, if there is one, counts them all.
         self.budget = CallBudget(max_calls_per_hour) if max_calls_per_hour else None
 
-        def transport() -> httpx.BaseTransport:
-            inner = httpx.HTTPTransport(verify=verify)
+        # `transport`, if given, carries every request in place of a plain
+        # HTTPS one - the live tests' recorder (tests/live). TLS settings
+        # are then the transport's to make.
+        given = transport
+
+        def wire() -> httpx.BaseTransport:
+            inner = given or httpx.HTTPTransport(verify=verify)
             return BudgetTransport(inner, self.budget) if self.budget else inner
 
-        self._login_client = httpx.Client(
-            headers=_JSON_HEADERS, timeout=timeout, transport=transport()
-        )
+        self._login_client = httpx.Client(headers=_JSON_HEADERS, timeout=timeout, transport=wire())
         if access_token:
             # An access token (Command Center > user > Access tokens) is
             # issued ahead of time, so there is no login call: it rides in
@@ -175,7 +180,7 @@ class CommvaultClient:
             auth=auth,
             default_headers=headers,
             timeout=timeout,
-            transport=transport(),
+            transport=wire(),
         )
         # A second transport for calls that change something, which never
         # retries. Reads are safe to repeat; "start a backup" is not. When
@@ -190,7 +195,7 @@ class CommvaultClient:
             default_headers=headers,
             timeout=timeout,
             max_attempts=1,
-            transport=transport(),
+            transport=wire(),
         )
 
         self.commcell = CommCell(self)
@@ -205,6 +210,7 @@ class CommvaultClient:
         self.partner = Partner(self)
         self.users = Users(self)
         self.access_tokens = AccessTokens(self)
+        self.raw = Raw(self)
 
     def close(self) -> None:
         self._api.close()

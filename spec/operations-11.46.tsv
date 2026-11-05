@@ -1,0 +1,1488 @@
+area	method	path	operationId
+access_control	GET	/V4/AccessControl	getAccessControl
+access_control	PUT	/V4/AccessControl	putAccessControl
+access_tokens	GET	/V4/AccessToken	GetAccessToken
+access_tokens	POST	/V4/AccessToken	CreateAccessToken
+access_tokens	POST	/V4/AccessToken/Renew	RenewAccesstoken
+access_tokens	DELETE	/V4/AccessToken/{accessTokenId}	DeleteAccessToken
+access_tokens	PUT	/V4/AccessToken/{accessTokenId}	UpdateAccessToken
+activate	GET	/AnalyticsServers	Get all Index Servers
+activate	GET	/AnalyticsServers/id/{cloudId}	Get Index Server Properteis
+activate	POST	/EDiscoveryClient/ConfigureTask	Update the Request Configuration
+activate	POST	/EDiscoveryClient/CreateTask	Create a Request Configuration
+activate	POST	/EDiscoveryClients/Clients	Create a new Project
+activate	DELETE	/EDiscoveryClients/Clients/{projectId}	Delete a Project
+activate	GET	/EDiscoveryClients/Clients/{projectId}/Jobs	Start Data Crawl
+activate	POST	/EDiscoveryClients/DataSources	Add Data Source
+activate	DELETE	/EDiscoveryClients/Datasources	Delete a Datasource
+activate	PUT	/EDiscoveryClients/Datasources	Edit Datasource
+activate	POST	/EDiscoveryClients/Datasources/Actions	Perform Datasource File Action
+activate	GET	/EDiscoveryClients/Inventories	Get Inventories
+activate	POST	/EDiscoveryClients/Inventories	Create Inventory
+activate	PUT	/EDiscoveryClients/Inventories	Add Assets To Inventory
+activate	DELETE	/EDiscoveryClients/Inventories/{inventoryId}	Delete Inventory
+activate	GET	/EDiscoveryClients/Inventories/{inventoryId}	Inventory Details
+activate	PUT	/EDiscoveryClients/Inventories/{inventoryId}/Assets	Remove Asset From Inventory
+activate	POST	/EDiscoveryClients/Security	Update Project Security
+activate	DELETE	/EDiscoveryClients/Tasks/{requestId}	Delete a Request
+activate	PUT	/EDiscoveryClients/Tasks/{requestId}/Documents	Review Request
+activate	POST	/EDiscoveryClients/Tasks/{requestId}/Workflows	Get Approval
+activate	GET	/EDiscoveryClients/{projectId}	Get Project Configuration
+activate	GET	/EDiscoveryclients	Get Projects
+activate	POST	/GetCommcellProfileReq	get-GetCommcellProfileReq
+activate	GET	/V4/Activate/Entity/{entityType}/{entityId}/Audit	GetActivateEntityAuditList
+activate	GET	/dcube/entity	Get all Entities
+activate	POST	/dcube/entity	Create an Entity
+activate	DELETE	/dcube/entity/{entityId}	Delete an Entity
+activate	PUT	/dcube/entity/{entityId}	Update Entity
+activate	POST	/dcube/federated/{requestHandlerId}/{requestHandlerName}	post-dcube-federated-requestHandlerId-requestHandlerName
+activate	GET	/dcube/getdefaulthandler/{datasourceId}	get-dcube-getdefaulthandler-datasourceId
+activate	GET	/dcube/handler/{datasourceHandlerId}	get-dcube-handler-datasourceHandlerId
+activate	POST	/dcube/handler/{datasourceHandlerId}	post-dcube-handler-datasourceHandlerId
+active_directory	GET	/V4/ActiveDirectory/Apps	GetActiveDirectoryClientsV2
+active_directory	POST	/V4/ActiveDirectory/AzureAD/{clientId}/Backup	PerformAzureADBackup
+active_directory	GET	/v4/ActiveDirectory/AzureAD	GetAzureADClients
+active_directory	POST	/v4/ActiveDirectory/AzureAD	CreateAzureADClient
+activity_control	PUT	/V4/Entity/{entityType}/{entityId}/ActivityControl/{activityType}/Action/Disable	Disable Activity Control For Entity
+activity_control	PUT	/V4/Entity/{entityType}/{entityId}/ActivityControl/{activityType}/Action/Enable	EnableActivityControlForEntity
+additional_settings	GET	/V4/AddedEntitySettings	ListAddedEntitySettings
+additional_settings	GET	/V4/AddedGlobalSettings	ListAddedGlobalSettings
+additional_settings	PUT	/V4/EntitySettings	AddorUpdateEntitySettings
+additional_settings	GET	/V4/GlobalSettings	GetGlobalSettings
+additional_settings	GET	/V4/LookupSettings	ListAvailableSettings
+agent	GET	/Agent	Get All Agents
+agent	POST	/Agent	Update Agent Properties
+agent	GET	/GetId	get-GetId
+agent	GET	/V4/CommCell/Agents	getConfiguredAgents
+agent	DELETE	/V4/Server/{serverId}/Agent/{agentId}	DeleteAgent
+agent	PUT	/V4/Server/{serverId}/Agent/{agentId}/Backup/Action/Disable	DisableBackupAgent
+agent	PUT	/V4/Server/{serverId}/Agent/{agentId}/Backup/Action/Enable	EnableBackupAgent
+agent	PUT	/V4/Server/{serverId}/Agent/{agentId}/Restore/Action/Disable	DisableRestoreAgent
+agent	PUT	/V4/Server/{serverId}/Agent/{agentId}/Restore/Action/Enable	EnableRestoreAgent
+alert	GET	/Alert	Get All Console Alerts
+alert	GET	/Alert/{liveFeedId}	Get Console Alert Details
+alert	POST	/Alert/{liveFeedId}	Update Console Alert Details
+alert	GET	/AlertRule	Get All Alerts
+alert	DELETE	/AlertRule/{alertId2}	Delete an Alert
+alert	GET	/AlertRule/{alertId2}	get-AlertRule-alertId2
+alert	POST	/AlertRule/{alertId2}/Action/Disable	Disable an Alert
+alert	POST	/AlertRule/{alertId2}/Action/Enable	Enable an Alert
+alert	POST	/AlertRule/{alertId2}/Action/Modify	Modify an Alert
+alert	POST	/AlertRule/{alertId2}/notificationType/1/Action/Disable	Disable Alert Notification
+alert	POST	/AlertRule/{alertId2}/notificationType/1/Action/Enable	Enable Alert Notification
+alert	GET	/LogStreamingConnector	get-LogStreamingConnector
+alert	POST	/LogStreamingConnector	post-LogStreamingConnector
+alert	GET	/LogStreamingConnector/Templates	get-LogStreamingConnector-Templates
+alert	DELETE	/LogStreamingConnector/{id}	delete-LogStreamingConnector-id
+alert	GET	/LogStreamingConnector/{id}	get-LogStreamingConnector-id
+alerts	GET	/Alert/CustomRule	getAlertCustomRulesList
+alerts	GET	/Alert/CustomRule/{alertRuleId}	getAlertCustomRuleDetails
+alerts	DELETE	/Alert/CustomRule/{alertRuleId}/Delete	deleteAlertCustomRule
+alerts	PUT	/Alert/CustomRule/{alertRuleId}/Disable	disableAlertCustomRule
+alerts	PUT	/Alert/CustomRule/{alertRuleId}/Enable	enableAlertCustomRule
+alerts	GET	/V4/AlertDefinitions	GetAlertDefinitionsList
+alerts	POST	/V4/AlertDefinitions	CreateAlertDefinitions
+alerts	DELETE	/V4/AlertDefinitions/{id}	DeleteAlertDefinitions
+alerts	GET	/V4/AlertDefinitions/{id}	GetAlertDefinitionsDetails
+alerts	PUT	/V4/AlertDefinitions/{id}	EditAlertDefinitions
+alerts	PUT	/V4/AlertDefinitions/{id}/Disable	DisableAlertDefinitions
+alerts	PUT	/V4/AlertDefinitions/{id}/Enable	EnableAlertDefinitions
+alerts	GET	/V4/AlertType	getAlertType
+alerts	GET	/V4/TriggeredAlerts	GetAlertsTriggered
+alerts	PUT	/V4/TriggeredAlerts/Action/Delete	DeleteMultipleTriggeredalerts
+alerts	DELETE	/V4/TriggeredAlerts/{id}	DeleteTriggeredAlerts
+alerts	GET	/V4/TriggeredAlerts/{id}	GetTriggeredAlertDetails
+alerts	PUT	/V4/TriggeredAlerts/{id}/Notes	ModifyTriggeredAlertsNotes
+alerts	PUT	/V4/TriggeredAlerts/{id}/Pin	PinTriggeredAlerts
+alerts	PUT	/V4/TriggeredAlerts/{id}/Read	ReadTriggeredAlerts
+alerts	PUT	/V4/TriggeredAlerts/{id}/Unpin	UnpinTriggeredAlerts
+alerts	PUT	/V4/TriggeredAlerts/{id}/Unread	UnreadTriggeredAlerts
+alibaba_objectstorage	POST	/Client	post-Instance
+anomalous_conditions	GET	/V4/AnomalousAudits	GetAnomalousAudits
+archive_file_servers	GET	/V4/ArchiveFileServers	GetArchiveFileServers
+archive_plan	POST	/V4/ArchivePlan	CreateArchivePlan
+archive_plan	DELETE	/V4/ArchivePlan/{planId}	DeleteArchivePlanById
+archive_plan	GET	/V4/ArchivePlan/{planId}	GetArchivePlanById
+archive_plan	PUT	/V4/ArchivePlan/{planId}	ModifyArchivePlanById
+archive_plan	POST	/V4/ArchivePlan/{planId}/BackupDestination	CreateArchiveBackupDestination
+archive_plan	DELETE	/V4/ArchivePlan/{planId}/BackupDestination/{BackupDestinationId}	DeleteArchiveBackupDestination
+archive_plan	PUT	/V4/ArchivePlan/{planId}/BackupDestination/{BackupDestinationId}	ModifyArchiveBackupDestination
+archive_plan	GET	/V4/ArchivePlan/{planId}/BackupDestinations	GetArchiveBackupDestinations
+archive_plan	DELETE	/V4/ArchivePlan/{planId}/storageRegion/{regionList}	DeleteStorageRegionForArchivePlan
+archive_plan	POST	/V5/ArchivePlan/{planId}/BackupDestination/{BackupDestinationId}/Clone	CloneArchivePlanBackupDestination
+archive_plan	GET	/V5/ArchivePlan/{planId}/StoragePolicy	GetStoragePolicyListForArchivePlan
+archive_plan	POST	/V5/ArchivePlan/{planId}/StoragePolicy	CreateStoragePolicyForArchivePlan
+archive_plan	DELETE	/V5/ArchivePlan/{planId}/StoragePolicy/{storagePolicyId}	DeleteStoragePolicyForArchivePlan
+archive_plan	GET	/V5/ArchivePlan/{planId}/StoragePolicy/{storagePolicyId}	GetStoragePolicyDetailsForArchivePlan
+archive_plan	PUT	/V5/ArchivePlan/{planId}/StoragePolicy/{storagePolicyId}	UpdateStoragePolicyForArchivePlan
+array_management	GET	/StorageArrays	Arrays
+array_management	POST	/StorageArrays	Add storage array
+array_management	DELETE	/StorageArrays/{storagearrayId}	Delete Storage Array
+array_management	GET	/StorageArrays/{storagearrayId}	Get storage array Details
+array_management	GET	/V4/StorageArrays	GetArrays
+array_management	POST	/V4/StorageArrays	createArray
+array_management	GET	/V4/StorageArrays/Client/{clientId}/Arrays	GetClientLvlArrays
+array_management	GET	/V4/StorageArrays/Client/{clientId}/Subclient/{subclientId}/Arrays	GetSubclientLvlArrays
+array_management	GET	/V4/StorageArrays/Copy/{copyId}/Arrays	GetCopytLvlArrays
+array_management	DELETE	/V4/StorageArrays/{arrayId}	DeleteArray
+array_management	GET	/V4/StorageArrays/{arrayId}	GetArrayDetails
+array_management	PUT	/V4/StorageArrays/{arrayId}	EditArray
+array_management	PUT	/V4/StorageArrays/{arrayId}/AccessNodes	EditArrayAccessNodes
+array_ransomware_resilience	GET	/V4/StorageArray/{arrayId}/RansomwareResilience	GetSnapRansomwareResilience
+array_ransomware_resilience	POST	/V4/StorageArray/{arrayId}/RansomwareResilience	CreateSnapRansomwareResilience
+array_ransomware_resilience	PUT	/V4/StorageArray/{arrayId}/RansomwareResilience	UpdateSnapRansomwareResilience
+audit_plan	POST	/V4/AuditPlan	CreateAuditPlan
+audit_plan	GET	/V4/AuditPlan/{planId}	GetAuditPlanDetails
+audits	GET	/v4/Audits	GetAuditsList
+audits	GET	/v4/Audits/Entity	GetEntityAudits
+authentication	POST	/Login	Login
+authentication	POST	/Logout	Logout
+authentication	POST	/RenewLoginToken	RenewLoginToken
+aws_db_document_db	POST	/BrowseRDSBackups	post-Browse-docDB-snapshots
+aws_db_document_db	POST	/CloudApps/CloudDBContentPreview	post-docDB-cloudcontent
+aws_db_document_db	POST	/Instance	post-documentdb-instance
+aws_db_document_db	DELETE	/Instance/{instanceid}	delete-docuDB-Instance
+aws_db_document_db	GET	/Instance/{instanceid}	get-instance-instanceid
+aws_db_document_db	POST	/Instance/{instanceid}	post-docuDB Instance
+aws_db_document_db	POST	/createtask	submit-docuDB-backup
+aws_db_document_db	POST	/subclient	post-docuDB-subclient
+aws_db_document_db	DELETE	/subclient/{subclientid}	delete-subclient-subclientid
+aws_db_document_db	GET	/subclient/{subclientid}	get-docuDB-subclient
+aws_db_document_db	POST	/subclient/{subclientid}	post-subclient-subclientid
+awsdynamodb	POST	/DoBrowse	Browse-DynamoDB-data
+awsdynamodb	GET	/Subclient	get-Subclient-list
+awsexport_db	GET	/Instance	list-Instances
+awsexport_db	GET	/Instance/RDSDiscover/0	fetch-Instances
+awsexport_db	POST	/Instances	post-Instances
+awsexport_db	GET	/backupset/{backupsetId}	get-backupset-backupsetId
+awsexport_db	POST	/backupset/{backupsetId}	post-backupset-backupsetId
+awsexport_db	POST	/instance/dbbrowse/{instanceId}	discover-databases
+azure_ad	POST	/v5/AzureAD/AuthCode/Application/PKCE	CreateAzureADApplicationWithPKCE
+azure_blob	PUT	/V4/azureblob/contentgroup/{contentGroupId}/content	UpdateAzureBlobContentGroupContents
+azure_blob	PUT	/V4/azureblob/contentgroup/{contentGroupId}/plan	UpdateAzureBlobContentGroupPlan
+azure_blob	POST	/V4/azureblob/instance	CreateAzureBlobInstance
+azure_blob	POST	/V4/azureblob/instance/{instanceId}/contentgroup	CreateAzureBlobContentGroup
+azure_blob	GET	/V4/azureblob/instance/{instanceId}/contentgroups	GetAzureBlobContentGroup
+azure_blob	POST	/V4/azureblob/instancegroup	CreateAzureBlobInstanceGroup
+azure_blob	GET	/V4/azureblob/instancegroup/{instancegroupid}/rules	GetBlobInstanceGroupRules
+azure_blob	PUT	/V4/azureblob/instancegroup/{instancegroupid}/rules	UpdateBlobInstanceGroupRules
+azure_data_lake_storage_gen2	PUT	/V4/azuredatalake/contentgroup/{contentGroupId}/content	ConfigureADLSContentGroupContents
+azure_data_lake_storage_gen2	PUT	/V4/azuredatalake/contentgroup/{contentGroupId}/plan	ConfigureADLSContentGroupPlan
+azure_data_lake_storage_gen2	POST	/V4/azuredatalake/instance	CreateAzureDataLakeInstance
+azure_data_lake_storage_gen2	POST	/V4/azuredatalake/instance/{instanceId}/contentgroup	CreateAzureDataLakeContentGroup
+azure_data_lake_storage_gen2	GET	/V4/azuredatalake/instance/{instanceId}/contentgroups	GetAzureDataLakeContentGroup
+azure_data_lake_storage_gen2	POST	/V4/azuredatalake/instancegroup	CreateADLSInstanceGroup
+azure_data_lake_storage_gen2	GET	/V4/azuredatalake/instancegroup/{instancegroupid}/rules	GetADLSInstanceGroupRules
+azure_data_lake_storage_gen2	PUT	/V4/azuredatalake/instancegroup/{instancegroupid}/rules	UpdateADLSInstanceGroupRules
+azure_file	PUT	/V4/azurefile/contentgroup/{contentGroupId}/content	ConfigureAzureFileContentGroupContents
+azure_file	PUT	/V4/azurefile/contentgroup/{contentGroupId}/plan	ConfigureAzureFileContentGroupPlan
+azure_file	POST	/V4/azurefile/instance	CreateAzureFileInstance
+azure_file	POST	/V4/azurefile/instance/{instanceId}/contentgroup	CreateAzureFileContentGroup
+azure_file	GET	/V4/azurefile/instance/{instanceId}/contentgroups	GetAzureFileContentGroups
+backup	POST	/Backupset/action/backup	post-Backupset-backupsetId-action-backup
+backup	POST	/subclient/{subclientId}/action/backup	post-subclient-subclientId-action-backup
+backup_set	GET	/Backupset	Get All Backup Sets
+backup_set	POST	/Backupset	Create Backup Set
+backup_set	DELETE	/Backupset/byName(clientName='{ClientName}',appName='{AppName}',backupsetName='{BackupsetName}')	Delete a Backup Set By Name
+backup_set	GET	/Backupset/byName(clientName='{ClientName}',appName='{AppName}',backupsetName='{BackupsetName}')	Get Backup Set Properties By Name
+backup_set	POST	/Backupset/byName(clientName='{ClientName}',appName='{AppName}',backupsetName='{BackupsetName}')	Modify Backup Set Properties By Name
+backup_set	POST	/Backupset/byName(clientName='{ClientName}',appName='{AppName}',backupsetName='{BackupsetName}')/action/backup	Trigger Backup Set Backup By Name
+backup_set	DELETE	/Backupset/{backupsetId}	Delete a Backup Set
+backup_set	POST	/Backupset/{backupsetId}/action/backup	Trigger Backup Set Backup
+bigdata	POST	/AIApps	post-AIApps
+bigdata	POST	/Client/{clientId}/Action/MachineBrowse	machinebrowse
+bigdata	POST	/pseudoClient	CreateMongoDBInstance
+blackout_windows	GET	/V4/BlackoutWindow	GetV4BlackoutWindows
+blackout_windows	POST	/V4/BlackoutWindow	CreateV4BlackoutWindow
+blackout_windows	DELETE	/V4/BlackoutWindow/{blackoutWindowId}	DeleteBlackoutWindow
+blackout_windows	GET	/V4/BlackoutWindow/{blackoutWindowId}	GetV4BlackoutWindowDetails
+blackout_windows	PUT	/V4/BlackoutWindow/{blackoutWindowId}	ModifyV4BlackoutWindow
+blackout_windows	GET	/V5/BlackoutWindow	GetBlackoutWindows
+blackout_windows	POST	/V5/BlackoutWindow	CreateBlackoutWindow
+blackout_windows	GET	/V5/BlackoutWindow/{blackoutWindowId}	GetBlackoutWindowDetails
+blackout_windows	PUT	/V5/BlackoutWindow/{blackoutWindowId}	ModifyBlackoutWindow
+cdmplan	POST	/V4/CDMPlan	CreateCDMPlan
+cleanroom_runbook	POST	/Cleanroom/Runbook	CleanroomRunBook
+cleanroom_runbook	GET	/Cleanroom/Runbook/{runbookId}/Target/{targetId}	
+cleanroom_runbook	PUT	/Cleanroom/Runbook/{runbookId}/Target/{targetId}	
+cleanroom_targets	POST	/Cleanroom/Target	
+cleanroom_targets	PUT	/Cleanroom/Target/{id}	
+cleanroom_targets	GET	/V4/Cleanroom/Target/{id}	
+client	GET	/Client	get-Client
+client	GET	/Client/DistributedApps	Get Clients - DistributedApps
+client	POST	/Client/{ClientID}/Log/{LogFileName}	Modify Log File properties
+client	GET	/Client/{clientId}/AdditionalSettings	Get All Client Additional Settings
+client	DELETE	/Client/{clientId}/Retire	Retire Client
+client	GET	/Client/{clientId}/browseFS	Perform Client Browse
+client	PUT	/Clients/retire	Retire Multiple Clients
+client	GET	/IndexServers	Get Index Servers
+client	POST	/InstallClient	Install Client with Media Agent Package
+client	POST	/Services/Action/Restart	Services Restart
+client	GET	/SystemProps/client/{clientId}	One-Touch Recovery Points using client Id
+client	DELETE	/client/byName(clientName='{clientname}')	Delete a Client By Name
+client	GET	/client/byName(clientName='{clientname}')	Get client properties by name
+client	POST	/client/byName(clientName='{clientname}')	Modify Client Properties By Name
+client	DELETE	/client/{clientId}	delete-client-clientId
+client	GET	/client/{clientId}	get-client-clientId
+client	POST	/client/{clientId}	post-client-clientId
+client	GET	/client/{clientId}/checkreadiness	get-client-checkreadiness
+client	GET	/clients/count	Get Clients count
+client	GET	/systemprops/byName(clientName='{clientName}' appName='{appName}' backupsetName='{backupsetName}' )	One-Touch Recovery Points using client name & backupset name
+client	GET	/systemprops/client/byName(clientName='{clientName}' )	One-Touch Recovery Points using client name
+client_group	GET	/ClientGroup	get-ClientGroup
+client_group	POST	/ClientGroup	post-ClientGroup
+client_group	DELETE	/ClientGroup/byName(clientGroupName='{clientGroupName}')	Delete Client Group By Name
+client_group	GET	/ClientGroup/byName(clientGroupName='{clientGroupName}')	Get Client Group Properties By Name
+client_group	POST	/ClientGroup/byName(clientGroupName='{clientGroupName}')	Update Client Group Properties By Name
+client_group	DELETE	/ClientGroup/{clientGroupId}	Delete Client Group
+client_group	GET	/ClientGroup/{clientGroupId}	Get Client Group Properties
+client_group	POST	/ClientGroup/{clientGroupId}	Update Client Group Properties
+client_group	POST	/HttpProxySettings	add-httpProxyOnServerGroup
+cloud_apps	GET	/Client/proxy/CloudApps	Get All Proxy Clients
+cloud_apps	POST	/CloudApps/TestCloudConnection	TestCloudConnection
+cloud_apps	POST	/Office365/CloudApps/SetUserPolicyAssociation	Office365 User Policy Association
+cloud_apps	GET	/V4/CRD/CloudAccounts	GetCRDCloudAccounts
+cloud_configuration	GET	/v4/Cloud/CloudConfig/Client/{clientId}	GetCloudConfigClient
+cloud_connection	GET	/V4/Cloud/CloudConnection	ListCloudConnections
+cloud_connection	POST	/V4/Cloud/CloudConnection	CreateCloudConnection
+cloud_connection	POST	/V4/Cloud/CloudConnection/Accounts/Browse	BrowseCloudConnectionAccounts
+cloud_connection	POST	/V4/Cloud/CloudConnection/credentials/validate	ValidateCloudConnectionCredentials
+cloud_connection	GET	/V4/Cloud/CloudConnection/{cloudConnectionId}	GetCloudConnectionDetails
+cloud_connection	PUT	/V4/Cloud/CloudConnection/{cloudConnectionId}	UpdateCloudConnection
+cloud_connection	GET	/V4/Cloud/CloudConnection/{cloudConnectionId}/accounts	ListCloudConnectionAccounts
+cloud_connection	POST	/V4/Cloud/CloudConnection/{cloudConnectionId}/discover	OnDemandCloudConnectionDiscovery
+cloud_object_storage	GET	/Instance/CloudStorage	Get Cloud Object Storage Accounts
+cloud_storage	GET	/V4/Storage/Cloud	GetCloudStorageList
+cloud_storage	POST	/V4/Storage/Cloud	CreateCloudStorage
+cloud_storage	DELETE	/V4/Storage/Cloud/{cloudStorageId}	DeleteCloudStorageById
+cloud_storage	GET	/V4/Storage/Cloud/{cloudStorageId}	GetCloudStorageById
+cloud_storage	PUT	/V4/Storage/Cloud/{cloudStorageId}	ModifyCloudStorageById
+cloud_storage	POST	/V4/Storage/Cloud/{cloudStorageId}/Bucket	CreateBucketforCloudStorage
+cloud_storage	DELETE	/V4/Storage/Cloud/{cloudStorageId}/Bucket/{bucketId}	DeleteBucketOfCloudStorage
+cloud_storage	GET	/V4/Storage/Cloud/{cloudStorageId}/Bucket/{bucketId}	GetBucketDetailsOfCloudStorage
+cloud_storage	PUT	/V4/Storage/Cloud/{cloudStorageId}/Bucket/{bucketId}	ModifyBucketOfCloudStorage
+cloud_storage	POST	/V4/Storage/Cloud/{cloudStorageId}/Bucket/{bucketId}/AccessPath	CreateAccessPathForBucketOfCloudStorage
+cloud_storage	GET	/V4/Storage/Cloud/{cloudStorageId}/Bucket/{bucketId}/AccessPath/MediaAgents	CloudGetEligibleMediaAgentsForAccessPath
+cloud_storage	DELETE	/V4/Storage/Cloud/{cloudStorageId}/Bucket/{bucketId}/AccessPath/{accessPathId}	DeleteAccessPathForBucketOfCloudStorage
+cloud_storage	PUT	/V4/Storage/Cloud/{cloudStorageId}/Bucket/{bucketId}/AccessPath/{accessPathId}	ModifyAccessPathOfBucketOfCloudStorage
+cloud_storage	POST	/V4/Storage/Cloud/{cloudStorageId}/MetadataCache	CreateCloudStorageMetaDataCache
+cloud_storage	DELETE	/V4/Storage/Cloud/{cloudStorageId}/MetadataCache/{metadataCacheId}	DeleteCloudStorageMetadataCacheById
+cloud_storage	GET	/V4/Storage/Cloud/{cloudStorageId}/MetadataCache/{metadataCacheId}	GetCloudStorageMetaDataCacheById
+cloud_storage	PUT	/V4/Storage/Cloud/{cloudStorageId}/MetadataCache/{metadataCacheId}	ModifyCloudStorageMetaDataCacheById
+cloud_storage	PUT	/V4/StoragePool/{storagePoolId}/ServerGroup	AssociateServerGroupWithStoragePool
+cockroach_db	POST	/Client/CockroachDB	CreateCockroachDBInstance
+comm_serv	PUT	/V4/CommServ/HostName	ChangeCommServHostName
+comm_serv	PUT	/V4/CommServ/credential	UpdateCommServeCredentials
+commcell	GET	/CommCell/PasswordEncryptionConfig	GetPasswordEncryptionConfig
+commcell	PUT	/CommCell/PasswordEncryptionConfig	SetPasswordEncryptionConfig
+commcell	PUT	/V4/Commcell/AllJobActivity/Action/Disable	DisableAllJobActivityCommcell
+commcell	PUT	/V4/Commcell/AllJobActivity/Action/Enable	EnableAllJobActivity
+commcell	PUT	/V4/Commcell/AuxillaryCopy/Action/Disable	DisableAuxillaryCopyCommcell
+commcell	PUT	/V4/Commcell/AuxillaryCopy/Action/Enable	EnableAuxillaryCopyCommcell
+commcell	PUT	/V4/Commcell/Backup/Action/Disable	DisableBackupCommcell
+commcell	PUT	/V4/Commcell/Backup/Action/Enable	EnableBackupCommcell
+commcell	PUT	/V4/Commcell/ContentIndexing/Action/Disable	DisableContentIndexingCommcell
+commcell	PUT	/V4/Commcell/ContentIndexing/Action/Enable	EnableContentIndexingCommcell
+commcell	PUT	/V4/Commcell/DDB/Action/Disable	DisableDDBCommcell
+commcell	PUT	/V4/Commcell/DDB/Action/Enable	EnableDDBCommcell
+commcell	PUT	/V4/Commcell/DataAging/Action/Disable	DisableDataAgingCommcell
+commcell	PUT	/V4/Commcell/DataAging/Action/Enable	EnableDataAgingCommcell
+commcell	PUT	/V4/Commcell/DataVerification/Action/Disable	DisableDataVerificationCommcell
+commcell	PUT	/V4/Commcell/DataVerification/Action/Enable	EnableDataVerificationCommcell
+commcell	GET	/V4/Commcell/PackageDownloader	
+commcell	PUT	/V4/Commcell/Restore/Action/Disable	DisableRestoreCommcell
+commcell	PUT	/V4/Commcell/Restore/Action/Enable	EnableRestoreCommcell
+commcell	PUT	/V4/Commcell/Scheduler/Action/Disable	DisableSchedulerCommcell
+commcell	PUT	/V4/Commcell/Scheduler/Action/Enable	EnableSchedulerCommcell
+commcell	PUT	/V4/DownloadSoftware	DownloadOrCopySoftware
+commcell	PUT	/V4/RepairSoftware	RepairSoftware
+commcell	PUT	/V4/UpgradeSoftware	UpgradeSoftware
+commcell_group	GET	/CommcellGroup	GetCommcellGroupsInfo
+commcell_group	GET	/V4/CommcellGroup	GetCommcellGroups
+commcell_group	POST	/V4/CommcellGroup	CreateCommcellGroups
+commcell_group	DELETE	/V4/CommcellGroup/{commcellGroupId}	DeleteCommcellGroup
+commcell_group	GET	/V4/CommcellGroup/{commcellGroupId}	GetCommcellGroupIdDetails
+commcell_level_encryption_settings	PUT	/Commcell/Encryption	SetGlobalEncryptionSettings
+company	GET	/V4/Company/{companyId}/LaptopAdmins	GetCompanyLaptopAdmins
+company	PUT	/V4/Company/{companyId}/LaptopAdmins	UpdateCompanyLaptopAdmins
+company	GET	/V4/Company/{companyId}/Servers	GetServersForCompany
+company	PUT	/V4/Company/{companyId}/Servers/Timezone	UpdateCompanyTimezoneForServers
+company	GET	/V4/Company/{companyId}/associations	GetAssociationsForCompany
+company	GET	/V4/company	GetCompanies
+company	POST	/V4/company	CreateCompany
+company	DELETE	/V4/company/{companyId}	DeleteCompany
+company	GET	/V4/company/{companyId}	GetCompanyDetails
+company	PUT	/V4/company/{companyId}	ModifyCompany
+compliance	POST	/Download	Add Export To Exportset Container For Selected Items
+compliance	POST	/DownloadFile	Download File
+compliance	POST	/GetContainers	Get Exportsets
+compliance	POST	/GetDownloads	Get Exports
+compliance	POST	/PerformContainerOperation	Create ExportSet
+compliance	POST	/RestoreAll	Add Export To Exportset Container For All Items
+compliance	POST	/ValidateExportInputs	Verify ExportSet
+compliance	GET	/getCIServerList	Index Servers and Search Engines
+control_panel	GET	/CommCell/ActivityControl	Retrieve Commcell Activity Control
+control_panel	GET	/CommCell/Credentials	Get Credentials
+control_panel	POST	/CommCell/Credentials	Create User Credential
+control_panel	PUT	/CommCell/Credentials	Update Credentials
+control_panel	POST	/CommCell/Credentials/action/delete	Delete Credentials
+control_panel	GET	/CommCell/Credentials/{credentialName}	Get Credentials Details
+control_panel	GET	/CommServ	get-CommServ
+control_panel	GET	/CommServ/AddRemoveSoftware/CommserveSoftwareCache	Get Commserve Cache Details
+control_panel	GET	/CommServ/AddRemoveSoftware/RemoteSoftwareCache	Get Commserve Remote Cache Details
+control_panel	GET	/CommServ/AuditTrail	Get Audit Trail Settings
+control_panel	POST	/CommServ/AuditTrail	Update Audit Trail Settings
+control_panel	GET	/CommServ/CustomCalendar	Get Custom Calendars
+control_panel	POST	/CommServ/CustomCalendar	Create a Custom Calendar
+control_panel	GET	/CommServ/MetricsReporting	Metrics Reporting Configuration
+control_panel	POST	/CommServ/MetricsReporting	Update Metrics Reporting Configuration
+control_panel	GET	/CommServ/SNMPV3Configuration	Get SNMPV3 Configurations
+control_panel	POST	/CommServ/SNMPV3Configuration	ADD SNMPV3 Configuration
+control_panel	GET	/Commcell/InternetOptions/Proxy	Get HTTP Proxy Server Details
+control_panel	POST	/Commcell/InternetOptions/Proxy	Create a HTTP Proxy Server
+control_panel	PUT	/Commcell/Properties	Allowpasskey
+control_panel	PUT	/Commcell/Properties/Privacy/Action/Disable	Denydataprivacy
+control_panel	PUT	/Commcell/Properties/Privacy/Action/enable	Allowdataprivacy
+control_panel	GET	/EmailServer	Get Email Servers
+control_panel	POST	/EmailServer	Update Email Server
+control_panel	POST	/OperationWindow	Create an Operation Rule
+control_panel	PUT	/OperationWindow	Update Operation Rules
+control_panel	PUT	/OperationWindow/IgnoreHigherLevelRules/Action/Disable	Disable ignore higher-level operation window rules feature
+control_panel	PUT	/OperationWindow/IgnoreHigherLevelRules/Action/Enable	Enable ignore higher-level operation window rules feature
+control_panel	GET	/OperationWindow/OpWindowList	Get Operation Rules
+control_panel	DELETE	/OperationWindow/{ruleId}	Delete Operation Rule
+control_panel	GET	/OperationWindow/{ruleId}	Get Operation Window Details
+control_panel	GET	/commcell/properties	Get Commcell properties
+convert_xmlto_json	POST	/jsonobject	Convert XML to JSON Object
+couchbase	POST	/Client/Couchbase	CreateCouchbaseInstance
+credential_manager	GET	/V4/Credential	GetCredentials
+credential_manager	POST	/V4/Credential	CreateCredential
+credential_manager	DELETE	/V4/Credential/{credentialName}	DeleteCredentialByName
+credential_manager	GET	/V4/Credential/{credentialName}	GetCredentialDetailsByName
+credential_manager	PUT	/V4/Credential/{credentialName}	UpdateCredentialByName
+credential_manager	DELETE	/V5/Credential/{credentialId}	DeleteCredential
+credential_manager	GET	/V5/Credential/{credentialId}	GetCredentialDetails
+credential_manager	PUT	/V5/Credential/{credentialId}	UpdateCredential
+credential_manager	GET	/V6/Credential	GetCredentialList
+credential_manager	POST	/V6/Credential	CreateCredentialV6
+credential_manager	DELETE	/V6/Credential/{credentialId}	DeleteCredentialById
+credential_manager	GET	/V6/Credential/{credentialId}	GetCredentialById
+credential_manager	PUT	/V6/Credential/{credentialId}	UpdateCredentialV6
+cslive_sync	GET	/CommServ/Failover	get-CommServ-Failover
+cslive_sync	POST	/CommServ/Failover	EditCSLiveSync
+cvfs	POST	/V4/CVFS/S3Bucket	CreateCVFS-S3Bucket
+cvfs	DELETE	/V4/CVFS/S3Bucket/{id}	DeleteCVFS-S3Bucket
+cvfs	GET	/V4/CVFS/S3Bucket/{id}	GetCVFS-S3Bucket
+cvfs	PUT	/V4/CVFS/S3Bucket/{id}	UpdateCVFS-S3Bucket
+cvfs	GET	/V4/CVFS/S3Bucket/{id}/Clone	GetListS3BucketClone
+cvfs	POST	/V4/CVFS/S3Bucket/{id}/Clone	CreateS3BucketClone
+cvfs	DELETE	/V4/CVFS/S3Bucket/{id}/Clone/{cloneId}	DeleteS3BucketClone
+cvfs	GET	/V4/CVFS/S3Bucket/{id}/Clone/{cloneId}	GetS3BucketCloneDetails
+cvfs	PUT	/V4/CVFS/S3Bucket/{id}/Clone/{cloneId}	UpdateS3BucketCloneExpiry
+cvfs	GET	/V4/User/S3AccessKey	GetS3AccessKey
+cvfs	PUT	/V4/User/S3AccessKey	RotateS3AccessKey
+cvfs	GET	/V4/User/{id}/S3AccessKey	GetUserS3AccessKey
+cvfs	PUT	/V4/User/{id}/S3AccessKey	RotateUserS3AccessKey
+cyber_resilience	POST	/V4/CyberResilience	ConfigureCyberResilience
+cyber_resilience	GET	/V4/CyberResilience/Credentials	GetCyberResilienceCredentials
+cyber_resilience	PUT	/V4/CyberResilience/Credentials	ManageCyberResilienceCredentials
+cyber_resilience	PUT	/V4/CyberResilience/Credentials/Sync	SyncCyberResilienceCredentials
+cyber_resilience	GET	/V4/CyberResilience/Credentials/Sync/Status	GetCyberResilienceSyncStatus
+cyber_resilience	POST	/V4/CyberResilience/TCO	CalculateTotalCostOfOwnership
+dashboard	GET	/CommServ/Anomaly/Entity/Count?anomalousEntityType=14	get-anomalous-entities
+dashboard	GET	/LocalCSUniqueId	Get_MetricsCommUniId
+dashboard	GET	/Security/Dashboard	SecurityDashboard
+dashboard	GET	/StoragePool/HyperScale/Dashboard	
+dashboard	GET	/clients/count?type=fileserver,vm,laptop	get-clientsclount
+dashboard	GET	/cr/reportsplusengine/datasets/075e703a-b29f-46d6-ad29-7c1a60f7e4f3/data?cache=true&parameter.i_DashboardType=commcell&datasource=2	Get-jobsin-24hours
+dashboard	GET	/cr/reportsplusengine/datasets/2b366703-52e1-4775-8047-1f4cfa13d2db/data?cache=true&parameter.i_DashboardType=commcell&orderby="Date to be Full"&datasource=2	get-storagespaceusage
+dashboard	GET	/cr/reportsplusengine/datasets/841800ea-53c4-4249-91fa-76ea0d60f6a4/data?cache=true&parameter.i_dashboardType=commcell&datasource=2	get-topfiveservers
+dashboard	GET	/cr/reportsplusengine/datasets/GetSLACounts/data?cache=true&parameter.i_DashboardType=commcell&datasource=2	get-commcellsladetails
+dashboard	GET	/cr/reportsplusengine/datasets/a0f077a5-2dfe-4010-a957-57a24cae89a8/data	get-commcelldetails
+dashboard	GET	/cr/reportsplusengine/datasets/b50b20ed-5fc4-4b4c-f7c4-fc6b84eb35cc/data?cache=true	get-health-overview
+dashboard	GET	/cr/reportsplusengine/datasets/d0a73c45-b06d-4358-8d7e-d55d428ba75c/data?cache=true&parameter.i_DashboardType=commcell&datasource=2	Get-EnvironmentDetails
+dashboard	GET	/cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:2654b01f-9bb0-481e-b273-4b4fddc585b1/data/?offset=0&fields=[LicUsageType] AS [License ID],[Dial] AS [License],[Purchased] AS [Available Total (TB)],[PermTotal] AS [Permanent Purchased (TB)],[Eval] AS [Term Purchased (TB)],[Usage] AS [Used (TB)],[EvalExpiryDate] AS [EvalExpiryDate],[Summary] AS [Summary]&parameter.GUID=-1&limit=10	get-hypescalelicensereport
+dashboard	GET	/cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:44cd7de8-ecb2-4ec8-8b2b-162491172eef/data/?offset=0&fields=[LicUsageType] AS [License ID],[Dial] AS [License],[Purchased] AS [Available Total (users)],[PermTotal] AS [Permanent Purchased (users)],[Eval] AS [Term Purchased (users)],[Usage] AS [Used (users)],[EvalExpiryDate] AS [EvalExpiryDate],[Summary] AS [Summary]&parameter.GUID=-1&limit=5	get-userlicenses
+dashboard	GET	/cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:cc2e77ec-9315-4446-cd7e-44ef80a8860e/data/?offset=0&fields=[LicUsageType] AS [License ID],[Dial] AS [License],[Purchased] AS [Available Total (TB)],[PermTotal] AS [Permanent Purchased (TB)],[Eval] AS [Term Purchased (TB)],[Usage] AS [Used (TB)],[EvalExpiryDate] AS [EvalExpiryDate],[Summary] AS [Summary]&parameter.GUID=-1&limit=20	get-airgapprotect-license
+dashboard	GET	/cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:cd38c52a-e099-4252-d36f-3e2c54540f6f/data/?offset=0&fields=[LicUsageType] AS [License ID],[Dial] AS [License],[Purchased] AS [Available Total (instances)],[PermTotal] AS [Permanent Purchased (instances)],[Eval] AS [Term Purchased (instances)],[Usage] AS [Used (instances)],[EvalExpiryDate] AS [EvalExpiryDate],[Summary] AS [Summary]&parameter.GUID=-1&limit=5	get-operatinginstanceslicense
+dashboard	GET	/cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:f7c6b473-f99d-44b4-ff5e-466b55656500/data/?offset=0&fields=[LicUsageType] AS [License ID],[Dial] AS [License],[Purchased] AS [Available Total],[PermTotal] AS [Permanent Purchased],[Eval] AS [Term Purchased],[Usage] AS [Used],[EvalExpiryDate] AS [EvalExpiryDate],[Summary] AS [Summary]&parameter.GUID=-1&limit=20	Get-DataInsightsLicense
+dashboard	GET	/cr/reportsplusengine/datasets/d7faef75-cf66-40a2-98ce-a2d0cc2a144b:feabb5ca-b6b7-4572-b0cb-39352c7e1b67/data/?cacheId=e76a6d07-2b1b-47b2-d97e-7a7f1a9793be&offset=0&fields=[Dial] AS [Dial],[Purchased] AS [Purchased],[PermTotal] AS [PermTotal],[Eval] AS [Eval],[Usage] AS [Usage],[TermDate] AS [TermDate],[EvalExpiryDate] AS [EvalExpiryDate]&isExport=false&componentName=Capacity Licenses&parameter.GUID=-1&limit=5&rawData=false	get-current-capacity
+data_cube	POST	/Stream/getDownloadCenterFileStream	Export Data - Step 3 - Download File Stream
+data_cube	GET	/V2/EDiscoveryClients/Clients/4	Datasources For Client With Mount Paths
+data_cube	GET	/dcube/GetDataSources	Datasources
+data_cube	GET	/dcube/GetHistory/{DatasourceId}	View Crawl History
+data_cube	GET	/dcube/GetJDBCDrivers/{cloudId}	View JDBC Drivers
+data_cube	GET	/dcube/GetStatus/{DatasourceId}	View Crawling Status
+data_cube	POST	/dcube/createDataSource	Create a Data Source
+data_cube	POST	/dcube/deleteDataSource/{DatasourceId}	Delete a Data Source
+data_cube	POST	/dcube/export/{datasourceHandlerId}	Export Data - Step 1 - Submit Request
+data_cube	GET	/dcube/export/{datasourceHandlerId}/status	Export Data - Step 2 - Poll Request
+data_cube	GET	/dcube/getAnalyticsEngine	View Index Servers
+data_cube	GET	/dcube/getcommcellinfo	View Registered CommServe Databases
+data_cube	POST	/dcube/schedule	Schedule a dataCrawl
+data_cube	POST	/dcube/startjob/{DatasourceId}	Start Crawl
+data_cube	POST	/dcube/stopjob/{DatasourceId}	Stop Crawl
+data_discovery	POST	/Asset/Discovery	StartDiscoveryJob
+data_discovery	PUT	/Asset/Discovery	StartDiscovery
+data_discovery	DELETE	/Asset/Discovery/Configuration	CleanupAssetDatasource
+data_discovery	GET	/Asset/Discovery/Configuration	GetAssetDatasource
+data_discovery	POST	/Asset/Discovery/Configuration	ConfigureAssetDatasource
+data_discovery	PUT	/Asset/Discovery/Configuration	ModifyAssetDatasource
+data_discovery	GET	/Asset/Discovery/Status	GetDiscoveryStatus
+data_discovery	POST	/Asset/TCO	CalculateTCO
+data_security	GET	/DataSecurity/Accounts	getCloudAccounts
+data_security	POST	/DataSecurity/Resources	addResourceToAnalyze
+data_security	POST	/DataSecurity/Resources/Jobs	manageDataSecurityResourceJobs
+databases	GET	/V4/Databases	GetDatabases
+dataroom	GET	/Dataroom	GetDatarooms
+dataroom	POST	/Dataroom	CreateDataroom
+dataroom	GET	/Dataroom/{id}	GetDataroom
+dataroom	PUT	/Dataroom/{id}/items	AddDataroomItems
+db2_database	GET	/Backupset/{BackupsetID}/DB2StorageGroups	DB2StorageGroups
+db2_database	GET	/Client/{ClientID}/DiscoverDB2Instances	DiscoverDB2Instances
+db2_multi_node	POST	/CreateTask/	RestoreDB
+db2_multi_node	GET	/Instance/DB2Partitions	GetDB2MultiNodePartitions
+dcplan	POST	/V4/DCPlan	CreateDCPlan
+dcplan	DELETE	/V4/DCPlan/{planId}	DeleteDCPlan
+dcplan	GET	/V4/DCPlan/{planId}	GetDCPlanById
+dcplan	PUT	/V4/DCPlan/{planId}	ModifyDCPlan
+disaster_recovery_backup	GET	/Commcell/DRBackup/Options	Get DR Backup Options
+disaster_recovery_backup	POST	/Commcell/DRBackup/Options	post-Commcell-DRBackup-Options
+disaster_recovery_backup	GET	/Commcell/DRBackup/Properties	Get DR Backup Properties
+disaster_recovery_backup	POST	/Commserve/DRBackup	get-Commserve-DRBackup
+disk_storage	GET	/V4/Storage/Disk	GetDiskStorages
+disk_storage	POST	/V4/Storage/Disk	CreateDiskStorage
+disk_storage	DELETE	/V4/Storage/Disk/{storagePoolId}	DeleteDiskStorage
+disk_storage	GET	/V4/Storage/Disk/{storagePoolId}	GetDiskStorageDetails
+disk_storage	PUT	/V4/Storage/Disk/{storagePoolId}	ModifyDiskStorage
+disk_storage	POST	/V4/Storage/Disk/{storagePoolId}/BackupLocation	CreateBackupLocation
+disk_storage	DELETE	/V4/Storage/Disk/{storagePoolId}/BackupLocation/{backupLocationId}	DeleteBackupLocation
+disk_storage	GET	/V4/Storage/Disk/{storagePoolId}/BackupLocation/{backupLocationId}	GetBackupLocationDetails
+disk_storage	PUT	/V4/Storage/Disk/{storagePoolId}/BackupLocation/{backupLocationId}	ModifyBackupLocation
+disk_storage	POST	/V4/Storage/Disk/{storagePoolId}/BackupLocation/{backupLocationId}/AccessPath	AddMediaAgent
+disk_storage	GET	/V4/Storage/Disk/{storagePoolId}/BackupLocation/{backupLocationId}/AccessPath/MediaAgents	DiskGetEligibleMediaAgentsForAccessPath
+disk_storage	DELETE	/V4/Storage/Disk/{storagePoolId}/BackupLocation/{backupLocationId}/AccessPath/{accessPathId}	DeleteDiskAccessPath
+disk_storage	PUT	/V4/Storage/Disk/{storagePoolId}/BackupLocation/{backupLocationId}/AccessPath/{accessPathId}	ModifyDiskAccessPath
+domain	GET	/CommCell/DomainController	get-CommCell-DomainController
+domain	POST	/CommCell/DomainController	post-CommCell-DomainController
+domain	DELETE	/CommCell/DomainController/{domainId}	Delete a Domain
+domain	GET	/IdentityServers	Get Identity Servers
+domain	DELETE	/ThirdParty/App	delete-ThirdParty-App
+domain	GET	/ThirdParty/App	get-ThirdParty-App
+domain	POST	/ThirdParty/App	post-ThirdParty-App
+domain	PUT	/ThirdParty/App	put-ThirdParty-App
+drbackup	GET	/V4/DRBackup/BackupDestination/SourceCopy/Eligible	GetSourceCopiesForDRBackup
+drbackup	DELETE	/V4/DRBackup/BackupDestination/{BackupDestinationId}	DeleteDRBackupDestination
+drbackup	GET	/V4/DRBackup/BackupDestination/{BackupDestinationId}	GetDRBackupDestinationDetails
+drbackup	PUT	/V4/DRBackup/BackupDestination/{BackupDestinationId}	ModifyDRBackupDestinationDetails
+drbackup	POST	/V4/DRBackup/BackupDestination/{backupDestinationId}/AuxCopy/Run	RunAuxCopyForDRBackups
+drbackup	GET	/V4/DRBackup/BackupDestinations	GetDRBackupDestinations
+drbackup	POST	/V4/DRBackup/BackupDestinations	CreateDRBackupDestination
+drbackup	GET	/V4/DRBackup/Regions	GetDRBackupRegionsList
+drbackup	GET	/V4/DRBackup/StoragePolicy	GetDRBackupStoragePolicy
+dynamics365	PUT	/V4/Dynamics365/{appId}/Content	AddD365Content
+dynamics365	POST	/v4/Dynamics365	CreateD365Client
+ediscovery	GET	/V4/Ediscovery/Packages/{packageId}/AccessNodes	
+email_server	GET	/V4/EmailServer	GetEmailServer
+email_server	POST	/V4/EmailServer	ConfigureEmailServer
+email_server	PUT	/V4/EmailServer	UpdateEmailServer
+email_server	POST	/V4/EmailServer/Action/Test	SendTestMailReq
+entity_tag	DELETE	/V4/EntityTags/{tagId}	DeleteEntityTag
+entity_tag	GET	/V4/Tags/AssociatedEntities	getTagAssociatedEntities
+entity_tag	DELETE	/V4/Tags/{tagId}/TagValues/{tagValue}	deletagValueForTagId
+entity_tag	GET	/V4/Tags/{tagId}/Values	getTagValuesForTagId
+entity_tag	PUT	/V4/Tags/{tagId}/Values	putValuesForTagId
+entity_tags	GET	/Ediscovery/Tags	AllTagsDetails
+entity_tags	DELETE	/Tags	Delete a Tag or multiple tags
+entity_tags	POST	/Tags	CreateTags
+entity_tags	PUT	/Tags	Update tags
+entity_tags	GET	/Tags/{entityType}/{entityId}	List of Tags for entity
+epic_servers	GET	/V4/EpicServers	GetEpicServers
+event_filter	GET	/V4/Event/Filter	GetEventFilters
+event_filter	POST	/V4/Event/Filter	CreateEventFilters
+event_filter	DELETE	/V4/Event/Filter/{id}	DeleteEventFilter
+exchange	GET	/V4/Office365/Exchange	GetExchangeClient
+exchange	POST	/V4/Office365/Exchange	CreateExchangeClient
+exchange	POST	/V4/Office365/Exchange/{appId}/Backup	PerformExchangeBackup
+exchange	GET	/V4/Office365/Exchange/{appId}/Content	GetExchangeContent
+exchange	PUT	/V4/Office365/Exchange/{appId}/Content	AddExchangeContent
+exchange	PUT	/V4/Office365/Exchange/{appId}/Content/CustomCategory	AddExchangeCustomCategory
+exchange	GET	/V4/Office365/Exchange/{appId}/Mailboxes	GetExchangeMailboxes
+exchange	PUT	/V4/Office365/Exchange/{appId}/Mailboxes	AddExchangeMailboxesList
+exchange	POST	/V4/Office365/Exchange/{appId}/Restore	PerformExchangeRestore
+external_endpoint_manager	GET	/v4/externalendpoint	GetExternalEndpoints
+external_endpoint_manager	POST	/v4/externalendpoint	AddExternalEndpoint
+external_endpoint_manager	DELETE	/v4/externalendpoint/{externalEndpointId}	DeleteExternalEndpoint
+external_endpoint_manager	GET	/v4/externalendpoint/{externalEndpointId}	GetExternalEndpoint
+external_endpoint_manager	PUT	/v4/externalendpoint/{externalEndpointId}	UpdateExternalEndpoint
+failover_group	GET	/DR/JobStats	Get Failover Group Job Statistics
+failover_group	GET	/FailoverGroups	Get Failover Groups
+failover_group	POST	/FailoverGroups	Create Failover Group
+failover_group	GET	/FailoverGroups/ClientList	Get Failover Group Clientlist
+failover_group	DELETE	/FailoverGroups/{FailoverGroupId}	delete-FailoverGroups-FailoverGroupId
+failover_group	GET	/FailoverGroups/{FailoverGroupId}	get-FailoverGroups-FailoverGroupId
+failover_group	PUT	/FailoverGroups/{FailoverGroupId}	Update Failover Group
+failover_group	GET	/FailoverGroups/{failoverGroupId}/Schedules	Get Failover Group Schedules
+failover_group	POST	/getVirtualMachineList	View Test Failover VM's
+failover_groups	GET	/V4/FailoverGroup/{failoverGroupId}/VirtualMachines	getFailoverGroupVMs
+failover_groups	GET	/V4/FailoverGroups	ListFailoverGroups
+failover_groups	GET	/V4/FailoverGroups/EligibleMachines	GetEligibleMachinesFailoverGroup
+failover_groups	DELETE	/V4/FailoverGroups/{failoverGroupId}	DeleteFailoverGroup
+failover_groups	GET	/V4/FailoverGroups/{failoverGroupId}	GetFailoverGroupDetails
+failover_groups	PUT	/V4/FailoverGroups/{failoverGroupId}	ModifyFailoverGroup
+failover_groups	PUT	/V4/FailoverGroups/{failoverGroupId}/Action/{drOperation}	PlannedFailoverFailoverGroup
+failover_groups	POST	/V4/FailoverGroups/{failoverGroupId}/Schedules	CreateFailoverGroupSchedule
+failover_groups	DELETE	/V4/FailoverGroups/{failoverGroupId}/Schedules/{scheduleId}	DeleteFailoverGroupSchedule
+failover_groups	PUT	/V4/FailoverGroups/{failoverGroupId}/Schedules/{scheduleId}	ModifyFailoverGroupSchedule
+failover_groups	GET	/V4/FailoverGroups/{failoverGroupId}/TestFailoverMachines	GetTestFailoverMachinesFailoverGroup
+file	GET	/action/preview	Preview a File
+file	POST	/client/{clientId}/file/action/upload	Upload-File
+file	GET	/stream/action/download	Download a File
+file_operationsforshares	POST	/GetSharedFolders	View Shared Files and Folders
+file_server	GET	/Backupsets	get-Backupsets
+file_server	GET	/Plan/{planId}/content	get-Plan-planId-content
+file_server	GET	/subclient/{subclientId}/Browse	get-subclient-subclientId-Browse
+file_servers	GET	/V4/FileServers	GetFileServers
+filtersfor_searchor_list	GET	/Entities/search	PerformGlobalSearch
+filtersfor_searchor_list	POST	/performSearch	Filter Based on File Name or Type
+gcpexpress_config	POST	/v4/Cloud/GCP/ExpressConfig/AuthCode/Token	GetGCPAccessTokenUsingAuthCode
+gcpexpress_config	GET	/v4/Cloud/GCP/ExpressConfig/OauthSignInDetails	GetGCPOauthSignInDetails
+gcpexpress_config	GET	/v4/Cloud/GCP/ExpressConfig/Projects	GetGCPExpressConfigProjectsList
+gcpspanner	GET	/V4/GCPSpanner/databases	getGCPSpannerDatabases
+gcpspanner	GET	/V4/GCPSpanner/instances	getGCPSpannerInstanceList
+gcpspanner	GET	/V4/GCPSpanner/permissions	getGCPSpannerPermissions
+global_exceptions	GET	/V4/GlobalExceptions	GetGlobalExceptions
+global_exceptions	POST	/V4/GlobalExceptions	UpdateGlobalExceptions
+global_parameters	POST	/CommServ/GlobalParams	Get value for a Global Parameter
+global_parameters	POST	/setGlobalParam	Set Global Parameter
+global_search	GET	/V4/{globalSearchEntity}/aggregate	GetAggregateOnEntity
+global_server_plan	POST	/V4/Global/ServerPlan	CreateGlobalServerPlan
+google_workspace	GET	/V4/GoogleWorkspace/Plans	GetGoogleWorkspacePlanDashboard
+hbase	POST	/Client/Hadoop	CreateHadoopInstanceforHBase
+hidden	POST	/V4/AI/AWSOpenSearch/Instance	CreateAwsOpenSearchInstance
+hidden	POST	/V4/AI/AwsAgentCore/Instance	CreateAwsAgentCoreInstance
+hidden	POST	/V4/AI/AwsBedrock/Instance	CreateAwsBedrockInstance
+hidden	POST	/V4/AI/AzureAiSearch/Instance	CreateAzureAiSearchInstance
+hidden	POST	/V4/AI/AzureFoundry/Instance	CreateAzureFoundryInstance
+hidden	POST	/V4/AI/AzureRedis/Instance	CreateAzureRedisInstance
+hidden	POST	/V4/AI/ClickHouse/Instance	CreateClickHouseInstance
+hidden	POST	/V4/AI/GCPMemorystore/Instance	CreateGCPMemorystoreInstance
+hidden	POST	/V4/AI/GcpFirestore/Instance	CreateGcpFirestoreInstance
+hidden	POST	/V4/AI/OCIAutonomousDB/Instance	CreateOCIAutonomousDBInstance
+hidden	POST	/V4/AI/Pinecone/Instance	CreatePineconeInstance
+hidden	POST	/V4/AI/SampleApp/Instance	CreateSampleAppInstance
+hidden	POST	/V4/AI/Snowflake/Instance	CreateSnowflakeInstance
+hidden	GET	/V4/Client/{clientId}/RetireInformation	GetClientInfoForRetire
+hidden	GET	/V4/Company/{companyId}/LocalAuthentication	FetchLocalAuthenticationDetilsOfCompany
+hidden	PUT	/V4/Company/{companyId}/LocalAuthentication/Action/Disable	DisableLocalAuthenticationForCompany
+hidden	PUT	/V4/Company/{companyId}/LocalAuthentication/Action/Enable	EnableLocalAuthenticationForCompany
+hidden	POST	/V4/SAAS/AtlassianTrello/Instance	CreateAtlassianTrelloInstance
+hidden	POST	/V4/SAAS/AwsS3Vectors/Instance	CreateAwsS3VectorsInstance
+hidden	POST	/V4/SAAS/BigCommerce/Instance	CreateBigCommerceInstance
+hidden	POST	/V4/SAAS/Bitbucket/Instance	CreateBitbucketInstance
+hidden	POST	/V4/SAAS/Datadog/Instance	CreateDatadogInstance
+hidden	POST	/V4/SAAS/DocuSign/Instance	CreateDocuSignInstance
+hidden	POST	/V4/SAAS/GcpLogs/Instance	CreateGcpLogsInstance
+hidden	POST	/V4/SAAS/HubSpot/Instance	CreateHubSpotInstance
+hidden	POST	/V4/SAAS/Klaviyo/Instance	CreateKlaviyoInstance
+hidden	POST	/V4/SAAS/Mailchimp/Instance	CreateMailchimpInstance
+hidden	POST	/V4/SAAS/Miro/Instance	CreateMiroInstance
+hidden	POST	/V4/SAAS/MondayDotCom/Instance	CreateMondayDotComInstance
+hidden	POST	/V4/SAAS/QuickBooksOnline/Instance	CreateQuickBooksOnlineInstance
+hidden	POST	/V4/SAAS/Shopify/Instance	CreateShopifyInstance
+hidden	POST	/V4/SAAS/SybaseIQ/Instance	CreateSybaseIQInstance
+hidden	POST	/V4/SAAS/Zscaler/Instance	CreateZscalerInstance
+hidden	GET	/V4/user/{userId}/authenticationMethods	getUserauthenticationMethods
+hybrid_file_stores	GET	/V4/HybridFileStores	GetHybridFileStores
+hybrid_file_stores	GET	/v4/HFSShare/{HFSShareId}/Status	GetHybridFileStoreShareStatus
+hyper_scale_storage	GET	/V4/Storage/HyperScale	GetHyperScaleStorageList
+hyper_scale_storage	POST	/V4/Storage/HyperScale	CreateHyperScaleStorage
+hyper_scale_storage	DELETE	/V4/Storage/HyperScale/{hyperScaleStorageId}	DeleteHyperScaleStorageById
+hyper_scale_storage	GET	/V4/Storage/HyperScale/{hyperScaleStorageId}	GetHyperScaleStorageById
+hyper_scale_storage	PUT	/V4/Storage/HyperScale/{hyperScaleStorageId}	ModifyHyperScaleStorageById
+hyper_scale_storage	GET	/V4/Storage/HyperScale/{hyperScaleStorageId}/Node/{nodeId}	GetNodeDetailsOfHyperScaleStorage
+hyper_scale_storage	PUT	/V4/Storage/HyperScale/{hyperScaleStorageId}/Node/{nodeId}/Refresh	RefreshNodeOfHyperScaleStorage
+hyper_scale_storage	POST	/V4/Storage/HyperScale/{hyperScaleStorageId}/Nodes	CreateNodeforHyperScaleStorage
+hyper_scale_storage	PUT	/V4/Storage/HyperScale/{storagePoolId}/Extend	AllowBackupOpOnHyperScaleXStoragePool
+hypervisor	PUT	/RecoveryPoint/Extend	ExtendRecoveryPoint
+hypervisor	POST	/V4/AccessNode	AccessNode
+hypervisor	GET	/V4/Hypervisor	ListHypervisors
+hypervisor	POST	/V4/Hypervisor	CreateHypervisor
+hypervisor	PUT	/V4/Hypervisor/{HypervisorId}/Credentials	updateHypervisorCredentials
+hypervisor	DELETE	/V4/Hypervisor/{hypervisorId}	DeleteHypervisor
+hypervisor	GET	/V4/Hypervisor/{hypervisorId}	GetHypervisors
+hypervisor	PUT	/V4/Hypervisor/{hypervisorId}	updateHypervisor
+hypervisor	PUT	/V4/Hypervisor/{hypervisorId}/AccessNode	setHypervisorAccessNode
+hypervisor	POST	/V4/Hypervisor/{hypervisorId}/Reconfigure	ReConfigureHypervisor
+hypervisor	GET	/V4/Hypervisor/{hypervisorId}/{InventoryEntityName}/Browse	BrowseHypervisorInventory
+hypervisor	POST	/V4/hypervisor/connection/validate	ValidateHypervisorConnection
+hypervisor	GET	/VSATenantClientList/{instanceId}	GetTenantHypervisorsForAdminHypervisor
+hypervisor	GET	/VSBrowse/{hypervisorId}	VSBrowse
+hypervisor	GET	/VSPseudoClientsForPermission	GetVSPseudoClientsForPermission
+hypervisor	GET	/v4/Cloud/OCI/QuickCreateLink/IAMCFT	GetOCIIAMQuickCreateLink
+hypervisor	GET	/v4/hypervisor/{hypervisorId}/filter	GetHypervisorFilter
+hypervisor	PUT	/v4/hypervisor/{hypervisorId}/filter	UpdateHypervisorFilter
+identity_servers	GET	/V4/IdentityServers	GetIdentityServers
+identity_servers	POST	/V4/LDAP	CreateLDAP
+identity_servers	DELETE	/V4/LDAP/{domainId}	DeleteADLDAP
+identity_servers	GET	/V4/LDAP/{domainId}	GetADLDAPDetails
+identity_servers	PUT	/V4/LDAP/{domainId}	UpdateADLDAP
+identity_servers	POST	/V4/OpenIdConnect	CreateOpenIdConnectApp
+identity_servers	DELETE	/V4/OpenIdConnect/{name}	DeleteOpenIdConnectApp
+identity_servers	GET	/V4/OpenIdConnect/{name}	GetOpenIdConnectApp
+identity_servers	PUT	/V4/OpenIdConnect/{name}	UpdateOpenIdConnectApp
+identity_servers	POST	/V4/SAML	CreateSAMLApp
+identity_servers	DELETE	/V4/SAML/{name}	DeleteSAMLApp
+identity_servers	GET	/V4/SAML/{name}	GetSAMLApp
+identity_servers	PUT	/V4/SAML/{name}	UpdateSAMLApp
+identity_servers	GET	/V4/SAML/{name}/Metadata	GetSAMLMetadata
+index_servers	GET	/V4/IndexServers	GetIndexServers
+instance	GET	/databases/instances	Get Instances of databases
+instance	GET	/instance/byName(clientName={clientName},appName={appName}),instanceName={instanceName}	Get Instance using parameters
+instance	POST	/instance/byName(clientName={clientName},appName={appName}),instanceName={instanceName}	modify Instance using name
+instances	PUT	/V4/Instance/{instanceId}/Backup/Action/Disable	DisableBackupInstance
+instances	PUT	/V4/Instance/{instanceId}/Backup/Action/Enable	EnableBackupInstance
+instances	PUT	/V4/Instance/{instanceId}/Restore/Action/Disable	DisableRestoreInstance
+instances	PUT	/V4/Instance/{instanceId}/Restore/Action/Enable	EnableRestoreInstance
+instances	PUT	/V4/Instance/{instanceId}/SLA/Exclude	ExcludeSLAInstance
+instances	PUT	/V4/Instance/{instanceId}/SLA/Include	IncludeSLAInstance
+instances	GET	/V4/Instances	GetInstances
+instances	GET	/V4/oracle/instance/{instanceId}/rmanbrowse	ListRMANBackupPieces
+instant_clones	GET	/V4/InstantClones	getInstantClones
+ip_library	POST	/V4/Storage/IPLibrary	CreateIPLibrary
+ip_library	POST	/V4/Storage/IPLibrary/{libraryId}/ConfigureDrives	ConfigureIPLibraryDrives
+ip_library	POST	/V4/Storage/IPLibrary/{libraryId}/DetectDrives	DetectIPLibraryDrives
+job	GET	/Events	Get Commcell Events
+job	GET	/Events/{eventId}	Get Specific Event by ID
+job	GET	/Job	Get List of Jobs
+job	GET	/Job/{jobId}	Get Job Summary of a Job
+job	GET	/Job/{jobId}/AdvancedDetails	Get Job Advanced Details
+job	GET	/Job/{jobId}/FailedItems	Get Failed Items in a Job
+job	GET	/Job/{jobId}/TaskDetails	Get Job Task Details
+job	POST	/Job/{jobId}/action/Resubmit	Resubmit a Job
+job	POST	/Job/{jobId}/action/kill	Kill a Job
+job	POST	/Job/{jobId}/action/pause	Suspend a aJob
+job	POST	/Job/{jobId}/action/resume	Resume a Job
+job	GET	/Jobs/History	GetJobHistory
+job	POST	/Jobs/MultiJobOperation	MultiJob Operation
+job	GET	/Jobs/active	GetActiveJobs
+job	GET	/Stream/Job/{jobId}/Logs	Get Job Logs
+job	POST	/V4/Job/Action/Resubmit	ResubmitJobs
+key_management_server	GET	/V4/KeyManagementServers	GetKeyManagementServers
+key_management_server	DELETE	/V4/KeyManagementServers/{kmsId}	DeleteKeyManagementServers
+kubernetes	GET	/V4/Kubernetes/{clusterId}/Modifier	
+kubernetes	POST	/V4/Kubernetes/{clusterId}/Modifier	
+kubernetes	POST	/V4/Kubernetes/{clusterId}/Modifier/Test	
+kubernetes	DELETE	/V4/Kubernetes/{clusterId}/Modifier/{ModifierName}	
+kubernetes	GET	/V4/Kubernetes/{clusterId}/Modifier/{ModifierName}	
+kubernetes	PUT	/V4/Kubernetes/{clusterId}/Modifier/{ModifierName}	
+kubernetes	GET	/V5/Kubernetes/Application	GetAllKubernetesApps
+kubernetes	GET	/V5/Kubernetes/Application/{appGUID}	GetKubernetesAppDetails
+kubernetes	POST	/V5/Kubernetes/Application/{appGUID}/Backup	RunApplicationBackup
+kubernetes	GET	/V5/Kubernetes/ApplicationGroup	GetAllKubernetesAppGroups
+kubernetes	POST	/V5/Kubernetes/ApplicationGroup	CreateKubernetesApplicationGroup
+kubernetes	POST	/V5/Kubernetes/ApplicationGroup/Preview	PreviewApplicationGroup
+kubernetes	DELETE	/V5/Kubernetes/ApplicationGroup/{applicationGroupId}	DeleteKubernetesAppGroup
+kubernetes	GET	/V5/Kubernetes/ApplicationGroup/{applicationGroupId}	GetApplicationGroupDetails
+kubernetes	PUT	/V5/Kubernetes/ApplicationGroup/{applicationGroupId}	UpdateKubernetesAppGroupOp
+kubernetes	POST	/V5/Kubernetes/ApplicationGroup/{applicationGroupId}/Backup	RunApplicationGroupBackup
+kubernetes	GET	/V5/Kubernetes/ApplicationGroup/{applicationGroupId}/Browse/Application	DoApplicationBrowse
+kubernetes	GET	/V5/Kubernetes/ApplicationGroup/{applicationGroupId}/Browse/Namespace	DoNamespaceBrowse
+kubernetes	POST	/V5/Kubernetes/ApplicationGroup/{applicationGroupId}/Restore/Application	DoApplicationRestore
+kubernetes	POST	/V5/Kubernetes/ApplicationGroup/{applicationGroupId}/Restore/Namespace	DoNamespaceRestore
+kubernetes	GET	/V5/Kubernetes/Cluster	GetAllKubernetesClustersOp
+kubernetes	POST	/V5/Kubernetes/Cluster	CreateKubernetesClusterOp
+kubernetes	DELETE	/V5/Kubernetes/Cluster/{clusterId}	DeleteDeconfiguredKubernetesCluster
+kubernetes	GET	/V5/Kubernetes/Cluster/{clusterId}	GetKubernetesClusterDetails
+kubernetes	PUT	/V5/Kubernetes/Cluster/{clusterId}	UpdateKubernetesProperties
+kubernetes	GET	/V5/Kubernetes/Cluster/{clusterId}/Content/Namespace	BrowseKubernetesNamespaces
+kubernetes	GET	/V5/Kubernetes/Cluster/{clusterId}/Content/Namespace/{nameSpace}/Applications	BrowseNamespaceApplications
+kubernetes	GET	/V5/Kubernetes/Cluster/{clusterId}/Content/Namespace/{nameSpace}/Labels	BrowseNamespaceLabels
+kubernetes	GET	/V5/Kubernetes/Cluster/{clusterId}/Content/Namespace/{nameSpace}/Volumes	BrowseNamespaceVolumes
+kubernetes	GET	/V5/Kubernetes/Cluster/{clusterId}/Content/StorageClass	BrowseKubernetesStorageClass
+kubernetes	PUT	/V5/Kubernetes/Cluster/{clusterId}/Reconfigure	ReconfigureKubernetesCluster
+kubernetes	DELETE	/V5/Kubernetes/Cluster/{clusterId}/Retire	RetireKubernetesCluster
+laptop	GET	/V4/Laptop	GetLaptopList
+laptop	POST	/V4/Laptop	postLaptop
+laptop_devices	GET	/Device	Get Laptop Devices
+laptop_devices	GET	/Device/{deviceId}	Get Laptop Device Properties
+laptop_plan	POST	/V4/LaptopPlan	CreateLaptopPlan
+laptop_plan	DELETE	/V4/LaptopPlan/{planId}	DeleteLaptopPlanById
+laptop_plan	GET	/V4/LaptopPlan/{planId}	GetLaptopPlanById
+laptop_plan	PUT	/V4/LaptopPlan/{planId}	ModifyLaptopPlanById
+laptop_plan	POST	/V4/LaptopPlan/{planId}/BackupDestination	CreateLaptopBackupDestination
+laptop_plan	DELETE	/V4/LaptopPlan/{planId}/BackupDestination/{BackupDestinationId}	DeleteLaptopBackupDestination
+laptop_plan	PUT	/V4/LaptopPlan/{planId}/BackupDestination/{BackupDestinationId}	ModifyLaptopBackupDestination
+laptop_plan	GET	/V4/LaptopPlan/{planId}/BackupDestinations	GetLaptopBackupDestinations
+laptop_plan	DELETE	/V4/LaptopPlan/{planId}/storageRegion/{regionList}	DeleteStorageRegionForLaptopPlan
+laptop_plan	POST	/V5/LaptopPlan/{planId}/BackupDestination/{BackupDestinationId}/Clone	CloneLaptopPlanBackupDestination
+laptop_plan	GET	/V5/LaptopPlan/{planId}/StoragePolicy	GetStoragePolicyListForPlan
+laptop_plan	POST	/V5/LaptopPlan/{planId}/StoragePolicy	CreateStoragePolicyForLaptopPlan
+laptop_plan	DELETE	/V5/LaptopPlan/{planId}/StoragePolicy/{storagePolicyId}	DeleteStoragePolicyForLaptopPlan
+laptop_plan	GET	/V5/LaptopPlan/{planId}/StoragePolicy/{storagePolicyId}	GetStoragePolicyDetailsForLaptopPlan
+laptop_plan	PUT	/V5/LaptopPlan/{planId}/StoragePolicy/{storagePolicyId}	UpdateStoragePolicyForLaptopPlan
+license	POST	/Client/License/Reconfigure	Reconfigure License to commcell entity
+license	POST	/Client/License/Release	Release License
+license	GET	/Client/{clientId}/License	Get Client Licenses
+license	POST	/License	Add License
+license	GET	/V4/License	GetLicenseInfo
+local_storage	GET	/V4/Storage/Local	GetLocalStorages
+local_storage	POST	/V4/Storage/Local	CreateLocalStorage
+local_storage	DELETE	/V4/Storage/Local/{storagePoolId}	DeleteLocalStorage
+local_storage	GET	/V4/Storage/Local/{storagePoolId}	GetLocalStorageDetails
+local_storage	PUT	/V4/Storage/Local/{storagePoolId}	ModifyLocalStorage
+local_storage	POST	/V4/Storage/Local/{storagePoolId}/BackupLocation	CreateLocalBackupLocation
+local_storage	DELETE	/V4/Storage/Local/{storagePoolId}/BackupLocation/{backupLocationId}	DeleteLocalBackupLocation
+local_storage	GET	/V4/Storage/Local/{storagePoolId}/BackupLocation/{backupLocationId}	GetLocalBackupLocationDetails
+local_storage	PUT	/V4/Storage/Local/{storagePoolId}/BackupLocation/{backupLocationId}	ModifyLocalBackupLocation
+local_storage	POST	/V4/Storage/Local/{storagePoolId}/BackupLocation/{backupLocationId}/AccessPath	AddLocalAccessPath
+local_storage	GET	/V4/Storage/Local/{storagePoolId}/BackupLocation/{backupLocationId}/AccessPath/MediaAgents	LocalGetEligibleMediaAgentsForAccessPath
+local_storage	DELETE	/V4/Storage/Local/{storagePoolId}/BackupLocation/{backupLocationId}/AccessPath/{accessPathId}	DeleteLocalAccessPath
+local_storage	PUT	/V4/Storage/Local/{storagePoolId}/BackupLocation/{backupLocationId}/AccessPath/{accessPathId}	ModifyLocalAccessPath
+media_agent	GET	/MediaAgent/{MediaAgent}/ReconstructionJobs	getMediaAgentReconstructionJobs
+media_agent	GET	/MediaAgent/{MediaAgent}/RedistributionJobs	getMediaAgentRedistributionJobs
+media_agent	GET	/V4/DDB/MediaAgents	GetMediaAgentsForDDB
+media_agent	POST	/V4/InfrastructureProvisioning	InfrastructureProvisioning
+media_agent	PUT	/V4/ProvisionedMA/{mediaAgentId}/Infrastructure	UpdateProvisionedMAInfrastructure
+media_agent	GET	/V4/mediaAgent	GetMediaAgents
+media_agent	POST	/V4/mediaAgent	InstallMediaAgent
+media_agent	DELETE	/V4/mediaAgent/{mediaAgentId}	DeleteMediaAgent
+media_agent	GET	/V4/mediaAgent/{mediaAgentId}	GetMediaAgentDetails
+media_agent	PUT	/V4/mediaAgent/{mediaAgentId}	ModifyMediaAgent
+media_agent	GET	/V4/mediaAgent/{mediaAgentId}/Associations	GetMediaAgentAssociatedEntities
+metallic	GET	/V4/Hypervisors/azure	get-azurevm-cloudaccount
+metallic	GET	/V4/Metallic/supported-regions	get-azuredb-regions
+metallic	GET	/V4/azuredb/backupgateway	get-azuredb-backupgateway
+metallic	POST	/V4/azuredb/cloudAccount	post-azuredb-cloudAccount
+metallic	GET	/V4/azuredb/cloudaccount	get-azuredb-cloudaccount
+metallic	POST	/V4/azuredb/cosmos/clouddbcontentpreview	post-azuredb-cosmos-clouddbcontentpreview
+metallic	POST	/V4/azuredb/cosmos/instance	post-azuredb-cosmos-instance
+metallic	GET	/V4/azuredb/maria/instance	get-azuredb-maria-instance
+metallic	POST	/V4/azuredb/maria/instance	post-azuredb-maria-instance
+metallic	POST	/V4/azuredb/mssql/Instance	post-azuredb-mssql-Instance
+metallic	GET	/V4/azuredb/mssql/credentials	get-azuredb-mssql-credentials
+metallic	POST	/V4/azuredb/mssql/credentials	post-azuredb-mssql-credentials
+metallic	GET	/V4/azuredb/mssql/instance	get-azuredb-mssql-instance
+metallic	GET	/V4/azuredb/mysql/instance	get-azuredb-mysql-instance
+metallic	POST	/V4/azuredb/mysql/instance	post-azuredb-mysql-instance
+metallic	GET	/V4/azuredb/postgresql/instance	get-azuredb-postgresql-instance
+metallic	POST	/V4/azuredb/postgresql/instance	post-azuredb-postgresql-instance
+metallic	POST	/V4/azurevm/vmgroup	post-azurevm-vmgroup
+metallic	PUT	/V4/azurevm/vmgroup/{vmGroupId}/backup/activitycontrol	put-azurevm-vmgroup-vmGroupId-backup-activitycontrol
+metallic	PUT	/V4/azurevm/vmgroup/{vmGroupId}/intellisnap	put-azurevm-vmgroup-vmGroupId-intellisnap
+metallic	GET	/V4/credentials/azure/cloudAccount	get-azuredb-cloudaccount-credentials
+metallic	POST	/V4/credentials/azure/cloudAccount	post-azuredb-cloudaccount-credentials
+metallic	GET	/V4/credentials/azure/storage	get-azuredb-storage-azure-credentials
+metallic	POST	/V4/credentials/azure/storage	post-azuredb-storage-credentials
+metallic	GET	/V4/objectstorage/instance	get-objectstore-instance
+metallic	GET	/V4/office365/serverplan	get-office365-serverplan
+metallic	POST	/V4/office365/serverplan	post-office365-serverplan
+metallic	GET	/V4/office365plan	get-office365plan
+metallic	POST	/V4/office365plan	post-office365plan
+metallic	GET	/V4/storage/cloud/azure	get-azuredb-storage
+metallic	POST	/V4/storage/cloud/azure	post-azuredb-Storage
+metallic	GET	/api/v1/tenant/usage/details	get-tenant-usage-details
+metallic	GET	/api/v1/tenant/usage/summary	get-tenant-usage-summary
+metallic	POST	/v4/Hypervisor/azure	post-azurevm-cloudaccount
+microsoft_azure_object_storage	POST	/V4/azureobj/cloudaccount	CreateAzureObjectStorageCloudAccount
+microsoft_azure_object_storage	GET	/V4/azureobj/cloudaccounts	ListAzureObjectStorageCloudAccounts
+mount_path	POST	/Library	EnableMountPathLibrary
+mssql_api	GET	/Client/{clientId}/Sql/Instance/{instanceId}/unconfiguredDatabases	GetUnconfiguredDatabases
+mssql_api	GET	/Client/{clientId}/Sql/unconfiguredServers	GetSQLUnconfiguredInstances
+mssql_api	POST	/SQL/RestoreOptions	SQLRestoreOption
+mssql_api	GET	/sql/instances	GetSQLInstances
+multi_comm_cell	GET	/V4/MultiCommCell	GetMultiCommCellInfo
+my_sqldatabases	GET	/Client/{clientId}/instance/mysql/discover	DiscoverMySQLInstances
+my_sqldatabases	DELETE	/Instance	delete-Instance
+nas	POST	/Client/NAS	post-Client-NAS
+nas	POST	/DoBrowse/NAS/SubClientContent	BrowseContentforSubclient
+nas	PUT	/NASClient/NDMPServer	put-NASClient-NDMPServer
+net_app_ransomware_resilience	GET	/V4/StorageArray/RansomwareResilience/AuthorizationStatus	GetNetAppAuthorizationStatus
+net_app_ransomware_resilience	POST	/V4/StorageArray/RansomwareResilience/NetApp/CreateAuthCredential	CreateNetAppAuthCredential
+net_app_ransomware_resilience	POST	/V4/StorageArray/RansomwareResilience/NetApp/GetBroadcastDomains	GetNetAppBroadcastDomainDetails
+net_app_ransomware_resilience	POST	/V4/StorageArray/RansomwareResilience/NetApp/Organization	GetNetAppOrganizationDetails
+network_topology	GET	/CommServ/DataInterfacePairs	get-CommServ-DataInterfacePairs
+network_topology	POST	/CommServ/DataInterfacePairs	post-CommServ-DataInterfacePairs
+network_topology	GET	/CommServ/DataInterfacePairs/HostInterfaces	gethostinterfaces
+network_topology	GET	/FirewallSummary/{clientId}	post-FirewallSummary-clientId
+network_topology	GET	/FirewallTopology	get-FirewallTopology
+network_topology	POST	/FirewallTopology	Configuring one-way network communication from tenants
+network_topology	DELETE	/FirewallTopology/{topologyId}	Delete Network Topology
+network_topology	GET	/FirewallTopology/{topologyId}	Get Network Topology properties
+network_topology	PUT	/FirewallTopology/{topologyId}	Update Network Topology
+network_topology	POST	/FirewallTopology/{topologyId}/Push	Push Network Configuration
+network_topology	POST	/PushNetworkConfiguration	post-PushNetworkConfiguration
+network_topology	POST	/V4/NetworkTopology	POSTFirewallTopology
+network_topology	DELETE	/V4/NetworkTopology/{topologyId}	DELETEFirewallTopology
+network_topology	GET	/V4/NetworkTopology/{topologyId}	GETFirewallTopologyDetails
+network_topology	PUT	/V4/NetworkTopology/{topologyId}	PUTFirewallTopology
+network_topology	GET	/v2/Commserv/DataInterfacePairs	get-v2-Commserv-DataInterfacePairs
+node	GET	/V4/Nodes	GetNodes
+node	GET	/V4/Nodes/{nodeId}	GetNodeDetails
+node	PUT	/V4/Nodes/{nodeId}	UpdateNodeProperties
+node	GET	/V4/Nodes/{nodeId}/DDB/Disks	GetNodeDDBDisks
+node	PUT	/V4/Nodes/{nodeId}/DDB/Disks	NodeDDBDiskMgmt
+object_store_plan	POST	/V4/ObjectStorePlan	CreateObjectStorePlan
+object_store_plan	DELETE	/V4/ObjectStorePlan/{planId}	DeleteObjectStorePlan
+object_store_plan	GET	/V4/ObjectStorePlan/{planId}	GetObjectStorePlanId
+object_store_plan	PUT	/V4/ObjectStorePlan/{planId}	ModifyObjectStorePlan
+office365	GET	/Office365/Subclient/{subclientId}/ObjectGUID/{objectGUID}	GetO365FolderPathAndSize
+office365	GET	/V4/Office365	GetOffice365Client
+office365	GET	/V4/Office365/Plans	GetOffice365PlanDashboard
+office365	DELETE	/V4/Office365/{appId}/AzureApp	DeleteOffice365AzureApp
+office365	GET	/V4/Office365/{appId}/AzureApp	GetOffice365AzureApp
+office365	PUT	/V4/Office365/{appId}/AzureApp	AddOffice365AzureApp
+one_drive	GET	/V4/Office365/OneDrive	GetOnedriveClient
+one_drive	POST	/V4/Office365/OneDrive	CreateOnedriveClient
+one_drive	POST	/V4/Office365/OneDrive/{appId}/Backup	PerformOnedriveBackup
+one_drive	GET	/V4/Office365/OneDrive/{appId}/Content	GetOnedriveContent
+one_drive	PUT	/V4/Office365/OneDrive/{appId}/Content	AddOnedriveContent
+one_drive	PUT	/V4/Office365/OneDrive/{appId}/Content/CustomCategory	AddOneDriveCustomCategory
+one_drive	POST	/V4/Office365/OneDrive/{appId}/Restore	PerformOnedriveRestore
+one_drive	GET	/V4/Office365/Onedrive/{appId}/Users	GetOnedriveUsers
+one_drive	PUT	/V4/Office365/Onedrive/{appId}/Users	AddOnedriveUsersList
+oracle_db	GET	/Job/{JobId}/RMANLogs	fetchRMANLogs
+oracle_db	GET	/client/{clientId}/instance/oracle/discover	InstanceDiscover
+oracle_db	GET	/oracle/instance/{instanceId}/backupPieces	GetOracleBackupPieces
+organization	GET	/EmailTemplates	GetEmailTemplate
+organization	POST	/EmailTemplates	CreateEmailTemplate
+organization	PUT	/EmailTemplates/{EmailTemplateId}	ModifyEmailTemplate
+organization	GET	/NavigationSettings	Get Navigation Settings
+organization	POST	/NavigationSettings	Update Navigation Settings
+organization	GET	/Organization	Get all Companies
+organization	POST	/Organization	Create a Company
+organization	PUT	/Organization	Update Company Details
+organization	DELETE	/Organization/{OrganizationId}	Delete a Company
+organization	GET	/Organization/{OrganizationId}	Get Company Details
+organization	GET	/Organization/{OrganizationId}/AuthToken	GetCompanyAuthorizationCode
+organization	POST	/Organization/{OrganizationId}/AuthToken	refresh-authcode
+organization	PUT	/Organization/{OrganizationId}/AuthToken/Action/disable	Disable Authorization Code
+organization	GET	/Organization/{OrganizationId}/EmailCustomization	Get Company Email Header and Footer
+organization	PUT	/Organization/{OrganizationId}/EmailCustomization	Update Company Email Header and Footer
+organization	GET	/Organization/{OrganizationId}/defaultplan	Get Company Default Plan
+organization	GET	/Organization/{organizationId}/Customization	get-Organization-organiationId-Customization
+organization	POST	/Organization/{organizationId}/action/activate	Organization Activate
+organization	POST	/Organization/{organizationId}/action/deactivate	Organization Deactivate
+organization	POST	/Subclient/byName(clientName='{clientName}',appName='{appName}',instanceName='DefaultInstanceName',backupsetName='defaultBackupSet',subclientName='{subclientName}')/Offboard	Subclient Offboard
+organization	POST	/Subclient/byName(clientName='{clientName}',appName={appName}',instanceName='DefaultInstanceName',backupsetName='defaultBackupSet',subclientName='{subclientName}')/Onboard	Subclient Onboard
+organization	POST	/Tenant/Offboard	Tenant Offboard
+organization	POST	/User/Offboard	UserOffboard
+organization	POST	/VM/{vmGuid}/Offboard	Perform VMClient Offboard
+organization	POST	/VM/{vmGuid}/Onboard	Perform VMClient Onboard
+organization	PUT	/company/{companyId}/company-association	Migrate client/client group
+organization	PUT	/company/{companyId}/migration-entities	Check eligible client/client group
+organization	PUT	/v2/Organization/{organizationId}/Customization	Organization Customization
+partner_apis	POST	/api/v1/authenticate	obtainAuthToken
+partner_apis	GET	/api/v1/partner/accounts	ListAccounts
+partner_apis	GET	/api/v1/partner/accounts/{accountId}	GetAccountbyId
+partner_apis	PATCH	/api/v1/partner/accounts/{id}	UpdateAccount
+partner_apis	PUT	/api/v1/partner/accounts/{id}/activate	ActivateAccount
+partner_apis	PUT	/api/v1/partner/accounts/{id}/deactivate	DeactivateAccount
+partner_apis	GET	/api/v1/partner/aggregator/submsps	listSubMsps
+partner_apis	POST	/api/v1/partner/aggregator/submsps	createSubMsp
+partner_apis	GET	/api/v1/partner/aggregator/submsps/{id}	getSubMspDetails
+partner_apis	GET	/api/v1/partner/aggregator/usage	getAggregatorUsage
+partner_apis	GET	/api/v1/partner/aggregator/usage/pooledstorage	getAggregatorPooledStorageUsage
+partner_apis	GET	/api/v1/partner/fulfillments	ListFulfillments
+partner_apis	POST	/api/v1/partner/fulfillments	SubmitFulfillment
+partner_apis	GET	/api/v1/partner/fulfillments/{fulfillmentId}	GetFulfillmentbyId
+partner_apis	POST	/api/v1/partner/organizations/resellers	CreateReseller
+partner_apis	GET	/api/v1/partner/organizations/resellers/{resellerId}	GetResellerbyId
+partner_apis	GET	/api/v1/partner/partners	listAllPartners
+partner_apis	PATCH	/api/v1/partner/partners	patch-api-v1-partner-partners
+partner_apis	POST	/api/v1/partner/partners	create-partner
+partner_apis	GET	/api/v1/partner/partners/{partnerId}	Get-PartnerDetails
+partner_apis	GET	/api/v1/partner/ratecards	GetRateCard
+partner_apis	GET	/api/v1/partner/usage	GetUsage
+partner_apis	GET	/api/v1/partner/usage/details	get-api-v1-partner-usage-details
+partner_apis	GET	/api/v1/partner/usage/summary	get-api-v1-partner-usage-summary
+partner_apis	GET	/api/v1/partner/users	ListUsers
+partner_apis	POST	/api/v1/partner/users	CreateUser
+partner_apis	DELETE	/api/v1/partner/users/{userId}	DeleteUser
+partner_apis	GET	/api/v1/partner/users/{userId}	GetUserbyId
+partner_apis	PUT	/api/v1/partner/users/{userId}	UpdateUserName
+partner_apis	PUT	/api/v1/partner/users/{userId}/accounts	UpdateUserManagedAccounts
+partner_apis	PUT	/api/v1/partner/users/{userId}/roles	UpdateUserRoles
+partner_apis	GET	/api/v2/partner/usage	get-api-v2-partner-usage
+partner_integrations	PUT	/Client/Action/Report/Anomaly	
+partner_integrations	PUT	/Client/Action/Report/Bulk/Anomaly	
+plan	GET	/Plan	View Plans
+plan	PUT	/Plan/{PlanId}/Clients	Plan Clients
+plan	GET	/V2/Plan/Eligible	Get Eligible Plans
+plan	POST	/V4/Plan/BackupDestination/JobOperations	RunJobOperationOnPlanBackupDestination
+plan	DELETE	/V4/Plan/BackupDestination/{BackupDestinationId}	DeleteBackupDestinationWithoutPlanInfo
+plan	GET	/V4/Plan/BackupDestination/{BackupDestinationId}	GetBackupDestinationDetailsWithoutPlanInfo
+plan	PUT	/V4/Plan/BackupDestination/{BackupDestinationId}	ModifyBackupDestinationWithoutPlanInfo
+plan	GET	/V4/Plan/BackupDestination/{backupDestinationId}/Clients	GetClientsForBackupDestination
+plan	GET	/V4/Plan/BackupDestination/{backupDestinationId}/Jobs	GetJobsOnBackupDestination
+plan	POST	/V4/Plan/BackupDestinations	CreateBackupDestinationWithoutPlanInfo
+plan	GET	/V4/Plan/Summary	GetPlanSummary
+plan	GET	/V4/Plan/{planId}/BackupDestination/{backupDestinationId}/Associations	GetBackupDestinationClientAssociations
+plan	PUT	/V4/Plan/{planId}/BackupDestination/{backupDestinationId}/Associations	UpdateBackupDestinationAssociations
+plan	POST	/V4/Plan/{planId}/BackupDestination/{backupDestinationId}/AuxCopy/Run	RunAuxCopyForPlan
+plan	PUT	/V4/Plan/{planId}/BackupDestination/{backupDestinationId}/BackupCopy/Jobs	PickUnpickJobsForBackupCopy
+plan	PUT	/V4/Plan/{planId}/BackupDestination/{backupDestinationId}/SnapCatalog/Jobs	PickUnpickJobsForCatalog
+plan	POST	/V4/Plan/{planId}/BackupDestination/{backupDestionationId}/BackupCopy/Run	RunBackupCopy
+plan	POST	/V4/Plan/{planId}/BackupDestination/{backupDestionationId}/SnapCatalog/Run	RunSnapCatalog
+plan	GET	/V4/Plan/{planId}/MediaAgents	GetAssocMAsForPlan
+plan	PUT	/V4/Plan/{planId}/StoragePolicy/{StoragePolicyId}/Association	put-V4-Plan-planId-StoragePolicy-StoragePolicyId-Association
+plan	GET	/V4/PlanIds	GetPlanIds
+plan	POST	/V5/Plan	CreatePlanV5
+plan	GET	/V5/Plan/{planId}/IncrementalPlan	get-V5-Plan-planId-Incrementalplan
+plan	GET	/V5/Plan/{planId}/LogPlan	get-V5-Plan-planId-Logplan
+plan	PUT	/plan/{planId}	Associate existing schedule policy to existing plan
+plan	GET	/v2/Plan	Get Plans
+plan	POST	/v2/Plan	CreatePlan
+plan	GET	/v2/Plan/{PlanId}	Get Plan Details
+plan	PUT	/v2/Plan/{PlanId}	Update Plan
+plan	GET	/v2/Plan/{PlanId}/AccessPolicies	Get Plan Access Policies
+plan	PUT	/v2/Plan/{PlanId}/AddOn/Database/Action/Disable	Disable Database Add-on
+plan	PUT	/v2/Plan/{PlanId}/AddOn/Database/Action/Enable	Enable Database Add-on
+plan	PUT	/v2/Plan/{PlanId}/AddOn/FileSystem/Action/Disable	Disable FileSystem Addon
+plan	PUT	/v2/Plan/{PlanId}/AddOn/FileSystem/Action/Enable	Enable FileSystem Addon
+plan	PUT	/v2/Plan/{PlanId}/AddOn/Snap/Action/Disable	Disable Snap Addon
+plan	PUT	/v2/Plan/{PlanId}/AddOn/Snap/Action/Enable	Enable Snap Addon
+plan	GET	/v2/Plan/{PlanId}/Alerts	Get Plan Alerts
+plan	PUT	/v2/Plan/{PlanId}/Alerts	Update Plan Alerts
+plan	GET	/v2/Plan/{PlanId}/AssociatedEntities	Get Plan Associations
+plan	GET	/v2/Plan/{PlanId}/Features	Plan Features
+plan	GET	/v2/Plan/{PlanId}/Operations	Plan Operations Info
+plan	PUT	/v2/Plan/{PlanId}/Options	Update Plan Options
+plan	PUT	/v2/Plan/{PlanId}/Storage/Modify	Plan Storage Modify
+plan	PUT	/v2/Plan/{PlanId}/Users	Update Plan Users
+plan	GET	/v2/Plan/{PlanId}/{entityName}	Plans For Entity Id
+plan	PUT	/v2/Plan/{planId}/sla	Update Plan SLA
+plan	GET	/v4/Plan/Summary/{planId}	getSinglePlanSummary
+plan_rules	GET	/V4/Plan/Rule	getPlanRules
+plan_rules	POST	/V4/Plan/Rule	createPlanRule
+plan_rules	PUT	/V4/Plan/Rule	updatePlanRule
+plan_rules	GET	/V4/Plan/Rule/Entities	GetPlanRuleAssociatedEntities
+plan_rules	PUT	/V4/Plan/Rule/Entities	PutPlanRuleAssociatedEntities
+plan_rules	PUT	/V4/Plan/Rule/Entities/Associate	PutPlanRuleEntitiesAssociate
+plan_rules	GET	/V4/Plan/Rule/Entities/Exclude	GetPlanRuleEntitiesExclude
+plan_rules	PUT	/V4/Plan/Rule/Entities/Exclude	PutPlanRuleEntitiesExclude
+plan_rules	PUT	/V4/Plan/Rule/Entities/Include	PutPlanRuleEntitiesInclude
+plan_rules	PUT	/V4/Plan/Rule/Rank	updatePlanRuleRank
+plan_rules	GET	/V4/Plan/Rule/Settings	GetPlanRuleSettings
+plan_rules	PUT	/V4/Plan/Rule/Settings	PutPlanRuleSettings
+plan_rules	DELETE	/V4/Plan/Rule/{ruleId}	deletePlanRule
+plan_rules	GET	/V4/Plan/Rule/{ruleId}	getPlanRuleDetails
+protection_group	GET	/V4/ProtectionGroup/AWS	GetWorkloadProtectionGroupList
+protection_group	POST	/V4/ProtectionGroup/AWS	CreateWorkloadProtectionGroupAWS
+protection_group	GET	/V4/ProtectionGroup/Azure	GetProtectionGroupList
+protection_group	POST	/V4/ProtectionGroup/Azure	CreateProtectionGroup
+protection_group	GET	/V4/ProtectionGroup/GCP	GetProtectionGroupListGCP
+protection_group	POST	/V4/ProtectionGroup/GCP	CreateWorkloadProtectionGroupGCP
+protection_group	DELETE	/V4/ProtectionGroup/{protectionGroupId}	DeleteWorkloadProtectionGroup
+protection_group	GET	/V4/ProtectionGroup/{protectionGroupId}	getProtectionGroupProperties
+protection_group	PUT	/V4/ProtectionGroup/{protectionGroupId}	UpdateWorkloadProtectionGroup
+protection_group	GET	/V4/ProtectionGroup/{protectionGroupId}/Entities	getProtectionGroupEntities
+qcommands	POST	/ExecuteQCommand	Execute QCommand
+qcommands	POST	/QCommand/{qcommand}	Execute QOperation
+rdssnap	POST	/Instance/{instanceId}/PITREnabledDBInstances	post-Instance-PITREnabledDBInstances
+rdssnap	POST	/Replication/{Secondarysnapcopyid}/RegionMapping	post-RegionMapping
+recovery_group	GET	/LicenseUsage	GetLicenseUsage
+recovery_group	POST	/RecoveryGroup	CreateRecoveryGroup
+recovery_group	PUT	/RecoveryGroup	UpdateRecoveryGroup
+recovery_group	POST	/RecoveryGroup/CleanupRecovery	RecoveryGroupCleanupRecovery
+recovery_group	DELETE	/RecoveryGroup/{recoveryGroupId}	DeleteRecoveryGroup
+recovery_group	GET	/RecoveryGroup/{recoveryGroupId}	GetRecoveryGroup
+recovery_group	GET	/RecoveryGroup/{recoveryGroupId}/Entity/{entityId}	GetRecoveryGroupAndEntityDetails
+recovery_group	GET	/RecoveryGroup/{recoverygroupid}/KPI	GetRecoveryGroupEntityKPI
+recovery_group	GET	/RecoveryGroups	GetRecoveryGroups
+recovery_group	POST	/V4/RecoveryEntity/BackupCopy/Regions	listRecoverableBackupRegionsForEntities
+recovery_group	POST	/V4/RecoveryGroup/VM/{VirtualMachineOperation}	PerformRecoveryGroupVMOperation
+recovery_group_entities	GET	/RecoveryEntity/{recoveryEntityId}	GetRecoveryEntity
+recovery_group_entities	DELETE	/RecoveryGroup/{recoveryGroupId}/Entity	DeleteRecoveryEntities
+recovery_group_entities	POST	/RecoveryGroup/{recoveryGroupId}/Entity	CreateRecoveryEntities
+recovery_group_entities	PUT	/RecoveryGroup/{recoveryGroupId}/Entity	UpdateRecoveryEntities
+recovery_group_entities	PUT	/RecoveryGroup/{recoveryGroupId}/Entity/{entityId}	UpdateRecoveryEntity
+recovery_groups	GET	/V4/RecoveryGroups	Recovery Groups
+recovery_point_stores	DELETE	/V4/RecoveryPointStore/{rpsId}	DeleteRecoveryPointStores
+recovery_point_stores	GET	/V4/RecoveryPointStore/{rpsId}	GetRecoveryPointStores
+recovery_point_stores	GET	/V4/RecoveryPointStores	GetRecoveryPointStoreList
+recovery_readiness	POST	/RecoveryReadiness	RecoveryReadiness
+recovery_runbook	GET	/V4/RecoveryRunbook	GetRecoveryRunbooks
+recovery_runbook	POST	/V4/RecoveryRunbook	CreateRecoveryRunbook
+recovery_runbook	POST	/V4/RecoveryRunbook/Cleanup	RecoveryRunbookCleanupRecovery
+recovery_runbook	GET	/V4/RecoveryRunbook/EligibleResources	RecoveryRunbookEligibleResources
+recovery_runbook	DELETE	/V4/RecoveryRunbook/{runbookId}	DeleteRecoveryRunbook
+recovery_runbook	GET	/V4/RecoveryRunbook/{runbookId}/KPI	GetRecoveryRunbookResourceKPI
+recovery_runbook	POST	/V4/RecoveryRunbook/{runbookId}/Recover	RecoveryRunbookRecover
+recovery_runbook	GET	/V4/RecoveryRunbook/{runbookId}/Resources	GetRecoveryRunbookResourcesDetails
+recovery_runbook	PUT	/V4/RecoveryRunbook/{runbookId}/Resources	UpdateRecoveryRunbookResources
+recovery_runbook	GET	/V4/RecoveryRunbook/{runbookId}/Resources/{resourceId}	GetRecoveryRunbookAndResourceDetails
+recovery_runbook	PUT	/V4/RecoveryRunbook/{runbookId}/Site	ChangeRecoveryRunbookSite
+recovery_runbook	GET	/V4/RecoveryRunbook/{runbookId}/Site/Validation	RecoveryRunbookSiteValidation
+recovery_runbook	POST	/V4/RecoveryRunbook/{runbookId}/{VirtualMachineOption}	PerformRecoveryRunbookVMOperation
+recovery_target	DELETE	/V4/RecoveryTarget/{recoveryTargetId}	DeleteRecoveryTarget
+recovery_target	GET	/V4/RecoveryTarget/{recoveryTargetId}	GetRecoveryTarget
+recovery_target	GET	/V4/RecoveryTarget/{targetId}/VirtualMachines	getRecoveryTargetVMs
+recovery_target	GET	/V4/RecoveryTargets	GetRecoveryTargets
+regions	GET	/Regions	Get all Regions
+regions	POST	/Regions	Create a new Region
+regions	DELETE	/Regions/{regionId}	Delete a Region
+regions	GET	/Regions/{regionId}	Get Region Details
+regions	PUT	/Regions/{regionId}	Update Region
+regions	GET	/Regions/{regionId}/clients	Get Clients of a region
+regions	GET	/V4/Regions	GetRegions
+regions	POST	/V4/Regions	CreateRegion
+regions	DELETE	/V4/Regions/{regionId}	DeleteRegion
+regions	GET	/V4/Regions/{regionId}	GetRegionDetails
+regions	PUT	/V4/Regions/{regionId}	UpdateRegion
+regions	GET	/entity/region	getRegionForEntities
+regions	GET	/entity/{entityType}/{entityId}/region	getRegionForEntity
+regions	PUT	/entity/{entityType}/{entityId}/region	setRegionForEntity
+remediation_policy	POST	/V4/Remediation/Policy/AssetViolationCount	
+remediation_policy	POST	/V4/RemediationPolicy	RemediationPolicy
+remediation_policy	GET	/V4/RemediationPolicy/PolicyDetails	
+remediation_policy	GET	/V4/RemediationPolicy/PolicyList	
+replication	POST	/ModifyTask	AddVMtoReplicationGroup
+replication	POST	/ReplicationGroups/{ReplicationGroupID}/testfailover	TestFailover-ReplicationGroup
+replication	GET	/Replications/Groups	GetReplicationGroups
+replication	GET	/Replications/Monitors/streaming	ReplicatedVMs
+replication	DELETE	/Replications/Monitors/streaming/{replicationPairId}	ReplicatedVM
+replication	GET	/Task/{taskId}/Details	ReplicationGroupDetails
+replication	POST	/Task/{taskId}/Operation/DELETE	DeleteReplicationGroup
+replication	GET	/V2/Replications/Monitors/streaming	get-V2-Replications-Monitors-streaming
+replication	GET	/VMAllocationPolicy	Recoverytargets
+replication	POST	/VMAllocationPolicy	CreateRecoverytarget
+replication	DELETE	/VMAllocationPolicy/{VMAllocationPolicyId}	DeleteRecoveryTarget
+replication_group	GET	/V4/ReplicationGroup	getReplicationGroups
+replication_group	POST	/V4/ReplicationGroup	CreateReplicationGroup
+replication_group	POST	/V4/ReplicationGroup/Content/Validate	validateReplicationGroupContent
+replication_group	PUT	/V4/ReplicationGroup/Disable	DisableReplicationGroup
+replication_group	PUT	/V4/ReplicationGroup/Enable	EnableReplicationGroup
+replication_group	GET	/V4/ReplicationGroup/{groupId}/ReplicationTask/{taskId}/Mapping	GetDiskMappingForReplicationGroup
+replication_group	GET	/V4/ReplicationGroup/{replicationGroupId}	getReplicationGroupDetails
+replication_group	PUT	/V4/ReplicationGroup/{replicationGroupId}	ModifyReplicationGroup
+replication_group	GET	/V4/ReplicationGroup/{replicationGroupTaskId}/VirtualMachines	getReplicationGroupTaskVMs
+replication_monitor	GET	/V4/ArrayReplicationMonitor	GetArrayReplicationMonitor
+replication_monitor	POST	/V4/ReplicationMonitor/ReplicateNow	post-V4-ReplicationMonitor-ReplicateNow
+replication_monitor	GET	/V4/ReplicationMonitor/{pairId}	GetReplicationMonitorPairId
+replication_monitor	GET	/V4/ReplicationMonitor/{pairId}/VirtualMachines	getReplicationPairVMs
+replication_monitor	GET	/V4/ReplicationMonitor/{replicationPairId}/testFailoverMachines	GetTestFailoverMachines
+replication_monitor	GET	/V4/VMProvisioning/VirtualMachine/{vmGUID}/ActiveMounts	getVMActiveMounts
+reporting	GET	/Reports/SubscriptionsList	Get list of report subscriptions
+reporting	POST	/Reports/UpdateSubscriptions	Update Subscription Schedule
+reporting	POST	/SLAReport	Get SLA Report
+reporting	GET	/cr/reportsplusengine/datasets	listAllDatasets
+reporting	GET	/cr/reportsplusengine/datasets/5e7dfa05-07cd-4beb-be9c-181a1722c2e8:571a5443-fb35-435e-b013-ecd1a6dcfb65/data	Get Audit Trail
+reporting	GET	/cr/reportsplusengine/datasets/METRICS_DEFAULT/data	Get Chargeback Report
+reporting	GET	/cr/reportsplusengine/datasets/{dataSetId}/data	Report
+reporting	PUT	/cr/reportsplusengine/reports	Import a Report
+reporting	GET	/cr/reportsplusengine/reports/name:{Report Name}	Get Report Details
+reporting	POST	/cr/reportsplusengine/reports/{reportId}/deploy	deploy a report
+reporting	GET	/cr/reportsplusengine/reports?icludeDrafts=false&includeStoreVersions=false&includeMetricsReports=false	get-allreports
+resource_pools	GET	/V4/ResourcePool	GetResourcePools
+resource_pools	GET	/V4/ResourcePool/Count	GetResourcePoolCount
+restore	GET	/Client/2/Hierarchy	Get Client Hierarchy Available backup
+restore	GET	/Recall	Perform Recall
+restore	POST	/retrieveToClient	Retrieve to Client (Restore)
+role	GET	/Role	View Roles
+role	POST	/Role	Create a Role
+role	DELETE	/Role/{roleId}	delete-Role-roleId
+role	GET	/Role/{roleId}	get-Role-roleId
+role	POST	/Role/{roleId}	Enabling security roles for tenant use
+roles	GET	/V4/Permissions	GetPermissionResponse
+roles	GET	/V4/Role	GetListOfRoles
+roles	POST	/V4/Role	CreateNewRole
+roles	DELETE	/V4/Role/{roleId}	DeleteRoles
+roles	GET	/V4/Role/{roleId}	GetRoleDetails
+roles	PUT	/V4/Role/{roleId}	ModifyRole
+runbook_resources	PUT	/Cleanroom/Runbook/Resource/Priority	UpdateRunbookResourcePriority
+runbook_resources	GET	/Cleanroom/Runbook/Resources	
+runbook_resources	PUT	/Cleanroom/Runbook/{id}/Priority/{priority}/Skip/{enableDisable}	UpdateResourceSkip
+s3_object_storage	GET	/CloudApps/AccessNodes	get-CloudApps-AccessNodes?instanceType=5&excludeClientGroups=false&excludeClients=false&regionId=53
+s3_object_storage	POST	/Instance/{instanceid}/Deconfigure	post-Instance-instanceid-Deconfigure
+s3_object_storage	POST	/MachineBrowse	post-SubclientBrowse
+s3_vault	GET	/V4/CVS3Endpoint/{ClientID}/state	GetS3EndpointState
+s3_vault	PUT	/V4/CVS3Endpoint/{ClientID}/state/disable	DisableS3Endpoint
+s3_vault	PUT	/V4/CVS3Endpoint/{ClientID}/state/enable	EnableS3Endpoint
+s3_vault	POST	/V4/CVS3Store	CreateCVS3Store
+s3_vault	GET	/V4/CVS3Store/{storeId}	getCVS3StoreDetails
+s3_vault	POST	/V4/CVS3Telemetry	PostCVS3Telemetry
+s3_vault	POST	/V4/Client/{clientId}/CVS3endpoint	CreateS3Endpoint
+salesforce	POST	/MaskingPolicy	post-MaskingPolicy
+salesforce	GET	/MaskingPolicy/{InstanceId}	get-MaskingPolicy-instanceId
+salesforce	GET	/Salesforce/Archiving/{clientId}/Archive/preview/{jobId}/children/{parentEdgeId}	get-Salesforce-Archive-Preview-Children
+salesforce	GET	/Salesforce/Archiving/{clientId}/Archive/preview/{jobId}/objects	get-Salesforce-Archive-Preview-Objects
+salesforce	POST	/Salesforce/Archiving/{clientId}/Archive/preview/{jobId}/records/{objectName}/{pathId}	post-Salesforce-Archive-Preview-Records
+salesforce	GET	/Salesforce/Organization	get-Salesforce-Organizations
+salesforce	POST	/Salesforce/Organization	post-Salesforce-Organization
+salesforce	GET	/Salesforce/Organization/{ClientId}	get-salesforce-organization-clientid
+salesforce	POST	/Salesforce/Organization/{ClientId}	post-Salesforce-Organization-ClientId
+salesforce	GET	/Salesforce/Organization/{ClientId}/User/Permissions/Refresh	get--refresh-permissions
+salesforce	PUT	/Salesforce/Organization/{ClientId}/User/Permissions/update	put-update-User-Permissions
+salesforce	POST	/Salesforce/{ClientId}/Alerts	post-Salesforce-ClientId-Alerts
+salesforce	DELETE	/Salesforce/{ClientId}/Alerts/{AlertId}	delete-Salesforce-ClientId-Alerts-AlertId
+salesforce	PUT	/Salesforce/{ClientId}/Alerts/{AlertId}	put-Salesforce-ClientId-Alerts-AlertId
+salesforce	PUT	/Salesforce/{ClientId}/Alerts/{AlertId}/Disable	put-Salesforce-ClientId-Alerts-AlertId-Disable
+salesforce	PUT	/Salesforce/{ClientId}/Alerts/{AlertId}/Enable	put-Salesforce-ClientId-Alerts-AlertId-Enable
+salesforce	GET	/Salesforce/{ClientId}/GDPR/Requests	get-Salesforce-ClientId-GDPR-Requests
+salesforce	POST	/Salesforce/{ClientId}/GDPR/Requests	post-Salesforce-GDPR-Requests
+salesforce	GET	/Salesforce/{ClientId}/Sandbox/Seeding/Templates	get-Salesforce-ClientId-Sandbox-Seeding-Templates
+salesforce	POST	/Salesforce/{ClientId}/Sandbox/Seeding/Templates	post-Salesforce-ClientId-Sandbox-Seeding-Templates
+salesforce	DELETE	/Salesforce/{ClientId}/Sandbox/Seeding/Templates/{TemplateId}	delete-Salesforce-ClientId-Sandbox-Seeding-Templates-TemplateId
+salesforce	GET	/Salesforce/{ClientId}/Sandbox/Seeding/Templates/{TemplateId}	get-Salesforce-ClientId-Sandbox-Seeding-Templates-TemplateId
+salesforce	PUT	/Salesforce/{ClientId}/Sandbox/Seeding/Templates/{TemplateId}	put-Salesforce-ClientId-Sandbox-Seeding-Templates-TemplateId
+salesforce	GET	/Salesforce/{clientId}/Restore/preview/{jobId}/children/{parentEdgeId}	get-Salesforce-Restore-Preview-Children
+salesforce	GET	/Salesforce/{clientId}/Restore/preview/{jobId}/objects	get-Salesforce-Restore-Preview-Objects
+salesforce	POST	/Salesforce/{clientId}/Restore/preview/{jobId}/records/{objectName}/{pathId}	post-Salesforce-Restore-Preview-Records
+salesforce	DELETE	/V4/Server/{clientId}/Agent/134	delete-V4-Server-ClientId-Agent-134
+salesforce	GET	/cr/reportsplusengine/datasets/4e639029-2764-4fb4-b7e3-0fc636cdd025/data	get-Record-Level-Browse
+satori	POST	/satori/tokens	GetRelaySamlToken
+schedule	POST	/V4/Schedule/list	getschedules
+schedule	POST	/V4/SchedulePolicy/list	GetSchedulePolicies
+schedule	PUT	/V4/SchedulePolicy/{schedulePolicyId}/Schedule/{scheduleId}/Pattern	modifySchedulePattern
+scheduleand_schedule_policy	GET	/SchedulePolicy	GetSchedulePolicies
+scheduleand_schedule_policy	DELETE	/SchedulePolicy/{taskId}	DeleteSchedulePolicy
+scheduleand_schedule_policy	GET	/SchedulePolicy/{taskId}	GetSchedulePolicyProperties
+scheduleand_schedule_policy	GET	/Schedules	GetallSchedules
+scheduleand_schedule_policy	GET	/Schedules/{taskId}	Get Schedules Properties
+scheduleand_schedule_policy	POST	/Task	Create a Schedule Policy
+scheduleand_schedule_policy	PUT	/Task	Update Schedule Policy Entity Associations
+scheduleand_schedule_policy	DELETE	/Task/{taskId}/Agent	Schedule Policy Agent
+scheduleand_schedule_policy	DELETE	/Task/{taskId}/Entity	Delete Schedule Policy Entity
+scheduleand_schedule_policy	POST	/Task/{taskId}/Entity/Add	Add Agent to Schedule Policy
+scheduleand_schedule_policy	POST	/Task/{taskId}/Entity/exclude	Exclude Entity to Schedule Policy
+scheduleand_schedule_policy	POST	/Task/{taskId}/SubTask/{subtaskId}	Modify a Schedule Pattern
+scrub_logs	PUT	/V4/scrubLogs/Action/Disable	DisableLogScrubbing
+scrub_logs	PUT	/V4/scrubLogs/Action/Enable	EnableLogScrubbing
+security	POST	/Security	get-Security
+security	POST	/security/multicommcell	Add service commcells to new company
+security_assembly	GET	/Security/Assembly	SecurityAssembly
+security_assembly	GET	/Security/Assembly/EligibleResources	CleanroomEligibleResources
+server_group	PUT	/V4/CommcellGroup/{commcellGroupId}	UpdateCommcellGroupAssociation
+server_group	GET	/V4/ServerGroup	GetServerGroups
+server_group	POST	/V4/ServerGroup	CreateServerGroups
+server_group	POST	/V4/ServerGroup/Preview	ServerGroupsCreationPreview
+server_group	DELETE	/V4/ServerGroup/{serverGroupId}	DeleteServerGroup
+server_group	GET	/V4/ServerGroup/{serverGroupId}	GetServerGroupIdDetails
+server_group	PUT	/V4/ServerGroup/{serverGroupId}	UpdateServerGroupAssociation
+server_group	PUT	/V4/ServerGroup/{serverGroupId}/Backup/Action/Disable	DisableBackupServerGroup
+server_group	PUT	/V4/ServerGroup/{serverGroupId}/Backup/Action/Enable	EnableBackupServerGroup
+server_group	DELETE	/V4/ServerGroup/{serverGroupId}/DCPlan	deleteServerGroupDCPlan
+server_group	GET	/V4/ServerGroup/{serverGroupId}/DCPlan	getServerGroupDCPlan
+server_group	PUT	/V4/ServerGroup/{serverGroupId}/DCPlan	putServerGroupDCPlan
+server_group	PUT	/V4/ServerGroup/{serverGroupId}/DataAging/Action/Disable	DisableDataAgingServerGroup
+server_group	PUT	/V4/ServerGroup/{serverGroupId}/DataAging/Action/Enable	EnableDataAgingServerGroup
+server_group	PUT	/V4/ServerGroup/{serverGroupId}/Refresh	RefreshServerGroupAssociation
+server_group	PUT	/V4/ServerGroup/{serverGroupId}/Restore/Action/Disable	DisableRestoreServerGroup
+server_group	PUT	/V4/ServerGroup/{serverGroupId}/Restore/Action/Enable	EnableRestoreServerGroup
+server_plan	DELETE	/V4/Global/ServerPlan/{planId}/storageRegion/{regionId}	DeleteStorageTagRegion
+server_plan	POST	/V4/ServerPlan	CreateServerPlan
+server_plan	DELETE	/V4/ServerPlan/{planId}	DeletePlan
+server_plan	GET	/V4/ServerPlan/{planId}	GetPlanById
+server_plan	PUT	/V4/ServerPlan/{planId}	ModifyPlan
+server_plan	POST	/V4/ServerPlan/{planId}/Backup	BackupServerPlan
+server_plan	PUT	/V4/ServerPlan/{planId}/Backup/Disable	DisableBackupOnPlan
+server_plan	PUT	/V4/ServerPlan/{planId}/Backup/Enable	EnableBackupOnPlan
+server_plan	POST	/V4/ServerPlan/{planId}/BackupContent	CreateServerPlanBackupContent
+server_plan	POST	/V4/ServerPlan/{planId}/BackupDestination	CreateBackupDestination
+server_plan	DELETE	/V4/ServerPlan/{planId}/BackupDestination/{BackupDestinationId}	DeleteBackupDestination
+server_plan	PUT	/V4/ServerPlan/{planId}/BackupDestination/{BackupDestinationId}	ModifyBackupDestination
+server_plan	GET	/V4/ServerPlan/{planId}/BackupDestinations	GetBackupDestinations
+server_plan	GET	/V4/ServerPlan/{planId}/RPO	GetServerPlanRPO
+server_plan	POST	/V4/ServerPlan/{planId}/RPO	CreateServerPlanRPO
+server_plan	PUT	/V4/ServerPlan/{planId}/RPO	UpdateServerPlanRPO
+server_plan	POST	/V4/ServerPlan/{planId}/RPO/Run	BackupServerPlanRunRPO
+server_plan	PUT	/V4/ServerPlan/{planId}/Retention/Synthfull	
+server_plan	DELETE	/V4/ServerPlan/{planId}/storageRegion/{regionList}	DeleteStorageRegion
+server_plan	GET	/V5/ServerPlan/{planId}/BackupDestination/SourceCopy/Eligible	GetSourceCopiesForGivenServerPlanRegion
+server_plan	GET	/V5/ServerPlan/{planId}/BackupDestination/{BackupDestinationId}	GetBackupDestinationDetails
+server_plan	PUT	/V5/ServerPlan/{planId}/BackupDestination/{BackupDestinationId}	ModifyBackupDestinationDetails
+server_plan	POST	/V5/ServerPlan/{planId}/BackupDestination/{BackupDestinationId}/Clone	CloneServerPlanBackupDestination
+server_plan	GET	/V5/ServerPlan/{planId}/StoragePolicy	StoragePolicyListForServerPlan
+server_plan	POST	/V5/ServerPlan/{planId}/StoragePolicy	CreateStoragePolicyForServerPlan
+server_plan	DELETE	/V5/ServerPlan/{planId}/StoragePolicy/{storagePolicyId}	DeleteStoragePolicyForServerPlan
+server_plan	GET	/V5/ServerPlan/{planId}/StoragePolicy/{storagePolicyId}	GetStoragePolicyDetailsForServerPlan
+server_plan	PUT	/V5/ServerPlan/{planId}/StoragePolicy/{storagePolicyId}	UpdateStoragePolicyForServerPlan
+servers	PUT	/V4/Client/{clientId}/Retire	RetireClientPackages
+servers	GET	/V4/PlatformUpgrade/Options	GetPlatformUpgradeOptions
+servers	PUT	/V4/Server/{serverId}/Backup/Action/Disable	DisableBackupServer
+servers	PUT	/V4/Server/{serverId}/Backup/Action/Enable	EnableBackupServer
+servers	PUT	/V4/Server/{serverId}/DataAging/Action/Disable	DisableDataAgingServer
+servers	PUT	/V4/Server/{serverId}/DataAging/Action/Enable	EnableDataAgingServer
+servers	PUT	/V4/Server/{serverId}/Restore/Action/Disable	DisableRestoreServer
+servers	PUT	/V4/Server/{serverId}/Restore/Action/Enable	EnableRestoreServer
+servers	PUT	/V4/ServerGroup/{serverGroupId}/Retire	RetireServerGroup
+servers	GET	/V4/Servers	GetServers
+servers	GET	/V4/Servers/CommServeHostName	GetServerCommServeHostName
+servers	PUT	/V4/Servers/CommServeHostName	PutServerCommServeHostName
+servers	GET	/V4/Servers/Domain	GetServerDomain
+servers	PUT	/V4/Servers/Domain	ChangeServerDomain
+servers	PUT	/V4/Servers/Retire	RetireServers
+servers	PUT	/V4/Servers/{serverId}/Role/MediaAgent	addMediaAgentRole
+servers	GET	/V4/Servers/{serverId}/isVM	CheckServerIsVM
+service_commcells	GET	/V4/ServiceCommcells	GetServiceCommcells
+sharepoint	GET	/V4/Office365/SharePoint	GetSharepointClient
+sharepoint	POST	/V4/Office365/SharePoint	CreateSharepointClient
+sharepoint	GET	/V4/Office365/SharePoint/{appId}/Content	GetSharepointContent
+sharepoint	PUT	/V4/Office365/SharePoint/{appId}/Content	AddSharepointContent
+sharepoint	PUT	/V4/Office365/SharePoint/{appId}/Content/CustomCategory	AddSharepointCustomCategory
+sharepoint	POST	/V4/Office365/Sharepoint/{appId}/Backup	PerformSharepointBackup
+sharepoint	POST	/V4/Office365/Sharepoint/{appId}/Restore	PerformSharepointRestore
+sharepoint	GET	/V4/Office365/Sharepoint/{appId}/Sites	GetSharepointSites
+sharepoint	PUT	/V4/Office365/Sharepoint/{appId}/Sites	AddSharepointSitesList
+smart_protect	PUT	/Asset/SmartProtect/Recommendations/Refresh	RefereshSmartProtectRecommendation
+smart_protect	POST	/Asset/SmartProtect/Recommendations/Search	SmartProtectRecommendationsSearch
+smart_protect	POST	/Asset/SmartProtect/ResourceClassification/Feedback	SubmitArlieAdvisorFeedback
+snapshot	GET	/V4/Snaps/snapEngine/{snapEngineId}/Plan/{planId}/Subclients	GetSubclientsForReplication
+snapshot	GET	/V4/StorageArrays/Job/{jobId}/Snaps	SnapByJobs
+snapshot	GET	/V4/StorageArrays/{arrayId}/Snaps	ListSnapshots
+snapshot	POST	/V4/StorageArrays/{arrayId}/Snaps/Delete	SnapDelete
+snapshot	POST	/V4/StorageArrays/{arrayId}/Snaps/Delete/Force	SnapForceDelete
+snapshot	POST	/V4/StorageArrays/{arrayId}/Snaps/InstantClone/Delete	InstantCloneDelete
+snapshot	POST	/V4/StorageArrays/{arrayId}/Snaps/InstantClone/Delete/Force	InstantCloneForceDelete
+snapshot	POST	/V4/StorageArrays/{arrayId}/Snaps/Mount	SnapMount
+snapshot	POST	/V4/StorageArrays/{arrayId}/Snaps/MultiNode/Unmount	MultiNodeUnmount
+snapshot	POST	/V4/StorageArrays/{arrayId}/Snaps/MultiNode/Unmount/Force	MultiNodeForceUnmount
+snapshot	PUT	/V4/StorageArrays/{arrayId}/Snaps/Recon	SnapReconWorkflow
+snapshot	POST	/V4/StorageArrays/{arrayId}/Snaps/Revert	SnapRevert
+snapshot	POST	/V4/StorageArrays/{arrayId}/Snaps/Unmount	SnapUnmount
+snapshot	POST	/V4/StorageArrays/{arrayId}/Snaps/Unmount/Force	SnapForceUnmount
+snapshot_configurations	GET	/V4/StorageArrays/Copy/{copyId}/Arrays/{arrayId}/Snap/Configs	GetCopyConfigs
+snapshot_configurations	PUT	/V4/StorageArrays/Copy/{copyId}/Arrays/{arrayId}/Snap/Configs	EditCopySnapConfigs
+snapshot_configurations	GET	/V4/StorageArrays/Vendors	GetVendors
+snapshot_configurations	GET	/V4/StorageArrays/Vendors/{vendorId}	GetSnapConfig
+snapshot_configurations	GET	/V4/StorageArrays/{arrayId}/Client/{clientId}/Snap/Configs	GetClientSnapConfigs
+snapshot_configurations	PUT	/V4/StorageArrays/{arrayId}/Client/{clientId}/Snap/Configs	EditClientSnapConfigs
+snapshot_configurations	PUT	/V4/StorageArrays/{arrayId}/Snap/Configs	EditSnapConfigs
+snapshot_configurations	GET	/V4/StorageArrays/{arrayId}/Subclient/{subclientId}/Snap/Configs	GetSubclientSnapConfigs
+snapshot_configurations	PUT	/V4/StorageArrays/{arrayId}/Subclient/{subclientId}/Snap/Configs	EditSubclientSnapConfigs
+snapshot_management	GET	/V4/Snaps/Subclients	GetSubclientsForSnapEngine
+snmp	GET	/V4/Snmp	GetSNMPhosts
+software_cache	GET	/V4/SoftwareCache	GetSoftwareCachesDetails
+software_cache	POST	/V4/SoftwareCache	AddSoftwareCache
+software_cache	GET	/V4/SoftwareCache/QualifiedServers	GetQualifiedServersForSoftwareCache
+software_cache	DELETE	/V4/SoftwareCache/{clientId}	DeleteSoftwareCacheServer
+software_cache	GET	/V4/SoftwareCache/{clientId}	GetSoftwareCacheDetailsForServer
+software_cache	PUT	/V4/SoftwareCache/{clientId}	ModifySoftwareCacheDetails
+solutions	GET	/V4/Solutions	getSolutionsId
+splunk	POST	CreateTask	BackupSplunkInstance
+storage	PUT	/ClientGroup/CloudVMPowerManagement	Update Power Management on Client Group Level
+storage	GET	/DDBInformation/{storeID}	Get DDB Store Info
+storage	GET	/DriveController	Get Controller for a mount path
+storage	POST	/DriveController	Add controller for mountpath
+storage	POST	/GetFileTypesAndExtensions	Get File Types And Extensions
+storage	GET	/Library	Library
+storage	GET	/Library/{LibraryId}	Get Library Details
+storage	POST	/LibraryOperations	Reset Tape Library
+storage	POST	/LockMMConfiguration	Lock / Unlock MM Configuration
+storage	GET	/MediaAgent	Get All MediaAgents
+storage	PUT	/MediaAgent/CloudVMPowerManagement	Update Media Agent Power Management
+storage	GET	/MediaAgent/{mediaAgentId}/CloudVMPowerManagement/{operation}	Get MediaAgent Power Management
+storage	GET	/MediaAgentForLibrary	Get MediaAgent for Library
+storage	GET	/StoragePolicyListAssociatedToMediaAgent	Storage Policy List for a MediaAgent
+storage	GET	/StoragePool	Get Storage Pools
+storage	POST	/StoragePool	Create a Storage Pool
+storage	DELETE	/StoragePool/{StoragePoolId}	Delete Storage Pool
+storage	GET	/StoragePool/{StoragePoolId}	Storage Pool Details
+storage	POST	/TapeLibraryProperties	Enable Tape Library
+storage	PUT	/V2/MediaAgents/{MediaAgentId}	Update Media Agent Properties
+storage	GET	/V2/StoragePolicy	Get Storage Policies
+storage	POST	/V2/StoragePolicy	Create Storage Policy
+storage	DELETE	/V2/StoragePolicy/{storagePolicyId}	Delete a Storage Policy
+storage	GET	/V2/StoragePolicy/{storagePolicyId}	Get Storage Policy Details
+storage	PUT	/V2/StoragePolicy/{storagePolicyId}	Update a Storage Policy
+storage	POST	/V2/StoragePolicy/{storagePolicyId}/Copy	Create a Storage Policy Copy
+storage	DELETE	/V2/StoragePolicy/{storagePolicyId}/Copy/{copyId}	Delete Storage Policy Copy
+storage	GET	/V2/StoragePolicy/{storagePolicyId}/Copy/{copyId}	Get Storage Policy Copy Details
+storage	PUT	/V2/StoragePolicy/{storagePolicyId}/Copy/{copyId}	Update Storage Policy Copy Details
+storage	GET	/V2/StoragePolicy/{storagePolicyId}/Copy/{copyId}/Size	Get Storage Policy Copy Size
+storage	GET	/V2/StoragePolicy/{storagePolicyId}/SearchEngineProperties	Storage Policy Search Engine List
+storage	GET	/V4/MountPath/Content	get-MountPath-Content
+storage	GET	/V4/Storage/{storagePoolId}/associatedCopies	GetStorageAssociatedCopies
+storage	PUT	/V4/Storage/{storagePoolId}/credential	UpdateLinuxMediaAgentsCredentials
+storage	PUT	/V4/StoragePool/DDB	UpdateDDBPropertiesOfStorage
+storage	PUT	/V4/StoragePool/{StoragePoolId}/maintenance/Disable	DisableMaintenanceForStoragePool
+storage	PUT	/V4/StoragePool/{StoragePoolId}/maintenance/Enable	EnableMaintenanceForStoragePool
+storage	PUT	/V4/StoragePool/{storagePoolId}/DDB/SpaceReclaim	DDBSpaceReclaimOnStoragePool
+storage	PUT	/V4/StoragePool/{storagePoolId}/DDB/Verify	DDBVerificationOnStoragePool
+storage	GET	/V4/StoragePool/{storagePoolId}/MediaAgents	GetMediaAgentsForStoragePool
+storage	GET	/V4/StoragePool/{storagePoolId}/runningJobs	GetRunningJobsForStoragePool
+storage	DELETE	/mediaagent/{mediaAgentId}	delete-mediaagent-mediaAgentId
+storage	GET	/v2/MediaAgents	Get MediaAgents
+storage	PUT	/v4/StoragePool/WORM/{storagePoolId}/Retention	UpdateRetentionOfDependentCopies
+storage_arrays	GET	/Snaps	GetSnapList
+storage_arrays	GET	/V4/StorageArrays/{arrayId}/SVMs	GetArraySvmDiscovery
+storage_arrays	POST	/V4/StorageArrays/{arrayId}/SVMs	AddArraySvms
+storage_arrays	PUT	/V4/StorageArrays/{arrayId}/physicalArray/{physicalArrayId}	AssociateSVMToCluster
+storage_policy	GET	/V4/StoragePolicy/{storagePolicyId}/Associations	getV5StoragePolicyAssociations
+subclient	POST	/Subclient/EmailPolicyAssociation	Subclient Email Policy Association
+subclient	PUT	/Subclient/EmailPolicyAssociation	Subclient Email Policy Association Copy
+subclient	DELETE	/Subclient/byName(clientName='{clientname}',appName='{appname}',backupsetName='{backupsetname}',subclientName='{subclientname}')	Delete a Subclient By Name
+subclient	GET	/Subclient/byName(clientName='{clientname}',appName='{appname}',backupsetName='{backupsetname}',subclientName='{subclientname}')	Get Subclient Properties By Name
+subclient	POST	/Subclient/byName(clientName='{clientname}',appName='{appname}',backupsetName='{backupsetname}',subclientName='{subclientname}')	Update Subclient Properties By Name
+subclient	POST	/Subclient/byName(clientName='{clientname}',appName='{appname}',backupsetName='{backupsetname}',subclientName='{subclientname}')/action/backup	Perform Subclient Backup By Name
+subclient	GET	/Subclient/{subclientId}/EmailPolicyAssociation	Get Subclient Email Policy Association
+subclient	PUT	/V4/Subclient/{subclientId}/Backup/Action/Disable	DisableBackupSubclient
+subclient	PUT	/V4/Subclient/{subclientId}/Backup/Action/Enable	EnableBackupSubclient
+sybase_db	POST	/databases/sybase/browse	post-instance-DBBrowse-instanceId
+syslog_server	POST	/Config	Create a Syslog Server
+syslog_server	GET	/V4/syslogServer	GetSyslogStatus
+syslog_server	POST	/V4/syslogServer	ConfigureSyslogStatus
+tape_storage	GET	/V4/Library/{libraryId}/Media	GetMediaListForLibrary
+tape_storage	GET	/V4/Library/{libraryId}/Slot	GetSlotListForLibrary
+tape_storage	PUT	/V4/MMConfiguration/Lock	CreatelockConfiguration
+tape_storage	PUT	/V4/MMConfiguration/Unlock	CreatelunlockConfiguration
+tape_storage	GET	/V4/Storage/Tape	ReturnListOfTapes
+tape_storage	GET	/V4/Storage/Tape/Locations	ReturnListOfLocations
+tape_storage	GET	/V4/Storage/Tape/{libraryId}	FetchTapeDetails
+tape_storage	GET	/V4/Storage/Tape/{libraryId}/Drive/{driveId}	ReturnDrivePoolDetails
+tape_storage	GET	/V4/Storage/Tape/{libraryId}/Media	FetchTapeMediaDetails
+tape_storage	POST	/V4/Storage/Tape/{libraryId}/Media	PerformTapeMediaOperation
+tape_storage	GET	/V4/Storage/Tape/{libraryId}/MediaType	GetInfoForDiscoverMedia
+tape_storage	GET	/V4/Storage/Tape/{libraryId}/SpareGroup/{spareGroupId}	GetSpareGroupProperties
+tape_storage	GET	/V4/Storage/Tape/{libraryId}/SpareGroups	GetSpareGroupDetails
+tape_storage	GET	/V4/VaultTracker/Media	GetVaultTrackerMediaDetails
+tape_storage	GET	/V4/VaultTrackerAction	GetVaultTackerActionList
+tape_storage	POST	/V4/VaultTrackerAction/Operation	VaultTrackerOperation
+tape_storage	GET	/V4/VaultTrackerPolicies	GetVaultTrackerPolicyList
+teams	GET	/V4/Office365/Teams	GetTeamsClient
+teams	POST	/V4/Office365/Teams	CreateTeamsClient
+teams	POST	/V4/Office365/Teams/{appId}/Backup	PerformTeamsBackup
+teams	GET	/V4/Office365/Teams/{appId}/Content	GetTeamsContent
+teams	PUT	/V4/Office365/Teams/{appId}/Content	AddTeamsContent
+teams	PUT	/V4/Office365/Teams/{appId}/Content/CustomCategory	AddTeamsCustomCategory
+teams	POST	/V4/Office365/Teams/{appId}/Restore	PerformTeamsRestore
+teams	GET	/V4/Office365/Teams/{appId}/Teams	GetTeamsList
+teams	PUT	/V4/Office365/Teams/{appId}/Teams	AddTeamsList
+teams	GET	/V4/Office365/Teams/{appId}/Users	GetTeamsUsersList
+teams	PUT	/V4/Office365/Teams/{appId}/Users	AddTeamsUsersList
+threat_indicators	GET	/Client/Anomaly	
+threat_indicators	GET	/Client/AnomalyRecord	
+total_cost_of_ownership	POST	/V4/TCO/Assessment	RunTCOAssessment
+total_cost_of_ownership	DELETE	/V4/TCO/AssessmentDetails	DeleteAssessmentDetails
+total_cost_of_ownership	GET	/V4/TCO/AssessmentDetails	GetAssessmentDetails
+total_cost_of_ownership	GET	/V4/TCO/AssessmentDiscoveryCriteria	AssessmentDiscoveryCriteria
+total_cost_of_ownership	DELETE	/V4/TCO/AuthenticatedUsers	DeleteAuthenticatedUsers
+total_cost_of_ownership	GET	/V4/TCO/AuthenticatedUsers	GetAuthenticatedUsers
+total_cost_of_ownership	POST	/V4/TCO/Credentials	AddTCOCredentials
+total_cost_of_ownership	POST	/V4/TCO/Workload/Discovery	RunCADiscoveryWorkload
+udvnfsshare	POST	/V4/FileServers/{subclientId}/UDVNFSShare	CreateUDVNFSShareForSubclient
+udvnfsshare	PUT	/V4/FileServers/{subclientId}/UDVNFSShare	UpdateUDVNFSShareBySubclient
+udvnfsshare	GET	/V4/UDVNFSShares	GetUDVNFSShares
+udvnfsshare	POST	/V4/UDVNFSShares	CreateUDVNFSShare
+udvnfsshare	DELETE	/V4/UDVNFSShares/{id}	DeleteUDVNFSShare
+udvnfsshare	GET	/V4/UDVNFSShares/{id}	GetUDVNFSShare
+udvnfsshare	PUT	/V4/UDVNFSShares/{id}	UpdateUDVNFSShare
+udvnfsshare	DELETE	/V4/UDVNFSShares/{id}/MediaAgents	DeleteUDVNFSShareExports
+udvnfsshare	POST	/V4/UDVNFSShares/{id}/MediaAgents	CreateUDVNFSShareExports
+udvnfsshare	PUT	/V4/UDVNFSShares/{id}/MediaAgents	RefreshUDVNFSShareExports
+untagged	GET	/Asset/Discovery/Criteria	GetAssetDiscoveryCriteria
+untagged	PUT	/Asset/Discovery/ProtectionStatus	AssetDiscoveryProtectionStatusSync
+untagged	POST	/Azure/ConditionalAccess/policies/Status	checkConditionalAccessPolicy
+untagged	POST	/Company/{companyGUID}/Workload/Action/Delete	updateCompanyWorkloadStatus
+untagged	GET	/V4/GridFilters/{gridId}	
+untagged	POST	/V4/GridFilters/{gridId}	
+untagged	DELETE	/V4/GridFilters/{gridId}/filter/{filterId}	
+untagged	PUT	/V4/GridFilters/{gridId}/filter/{filterId}	
+untagged	DELETE	/V4/Storage/Tape/SpareGroup/{spareGroupId}	deleteSpareGroup
+untagged	GET	/V4/StoragePool/{storagePoolId}/BackupLocations	GetStoragePoolBackupLocations
+untagged	POST	/V4/Workload/AuditPlan	CreateAuditPlanForWorkload
+untagged	GET	/V4/Workload/ResourcePool	
+untagged	POST	/V4/Workload/ServerPlan	
+untagged	POST	/V5/StoragePolicy/{storagePolicyId}/Clone	post-V5-storagePolicy-storagePolicyId-Clone
+untagged	POST	/VM/AccessNode	post-VM-AccessNode
+user	DELETE	/Sessions	DeleteSession
+user	GET	/Sessions	get-Sessions
+user	GET	/User	Get all Users
+user	POST	/User	Create an User
+user	DELETE	/User/byName(userName='{UserName}')	Delete User By Name
+user	GET	/User/byName(userName='{UserName}')	Get User Properties By Name
+user	POST	/User/byName(userName='{UserName}')	Update User Properties By Name
+user	DELETE	/User/{UserId}	delete-User-UserId
+user	GET	/User/{UserId}	Get User Properties
+user	POST	/User/{UserId}	Update User Properties
+user	PUT	/User/{UserId}/Disable	Disable User
+user	PUT	/User/{UserId}/Enable	Enable User
+user	GET	/UsersAndGroups	Get Users and User Groups
+user	GET	/V4/user	GetUsers
+user	POST	/V4/user	CreateUser
+user	PUT	/V4/user/action/delete	DeleteMultipleUsers
+user	DELETE	/V4/user/{userId}	DeleteUser
+user	GET	/V4/user/{userId}	GetUserDetails
+user	PUT	/V4/user/{userId}	ModifyUser
+user	POST	/user/otp/generate	Generate OTP
+user_group	GET	/UserGroup	User Group
+user_group	POST	/UserGroup	Create an User Group
+user_group	DELETE	/UserGroup/byName(userGroupName='{UserGroupName}')	Delete User Group By  Name
+user_group	GET	/UserGroup/byName(userGroupName='{UserGroupName}')	Get Usergroup Details By Name
+user_group	POST	/UserGroup/byName(userGroupName='{UserGroupName}')	User Group Properties - Adds User to User Group(By Name)
+user_group	DELETE	/UserGroup/{UserGroupId}	Delete User Group
+user_group	GET	/UserGroup/{UserGroupId}	Get Usergroup Details
+user_group	POST	/UserGroup/{UserGroupId}	User Group Properties - Adds User to User Group
+user_group	GET	/V4/UserGroup	GetUserGroups
+user_group	POST	/V4/UserGroup	CreateUserGroup
+user_group	PUT	/V4/UserGroup/action/delete	DeleteMultipleUserGroups
+user_group	DELETE	/V4/UserGroup/{userGroupId}	DeleteUserGroup
+user_group	GET	/V4/UserGroup/{userGroupId}	GetUserGroupDetails
+user_group	PUT	/V4/UserGroup/{userGroupId}	ModifyUserGroup
+virtual_machines	GET	/V4/AccessNodes	getAccessNodes
+virtual_machines	PUT	/V4/Hypervisor/{hypervisorId}/FBR	SetHypervisorFBR
+virtual_machines	GET	/V4/Kubernetes/ApplicationGroups	GetAllAPllicationGroups
+virtual_machines	GET	/V4/Kubernetes/Applications	GetKubernetesApplication
+virtual_machines	GET	/V4/Kubernetes/cluster	ListKubernetesCluster
+virtual_machines	POST	/V4/Kubernetes/cluster	CreateKubernetescluster
+virtual_machines	POST	/V4/VM/{vmGuid}/restore	VMRestore
+virtual_machines	GET	/V4/VirtualMachines	GetVirtualMachines
+virtual_machines	DELETE	/V4/VirtualMachines/{vmUUID}	DeleteVirtualMachine
+virtual_machines	GET	/V4/VirtualMachines/{vmUUID}	GetVMDetails
+virtual_machines	PUT	/V4/VirtualMachines/{vmUUID}	ModifyVirtualMachine
+virtual_machines	POST	/V4/VirtualMachines/{vmUUID}/backup	VirtualMachineBackup
+virtual_machines	POST	/VM/TestBackup	TestVMBackup
+virtual_machines	POST	/VM/{vmGuid}/Restore/Validate	performValidateRestore
+virtualization	POST	/Application	Change Hypervisor Client Credentials
+virtualization	GET	/Client/VMPseudoClient	Get All Virtualization Clients
+virtualization	GET	/Client/{clientId}/credentials/verify	Verify Credentials
+virtualization	POST	/Subclient/Content/Preview	VSA Subclient Preview
+virtualization	PUT	/Subclient/{vsubclientId}/content	Update Subclient Virtual Machine Content
+virtualization	GET	/VM	Get all VMs
+virtualization	GET	/VMBrowse	Perform Virtual Machine Browse
+virtualization	GET	/VSAclientlist	Get Virtual Server Agent Clients
+virtualization	GET	/VSBrowse/{vclientId}/INVENTORY	Get Datastore Browse Inventory
+virtualization	GET	/v2/vsa/hypervisors/{clientId}	Get Virtualization Client properties
+virtualization	GET	/v2/vsa/hypervisors/{clientId}/refresh	DC Refresh
+virtualization	POST	/v2/vsa/vm/{jobid}/browse	Perform VMBrowse for job
+virtualization	POST	/v2/vsa/vm/{vmClientGUID}/recover	VM Recover
+virtualization	POST	/v2/vsa/vm/{vmClientGUID}/recoverfile	VM File In Place Recover
+virtualization	GET	/v2/vsa/vm/{vmGuid}/Jobs	Get VM Jobs
+virtualization	POST	/v2/vsa/vm/{vmGuid}/backup	Perform VM Backup
+virtualization	GET	/v2/vsa/vm/{vmGuid}/disks	Get Disks for VM
+virtualization	GET	/v2/vsa/vm/{vmGuid}/nics	Get VM Nics
+virtualization	POST	/v2/vsa/vmGroup/{VMGroupID}/testfailover	Test Failover - VM Group Level
+virtualization	GET	/v2/vsa/vmgroups	Virtual Group IDs
+virtualization	GET	/v2/vsa/vmgroups/{subclientId}	Get Virtual Group ID Properties
+vm_group	POST	/V4/VMGroup	CreateVMGroup
+vm_group	GET	/V4/VMGroups	GetDetailsOfAllVMGroups
+vm_group	POST	/V4/VmGroup/Preview	vmGroupPreview
+vm_group	DELETE	/V4/VmGroup/{VmGroupId}	DeleteVMGroup
+vm_group	GET	/V4/VmGroup/{VmGroupId}	GetVMGroup
+vm_group	PUT	/V4/VmGroup/{VmGroupId}	UpdateVMGroup
+vm_group	POST	/V4/VmGroup/{VmGroupId}/restore	VMGroupRestore
+vm_group	PUT	/VMGroup/{vmGroupId}/AssociateCompany/{companyId}	AssociateVMGroupToCompany
+vmprovisioning	GET	/V4/VMProvisioning/Policy/{policyId}	getVMProvisioningPolicyDetails
+vmprovisioning	GET	/V4/VMProvisioning/Snapshots	getvirtualmachinesnapshots
+vmprovisioning	POST	/V4/VMProvisioning/VM	postVMProvisioningCreateVirtualMachine
+vmprovisioning	POST	/V4/VMProvisioning/VirtualLab	postVMProvCreateVirtualLab
+vmprovisioning	GET	/V4/VMProvisioning/VirtualMachine/{vmGUID}	getVMDetailsByGUID
+vmprovisioning	GET	/V4/VMProvisioning/VirtualMachine/{vmGUID}/Volumes	getvirtualmachinevolumes
+vmprovisioning	GET	/V4/VMProvisioning/VirtualMachines	getVMs
+vmprovisioning	POST	/V4/VMProvisioning/VirtualMachines/Action	postVMProvisioningVMAction
+vmprovisioning	GET	/V4/VirtualLab/VirtualMachines	getLabVMs
+vmprovisioning	GET	/V4/VirtualLabs	getVirtualLabs
+workflow	GET	/Workflow	Get all Workflows
+workflow	PUT	/Workflow	Import a Workflow Definition
+workflow	DELETE	/Workflow/{WorkflowId}	Delete a Workflow
+workflow	POST	/Workflow/{WorkflowId}/Action/Deploy	Deploying a Workflow
+workflow	GET	/Workflow/{WorkflowId}/definition	Workflow Definition
+workflow	POST	/Workflow/{workflowname}/Action/Execute	Executing a Workflow as a Job
+workflow	GET	/wapi/{workflowname}	get-wapi-workflowname
+workflow	POST	/wapi/{workflowname}	post-wapi-workflowname
+workflow	GET	/webhook	get-webhook
+workflow	POST	/webhook	post-webhook
+workflow	DELETE	/webhook/{webhookid}	delete-webhook-webhookid
+workflow	PUT	/webhook/{webhookid}	put-webhook-webhookid
+yugabytedb	POST	/Client/YugabyteDB	CreateYugabyteDBInstance
