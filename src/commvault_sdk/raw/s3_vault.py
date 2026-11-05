@@ -14,17 +14,17 @@ from .._base import Resource
 class S3Vault(Resource):
     """`s3_vault`: 7 operations."""
 
-    def get_cvs3_endpoint_state(self, client_id: str | int, client_id_: str | int) -> Any:
+    def get_cvs3_endpoint_state(self, client_id: str | int) -> Any:
         """`GET /V4/CVS3Endpoint/{ClientID}/state` - Request enable status of S3 endpoint."""
         path = f"/V4/CVS3Endpoint/{client_id}/state"
         return self._call("GET", path)
 
-    def put_cvs3_endpoint_state_disable(self, client_id: str | int, client_id_: str | int) -> Any:
+    def put_cvs3_endpoint_state_disable(self, client_id: str | int) -> Any:
         """`PUT /V4/CVS3Endpoint/{ClientID}/state/disable` - Disable S3 endpoint."""
         path = f"/V4/CVS3Endpoint/{client_id}/state/disable"
         return self._call("PUT", path, change=True)
 
-    def put_cvs3_endpoint_state_enable(self, client_id: str | int, client_id_: str | int) -> Any:
+    def put_cvs3_endpoint_state_enable(self, client_id: str | int) -> Any:
         """`PUT /V4/CVS3Endpoint/{ClientID}/state/enable` - Enable S3 endpoint."""
         path = f"/V4/CVS3Endpoint/{client_id}/state/enable"
         return self._call("PUT", path, change=True)

@@ -194,12 +194,59 @@ been run through it; the rest send requests that were proven before
 this code was a library, checked here by unit tests. Nothing has been
 run against Commvault Cloud.
 
-## What is not here, deliberately
+## Everything else: `cv.raw`
 
-Commvault's API has hundreds of endpoints. This covers the ones its
-first user (blt, a job-history collector, and its lab) has needed and
-tested, not the catalogue. Wrapping the rest
-untested would produce an SDK that looks complete and is wrong in ways
-only a live CommServe reveals; `cvpysdk` already exists for breadth.
-Add groups as work calls for them - restores, schedules, alerts, storage
-policies, VM and file-system content are the likely next ones.
+The groups above are hand-written, for what blt uses. Under them,
+`cv.raw` has one method for every operation Commvault publishes for the
+CommServe - 1,487 in 11.46 (SP46), in 191 areas:
+
+```python
+cv.raw.job.list_job(completed_job_lookup_time=86400)
+cv.raw.plan.get_plan_summary()
+cv.raw.storage.list_storage_pool()
+cv.raw.client.get_client(client_id)
+```
+
+Path parameters are positional, query parameters and headers keyword
+arguments, a body is `body=`. Answers come back decoded (JSON, text or
+bytes); an error Commvault puts inside a 200 is raised as
+`CommvaultError`. Anything but a GET is refused by a read-only client and
+sent once, never retried. Names come from the path (`GET /Client` is
+`list_client`, `GET /Client/{clientId}` is `get_client`); each method's
+docstring has the method, path and Commvault's summary.
+
+It is generated: `scripts/spec.py` reads Commvault's API description from
+its docs site (api.commvault.com - one OpenAPI file per subject, one
+version per Service Pack; the files themselves are not served, so it
+reads the operation out of each page, as data, without running the
+page) and writes `spec/operations-<release>.tsv`; `scripts/generate.py`
+writes `src/commvault_sdk/raw/`. The description itself stays out of git.
+Clumio and CloudRewind, separate products on the same site, are left out.
+
+Generated is not proven: which of these calls really work, on a real
+CommServe, is what the live tests are for.
+
+## Live tests
+
+`tests/live` runs the SDK against a real CommServe and writes up what
+happened. They connect the way the lab does - its own access token,
+renewed and written back under its lock - so they never copy a token
+that lives somewhere else:
+
+```
+uv run --with-editable ../yoki-commvault-lab pytest -m live
+```
+
+- `docs/live/<area>.md` - each call as it was really made: the code, the
+  request, Commvault's answer and what the SDK gave back, with the
+  release and the date. Host, client, user, plan, storage and other lab
+  names are replaced by placeholders (`commserve-01`, `host-03`, ...); a
+  page that would still contain one is not written.
+- `docs/live/coverage.md` - which of the published operations the run
+  proved: **317 of 1,487** on the first run, against an 11 SP46
+  CommServe. A call Commvault refuses is listed with its reason (a
+  feature this CommServe does not use, a permission it does not give).
+- `CV_LIVE_CHANGES=yes` adds the tests that create, change and delete
+  things - only their own `bltlive-<run>-*` objects.
+- `CV_LIVE_COMMCELL`, `CV_LIVE_CONFIG_DIR`, `CV_LIVE_MASK`,
+  `CV_LIVE_MASK_PREFIXES`, `CV_LIVE_DOCS=0`: see `tests/live/conftest.py`.

@@ -114,15 +114,25 @@ def normalise(entry: dict[str, Any]) -> dict[str, Any]:
     path = "/" + path.lstrip("/")
     entry = {**entry, "path": path}
     params = [p for p in op.get("parameters") or [] if p.get("in") in ("path", "query", "header")]
-    named = {p["name"] for p in params if p.get("in") == "path"}
-    # A parameter in the path that the description forgot to declare.
-    params += [{"name": n, "in": "path"} for n in path_params(entry["path"]) if n not in named]
-    # Declared in the path but spelled differently there: the path wins.
+    # Declared in the path but spelled differently there ({ClientID} for
+    # clientId): the path wins. Copies, so the description is untouched.
     in_path = {n.lower(): n for n in path_params(entry["path"])}
-    for p in params:
-        if p.get("in") == "path" and p["name"] not in in_path.values():
-            p["name"] = in_path.get(p["name"].lower(), p["name"])
+    params = [
+        {**p, "name": in_path.get(p["name"].lower(), p["name"])} if p.get("in") == "path" else p
+        for p in params
+    ]
     params = [p for p in params if p.get("in") != "path" or p["name"] in in_path.values()]
+    # Each path parameter once, and any the description forgot to declare.
+    seen: set[str] = set()
+    once = []
+    for p in params:
+        if p.get("in") == "path":
+            if p["name"] in seen:
+                continue
+            seen.add(p["name"])
+        once.append(p)
+    params = once
+    params += [{"name": n, "in": "path"} for n in path_params(entry["path"]) if n not in seen]
     body = op.get("requestBody") or {}
     answers: list[str] = []
     for code, response in (op.get("responses") or {}).items():
