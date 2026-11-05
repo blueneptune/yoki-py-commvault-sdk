@@ -1,6 +1,6 @@
 # `cv.raw.array_management`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `list_storage_arrays` - GET /StorageArrays
 
@@ -108,7 +108,7 @@ cv.raw.array_management.list_storage_arrays_v4()
 
 **On the wire**
 
-- `GET /V4/StorageArrays` -> **200** (0.17 s)
+- `GET /V4/StorageArrays` -> **200** (0.19 s)
 
   <details><summary>Answer</summary>
 
@@ -330,7 +330,7 @@ cv.raw.array_management.get_storage_array_v4('1')
 
 **On the wire**
 
-- `GET /V4/StorageArrays/1` -> **200** (0.35 s)
+- `GET /V4/StorageArrays/1` -> **200** (0.37 s)
 
   <details><summary>Answer</summary>
 
@@ -420,7 +420,7 @@ cv.raw.array_management.get_storage_arrays_client_arrays('2')
 
 **On the wire**
 
-- `GET /V4/StorageArrays/Client/2/Arrays` -> **200** (0.15 s)
+- `GET /V4/StorageArrays/Client/2/Arrays` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 
@@ -493,7 +493,7 @@ cv.raw.array_management.get_storage_arrays_copy_arrays('2')
 
 **On the wire**
 
-- `GET /V4/StorageArrays/Copy/2/Arrays` -> **200** (0.15 s)
+- `GET /V4/StorageArrays/Copy/2/Arrays` -> **200** (0.17 s)
 
   <details><summary>Answer</summary>
 
@@ -568,7 +568,7 @@ cv.raw.array_management.get_storage_arrays_client_subclient_arrays('2', '44')
 
 **On the wire**
 
-- `GET /V4/StorageArrays/Client/2/Subclient/44/Arrays` -> **200** (0.15 s)
+- `GET /V4/StorageArrays/Client/2/Subclient/44/Arrays` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 

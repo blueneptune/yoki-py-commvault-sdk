@@ -1,6 +1,6 @@
 # `cv.raw.activate`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_analytics_servers` - GET /AnalyticsServers
 
@@ -45,7 +45,7 @@ cv.raw.activate.list_dcube_entity()
 
 **On the wire**
 
-- `GET /dcube/entity` -> **200** (0.11 s)
+- `GET /dcube/entity` -> **200** (0.14 s)
 
   <details><summary>Answer</summary>
 
@@ -185,7 +185,7 @@ cv.raw.activate.get_analytics_servers_id('1')
 
 **On the wire**
 
-- `GET /AnalyticsServers/id/1` -> **200** (0.07 s)
+- `GET /AnalyticsServers/id/1` -> **200** (0.10 s)
 
   <details><summary>Answer</summary>
 
@@ -238,7 +238,7 @@ cv.raw.activate.get_e_discovery_client(...)
 
 **On the wire**
 
-- `GET /EDiscoveryclients` -> **500** (0.06 s)
+- `GET /EDiscoveryclients` -> **500** (0.07 s)
 
   <details><summary>Answer</summary>
 

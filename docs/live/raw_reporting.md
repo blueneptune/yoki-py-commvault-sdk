@@ -1,6 +1,6 @@
 # `cv.raw.reporting`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_allreports` - GET /cr/reportsplusengine/reports
 
@@ -10,7 +10,7 @@ cv.raw.reporting.get_allreports()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/reports?icludeDrafts=false&includeStoreVersions=false&includeMetricsReports=false` -> **200** (0.34 s)
+- `GET /cr/reportsplusengine/reports?icludeDrafts=false&includeStoreVersions=false&includeMetricsReports=false` -> **200** (0.47 s)
 
   <details><summary>Answer</summary>
 
@@ -108,7 +108,7 @@ cv.raw.reporting.get_cr_reportsplusengine_datasets()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets` -> **200** (0.22 s)
+- `GET /cr/reportsplusengine/datasets` -> **200** (0.20 s)
 
   <details><summary>Answer</summary>
 
@@ -408,16 +408,16 @@ cv.raw.reporting.list_cr_reportsplusengine_datasets_5e7dfa05_07cd_4beb_be9c_181a
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/5e7dfa05-07cd-4beb-be9c-181a1722c2e8:571a5443-fb35-435e-b013-ecd1a6dcfb65/data` -> **200** (0.45 s)
+- `GET /cr/reportsplusengine/datasets/5e7dfa05-07cd-4beb-be9c-181a1722c2e8:571a5443-fb35-435e-b013-ecd1a6dcfb65/data` -> **200** (0.37 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "f9f67d2ef4e34d488b6a251bd67a3201",
+    "cacheId": "dbd9707d12b246c5a34c37b26a5a04cc",
     "offset": 0,
     "limit": 0,
-    "totalRecordCount": 411,
+    "totalRecordCount": 428,
     "columns": [
       {
         "name": "sys_rowid",
@@ -445,27 +445,27 @@ cv.raw.reporting.list_cr_reportsplusengine_datasets_5e7dfa05_07cd_4beb_be9c_181a
       },
       "... 7 more"
     ],
-    "recordsCount": 411,
+    "recordsCount": 428,
     "records": [
       [
         1,
         "commserve-02",
-        413,
+        430,
         "... 7 more"
       ],
       [
         2,
         "commserve-02",
-        412,
+        429,
         "... 7 more"
       ],
       [
         3,
         "commserve-02",
-        411,
+        428,
         "... 7 more"
       ],
-      "... 408 more"
+      "... 425 more"
     ],
     "failures": {},
     "warnings": {}
@@ -484,7 +484,7 @@ cv.raw.reporting.list_cr_reportsplusengine_datasets_metrics_subclient-01_data()
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/METRICS_subclient-01/data` -> **200** (0.20 s)
+- `GET /cr/reportsplusengine/datasets/METRICS_subclient-01/data` -> **200** (0.19 s)
 
   <details><summary>Answer</summary>
 
@@ -528,16 +528,16 @@ cv.raw.reporting.list_cr_reportsplusengine_dataset_data('2b3e43c0-21fe-401d-ebf8
 
 **On the wire**
 
-- `GET /cr/reportsplusengine/datasets/2b3e43c0-21fe-401d-ebf8-c485309262a7/data` -> **200** (1.06 s)
+- `GET /cr/reportsplusengine/datasets/2b3e43c0-21fe-401d-ebf8-c485309262a7/data` -> **200** (1.34 s)
 
   <details><summary>Answer</summary>
 
   ```json
   {
-    "cacheId": "f0b0760bdc20446e98e001d57fca72cb",
+    "cacheId": "609aac067b0b4df49aa71ecec25ceb7e",
     "offset": 0,
     "limit": 0,
-    "totalRecordCount": 408,
+    "totalRecordCount": 425,
     "columns": [
       {
         "name": "sys_rowid",
@@ -565,27 +565,27 @@ cv.raw.reporting.list_cr_reportsplusengine_dataset_data('2b3e43c0-21fe-401d-ebf8
       },
       "... 6 more"
     ],
-    "recordsCount": 408,
+    "recordsCount": 425,
     "records": [
       [
         1,
         "commserve-02",
-        413,
+        430,
         "... 6 more"
       ],
       [
         2,
         "commserve-02",
-        412,
+        429,
         "... 6 more"
       ],
       [
         3,
         "commserve-02",
-        411,
+        428,
         "... 6 more"
       ],
-      "... 405 more"
+      "... 422 more"
     ],
     "failures": {},
     "warnings": {}

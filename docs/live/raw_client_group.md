@@ -1,6 +1,6 @@
 # `cv.raw.client_group`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `list_client_group` - GET /ClientGroup
 
@@ -10,7 +10,7 @@ cv.raw.client_group.list_client_group()
 
 **On the wire**
 
-- `GET /ClientGroup` -> **200** (0.13 s)
+- `GET /ClientGroup` -> **200** (0.15 s)
 
   <details><summary>Answer</summary>
 
@@ -110,7 +110,7 @@ cv.raw.client_group.get_client_group('3')
 
 **On the wire**
 
-- `GET /ClientGroup/3` -> **200** (0.67 s)
+- `GET /ClientGroup/3` -> **200** (0.61 s)
 
   <details><summary>Answer</summary>
 

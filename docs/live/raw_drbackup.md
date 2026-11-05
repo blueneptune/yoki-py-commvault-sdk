@@ -1,6 +1,6 @@
 # `cv.raw.drbackup`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_dr_backup_backup_destination_source_copy_eligible`
 
@@ -12,7 +12,7 @@ cv.raw.drbackup.get_dr_backup_backup_destination_source_copy_eligible()
 
 **On the wire**
 
-- `GET /V4/DRBackup/BackupDestination/SourceCopy/Eligible` -> **200** (0.09 s)
+- `GET /V4/DRBackup/BackupDestination/SourceCopy/Eligible` -> **200** (0.08 s)
 
   <details><summary>Answer</summary>
 
@@ -29,7 +29,7 @@ cv.raw.drbackup.get_dr_backup_backup_destination_source_copy_eligible()
         "isSourceCatalog": false,
         "copyType": "SYNCHRONOUS",
         "backupDestination": {
-          "name": "storage-copy-01",
+          "name": "Primary",
           "id": 3
         }
       }
@@ -70,7 +70,7 @@ cv.raw.drbackup.get_dr_backup_backup_destinations()
         "enableDataAging": true,
         "dataRetentionLockDays": 0,
         "planBackupDestination": {
-          "name": "storage-copy-01",
+          "name": "Primary",
           "id": 3
         },
         "storagePool": {
@@ -116,7 +116,7 @@ cv.raw.drbackup.get_dr_backup_regions()
 
 **On the wire**
 
-- `GET /V4/DRBackup/Regions` -> **200** (0.07 s)
+- `GET /V4/DRBackup/Regions` -> **200** (0.08 s)
 
   <details><summary>Answer</summary>
 

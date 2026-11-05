@@ -1,6 +1,6 @@
 # `cv.raw.commcell`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_comm_cell_password_encryption_config` - GET /CommCell/PasswordEncryptionConfig
 
@@ -10,7 +10,7 @@ cv.raw.commcell.get_comm_cell_password_encryption_config()
 
 **On the wire**
 
-- `GET /CommCell/PasswordEncryptionConfig` -> **200** (0.10 s)
+- `GET /CommCell/PasswordEncryptionConfig` -> **200** (0.11 s)
 
   <details><summary>Answer</summary>
 

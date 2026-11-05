@@ -1,6 +1,6 @@
 # `cv.raw.organization`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_navigation_settings` - GET /NavigationSettings
 
@@ -10,7 +10,7 @@ cv.raw.organization.get_navigation_settings()
 
 **On the wire**
 
-- `GET /NavigationSettings` -> **200** (0.08 s)
+- `GET /NavigationSettings` -> **200** (0.09 s)
 
   <details><summary>Answer</summary>
 
@@ -50,7 +50,7 @@ cv.raw.organization.list_email_templates()
 
 **On the wire**
 
-- `GET /EmailTemplates` -> **200** (0.13 s)
+- `GET /EmailTemplates` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 
@@ -126,7 +126,7 @@ cv.raw.organization.list_organization()
 
 **On the wire**
 
-- `GET /Organization` -> **200** (0.11 s)
+- `GET /Organization` -> **200** (0.15 s)
 
   <details><summary>Answer</summary>
 

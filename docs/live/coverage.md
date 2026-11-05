@@ -1,13 +1,13 @@
 # Coverage, proven live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
-**317 of 1487** operations in the server's own API description were called by the live tests and answered without an error. (Commvault publishes it at
+**327 of 1487** operations in the server's own API description were called by the live tests and answered without an error. (Commvault publishes it at
 api.commvault.com; scripts/spec.py reads it from there.)
 
 | Area | Proven | Operations |
 |---|---|---|
-| plan | 8 | 47 |
+| plan | 12 | 47 |
 | storage | 13 | 44 |
 | hidden | 1 | 34 |
 | metallic | 8 | 34 |
@@ -26,7 +26,7 @@ api.commvault.com; scripts/spec.py reads it from there.)
 | cloud_storage | 1 | 18 |
 | dashboard | 16 | 18 |
 | hypervisor | 3 | 18 |
-| server_group | 3 | 17 |
+| server_group | 6 | 17 |
 | servers | 4 | 17 |
 | tape_storage | 6 | 17 |
 | alert | 5 | 16 |
@@ -40,7 +40,7 @@ api.commvault.com; scripts/spec.py reads it from there.)
 | plan_rules | 4 | 14 |
 | regions | 5 | 14 |
 | snapshot | 2 | 14 |
-| user_group | 4 | 14 |
+| user_group | 7 | 14 |
 | virtual_machines | 5 | 14 |
 | array_management | 7 | 13 |
 | credential_manager | 5 | 13 |
@@ -636,7 +636,11 @@ api.commvault.com; scripts/spec.py reads it from there.)
 - `GET /V4/Plan/{planId}/MediaAgents`
 - `GET /V4/PlanIds`
 - `GET /v2/Plan`
+- `GET /v2/Plan/{PlanId}`
+- `GET /v2/Plan/{PlanId}/Alerts`
 - `GET /v2/Plan/{PlanId}/AssociatedEntities`
+- `GET /v2/Plan/{PlanId}/Features`
+- `GET /v2/Plan/{PlanId}/{entityName}`
 - `GET /v4/Plan/Summary/{planId}`
 
 ### plan_rules
@@ -755,7 +759,10 @@ api.commvault.com; scripts/spec.py reads it from there.)
 ### server_group
 
 - `GET /V4/ServerGroup`
+- `POST /V4/ServerGroup`
+- `DELETE /V4/ServerGroup/{serverGroupId}`
 - `GET /V4/ServerGroup/{serverGroupId}`
+- `PUT /V4/ServerGroup/{serverGroupId}`
 - `GET /V4/ServerGroup/{serverGroupId}/DCPlan`
 
 ### server_plan
@@ -876,7 +883,10 @@ api.commvault.com; scripts/spec.py reads it from there.)
 - `GET /UserGroup`
 - `GET /UserGroup/{UserGroupId}`
 - `GET /V4/UserGroup`
+- `POST /V4/UserGroup`
+- `DELETE /V4/UserGroup/{userGroupId}`
 - `GET /V4/UserGroup/{userGroupId}`
+- `PUT /V4/UserGroup/{userGroupId}`
 
 ### virtual_machines
 

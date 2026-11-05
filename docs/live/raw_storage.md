@@ -1,6 +1,6 @@
 # `cv.raw.storage`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_drive_controller` - GET /DriveController
 
@@ -10,7 +10,7 @@ cv.raw.storage.get_drive_controller()
 
 **On the wire**
 
-- `GET /DriveController` -> **200** (0.18 s)
+- `GET /DriveController` -> **200** (0.19 s)
 
   <details><summary>Answer</summary>
 
@@ -51,7 +51,7 @@ cv.raw.storage.get_drive_controller()
         "totalUsableFreeSpace": -1,
         "avgDataWrittenPerDayMB": 0,
         "totalReserveSpaceMB": 0,
-        "lastNumDays": 9,
+        "lastNumDays": 8,
         "libraryId": 0,
         "maxDataToWriteMB": 0,
         "totalSpace": -1,
@@ -138,7 +138,7 @@ cv.raw.storage.list_library()
 
 **On the wire**
 
-- `GET /Library` -> **200** (0.12 s)
+- `GET /Library` -> **200** (0.15 s)
 
   <details><summary>Answer</summary>
 
@@ -165,7 +165,7 @@ cv.raw.storage.list_media_agent()
 
 **On the wire**
 
-- `GET /MediaAgent` -> **200** (0.18 s)
+- `GET /MediaAgent` -> **200** (0.21 s)
 
   <details><summary>Answer</summary>
 
@@ -192,7 +192,7 @@ cv.raw.storage.list_media_agents()
 
 **On the wire**
 
-- `GET /v2/MediaAgents` -> **200** (0.21 s)
+- `GET /v2/MediaAgents` -> **200** (0.30 s)
 
   <details><summary>Answer</summary>
 
@@ -262,7 +262,7 @@ cv.raw.storage.list_storage_policy()
 
 **On the wire**
 
-- `GET /V2/StoragePolicy` -> **200** (0.17 s)
+- `GET /V2/StoragePolicy` -> **200** (0.19 s)
 
   <details><summary>Answer</summary>
 
@@ -281,6 +281,13 @@ cv.raw.storage.list_storage_policy()
         "storagePolicy": {
           "storagePolicyName": "storage-policy-01",
           "storagePolicyId": 4
+        }
+      },
+      {
+        "numberOfStreams": 50,
+        "storagePolicy": {
+          "storagePolicyName": "bltlive-11051831-plan-2",
+          "storagePolicyId": 6
         }
       }
     ]
@@ -305,7 +312,7 @@ cv.raw.storage.list_storage_pool()
   {
     "storagePoolList": [
       {
-        "totalUsableFreeSpace": 1003792,
+        "totalUsableFreeSpace": 1005050,
         "HSStoragePoolHealth": -1,
         "cloudStorageClassName": "",
         "numberOfNodes": 1,
@@ -318,7 +325,7 @@ cv.raw.storage.list_storage_pool()
         "cloudStorageClassNumber": -1,
         "isArchiveStorage": 0,
         "libraryVendorType": 1,
-        "totalFreeSpace": 1024272,
+        "totalFreeSpace": 1025530,
         "storagePoolType": 1,
         "storageSubType": 0,
         "storageType": 1,
@@ -370,7 +377,7 @@ cv.raw.storage.get_library('1')
 
 **On the wire**
 
-- `GET /Library/1` -> **200** (0.14 s)
+- `GET /Library/1` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 
@@ -528,13 +535,13 @@ cv.raw.storage.get_library('1')
         "lastDayThroughput": "1.35 GB/Hr",
         "isOnline": "Ready",
         "backupReservations": 0,
-        "bytesBackedupInLast1H": "1.28 GB",
-        "lastRestoreTime": "Nov  4 2026 11:05AM",
+        "bytesBackedupInLast1H": "",
+        "lastRestoreTime": "Nov  5 2026 11:04AM",
         "onlineMountPaths": "1 out of 1",
         "lastBackupTime": "Nov  5 2026 10:01AM",
-        "totalAvailableSpace": "980.27 GB",
-        "lastHourThroughput": "270.91 GB/Hr",
-        "totalFreeSpace": "1000.27 GB",
+        "totalAvailableSpace": "981.49 GB",
+        "lastHourThroughput": "0",
+        "totalFreeSpace": "1001.49 GB",
         "totalCapacity": "1024.00 GB",
         "auxiliaryCopyWriteReservations": 0,
         "numOfMountPath": 1,
@@ -555,7 +562,7 @@ cv.raw.storage.get_storage_associated_copies('2')
 
 **On the wire**
 
-- `GET /V4/Storage/2/associatedCopies` -> **200** (0.16 s)
+- `GET /V4/Storage/2/associatedCopies` -> **200** (0.17 s)
 
   <details><summary>Answer</summary>
 
@@ -563,8 +570,25 @@ cv.raw.storage.get_storage_associated_copies('2')
   {
     "copies": [
       {
+        "planType": "Server",
+        "retentionPeriodDays": 7,
+        "copyType": "PRIMARY",
+        "storagePolicy": {
+          "name": "bltlive-11051831-plan-2",
+          "id": 6
+        },
+        "copy": {
+          "name": "Primary",
+          "id": 5
+        },
+        "plan": {
+          "name": "bltlive-11051831-plan-2",
+          "id": 3
+        }
+      },
+      {
         "retentionPeriodDays": 15,
-        "copyType": "storage-copy-01",
+        "copyType": "PRIMARY",
         "useExtendedRetentionRules": true,
         "extendedRetentionRules": {
           "firstExtendedRetentionRule": {
@@ -581,20 +605,20 @@ cv.raw.storage.get_storage_associated_copies('2')
           "id": 4
         },
         "copy": {
-          "name": "storage-copy-01",
+          "name": "Primary",
           "id": 3
         }
       },
       {
         "planType": "Server",
         "retentionPeriodDays": 30,
-        "copyType": "storage-copy-01",
+        "copyType": "PRIMARY",
         "storagePolicy": {
           "name": "plan-01",
           "id": 3
         },
         "copy": {
-          "name": "storage-copy-01",
+          "name": "Primary",
           "id": 2
         },
         "plan": {
@@ -616,7 +640,7 @@ cv.raw.storage.get_storage_policy('3')
 
 **On the wire**
 
-- `GET /V2/StoragePolicy/3` -> **200** (0.20 s)
+- `GET /V2/StoragePolicy/3` -> **200** (0.15 s)
 
   <details><summary>Answer</summary>
 
@@ -632,7 +656,7 @@ cv.raw.storage.get_storage_policy('3')
             "isMirrorCopy": 0,
             "StoragePolicyCopy": {
               "copyId": 2,
-              "copyName": "storage-copy-01"
+              "copyName": "Primary"
             }
           }
         ],
@@ -679,7 +703,7 @@ cv.raw.storage.get_storage_pool('2')
 
 **On the wire**
 
-- `GET /StoragePool/2` -> **200** (0.46 s)
+- `GET /StoragePool/2` -> **200** (0.49 s)
 
   <details><summary>Answer</summary>
 
@@ -711,7 +735,7 @@ cv.raw.storage.get_storage_pool('2')
       "isDatabaseDevTestStoragePool": false,
       "status": "Online",
       "statusCode": 0,
-      "totalUsableFreeSpace": 1003792,
+      "totalUsableFreeSpace": 1005050,
       "numOfCleaningMedia": 0,
       "lastDayThroughput": "0.00 GB/Hr",
       "sizeOnDisk": 24144,
@@ -722,7 +746,7 @@ cv.raw.storage.get_storage_pool('2')
       "usedSpacePerc": 0,
       "cloudStorageClassNumber": -1,
       "HSXUtilWarn": "",
-      "totalFreeSpace": 1024272,
+      "totalFreeSpace": 1025530,
       "storageSubType": 0,
       "storagePoolType": 1,
       "isHSXWriteOpGraceAppl": false,
@@ -759,12 +783,12 @@ cv.raw.storage.get_storage_pool('2')
           "storagePolicyName": "storage-pool-01",
           "storagePolicyId": 2,
           "copyId": 1,
-          "copyName": "storage-copy-01"
+          "copyName": "Primary"
         },
         "extendedFlags": {
           "isAirgapCopy": 0,
           "indelibleWormCopy": 0,
-          "encryptOnDependentstorage-copy-01": 0
+          "encryptOnDependentPrimary": 0
         },
         "drivePool": {
           "drivePoolId": 1,
@@ -809,14 +833,14 @@ cv.raw.storage.get_storage_pool('2')
           "baselineApplicationSize": 0,
           "fragmentedSpaceSize": 0,
           "baselineSize": 0,
-          "totalDataSize": 614465536,
+          "totalDataSize": 609222656,
           "storeName": "storage-pool-01_Files_1",
           "ddbVersion": 0,
           "freeSpaceOnLibrary": 0,
-          "totalAppSize": 3907138332,
-          "storage-copy-01RecordsPercentage": 0,
+          "totalAppSize": 3108974519,
+          "primaryRecordsPercentage": 0,
           "prunePending": 0,
-          "deDupSavingPercent": "84.27",
+          "deDupSavingPercent": "80.40",
           "noOfPartitions": 2,
           "storeFlags": 0,
           "retentionCyclesForCopy": 0,
@@ -825,7 +849,7 @@ cv.raw.storage.get_storage_pool('2')
           "reserveField7": "2 of 2  partitions online",
           "reserveField8": "",
           "deDupSavingSize": 2025634830,
-          "sizeOnMedia": 614465536,
+          "sizeOnMedia": 609222656,
           "sealedTime": 0,
           "maxAvgQITime": 0,
           "creationtime": 1791249029,
@@ -838,7 +862,7 @@ cv.raw.storage.get_storage_pool('2')
           "retentionDaysForCopy": 0,
           "reserveField5": 0,
           "status": 0,
-          "estMediaSize": 547364144,
+          "estMediaSize": 379311122,
           "enablePruningTime": {
             "EnableTimeZone": 0,
             "EnableTime": 0
@@ -859,7 +883,7 @@ cv.raw.storage.get_storage_pool('2')
           "ddbVersion": 0,
           "freeSpaceOnLibrary": 0,
           "totalAppSize": 9999563046,
-          "storage-copy-01RecordsPercentage": 0,
+          "primaryRecordsPercentage": 0,
           "prunePending": 0,
           "deDupSavingPercent": "88.94",
           "noOfPartitions": 2,
@@ -902,6 +926,11 @@ cv.raw.storage.get_storage_pool('2')
           "planName": "plan-01",
           "_type_": 158,
           "planId": 1
+        },
+        {
+          "planName": "bltlive-11051831-plan-2",
+          "_type_": 158,
+          "planId": 3
         }
       ],
       "region": {
@@ -1006,7 +1035,7 @@ cv.raw.storage.get_storage_pool('2')
                 "libraryName": "storage-pool-01",
                 "avgMediaConsumedPerDay": 0,
                 "totalDeduplicationAppSize": 0,
-                "totalUsableFreeSpace": 1003792,
+                "totalUsableFreeSpace": 1005050,
                 "avgDataWrittenPerDayMB": 0,
                 "totalReserveSpaceMB": 20480,
                 "lastNumDays": 0,
@@ -1016,7 +1045,7 @@ cv.raw.storage.get_storage_pool('2')
                 "totalValidData": 0,
                 "estimatedSpaceRunoutDays": 0,
                 "warningWaterMark": 0,
-                "totalFreeSpace": 1024272,
+                "totalFreeSpace": 1025530,
                 "avgMediaFreedPerDay": 0,
                 "totalDataWritten": 0,
                 "avgCapacityFreedMB": 0,
@@ -1093,14 +1122,14 @@ cv.raw.storage.get_storage_pool('2')
         "baselineApplicationSize": 0,
         "fragmentedSpaceSize": 0,
         "baselineSize": 0,
-        "totalDataSize": 1720713216,
+        "totalDataSize": 1715470336,
         "storeName": "",
         "ddbVersion": 0,
         "freeSpaceOnLibrary": 0,
-        "totalAppSize": 13906701378,
-        "storage-copy-01RecordsPercentage": 0,
+        "totalAppSize": 13108537565,
+        "primaryRecordsPercentage": 0,
         "prunePending": 0,
-        "deDupSavingPercent": "87.63",
+        "deDupSavingPercent": "86.91",
         "noOfPartitions": 0,
         "storeFlags": 0,
         "retentionCyclesForCopy": 0,
@@ -1109,7 +1138,7 @@ cv.raw.storage.get_storage_pool('2')
         "reserveField7": "",
         "reserveField8": "",
         "deDupSavingSize": 2037645708,
-        "sizeOnMedia": 1720713216,
+        "sizeOnMedia": 1715470336,
         "sealedTime": 0,
         "maxAvgQITime": 0,
         "creationtime": 0,
@@ -1122,7 +1151,7 @@ cv.raw.storage.get_storage_pool('2')
         "retentionDaysForCopy": 0,
         "reserveField5": 0,
         "status": 0,
-        "estMediaSize": 1570608064,
+        "estMediaSize": 1402555042,
         "enablePruningTime": {
           "EnableTimeZone": 0,
           "EnableTime": 0
@@ -1160,7 +1189,7 @@ cv.raw.storage.get_storage_pool_running_jobs('2')
 
 **On the wire**
 
-- `GET /V4/StoragePool/2/runningJobs` -> **200** (0.08 s)
+- `GET /V4/StoragePool/2/runningJobs` -> **200** (0.09 s)
 
   <details><summary>Answer</summary>
 
@@ -1192,7 +1221,7 @@ cv.raw.storage.get_storage_policy_copy('3', '2')
 
 **On the wire**
 
-- `GET /V2/StoragePolicy/3/Copy/2` -> **200** (0.33 s)
+- `GET /V2/StoragePolicy/3/Copy/2` -> **200** (0.43 s)
 
   <details><summary>Answer</summary>
 
@@ -1259,7 +1288,7 @@ cv.raw.storage.get_storage_policy_copy('3', '2')
       },
       "StoragePolicyCopy": {
         "copyId": 2,
-        "copyName": "storage-copy-01"
+        "copyName": "Primary"
       },
       "extendedFlags": {
         "overRideGACPRetention": 1
@@ -1365,12 +1394,12 @@ cv.raw.storage.get_storage_policy_copy_size('3', '2')
         "dataSizeInGB": 12,
         "dataWrittenInGB": 1,
         "requiresBackupsOnOrAfterDate": false,
-        "oldestJobStartTime": 1793897000,
+        "oldestJobStartTime": 1793903852,
         "spCopy": {
           "storagePolicyName": "plan-01",
           "storagePolicyId": 3,
           "copyId": 2,
-          "copyName": "storage-copy-01"
+          "copyName": "Primary"
         }
       }
     ]

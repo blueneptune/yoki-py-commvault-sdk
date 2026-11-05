@@ -59,12 +59,19 @@ def test_server_group_lifecycle(cv: CommvaultClient, record: Entry) -> None:
     created = cv.raw.server_group.post_server_group(
         body={"name": name, "description": "bltlive: made by the SDK's live tests"}
     )
-    group_id = int((created.get("serverGroup") or created)["id"])
+    group_id = _id_of(_named(cv.raw.server_group.list_server_group(), "serverGroups"), name)
     group = cv.raw.server_group.get_server_group(group_id)
-    assert (group.get("general") or group).get("name", name) == name or name in str(group)
+    assert name in str(group)
 
+    # The update names the group's type (one with servers picked by hand
+    # is MANUAL); a body with the description alone is answered 500.
     cv.raw.server_group.put_server_group(
-        group_id, body={"description": "bltlive: changed by the SDK's live tests"}
+        group_id,
+        body={
+            "serverGroupType": "MANUAL",
+            "serverGroup": {"id": group_id, "name": name},
+            "description": "bltlive: changed by the SDK's live tests",
+        },
     )
     changed = cv.raw.server_group.get_server_group(group_id)
     record.result({"created": created, "description": _find(changed, "description")})
@@ -82,9 +89,11 @@ def test_user_group_lifecycle(cv: CommvaultClient, record: Entry) -> None:
     created = cv.raw.user_group.post_user_group_2(
         body={"name": name, "description": "bltlive: made by the SDK's live tests"}
     )
-    group_id = int(_find(created, "id"))
+    group_id = _id_of(_named(cv.raw.user_group.list_user_group_v4(), "userGroups"), name)
+    # V4 names the new value: `newDescription` (and `newName`); a plain
+    # `description` is accepted and ignored.
     cv.raw.user_group.put_user_group(
-        group_id, body={"description": "bltlive: changed by the SDK's live tests"}
+        group_id, body={"newDescription": "bltlive: changed by the SDK's live tests"}
     )
     changed = cv.raw.user_group.get_user_group_v4(group_id)
     record.result({"created": created, "description": _find(changed, "description")})
@@ -162,6 +171,16 @@ def test_server_plan_lifecycle(cv: CommvaultClient, record: Entry) -> None:
         str(p.get("plan", {}).get("planName")) for p in cv.raw.plan.list_plan().get("plans", [])
     ]
     assert renamed not in remaining
+
+
+def _id_of(named: list[tuple[int, str]], name: str) -> int:
+    """The id of the object called `name` in a listing: found by name, so
+    the test does not depend on the shape of the create call's answer
+    (recorded on the page as it came)."""
+    for object_id, object_name in named:
+        if object_name == name:
+            return object_id
+    raise AssertionError(f"{name} is not in the listing after it was created")
 
 
 def _find(value: Any, key: str) -> Any:

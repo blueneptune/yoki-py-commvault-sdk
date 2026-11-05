@@ -1,6 +1,6 @@
 # `cv.raw.regions`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_entity_region` - GET /entity/region
 
@@ -89,7 +89,7 @@ cv.raw.regions.list_regions_v4()
 
 **On the wire**
 
-- `GET /V4/Regions` -> **200** (0.50 s)
+- `GET /V4/Regions` -> **200** (0.47 s)
 
   <details><summary>Answer</summary>
 
@@ -201,7 +201,7 @@ cv.raw.regions.get_region('1')
 
 **On the wire**
 
-- `GET /Regions/1` -> **200** (0.34 s)
+- `GET /Regions/1` -> **200** (0.35 s)
 
   <details><summary>Answer</summary>
 
@@ -282,7 +282,7 @@ cv.raw.regions.get_region_clients('1')
 
 **On the wire**
 
-- `GET /Regions/1/clients` -> **200** (0.31 s)
+- `GET /Regions/1/clients` -> **200** (0.32 s)
 
   <details><summary>Answer</summary>
 
@@ -363,7 +363,7 @@ cv.raw.regions.get_region_v4('1')
 
 **On the wire**
 
-- `GET /V4/Regions/1` -> **200** (0.67 s)
+- `GET /V4/Regions/1` -> **200** (0.66 s)
 
   <details><summary>Answer</summary>
 

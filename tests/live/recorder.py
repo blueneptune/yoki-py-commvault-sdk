@@ -208,6 +208,10 @@ PRODUCT_WORDS = {
     "commcell",
     "metallic",
     "mediaagent",
+    # names every CommServe ships with: the built-in admin account, the
+    # first copy of a plan or storage policy
+    "administrator",
+    "primary",
     # and the page's own words (<details><summary>Answer</summary>)
     "details",
     "summary",

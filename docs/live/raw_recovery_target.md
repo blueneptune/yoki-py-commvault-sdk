@@ -1,6 +1,6 @@
 # `cv.raw.recovery_target`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_recovery_targets` - GET /V4/RecoveryTargets
 
@@ -10,7 +10,7 @@ cv.raw.recovery_target.get_recovery_targets()
 
 **On the wire**
 
-- `GET /V4/RecoveryTargets` -> **200** (0.17 s)
+- `GET /V4/RecoveryTargets` -> **200** (0.19 s)
 
   <details><summary>Answer</summary>
 

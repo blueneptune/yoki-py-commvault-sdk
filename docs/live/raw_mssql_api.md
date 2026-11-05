@@ -1,6 +1,6 @@
 # `cv.raw.mssql_api`: every read, live
 
-> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 16:43 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
+> Recorded from a real Commvault 11.46 CommServe (11 SP46.30) on 2026-11-05 18:37 UTC, by `pytest -m live` (tests/live). Generated - do not edit; names and addresses are masked.
 
 ## `get_sql_instances` - GET /sql/instances
 
@@ -10,7 +10,7 @@ cv.raw.mssql_api.get_sql_instances()
 
 **On the wire**
 
-- `GET /sql/instances` -> **200** (0.14 s)
+- `GET /sql/instances` -> **200** (0.16 s)
 
   <details><summary>Answer</summary>
 
@@ -75,7 +75,7 @@ cv.raw.mssql_api.get_client_sql_unconfigured_servers('2')
 
 **On the wire**
 
-- `GET /Client/2/Sql/unconfiguredServers` -> **500** (0.24 s)
+- `GET /Client/2/Sql/unconfiguredServers` -> **500** (0.22 s)
 
   <details><summary>Answer</summary>
 
@@ -100,7 +100,7 @@ cv.raw.mssql_api.get_client_sql_instance_unconfigured_databases('2', '1')
 
 **On the wire**
 
-- `GET /Client/2/Sql/Instance/1/unconfiguredDatabases` -> **500** (0.23 s)
+- `GET /Client/2/Sql/Instance/1/unconfiguredDatabases` -> **500** (0.25 s)
 
   <details><summary>Answer</summary>
 
